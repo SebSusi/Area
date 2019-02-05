@@ -1,0 +1,27 @@
+svg-icon {
+  width: 250px;
+}
+
+.centered-icon {
+  margin-bottom: 20px;
+}
+
+.db-container {
+  margin: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  height: 90vh;
+  min-height: fit-content;
+}
+
+.background-card {
+  background-color: var(--darker-color);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.16);
+  height: fit-content;
+  width: fit-content;
+  margin: auto;
+  padding: 20px;
+  z-index: 1000;
+}

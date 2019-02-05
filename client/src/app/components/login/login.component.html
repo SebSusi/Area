@@ -1,0 +1,75 @@
+<div class="db-page">
+    <form *ngIf="!signingUp" class="db-form db-container" [formGroup]="loginForm"
+          (submit)="login(this.loginForm.get('email').value, this.loginForm.get('password').value)">
+        <div class="text-center db-top-form-logo">
+            <svg-icon src="assets/blindtest-logo.svg" ngClass="centered-icon"></svg-icon>
+        </div>
+        <mat-form-field>
+            <input matInput="" type="email" formControlName="email" placeholder="Email" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput="" type="password" formControlName="password" placeholder="Password" required>
+        </mat-form-field>
+        <div class="db-row">
+            <button (click)="signingUp = !signingUp; userError = '';" mat-raised-button color="primary"
+                    type="button" class="col-5 float-left">Sign up
+            </button>
+            <button [disabled]="!loginForm.valid" mat-raised-button color="accent"
+                    type="submit" class="col-5 float-right">Login
+            </button>
+        </div>
+        <div *ngIf="userError != ''" class="alert alert-danger" role="alert">
+            <button type="button" class="close-alert" (click)="userError = ''">×</button>
+            <i class="material-icons">error</i>
+            {{userError}}
+        </div>
+        <div class="social-buttons">
+            <button mat-raised-button type="button" (click)="loginSocial('Google')" class="btn-social btn-google">
+                <span class="fa fa-google"></span> Login with Google
+            </button><br>
+            <button mat-raised-button type="button" (click)="loginSocial('Facebook')" class="btn-social btn-facebook">
+                <span class="fa fa-facebook"></span> Login with Facebook
+            </button>
+        </div>
+    </form>
+
+    <form *ngIf="signingUp" class="db-form db-container" [formGroup]="userForm"
+          (submit)="signUp(this.userForm.get('username').value, this.userForm.get('email').value, this.userForm.get('password').value)">
+        <div class="text-center db-top-form-logo">
+            <svg-icon src="assets/blindtest-logo.svg" ngClass="centered-icon"></svg-icon>
+        </div>
+        <mat-form-field>
+            <input matInput="" type="text" placeholder="Username" formControlName="username" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput="" type="email" formControlName="email" placeholder="Email" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput="" type="password" formControlName="password" placeholder="Password" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput="" type="password" formControlName="passwordConfirm" placeholder="Confirm Password" required>
+        </mat-form-field>
+        <div class="db-row">
+            <button (click)="signingUp = !signingUp; userError = '';" mat-raised-button color="primary"
+                    type="button" class="col-5 float-left">Login
+            </button>
+            <button [disabled]="!userForm.valid" mat-raised-button color="accent"
+                    type="submit" class="col-5 float-right">Sign Up
+            </button>
+        </div>
+        <div *ngIf="userError != ''" class="alert alert-danger" role="alert">
+            <button type="button" class="close-alert" (click)="userError = ''">×</button>
+            <i class="material-icons">error</i>
+            {{userError}}
+        </div>
+        <div class="social-buttons">
+            <button mat-raised-button type="button" (click)="loginSocial('Google')" class="btn-social btn-google signup">
+                <span class="fa fa-google"></span> Sign up with Google
+            </button><br>
+            <button mat-raised-button type="button" (click)="loginSocial('Facebook')" class="btn-social btn-facebook signup">
+                <span class="fa fa-facebook"></span> Sign up with Facebook
+            </button>
+        </div>
+    </form>
+</div>

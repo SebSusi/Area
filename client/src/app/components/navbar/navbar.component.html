@@ -1,0 +1,15 @@
+<div class="navbar">
+    <div id="navbar" class="db-nav-container">
+        <a href="/home" class="svg">
+            <svg-icon src="assets/blindtest-logo.svg"></svg-icon>
+        </a>
+        <div class="db-tools">
+            <button mat-button (click)="user()">
+                <mat-icon>person</mat-icon> {{displayName}}
+            </button>
+            <button mat-icon-button color="warn" (click)="logout()">
+                <mat-icon>logout</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
