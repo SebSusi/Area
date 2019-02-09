@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+@mixin login-theme($theme) {
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .area-container {
+    background-color: rgba(map-get($background, background), .7);
+  }
+}

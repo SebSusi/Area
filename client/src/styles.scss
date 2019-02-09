@@ -1,16 +1,6 @@
-@import "theme.scss";
+@import "theme";
 
-:root {
-    --orange-color: #f0572aff;
-    --red-color: #de1d25ff;
-    --purple-color: #912987ff;
-    --pink-color: #d71c5bff;
-    --dark-color: #3f3f41ff;
-    --darker-color: #333333ff;
-    --light-color: #f2f2f2ff;
-}
-
-.area-page {
+.db-page {
     margin: 20px;
 }
 
@@ -32,17 +22,4 @@
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #555;
-}
-
-    .primaryColorBG ::ng-deep {
-        background-color: mat-color($primary);
-    }
-    .accentColorBG ::ng-deep {
-        background-color: mat-color($accent);
-    }
-    .warnColorBG ::ng-deep {
-        background-color: mat-color($warn);
-    }
-.basicColorBG ::ng-deep {
-    background-color: mat-color($warn);
 }

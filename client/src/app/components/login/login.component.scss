@@ -1,4 +1,12 @@
-@import '../../../styles.scss';
+@import 'login-theme';
+
+
+.area-login {
+  background-image: url("/assets/backlit.jpg");
+  background-size: cover;
+  background-origin: border-box;
+  height: 100vh;
+}
 
 .area-form {
   display: flex;
@@ -16,12 +24,12 @@
 .area-container {
   @extend .area-form;
 
-  margin-left: auto;
-  margin-right: auto;
   max-width: 500px;
-  padding-left: 50px;
-  padding-right: 50px;
-  height: 100vh;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   svg-icon {
     display: block;
