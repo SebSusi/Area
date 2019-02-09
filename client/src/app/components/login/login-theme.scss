@@ -7,4 +7,23 @@
   .area-container {
     background-color: rgba(map-get($background, background), .7);
   }
+
+  p.untitled-divider {
+    margin-top: 20px;
+    text-align: center;
+    display: table !important;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &:before, &:after {
+      border-top: 1px solid map-get($foreground, divider);
+      content: '';
+      display: table-cell;
+      position: relative;
+      top: 0.6em;
+      width: 45%;
+    }
+    &:before { right: 1.5%; }
+    &:after { left: 1.5%; }
+  }
 }
