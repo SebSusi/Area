@@ -1,20 +1,20 @@
 @import '../../../styles.scss';
 
-.db-form {
+.area-form {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
 
-  & > *, ::ng-deep .db-container svg-icon > * {
+  & > *, ::ng-deep .area-container svg-icon > * {
     position: relative;
     display: block;
     width: 100%;
   }
 }
 
-.db-container {
-  @extend .db-form;
+.area-container {
+  @extend .area-form;
 
   margin-left: auto;
   margin-right: auto;
@@ -29,7 +29,7 @@
   }
 }
 
-.db-top-form-logo {
+.area-top-form-logo {
   margin-bottom: 20px;
 }
 

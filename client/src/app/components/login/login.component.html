@@ -1,12 +1,12 @@
-<div class="db-page">
+<div class="area-page">
 
-    <div class="db-container">
-    <!--div class="text-center db-top-form-logo">
+    <div class="area-container">
+    <!--div class="text-center area-top-form-logo">
         <svg-icon src="assets/blindtest-logo.svg" ngClass="centered-icon"></svg-icon>
     </div-->
         <mat-tab-group mat-align-tabs="center">
             <mat-tab label="Login">
-                <form class="db-form" [formGroup]="loginForm"
+                <form class="area-form" [formGroup]="loginForm"
                       (submit)="login(this.loginForm.get('email').value, this.loginForm.get('password').value)">
                     <mat-form-field>
                         <input matInput="" type="email" formControlName="email" placeholder="Email" required>
@@ -14,7 +14,7 @@
                     <mat-form-field>
                         <input matInput="" type="password" formControlName="password" placeholder="Password" required>
                     </mat-form-field>
-                    <div class="db-row">
+                    <div class="area-row">
                         <button [disabled]="!loginForm.valid" mat-raised-button color="accent"
                                 type="submit" class="col-12">Login
                         </button>
@@ -22,7 +22,7 @@
                 </form>
             </mat-tab>
             <mat-tab label="Register">
-                <form class="db-form" [formGroup]="userForm"
+                <form class="area-form" [formGroup]="userForm"
                       (submit)="signUp(this.userForm.get('username').value, this.userForm.get('email').value, this.userForm.get('password').value)">
                     <mat-form-field>
                         <input matInput="" type="text" placeholder="Username" formControlName="username" required>
@@ -36,7 +36,7 @@
                     <mat-form-field>
                         <input matInput="" type="password" formControlName="passwordConfirm" placeholder="Confirm Password" required>
                     </mat-form-field>
-                    <div class="db-row">
+                    <div class="area-row">
                         <button [disabled]="!userForm.valid" mat-raised-button color="accent"
                                 type="submit" class="col-12">Sign-up
                         </button>

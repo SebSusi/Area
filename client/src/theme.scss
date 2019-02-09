@@ -150,14 +150,14 @@ $theme-dark: mat-dark-theme($primary, $accent, $warn);
 
 @include angular-material-theme($theme-dark);
 
-.db-primary, .db-primary:hover, .db-primary:focus, .db-primary:visited {
+.area-primary, .area-primary:hover, .area-primary:focus, .area-primary:visited {
         color: mat-color($primary);
 }
 
-.db-accent, .db-accent:hover, .db-accent:focus, .db-accent:visited {
+.area-accent, .area-accent:hover, .area-accent:focus, .area-accent:visited {
         color: mat-color($accent);
 }
 
-.db-warn, .db-warn:hover, .db-warn:focus, .db-warn:visited {
+.area-warn, .area-warn:hover, .area-warn:focus, .area-warn:visited {
         color: mat-color($warn);
 }

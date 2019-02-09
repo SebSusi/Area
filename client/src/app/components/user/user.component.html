@@ -1,10 +1,10 @@
-<div class="db-widgets-table">
+<div class="area-widgets-table">
     <app-navbar></app-navbar>
-    <div class="db-page">
-        <section id="home" class="db-container text-center">
-            <form class="db-form" [formGroup]="usernameForm"
+    <div class="area-page">
+        <section id="home" class="area-container text-center">
+            <form class="area-form" [formGroup]="usernameForm"
                   (submit)="changeUsername(this.usernameForm.get('username').value)">
-                <div class="db-row">
+                <div class="area-row">
                     <mat-form-field class="col-7">
                         <input matInput="" type="text" formControlName="username" placeholder="Username">
                     </mat-form-field>
@@ -21,9 +21,9 @@
                     <span *ngIf="showBlindtest" class="end-icon fa fa-chevron-down"></span>
                 </button>
                 <div *ngIf="showBlindtest" class="background-card">
-                    <form class="db-form" [formGroup]="emailForm"
+                    <form class="area-form" [formGroup]="emailForm"
                           (submit)="changeEmail(this.emailForm.get('email').value)">
-                        <div class="db-row">
+                        <div class="area-row">
                             <mat-form-field class="col-7">
                                 <input matInput="" type="email" formControlName="email" placeholder="Email">
                             </mat-form-field>
@@ -32,7 +32,7 @@
                             </button>
                         </div>
                     </form>
-                    <form class="db-form" [formGroup]="passwordForm"
+                    <form class="area-form" [formGroup]="passwordForm"
                           (submit)="changePassword(this.passwordForm.get('password').value, this.passwordForm.get('oldPassword').value)">
                         <mat-form-field class="col-10">
                             <input matInput="" type="password" formControlName="oldPassword" placeholder="Current Password">
@@ -57,7 +57,7 @@
                         <span *ngIf="linkLocal" class="end-icon fa fa-chevron-down"></span>
                     </button><br>
                 </div>
-                <form *ngIf="linkLocal" class="db-form background-card social-buttons" [formGroup]="linkForm"
+                <form *ngIf="linkLocal" class="area-form background-card social-buttons" [formGroup]="linkForm"
                       (submit)="linkAccount(this.linkForm.get('email').value, this.linkForm.get('password').value)">
                     <mat-form-field class="col-11">
                         <input matInput="" type="email" formControlName="email" placeholder="Email" required>
