@@ -7,16 +7,17 @@ import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {AuthServiceConfig, SocialLoginModule} from 'angularx-social-login';
 
-import {MatButtonModule, MatCheckboxModule, MatChipsModule, MatDialogModule, MatDividerModule, MatIconModule} from '@angular/material';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatListModule} from '@angular/material/list';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatTreeModule} from '@angular/material/tree';
+import {
+    MatAutocompleteModule,
+    MatButtonModule, MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatDividerModule, MatFormFieldModule,
+    MatIconModule, MatInputModule, MatListModule, MatProgressBarModule, MatProgressSpinnerModule,
+    MatSlideToggle, MatSlideToggleModule, MatTabsModule, MatTreeModule
+} from '@angular/material';
+
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ButtonsModule} from 'angular-bootstrap-md';
@@ -28,8 +29,8 @@ import {UserComponent} from './components/user/user.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {Error404Component} from './components/error404/error404.component';
 import {getAuthServiceConfigs} from './objects/socialLoginConfig';
-import { AreaListComponent } from './components/area-list/area-list.component';
-import { AreaItemComponent } from './components/area-item/area-item.component';
+import {AreaListComponent} from './components/area-list/area-list.component';
+import {AreaItemComponent} from './components/area-item/area-item.component';
 
 const appRoutes: Routes = [
     {
@@ -70,12 +71,11 @@ const appRoutes: Routes = [
         AreaListComponent,
         AreaItemComponent
     ],
-    entryComponents: [
-    ],
+    entryComponents: [],
     imports: [
         RouterModule.forRoot(
             appRoutes,
-            { enableTracing: true }
+            {enableTracing: true}
         ),
         HttpClientModule,
         BrowserModule,
@@ -99,6 +99,7 @@ const appRoutes: Routes = [
         MatChipsModule,
         MatProgressBarModule,
         MatProgressSpinnerModule,
+        MatSlideToggleModule,
         ButtonsModule,
         SocialLoginModule
     ],
@@ -109,4 +110,5 @@ const appRoutes: Routes = [
     bootstrap: [AppComponent]
 })
 
-export class AppModule { }
+export class AppModule {
+}
