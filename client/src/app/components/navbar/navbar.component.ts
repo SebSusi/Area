@@ -29,6 +29,16 @@ export class NavbarComponent implements OnInit {
         });
     }
 
+    switchTheme()
+    {
+        const body = document.getElementsByTagName('body')[0];
+        if (body.classList.contains('light')) {
+            body.classList.remove('light');
+        } else {
+            body.classList.add('light');
+        }
+    }
+
     user() {
         this.router.navigateByUrl('/user');
     }
