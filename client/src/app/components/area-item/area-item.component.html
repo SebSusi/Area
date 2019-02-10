@@ -1,4 +1,9 @@
 <mat-card class="d-flex align-content-center">
+    <ol class="d-flex align-content-center">
+        <li *ngFor="let item of area.actions" class="action-type-icon">
+            <svg-icon src="assets/types/{{item.type}}.svg"></svg-icon>
+        </li>
+    </ol>
     <p class="flex-fill">{{area.name}}</p>
     <mat-slide-toggle></mat-slide-toggle>
 </mat-card>

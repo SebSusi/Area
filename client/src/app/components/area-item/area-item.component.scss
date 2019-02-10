@@ -1,5 +1,31 @@
 mat-card {
+  ol {
+    list-style-type: none;
+    padding: 0;
+    width: 160px;
+    li {
+      margin-right: 25px;
+
+      &:not(:last-child) svg-icon::after {
+        content: '';
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: calc(50% - 5px);
+        border-left-color: grey !important;
+        border: 5px solid transparent;
+        margin-left: 10px;
+      }
+
+      ::ng-deep svg-icon {
+        svg {
+          height: 30px !important;
+          width: 30px !important;
+        }
+      }
+    }
+  }
   & > * {
-    margin: 0;
+    margin: auto !important;
   }
 }

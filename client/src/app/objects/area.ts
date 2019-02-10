@@ -40,6 +40,6 @@ export class Area {
 
 export class AreaAdapter implements Adapter<Area> {
     adapt(item: any): Area {
-        return new Area(item.name);
+        return new Area(item.name, item.actions);
     }
 }
