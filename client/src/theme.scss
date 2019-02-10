@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
 @import './app/components/login/login-theme';
+@import './app/components/navbar/navbar-theme';
 @include mat-core();
 
 /* For use in src/lib/core/theming/_palette.scss */
@@ -146,12 +147,14 @@ $theme-dark: mat-dark-theme($primary, $accent, $warn);
 
 @include angular-material-theme($theme-dark);
 @include login-theme($theme-dark);
+@include navbar-theme($theme-dark);
 
 .light {
         @include angular-material-theme($theme-light);
         $foreground: map-get($theme-light, foreground);
         $background: map-get($theme-light, background);
         @include login-theme($theme-light);
+        @include navbar-theme($theme-light);
 }
 
 .area-primary, .area-primary:hover, .area-primary:focus, .area-primary:visited {

@@ -1,0 +1,10 @@
+
+@import '~@angular/material/theming';
+
+@mixin navbar-theme($theme) {
+  $background: map-get($theme, background);
+
+  .navbar-container {
+    background-color: map-get($background, app-bar);
+  }
+}

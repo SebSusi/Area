@@ -1,11 +1,13 @@
 mat-card {
   ol {
+    position: relative;
     list-style-type: none;
     padding: 0;
     width: 160px;
-    li {
+    li:not(:last-child) {
       margin-right: 25px;
-
+    }
+    li {
       &:not(:last-child) svg-icon::after {
         content: '';
         width: 0;
@@ -25,7 +27,23 @@ mat-card {
       }
     }
   }
+
   & > * {
     margin: auto !important;
+  }
+}
+
+$break-phone: 778px;
+
+@media screen and (max-width: $break-phone) {
+  mat-card {
+    padding: 0;
+    flex-direction: column !important;
+    ol {
+      width: auto;
+    }
+    & > * {
+      margin: 10px auto !important;
+    }
   }
 }
