@@ -28,6 +28,7 @@ import {UserComponent} from './components/user/user.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {Error404Component} from './components/error404/error404.component';
 import {getAuthServiceConfigs} from './objects/socialLoginConfig';
+import { AreaListComponent } from './components/area-list/area-list.component';
 
 const appRoutes: Routes = [
     {
@@ -64,7 +65,8 @@ const appRoutes: Routes = [
         NavbarComponent,
         HomeComponent,
         UserComponent,
-        Error404Component
+        Error404Component,
+        AreaListComponent
     ],
     entryComponents: [
     ],
