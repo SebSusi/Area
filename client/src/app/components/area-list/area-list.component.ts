@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Area} from '../../objects/area';
+import {Area, AreaAdapter} from '../../objects/area';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-area-list',
@@ -11,12 +12,11 @@ export class AreaListComponent implements OnInit {
   public areas: Area[] = [];
 
   constructor() {
-      this.areas.push(new Area());
-      this.areas.push(new Area());
-      this.areas.push(new Area());
-      this.areas.push(new Area());
-      this.areas.push(new Area());
-      this.areas.push(new Area());
+      const adapter = new AreaAdapter();
+      const names = ['Envois des mails', 'GregStalker', 'Activity Alert', 'Dis bonjour sur facebook', 'Mail Translator'];
+      for (const value of names) {
+          this.areas.push(adapter.adapt({name: value}));
+      }
   }
 
   ngOnInit() {
