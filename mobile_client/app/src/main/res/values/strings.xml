@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Area</string>
+    <string name="area_api_baseurl">http://10.0.2.2:8080/</string>
+
+    <string name="logged_in">Logged in.</string>
+    <string name="logged_out">Logged out.</string>
+    <string name="connect">Connect !</string>
+
+    <string name="imgur_client_id">42f867cae60d6a4</string>
+    <string name="imgur_client_secret">c42928317b1582bf17f1fca357af62055d348aee</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_dark">Dark Mode</string>
+</resources>
