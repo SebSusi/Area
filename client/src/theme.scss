@@ -3,21 +3,54 @@
 @include mat-core();
 
 /* For use in src/lib/core/theming/_palette.scss */
-$md-dborangepalette: (
-        50 : #fdebe5,
-        100 : #fbcdbf,
-        200 : #f8ab95,
-        300 : #f5896a,
-        400 : #f2704a,
-        500 : #f0572a,
-        600 : #ee4f25,
-        700 : #ec461f,
-        800 : #e93c19,
-        900 : #e52c0f,
+$accent-palette: (
+        50 : #fffbe9,
+        100 : #fef5c8,
+        200 : #fdefa4,
+        300 : #fce87f,
+        400 : #fce363,
+        500 : #fbde48,
+        600 : #fada41,
+        700 : #fad538,
+        800 : #f9d130,
+        900 : #f8c821,
         A100 : #ffffff,
-        A200 : #ffe1de,
-        A400 : #ffb4ab,
-        A700 : #ff9d91,
+        A200 : #fffefc,
+        A400 : #fff2c9,
+        A700 : #ffecb0,
+        contrast: (
+                50 : #000000,
+                100 : #000000,
+                200 : #000000,
+                300 : #000000,
+                400 : #000000,
+                500 : #000000,
+                600 : #000000,
+                700 : #000000,
+                800 : #000000,
+                900 : #000000,
+                A100 : #000000,
+                A200 : #000000,
+                A400 : #000000,
+                A700 : #000000,
+        )
+);
+
+$primary-palette: (
+        50 : #e0f5f6,
+        100 : #b3e6e9,
+        200 : #80d6da,
+        300 : #4dc5cb,
+        400 : #26b8bf,
+        500 : #00acb4,
+        600 : #00a5ad,
+        700 : #009ba4,
+        800 : #00929c,
+        900 : #00828c,
+        A100 : #b8f9ff,
+        A200 : #85f4ff,
+        A400 : #52f0ff,
+        A700 : #39eeff,
         contrast: (
                 50 : #000000,
                 100 : #000000,
@@ -36,7 +69,7 @@ $md-dborangepalette: (
         )
 );
 
-$md-dbredpalette: (
+$warn-palette: (
         50 : #fbe4e5,
         100 : #f5bbbe,
         200 : #ef8e92,
@@ -69,83 +102,9 @@ $md-dbredpalette: (
         )
 );
 
-$md-dbpurplepalette: (
-        50 : #f2e5f1,
-        100 : #debfdb,
-        200 : #c894c3,
-        300 : #b269ab,
-        400 : #a24999,
-        500 : #912987,
-        600 : #89247f,
-        700 : #7e1f74,
-        800 : #74196a,
-        900 : #620f57,
-        A100 : #ff97f0,
-        A200 : #ff64e9,
-        A400 : #ff31e1,
-        A700 : #ff18de,
-        contrast: (
-                50 : #000000,
-                100 : #000000,
-                200 : #000000,
-                300 : #000000,
-                400 : #ffffff,
-                500 : #ffffff,
-                600 : #ffffff,
-                700 : #ffffff,
-                800 : #ffffff,
-                900 : #ffffff,
-                A100 : #000000,
-                A200 : #000000,
-                A400 : #000000,
-                A700 : #ffffff,
-        )
-);
-
-$md-dbpinkpalette: (
-        50 : #fae4eb,
-        100 : #f3bbce,
-        200 : #eb8ead,
-        300 : #e3608c,
-        400 : #dd3e74,
-        500 : #d71c5b,
-        600 : #d31953,
-        700 : #cd1449,
-        800 : #c71140,
-        900 : #be092f,
-        A100 : #ffe9ec,
-        A200 : #ffb6c2,
-        A400 : #ff8397,
-        A700 : #ff6982,
-        contrast: (
-                50 : #000000,
-                100 : #000000,
-                200 : #000000,
-                300 : #000000,
-                400 : #ffffff,
-                500 : #ffffff,
-                600 : #ffffff,
-                700 : #ffffff,
-                800 : #ffffff,
-                900 : #ffffff,
-                A100 : #000000,
-                A200 : #000000,
-                A400 : #000000,
-                A700 : #000000,
-        )
-);
-
-$orange-color: "#f0572aff";
-$red-color: "#de1d25ff";
-$purple-color: "#912987ff";
-$pink-color: "#d71c5bff";
-$dark-color: "#3f3f41ff";
-$darker-color: "#333333ff";
-$light-color: "#f2f2f2ff";
-
-$primary: mat-palette($md-dbpurplepalette);
-$accent:  mat-palette($md-dborangepalette);
-$warn:    mat-palette($md-dbpinkpalette);
+$primary: mat-palette($primary-palette);
+$accent:  mat-palette($accent-palette);
+$warn:    mat-palette($warn-palette);
 $theme-light: mat-light-theme($primary, $accent, $warn);
 $theme-dark: mat-dark-theme($primary, $accent, $warn);
 
