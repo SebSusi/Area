@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Area} from '../../objects/area';
 
 @Component({
   selector: 'app-area-list',
@@ -7,7 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AreaListComponent implements OnInit {
 
-  constructor() { }
+  public areas: Area[] = [];
+
+  constructor() {
+      this.areas.push(new Area());
+      this.areas.push(new Area());
+      this.areas.push(new Area());
+      this.areas.push(new Area());
+      this.areas.push(new Area());
+      this.areas.push(new Area());
+  }
 
   ngOnInit() {
   }

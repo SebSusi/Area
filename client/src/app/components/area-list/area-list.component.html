@@ -1,3 +1,7 @@
-<p>
-  area-list works!
-</p>
+<ul class="area-list">
+    <li *ngFor="let item of areas" class="d-flex align-items-center">
+        <mat-checkbox color="primary"></mat-checkbox>
+        <app-area-item [area]="item" class="flex-fill">
+        </app-area-item>
+    </li>
+</ul>

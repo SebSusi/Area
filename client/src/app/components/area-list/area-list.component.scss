@@ -1,0 +1,10 @@
+ul.area-list {
+  list-style-type: none;
+  padding: 0;
+  & > * {
+    margin: 20px 0;
+    mat-checkbox {
+      margin: 0 15px;
+    }
+  }
+}
