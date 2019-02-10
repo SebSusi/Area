@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
 import {$} from 'jquery';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {ConnectionService} from '../../services/connection.service';
+import {ThemeService} from '../../services/theme.service';
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -15,7 +16,7 @@ export class NavbarComponent implements OnInit {
     connectionService: ConnectionService;
     displayName: String;
 
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient, private router: Router, private themeService: ThemeService) {
         this.connectionService = new ConnectionService(http, router);
     }
 
@@ -29,14 +30,8 @@ export class NavbarComponent implements OnInit {
         });
     }
 
-    switchTheme()
-    {
-        const body = document.getElementsByTagName('body')[0];
-        if (body.classList.contains('light')) {
-            body.classList.remove('light');
-        } else {
-            body.classList.add('light');
-        }
+    switchTheme() {
+        this.themeService.switchTheme();
     }
 
     user() {
