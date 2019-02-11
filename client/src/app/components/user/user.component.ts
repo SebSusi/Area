@@ -74,7 +74,7 @@ export class UserComponent implements OnInit {
             password: password
         };
         this.changeInfo('');
-        this.userService.linkAccount(jsonLoginForm).subscribe(
+        this.cnxService.linkAccount(jsonLoginForm).subscribe(
             _ => {
                 this.changeInfo('BlindTest account created.');
                 this.updateLocalInfo();
