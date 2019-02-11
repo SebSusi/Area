@@ -16,14 +16,14 @@ export class AreaService {
     }
 
     getAreas(): Observable<Area[]> {
-        const url = '../../assets/areas.json';
+        const url = 'https://next.json-generator.com/api/json/get/4k_9XCtVI';
         return this._http.get(url).pipe(
             map((data: any[]) => data.map(item => this._adapter.adapt(item))),
         );
     }
 
     getArea(id: Number): Observable<Area> {
-        const url = '../../assets/area.json';
+        const url = 'https://next.json-generator.com/api/json/get/4y9sGCYN8';
         return this._http.get(url).pipe(map(data => this._adapter.adapt(data)));
     }
 }
