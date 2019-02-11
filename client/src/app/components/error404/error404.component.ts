@@ -14,7 +14,7 @@ export class Error404Component implements OnInit {
     }
 
     goHome() {
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('app');
     }
 
 }

@@ -36,7 +36,7 @@ import { UserAppComponent } from './components/user-app/user-app.component';
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: '/home',
+        redirectTo: '/app',
         pathMatch: 'full',
     },
     {

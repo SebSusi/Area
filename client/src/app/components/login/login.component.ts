@@ -12,14 +12,15 @@ import {ConnectionService} from '../../services/connection.service';
 })
 
 export class LoginComponent implements OnInit {
-    connectionService: ConnectionService;
     signingUp: boolean;
     loginForm: FormGroup;
     userForm: FormGroup;
     userError: string;
 
-    constructor(private socialAuthService: AuthService, private http: HttpClient, private router: Router, private formBuilder: FormBuilder) {
-        this.connectionService = new ConnectionService(http, router);
+    constructor(private http: HttpClient, private router: Router,
+                private socialAuthService: AuthService,
+                private formBuilder: FormBuilder,
+                private connectionService: ConnectionService) {
         this.signingUp = false;
         this.userError = '';
         this.loginForm = this.formBuilder.group({
@@ -46,34 +47,26 @@ export class LoginComponent implements OnInit {
             email: email,
             password: password
         };
-        this.connectionService.login(jsonLoginForm).then(response => {
-            if (response['success']) {
+        this.connectionService.login(jsonLoginForm).subscribe(
+            response => {
                 window.localStorage.setItem('token', response['token']);
-                this.router.navigateByUrl('/home');
-            } else if (response['message']) {
-                this.userError = response['message'];
-            }
-        });
+                this.router.navigateByUrl('/app'); },
+            err => {this.userError = err; });
     }
 
-    loginSocial (platform) {
+    loginSocial(platform) {
         this.userError = '';
         let socialPlatformProvider;
-        if (platform === 'Google') {
+        if (platform === 'google') {
             socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-        } else if (platform === 'Facebook') {
+        } else if (platform === 'facebook') {
             socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
         }
         this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
-            userData['access_token'] = userData.authToken;
-                this.connectionService.loginSocial(socialPlatformProvider, userData).then(response => {
-                    if (response['success']) {
-                        window.localStorage.setItem('token', response['token']);
-                        this.router.navigateByUrl('/home');
-                    } else if (response['message']) {
-                        this.userError = response['message'];
-                    }
-                });
+                userData['access_token'] = userData.authToken;
+                this.connectionService.loginSocial(socialPlatformProvider, userData).subscribe(_ => {
+                        this.router.navigateByUrl('/app');
+                    });
             }
         );
     }
@@ -85,13 +78,10 @@ export class LoginComponent implements OnInit {
             email: email,
             password: password
         };
-        this.connectionService.signUp(jsonUserForm).then(response => {
-            if (response['success']) {
-                this.login(email, password);
-            } else if (response['message']) {
-                this.userError = response['message'];
-            }
-        });
+        this.connectionService.signUp(jsonUserForm).subscribe(
+            response => { this.login(email, password); },
+            err => {this.userError = err; }
+        );
     }
 
     matchPassword(c: AbstractControl): { invalid: boolean } {

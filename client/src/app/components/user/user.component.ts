@@ -12,7 +12,6 @@ import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angularx-
 })
 
 export class UserComponent implements OnInit {
-    userService: UserService;
     usernameForm: FormGroup;
     emailForm: FormGroup;
     passwordForm: FormGroup;
@@ -25,8 +24,7 @@ export class UserComponent implements OnInit {
     showFacebook: Boolean;
     profiles: Object;
 
-    constructor(private socialAuthService: AuthService, private http: HttpClient, private router: Router, private formBuilder: FormBuilder) {
-        this.userService = new UserService(this.http, this.router);
+    constructor(private socialAuthService: AuthService, private http: HttpClient, private router: Router, private formBuilder: FormBuilder, private userService: UserService) {
         this.linkLocal = false;
         this.showBlindtest = false;
         this.showGoogle = false;
@@ -74,14 +72,13 @@ export class UserComponent implements OnInit {
             password: password
         };
         this.changeInfo('');
-        this.userService.linkAccount(jsonLoginForm).then(response => {
-            if (response['success']) {
+        this.userService.linkAccount(jsonLoginForm).subscribe(
+            _ => {
                 this.changeInfo('BlindTest account created.');
-                this.updateLocalInfo()
-            } else if (response['message']) {
-                this.changeError(response['message']);
-            }
-        });
+                this.updateLocalInfo();
+            }, res => {
+                this.changeError(res);
+            });
     }
 
     linkSocial(platform) {
@@ -89,36 +86,30 @@ export class UserComponent implements OnInit {
         this.changeInfo('');
         this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
             userData['access_token'] = userData.authToken;
-            this.userService.linkSocial(socialPlatformProvider, userData).then(response => {
-                if (response['success']) {
+            this.userService.linkSocial(socialPlatformProvider, userData).subscribe(_ => {
                     this.changeInfo(platform + ' account linked.');
-                    if (platform === 'Google') {
+                    if (platform === 'google') {
                         this.updateGoogleInfo();
-                    } else if (platform === 'Facebook') {
+                    } else if (platform === 'facebook') {
                         this.updateFacebookInfo();
                     }
-                } else if (response['message']) {
-                    this.changeError(response['message']);
-                }
-            });
+                },
+                err => {
+                    this.changeError(err);
+                });
         });
     }
 
     unlinkSocial(platform) {
         const socialPlatformProvider = this.getSocialPlatformProviderId(platform);
         this.changeInfo('');
-        this.userService.unlinkSocial(socialPlatformProvider).then(response => {
-            if (response['success']) {
+        this.userService.unlinkSocial(socialPlatformProvider).subscribe(_ => {
                 this.changeInfo(platform + ' account unlinked.');
-                if (platform === 'Google') {
-                    this.profiles['google'] = null;
-                } else if (platform === 'Facebook') {
-                    this.profiles['facebook'] = null;
-                }
-            } else if (response['message']) {
-                this.changeError(response['message']);
-            }
-        });
+                this.profiles[platform] = null;
+            },
+            err => {
+                this.changeError(err);
+            });
     }
 
     changeUsername(username) {
@@ -127,14 +118,13 @@ export class UserComponent implements OnInit {
         };
         this.changeInfo('');
         this.updateDisplayName();
-        this.userService.changeUsername(jsonUsername).then(response => {
-            if (response['success']) {
+        this.userService.changeUsername(jsonUsername).subscribe(_ => {
                 this.updateDisplayName();
                 this.changeInfo('Username changed.');
-            } else if (response['message']) {
-                this.changeError(response['message']);
-            }
-        });
+            },
+            err => {
+                this.changeError(err);
+            });
     }
 
     changeEmail(email) {
@@ -142,14 +132,13 @@ export class UserComponent implements OnInit {
             email: email
         };
         this.changeInfo('');
-        this.userService.changeEmail(jsonEmail).then(response => {
-            if (response['success']) {
+        this.userService.changeEmail(jsonEmail).subscribe(_ => {
                 this.updateLocalInfo();
                 this.changeInfo('Email saved.');
-            } else if (response['message']) {
-                this.changeError(response['message']);
-            }
-        });
+            },
+            err => {
+                this.changeError(err);
+            });
     }
 
     changePassword(password, old) {
@@ -158,14 +147,13 @@ export class UserComponent implements OnInit {
             oldPassword: old,
             password: password
         };
-        this.userService.changePassword(jsonPassword).then(response => {
-            if (response['success']) {
+        this.userService.changePassword(jsonPassword).subscribe(_ => {
                 this.passwordForm.reset();
                 this.changeInfo('Password changed.');
-            } else if (response['message']) {
-                this.changeError(response['message']);
-            }
-        });
+            },
+            err => {
+                this.changeError(err);
+            });
     }
 
     private updateProfilesInfo() {
@@ -176,15 +164,13 @@ export class UserComponent implements OnInit {
     }
 
     private updateDisplayName() {
-        this.userService.getCurrent().then(response => {
-            if (response['success']) {
+        this.userService.getCurrent().subscribe(response => {
                 this.usernameForm.patchValue({username: response['displayName'], current: response['displayName']});
-            }
         });
     }
 
     private updateLocalInfo() {
-        this.userService.getLocal().then(response => {
+        this.userService.getLocal().subscribe(response => {
             if (response['success'] && !this.isEmptyJson(response['local'])) {
                 this.profiles['blindtest'] = response['local'];
                 this.emailForm.patchValue({email: response['local']['email'], current: response['local']['email']});
@@ -195,7 +181,7 @@ export class UserComponent implements OnInit {
     }
 
     private updateGoogleInfo() {
-        this.userService.getGoogle().then(response => {
+        this.userService.getGoogle().subscribe(response => {
             if (response['success'] && !this.isEmptyJson(response['google'])) {
                 this.profiles['google'] = response['google'];
             } else {
@@ -205,7 +191,7 @@ export class UserComponent implements OnInit {
     }
 
     private updateFacebookInfo() {
-        this.userService.getFacebook().then(response => {
+        this.userService.getFacebook().subscribe(response => {
             if (response['success'] && !this.isEmptyJson(response['facebook'])) {
                 this.profiles['facebook'] = response['facebook'];
             } else {
@@ -225,12 +211,9 @@ export class UserComponent implements OnInit {
     }
 
     private getCurrentEmail() {
-        this.userService.getCurrent().then(response => {
-            if (response['success']) {
-                return response[response['currentConnectionType']]['email'];
-            }
+        return this.userService.getCurrent().subscribe(_ => {
+                return _[_['currentConnectionType']]['email'];
         });
-        return '';
     }
 
     private getSocialPlatformProviderId(platform) {

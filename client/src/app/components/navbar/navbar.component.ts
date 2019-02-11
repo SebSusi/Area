@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {ConnectionService} from '../../services/connection.service';
 import {ThemeService} from '../../services/theme.service';
+import {UserService} from '../../services/user.service';
+import {map} from 'rxjs/operators';
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -13,38 +15,19 @@ import {ThemeService} from '../../services/theme.service';
 })
 
 export class NavbarComponent implements OnInit {
-    connectionService: ConnectionService;
     displayName: String;
 
-    constructor(private http: HttpClient, private router: Router, private themeService: ThemeService) {
-        this.connectionService = new ConnectionService(http, router);
+    constructor(private http: HttpClient, private router: Router,
+                private themeService: ThemeService, private connectionService: ConnectionService, private userService: UserService) {
     }
 
     ngOnInit() {
-        this.connectionService.getConnectionInfo().then(response => {
-            if (response['success']) {
-                this.displayName = response['displayName'];
-            } else {
-                this.disconnect();
-            }
-        });
+        this.userService.getConnectionInfo().subscribe(
+            data => {this.displayName = data['displayName']; console.log('MDR'); }
+        );
     }
 
     switchTheme() {
         this.themeService.switchTheme();
-    }
-
-    user() {
-        this.router.navigateByUrl('/user');
-    }
-
-    logout() {
-        this.connectionService.logout();
-        this.disconnect();
-    }
-
-    private disconnect() {
-        window.localStorage.setItem('token', '');
-        this.router.navigateByUrl('/login');
     }
 }

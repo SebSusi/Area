@@ -8,13 +8,12 @@ import {FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login'
     providedIn: 'root'
 })
 
-export class UserService extends ApiService {
-    constructor(http: HttpClient, router: Router) {
-        super(http, router);
+export class UserService {
+    constructor(private s: ApiService, private http: HttpClient, private router: Router) {
     }
 
     linkAccount(data) {
-        return this.apiPost('/auth/local/link', data);
+        return this.s.apiPost('/auth/local/link', data);
     }
 
     linkSocial(socialPlatformProvider, userData) {
@@ -26,15 +25,15 @@ export class UserService extends ApiService {
     }
 
     linkGoogle(data) {
-        return this.apiPost('/auth/google', data);
+        return this.s.apiPost('/auth/google', data);
     }
 
     linkFacebook(data) {
-        return this.apiPost('/auth/facebook', data);
+        return this.s.apiPost('/auth/facebook', data);
     }
 
     unlinkAccount(data) {
-        return this.apiDelete('/auth/local/link');
+        return this.s.apiDelete('/auth/local/link');
     }
 
     unlinkSocial(socialPlatformProvider) {
@@ -46,11 +45,11 @@ export class UserService extends ApiService {
     }
 
     unlinkGoogle() {
-        return this.apiDelete('/auth/google');
+        return this.s.apiDelete('/auth/google');
     }
 
     unlinkFacebook() {
-        return this.apiDelete('/auth/facebook');
+        return this.s.apiDelete('/auth/facebook');
     }
 
     getSocial(socialPlatformProvider) {
@@ -62,35 +61,38 @@ export class UserService extends ApiService {
     }
 
     getGoogle() {
-        return this.apiGet('/account/profile/google');
+        return this.s.apiGet('/account/profile/google');
     }
 
     getFacebook() {
-        return this.apiGet('/account/profile/facebook');
+        return this.s.apiGet('/account/profile/facebook');
     }
 
     getLocal() {
-        return this.apiGet('/account/profile/local');
+        return this.s.apiGet('/account/profile/local');
     }
 
     getCurrent() {
-        return this.apiGet('/account/profile/current');
+        return this.s.apiGet('/account/profile/current');
     }
 
     getProfiles() {
-        return this.apiGet('/account/profile');
+        return this.s.apiGet('/account/profile');
     }
 
     changeUsername(data) {
-        return this.apiPut('/account/profile/info/display_name', data);
+        return this.s.apiPut('/account/profile/info/display_name', data);
     }
 
     changeEmail(data) {
-        return this.apiPut('/account/profile/local/email', data);
+        return this.s.apiPut('/account/profile/local/email', data);
     }
 
     changePassword(data) {
-        return this.apiPut('/account/profile/local/password', data);
+        return this.s.apiPut('/account/profile/local/password', data);
     }
 
+    getConnectionInfo() {
+        return this.s.apiGet('/account/profile/current');
+    }
 }

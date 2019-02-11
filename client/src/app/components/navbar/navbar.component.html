@@ -1,22 +1,19 @@
 <div class="navbar-padding">
     <div class="navbar-container">
         <div id="navbar" class="container">
-            <a href="/home" class="svg">
+            <a routerLink="/app" class="svg">
                 <svg-icon src="assets/area.svg"></svg-icon>
             </a>
             <div class="area-tools">
                 <button mat-raised-button color="primary">
                     Make an Area!
                 </button>
-                <button mat-button (click)="user()">
+                <button mat-button routerLink="/app/account">
                     <mat-icon>person</mat-icon> {{displayName}}
                 </button>
                 <button mat-icon-button (click)="switchTheme()">
                         <mat-icon>brightness_medium</mat-icon>
                 </button>
-                <!--button mat-icon-button color="warn" (click)="logout()">
-                    <mat-icon>logout</mat-icon>
-                </button-->
             </div>
         </div>
     </div>
