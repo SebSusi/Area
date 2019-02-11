@@ -5,12 +5,21 @@ export class Area {
     private _name: String;
     private _actions: Action[];
     private _on = false;
+    private _id: number;
 
 
     constructor(name: String = 'Basic Area', actions: Action[] = [], on: boolean = false) {
         this._name = name;
         this._actions = actions;
         this._on = on;
+    }
+
+    get id(): number {
+        return this._id;
+    }
+
+    set id(value: number) {
+        this._id = value;
     }
 
     get name(): String {

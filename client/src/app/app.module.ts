@@ -31,6 +31,7 @@ import {Error404Component} from './components/error404/error404.component';
 import {getAuthServiceConfigs} from './objects/socialLoginConfig';
 import {AreaListComponent} from './components/area-list/area-list.component';
 import {AreaItemComponent} from './components/area-item/area-item.component';
+import { EditorComponent } from './components/editor/editor.component';
 
 const appRoutes: Routes = [
     {
@@ -45,6 +46,10 @@ const appRoutes: Routes = [
     {
         path: 'home',
         component: HomeComponent
+    },
+    {
+        path: 'editor',
+        component: EditorComponent
     },
     {
         path: 'user',
@@ -69,7 +74,8 @@ const appRoutes: Routes = [
         UserComponent,
         Error404Component,
         AreaListComponent,
-        AreaItemComponent
+        AreaItemComponent,
+        EditorComponent
     ],
     entryComponents: [],
     imports: [

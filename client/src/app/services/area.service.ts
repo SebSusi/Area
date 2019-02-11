@@ -3,7 +3,7 @@ import {ApiService} from './api.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Area, AreaAdapter} from '../objects/area';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 
 @Injectable({
@@ -12,18 +12,37 @@ import {Observable, of} from 'rxjs';
 
 export class AreaService {
     private _adapter = new AreaAdapter();
+    private _areas: Area[] = [];
     constructor(private _http: HttpClient, private _router: Router, private api: ApiService) {
+    }
+
+
+    get areas(): Area[] {
+        return this._areas;
     }
 
     getAreas(): Observable<Area[]> {
         const url = 'https://next.json-generator.com/api/json/get/4k_9XCtVI';
         return this._http.get(url).pipe(
             map((data: any[]) => data.map(item => this._adapter.adapt(item))),
+            tap(data => this._areas = data)
         );
     }
 
     getArea(id: Number): Observable<Area> {
         const url = 'https://next.json-generator.com/api/json/get/4y9sGCYN8';
-        return this._http.get(url).pipe(map(data => this._adapter.adapt(data)));
+        return this._http.get(url).pipe(
+            map(data => this._adapter.adapt(data)),
+            tap(data => this.updateArea(data))
+        );
+    }
+
+    private updateArea(data: Area) {
+        const id = this._areas.findIndex(item => item.id === data.id);
+        if (id === -1) {
+            this._areas.push(data);
+        } else {
+            this._areas[id] = data;
+        }
     }
 }
