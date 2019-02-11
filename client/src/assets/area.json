@@ -1,0 +1,13 @@
+{
+  "name": "New Area",
+  "actions": [
+    {
+      "name": "amet esse",
+      "type": "outlook"
+    },
+    {
+      "name": "amet esse",
+      "type": "gmail"
+    }
+  ]
+}

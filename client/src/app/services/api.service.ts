@@ -11,7 +11,11 @@ import {environment} from '../../environments/environment';
 export class ApiService {
     apiUrl: string;
 
-    constructor(private http: HttpClient, private router: Router) {
+    get http(): HttpClient {
+        return this._http;
+    }
+
+    constructor(private _http: HttpClient, private _router: Router) {
         this.apiUrl = environment.apiUrl;
     }
 
@@ -26,24 +30,24 @@ export class ApiService {
     apiGet(path = '') {
         const headers = ApiService.getHeaders();
 
-        return this.http.get(`${this.apiUrl}${path}`, {headers: headers}).toPromise();
+        return this._http.get(`${this.apiUrl}${path}`, {headers: headers}).toPromise();
     }
 
     apiPost(path, data) {
         const headers = ApiService.getHeaders();
 
-        return this.http.post(`${this.apiUrl}${path}`, data, {headers: headers}).toPromise();
+        return this._http.post(`${this.apiUrl}${path}`, data, {headers: headers}).toPromise();
     }
 
     apiPut(path, data) {
         const headers = ApiService.getHeaders();
 
-        return this.http.put(`${this.apiUrl}${path}`, data, {headers: headers}).toPromise();
+        return this._http.put(`${this.apiUrl}${path}`, data, {headers: headers}).toPromise();
     }
 
     apiDelete(path) {
         const headers = ApiService.getHeaders();
 
-        return this.http.delete(`${this.apiUrl}${path}`, {headers: headers}).toPromise();
+        return this._http.delete(`${this.apiUrl}${path}`, {headers: headers}).toPromise();
     }
 }
