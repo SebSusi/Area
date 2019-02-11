@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/form
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login';
-import {ConnectionService} from '../../services/connection.service';
+import {ConnectionService} from '../../../services/connection.service';
 
 @Component({
     selector: 'app-login-page',

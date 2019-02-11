@@ -1,4 +1,4 @@
-<mat-card class="d-flex align-content-center flex-wraps">
+<mat-card routerLink="/app/editor/{{area.id}}" class="d-flex align-content-center flex-wraps">
     <ol class="d-flex align-content-center">
         <li *ngFor="let item of area.actions" class="action-type-icon">
             <svg-icon src="assets/types/{{item.type}}.svg"></svg-icon>

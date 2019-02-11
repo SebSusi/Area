@@ -23,16 +23,19 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ButtonsModule} from 'angular-bootstrap-md';
 
 import {AppComponent} from './app.component';
-import {LoginComponent} from './components/login/login.component';
-import {HomeComponent} from './components/home/home.component';
-import {UserComponent} from './components/user/user.component';
+import {LoginComponent} from './components/pages/login/login.component';
+import {HomeComponent} from './components/pages/home/home.component';
+import {UserComponent} from './components/pages/user/user.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {Error404Component} from './components/error404/error404.component';
 import {getAuthServiceConfigs} from './objects/socialLoginConfig';
 import {AreaListComponent} from './components/area-list/area-list.component';
 import {AreaItemComponent} from './components/area-item/area-item.component';
-import { EditorComponent } from './components/editor/editor.component';
-import { UserAppComponent } from './components/user-app/user-app.component';
+import { EditorComponent } from './components/pages/editor/editor.component';
+import { UserAppComponent } from './components/pages/user-app/user-app.component';
+import { AppTypeManagerComponent } from './components/components-managers/app-type-manager/app-type-manager.component';
+import { TriggerManagerComponent } from './components/components-managers/trigger-manager/trigger-manager.component';
+import { OptionsManagerComponent } from './components/components-managers/options-manager/options-manager.component';
 const appRoutes: Routes = [
     {
         path: '',
@@ -49,6 +52,10 @@ const appRoutes: Routes = [
             },
             {
                 path: 'editor',
+                redirectTo: 'editor/'
+            },
+            {
+                path: 'editor/:id',
                 component: EditorComponent
             },
             {
@@ -64,11 +71,11 @@ const appRoutes: Routes = [
     {
         path: '404',
         component: Error404Component
-    },
+    }/*,
     {
         path: '**',
         redirectTo: '/404'
-    }
+    }*/
 ];
 
 @NgModule({
@@ -82,7 +89,10 @@ const appRoutes: Routes = [
         AreaListComponent,
         AreaItemComponent,
         EditorComponent,
-        UserAppComponent
+        UserAppComponent,
+        AppTypeManagerComponent,
+        TriggerManagerComponent,
+        OptionsManagerComponent
     ],
     entryComponents: [],
     imports: [

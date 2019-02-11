@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {UserService} from '../../services/user.service';
+import {UserService} from '../../../services/user.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login';
-import {ConnectionService} from '../../services/connection.service';
+import {ConnectionService} from '../../../services/connection.service';
 
 @Component({
     selector: 'app-user',

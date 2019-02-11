@@ -5,20 +5,21 @@ export class Area {
     private _name: String;
     private _actions: Action[];
     private _on = false;
-    private _id: number;
+    private _id: String;
 
 
-    constructor(name: String = 'Basic Area', actions: Action[] = [], on: boolean = false) {
+    constructor(id: String, name: String = 'Basic Area', actions: Action[] = [], on: boolean = false) {
         this._name = name;
         this._actions = actions;
         this._on = on;
+        this._id = id;
     }
 
-    get id(): number {
+    get id(): String {
         return this._id;
     }
 
-    set id(value: number) {
+    set id(value: String) {
         this._id = value;
     }
 
@@ -49,6 +50,6 @@ export class Area {
 
 export class AreaAdapter implements Adapter<Area> {
     adapt(item: any): Area {
-        return new Area(item.name, item.actions);
+        return new Area(item.id, item.name, item.actions);
     }
 }

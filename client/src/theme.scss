@@ -1,5 +1,5 @@
 @import '~@angular/material/theming';
-@import './app/components/login/login-theme';
+@import 'app/components/pages/login/login-theme';
 @import './app/components/navbar/navbar-theme';
 @include mat-core();
 
