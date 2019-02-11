@@ -32,7 +32,7 @@ import {getAuthServiceConfigs} from './objects/socialLoginConfig';
 import {AreaListComponent} from './components/area-list/area-list.component';
 import {AreaItemComponent} from './components/area-item/area-item.component';
 import { EditorComponent } from './components/editor/editor.component';
-
+import { UserAppComponent } from './components/user-app/user-app.component';
 const appRoutes: Routes = [
     {
         path: '',
@@ -40,20 +40,26 @@ const appRoutes: Routes = [
         pathMatch: 'full',
     },
     {
+        path: 'app',
+        component: UserAppComponent,
+        children: [
+            {
+                path: '',
+                component: HomeComponent
+            },
+            {
+                path: 'editor',
+                component: EditorComponent
+            },
+            {
+                path: 'account',
+                component: UserComponent
+            }
+        ]
+    },
+    {
         path: 'login',
         component: LoginComponent
-    },
-    {
-        path: 'home',
-        component: HomeComponent
-    },
-    {
-        path: 'editor',
-        component: EditorComponent
-    },
-    {
-        path: 'user',
-        component: UserComponent
     },
     {
         path: '404',
@@ -75,7 +81,8 @@ const appRoutes: Routes = [
         Error404Component,
         AreaListComponent,
         AreaItemComponent,
-        EditorComponent
+        EditorComponent,
+        UserAppComponent
     ],
     entryComponents: [],
     imports: [

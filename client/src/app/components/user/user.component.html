@@ -1,137 +1,143 @@
-<div class="area-widgets-table">
-    <app-navbar></app-navbar>
-    <div class="area-page">
-        <section id="home" class="area-container text-center">
-            <form class="area-form" [formGroup]="usernameForm"
-                  (submit)="changeUsername(this.usernameForm.get('username').value)">
+<section id="home" class="user-container text-center">
+    <form class="area-form" [formGroup]="usernameForm"
+          (submit)="changeUsername(this.usernameForm.get('username').value)">
+        <div class="area-row">
+            <mat-form-field class="col-7">
+                <input matInput="" type="text" formControlName="username" placeholder="Username">
+            </mat-form-field>
+            <button [disabled]="!usernameForm.valid" mat-raised-button color="accent"
+                    type="submit" class="col-3">Save
+            </button>
+        </div>
+    </form>
+
+    <div *ngIf="profiles['blindtest']" class="social-buttons">
+        <button mat-raised-button type="button" (click)="showBlindtest = !showBlindtest"
+                class="btn-social col-md-12">
+            <svg-icon src="assets/blindtest-icon.svg"></svg-icon>
+            BlindTest account
+            <span *ngIf="!showBlindtest" class="end-icon fa fa-chevron-right"></span>
+            <span *ngIf="showBlindtest" class="end-icon fa fa-chevron-down"></span>
+        </button>
+        <div *ngIf="showBlindtest" class="background-card">
+            <form class="area-form" [formGroup]="emailForm"
+                  (submit)="changeEmail(this.emailForm.get('email').value)">
                 <div class="area-row">
                     <mat-form-field class="col-7">
-                        <input matInput="" type="text" formControlName="username" placeholder="Username">
+                        <input matInput="" type="email" formControlName="email" placeholder="Email">
                     </mat-form-field>
-                    <button [disabled]="!usernameForm.valid" mat-raised-button color="accent"
+                    <button [disabled]="!emailForm.valid" mat-raised-button color="accent"
                             type="submit" class="col-3">Save
                     </button>
                 </div>
             </form>
-
-            <div *ngIf="profiles['blindtest']" class="social-buttons">
-                <button mat-raised-button type="button" (click)="showBlindtest = !showBlindtest" class="btn-social col-md-12">
-                    <svg-icon src="assets/blindtest-icon.svg"></svg-icon> BlindTest account
-                    <span *ngIf="!showBlindtest" class="end-icon fa fa-chevron-right"></span>
-                    <span *ngIf="showBlindtest" class="end-icon fa fa-chevron-down"></span>
+            <form class="area-form" [formGroup]="passwordForm"
+                  (submit)="changePassword(this.passwordForm.get('password').value, this.passwordForm.get('oldPassword').value)">
+                <mat-form-field class="col-10">
+                    <input matInput="" type="password" formControlName="oldPassword" placeholder="Current Password">
+                </mat-form-field>
+                <mat-form-field class="col-10">
+                    <input matInput="" type="password" formControlName="password" placeholder="New Password">
+                </mat-form-field>
+                <mat-form-field class="col-10">
+                    <input matInput="" type="password" formControlName="passwordConfirm"
+                           placeholder="Confirm New Password">
+                </mat-form-field>
+                <button [disabled]="!passwordForm.valid" mat-raised-button color="accent" type="submit">
+                    Change Password
                 </button>
-                <div *ngIf="showBlindtest" class="background-card">
-                    <form class="area-form" [formGroup]="emailForm"
-                          (submit)="changeEmail(this.emailForm.get('email').value)">
-                        <div class="area-row">
-                            <mat-form-field class="col-7">
-                                <input matInput="" type="email" formControlName="email" placeholder="Email">
-                            </mat-form-field>
-                            <button [disabled]="!emailForm.valid" mat-raised-button color="accent"
-                                    type="submit" class="col-3">Save
-                            </button>
-                        </div>
-                    </form>
-                    <form class="area-form" [formGroup]="passwordForm"
-                          (submit)="changePassword(this.passwordForm.get('password').value, this.passwordForm.get('oldPassword').value)">
-                        <mat-form-field class="col-10">
-                            <input matInput="" type="password" formControlName="oldPassword" placeholder="Current Password">
-                        </mat-form-field>
-                        <mat-form-field class="col-10">
-                            <input matInput="" type="password" formControlName="password" placeholder="New Password">
-                        </mat-form-field>
-                        <mat-form-field class="col-10">
-                            <input matInput="" type="password" formControlName="passwordConfirm" placeholder="Confirm New Password">
-                        </mat-form-field>
-                        <button [disabled]="!passwordForm.valid" mat-raised-button color="accent" type="submit">
-                            Change Password
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div *ngIf="!profiles['blindtest']">
-                <div class="social-buttons">
-                    <button mat-raised-button type="button" (click)="linkLocal = !linkLocal" class="btn-social col-md-12">
-                        <svg-icon src="assets/blindtest-icon.svg"></svg-icon> Create BlindTest account
-                        <span *ngIf="!linkLocal" class="end-icon fa fa-chevron-right"></span>
-                        <span *ngIf="linkLocal" class="end-icon fa fa-chevron-down"></span>
-                    </button><br>
-                </div>
-                <form *ngIf="linkLocal" class="area-form background-card social-buttons" [formGroup]="linkForm"
-                      (submit)="linkAccount(this.linkForm.get('email').value, this.linkForm.get('password').value)">
-                    <mat-form-field class="col-11">
-                        <input matInput="" type="email" formControlName="email" placeholder="Email" required>
-                    </mat-form-field>
-                    <mat-form-field class="col-11">
-                        <input matInput="" type="password" formControlName="password" placeholder="Password" required>
-                    </mat-form-field>
-                    <mat-form-field class="col-11">
-                        <input matInput="" type="password" formControlName="passwordConfirm" placeholder="Confirm Password" required>
-                    </mat-form-field>
-                    <button [disabled]="!linkForm.valid" mat-raised-button color="accent" type="submit">
-                        Create Account
-                    </button>
-                </form>
-            </div>
-
-            <div *ngIf="profiles['google']" class="social-buttons">
-                <button mat-raised-button type="button" (click)="showGoogle = !showGoogle" class="btn-social btn-google col-md-12">
-                    <span class="fa fa-google"></span>Google account
-                    <span *ngIf="!showGoogle" class="end-icon fa fa-chevron-right"></span>
-                    <span *ngIf="showGoogle" class="end-icon fa fa-chevron-down"></span>
-                </button>
-                <div *ngIf="showGoogle" class="background-card">
-                    <mat-form-field class="col-11">
-                        <input matInput="" type="email" ngModel="{{profiles['google'].email}}" placeholder="Email" disabled>
-                    </mat-form-field>
-                    <mat-form-field class="col-11">
-                        <input matInput="" type="text" ngModel="{{profiles['google'].name}}" placeholder="Name" disabled>
-                    </mat-form-field>
-                    <button mat-raised-button color="accent" (click)="unlinkSocial('Google')">
-                        Unlink Account
-                    </button>
-                </div>
-            </div>
-            <div *ngIf="!profiles['google']" class="social-buttons">
-                <button mat-raised-button type="button" (click)="linkSocial('Google')" class="btn-social btn-google col-md-12">
-                    <span class="fa fa-google"></span> Link Google account
-                </button>
-            </div>
-
-            <div *ngIf="profiles['facebook']" class="social-buttons">
-                <button mat-raised-button type="button" (click)="showFacebook = !showFacebook" class="btn-social btn-facebook col-md-12">
-                    <span class="fa fa-facebook"></span> Facebook account
-                    <span *ngIf="!showFacebook" class="end-icon fa fa-chevron-right"></span>
-                    <span *ngIf="showFacebook" class="end-icon fa fa-chevron-down"></span>
-                </button>
-                <div *ngIf="showFacebook" class="background-card">
-                    <mat-form-field class="col-11">
-                        <input matInput="" type="email" ngModel="{{profiles['facebook'].email}}" placeholder="Email" disabled>
-                    </mat-form-field>
-                    <mat-form-field class="col-11">
-                        <input matInput="" type="text" ngModel="{{profiles['facebook'].name}}" placeholder="Name" disabled>
-                    </mat-form-field>
-                    <button mat-raised-button color="accent" (click)="unlinkSocial('Facebook')">
-                        Unlink Account
-                    </button>
-                </div>
-            </div>
-            <div *ngIf="!profiles['facebook']" class="social-buttons">
-                <button mat-raised-button type="button" (click)="linkSocial('Facebook')" class="btn-social btn-facebook col-md-12">
-                    <span class="fa fa-facebook"></span> Link Facebook account
-                </button>
-            </div>
-
-            <div *ngIf="userInfo != ''" class="alert alert-info" role="alert">
-                <button type="button" class="close-alert" (click)="userInfo = ''">×</button>
-                <i class="material-icons">info</i>
-                {{userInfo}}
-            </div>
-            <div *ngIf="userError != ''" class="alert alert-danger" role="alert">
-                <button type="button" class="close-alert" (click)="userError = ''">×</button>
-                <i class="material-icons">info</i>
-                {{userError}}
-            </div>
-        </section>
+            </form>
+        </div>
     </div>
-</div>
+    <div *ngIf="!profiles['blindtest']">
+        <div class="social-buttons">
+            <button mat-raised-button type="button" (click)="linkLocal = !linkLocal" class="btn-social col-md-12">
+                <svg-icon src="assets/blindtest-icon.svg"></svg-icon>
+                Create BlindTest account
+                <span *ngIf="!linkLocal" class="end-icon fa fa-chevron-right"></span>
+                <span *ngIf="linkLocal" class="end-icon fa fa-chevron-down"></span>
+            </button>
+            <br>
+        </div>
+        <form *ngIf="linkLocal" class="area-form background-card social-buttons" [formGroup]="linkForm"
+              (submit)="linkAccount(this.linkForm.get('email').value, this.linkForm.get('password').value)">
+            <mat-form-field class="col-11">
+                <input matInput="" type="email" formControlName="email" placeholder="Email" required>
+            </mat-form-field>
+            <mat-form-field class="col-11">
+                <input matInput="" type="password" formControlName="password" placeholder="Password" required>
+            </mat-form-field>
+            <mat-form-field class="col-11">
+                <input matInput="" type="password" formControlName="passwordConfirm" placeholder="Confirm Password"
+                       required>
+            </mat-form-field>
+            <button [disabled]="!linkForm.valid" mat-raised-button color="accent" type="submit">
+                Create Account
+            </button>
+        </form>
+    </div>
+
+    <div *ngIf="profiles['google']" class="social-buttons">
+        <button mat-raised-button type="button" (click)="showGoogle = !showGoogle"
+                class="btn-social btn-google col-md-12">
+            <span class="fa fa-google"></span>Google account
+            <span *ngIf="!showGoogle" class="end-icon fa fa-chevron-right"></span>
+            <span *ngIf="showGoogle" class="end-icon fa fa-chevron-down"></span>
+        </button>
+        <div *ngIf="showGoogle" class="background-card">
+            <mat-form-field class="col-11">
+                <input matInput="" type="email" ngModel="{{profiles['google'].email}}" placeholder="Email" disabled>
+            </mat-form-field>
+            <mat-form-field class="col-11">
+                <input matInput="" type="text" ngModel="{{profiles['google'].name}}" placeholder="Name" disabled>
+            </mat-form-field>
+            <button mat-raised-button color="accent" (click)="unlinkSocial('Google')">
+                Unlink Account
+            </button>
+        </div>
+    </div>
+    <div *ngIf="!profiles['google']" class="social-buttons">
+        <button mat-raised-button type="button" (click)="linkSocial('Google')"
+                class="btn-social btn-google col-md-12">
+            <span class="fa fa-google"></span> Link Google account
+        </button>
+    </div>
+
+    <div *ngIf="profiles['facebook']" class="social-buttons">
+        <button mat-raised-button type="button" (click)="showFacebook = !showFacebook"
+                class="btn-social btn-facebook col-md-12">
+            <span class="fa fa-facebook"></span> Facebook account
+            <span *ngIf="!showFacebook" class="end-icon fa fa-chevron-right"></span>
+            <span *ngIf="showFacebook" class="end-icon fa fa-chevron-down"></span>
+        </button>
+        <div *ngIf="showFacebook" class="background-card">
+            <mat-form-field class="col-11">
+                <input matInput="" type="email" ngModel="{{profiles['facebook'].email}}" placeholder="Email"
+                       disabled>
+            </mat-form-field>
+            <mat-form-field class="col-11">
+                <input matInput="" type="text" ngModel="{{profiles['facebook'].name}}" placeholder="Name" disabled>
+            </mat-form-field>
+            <button mat-raised-button color="accent" (click)="unlinkSocial('Facebook')">
+                Unlink Account
+            </button>
+        </div>
+    </div>
+    <div *ngIf="!profiles['facebook']" class="social-buttons">
+        <button mat-raised-button type="button" (click)="linkSocial('Facebook')"
+                class="btn-social btn-facebook col-md-12">
+            <span class="fa fa-facebook"></span> Link Facebook account
+        </button>
+    </div>
+
+    <div *ngIf="userInfo != ''" class="alert alert-info" role="alert">
+        <button type="button" class="close-alert" (click)="userInfo = ''">×</button>
+        <i class="material-icons">info</i>
+        {{userInfo}}
+    </div>
+    <div *ngIf="userError != ''" class="alert alert-danger" role="alert">
+        <button type="button" class="close-alert" (click)="userError = ''">×</button>
+        <i class="material-icons">info</i>
+        {{userError}}
+    </div>
+</section>
