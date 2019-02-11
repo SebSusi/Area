@@ -4,6 +4,7 @@ import {UserService} from '../../services/user.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login';
+import {ConnectionService} from '../../services/connection.service';
 
 @Component({
     selector: 'app-user',
@@ -24,7 +25,8 @@ export class UserComponent implements OnInit {
     showFacebook: Boolean;
     profiles: Object;
 
-    constructor(private socialAuthService: AuthService, private http: HttpClient, private router: Router, private formBuilder: FormBuilder, private userService: UserService) {
+    constructor(private socialAuthService: AuthService, private http: HttpClient, private router: Router, private formBuilder: FormBuilder,
+                private userService: UserService, private cnxService: ConnectionService) {
         this.linkLocal = false;
         this.showBlindtest = false;
         this.showGoogle = false;
@@ -86,7 +88,7 @@ export class UserComponent implements OnInit {
         this.changeInfo('');
         this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
             userData['access_token'] = userData.authToken;
-            this.userService.linkSocial(socialPlatformProvider, userData).subscribe(_ => {
+            this.cnxService.linkSocial(socialPlatformProvider, userData).subscribe(_ => {
                     this.changeInfo(platform + ' account linked.');
                     if (platform === 'google') {
                         this.updateGoogleInfo();
@@ -103,7 +105,7 @@ export class UserComponent implements OnInit {
     unlinkSocial(platform) {
         const socialPlatformProvider = this.getSocialPlatformProviderId(platform);
         this.changeInfo('');
-        this.userService.unlinkSocial(socialPlatformProvider).subscribe(_ => {
+        this.cnxService.unlinkSocial(socialPlatformProvider).subscribe(_ => {
                 this.changeInfo(platform + ' account unlinked.');
                 this.profiles[platform] = null;
             },
@@ -217,9 +219,9 @@ export class UserComponent implements OnInit {
     }
 
     private getSocialPlatformProviderId(platform) {
-        if (platform === 'Google') {
+        if (platform === 'google') {
             return GoogleLoginProvider.PROVIDER_ID;
-        } else if (platform === 'Facebook') {
+        } else if (platform === 'facebook') {
             return FacebookLoginProvider.PROVIDER_ID;
         }
     }

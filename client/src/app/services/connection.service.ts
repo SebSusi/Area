@@ -35,4 +35,44 @@ export class ConnectionService {
     logout() {
         return this.s.apiGet('/auth/logout');
     }
+
+    linkAccount(data) {
+        return this.s.apiPost('/auth/local/link', data);
+    }
+
+    linkSocial(socialPlatformProvider, userData) {
+        if (socialPlatformProvider === GoogleLoginProvider.PROVIDER_ID) {
+            return this.linkGoogle(userData);
+        } else if (socialPlatformProvider === FacebookLoginProvider.PROVIDER_ID) {
+            return this.linkFacebook(userData);
+        }
+    }
+
+    linkGoogle(data) {
+        return this.s.apiPost('/auth/google', data);
+    }
+
+    linkFacebook(data) {
+        return this.s.apiPost('/auth/facebook', data);
+    }
+
+    unlinkAccount(data) {
+        return this.s.apiDelete('/auth/local/link');
+    }
+
+    unlinkSocial(socialPlatformProvider) {
+        if (socialPlatformProvider === GoogleLoginProvider.PROVIDER_ID) {
+            return this.unlinkGoogle();
+        } else if (socialPlatformProvider === FacebookLoginProvider.PROVIDER_ID) {
+            return this.unlinkFacebook();
+        }
+    }
+
+    unlinkGoogle() {
+        return this.s.apiDelete('/auth/google');
+    }
+
+    unlinkFacebook() {
+        return this.s.apiDelete('/auth/facebook');
+    }
 }
