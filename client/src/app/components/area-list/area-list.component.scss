@@ -1,6 +1,7 @@
 ul.area-list {
   list-style-type: none;
   padding: 0;
+  margin-right: 10px;
   & > * {
     margin: 20px 0;
     mat-checkbox {

@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 mat-card.mat-card {
   padding: 0;
   .area-infos {
@@ -40,6 +42,10 @@ mat-card.mat-card {
   & > * {
     margin: auto !important;
     padding: 20px;
+  }
+
+  &:hover {
+    @include mat-elevation(12);
   }
 }
 

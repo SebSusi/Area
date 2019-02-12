@@ -22,7 +22,7 @@ export class AppTypeManagerComponent implements OnInit {
     }
 
     isTypeSelected(type) {
-        return type === this.action.type;
+        return this.action && type === this.action.type;
     }
 
     setSelectedType(type) {
