@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Area} from '../../../objects/area';
+import {Action} from '../../../objects/action';
 
 @Component({
     selector: 'app-trigger-manager',
@@ -9,7 +9,7 @@ import {Area} from '../../../objects/area';
 export class TriggerManagerComponent implements OnInit {
 
     @Input()
-    public area: Area;
+    public action: Action;
 
     constructor() {
     }

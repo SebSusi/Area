@@ -1,13 +1,3 @@
 <section id="editor" class="container">
-    <mat-tab-group>
-        <mat-tab label="Choose App">
-            <app-app-type-manager [area]="area"></app-app-type-manager>
-        </mat-tab>
-        <mat-tab label="Select Trigger">
-            <app-options-manager [area]="area"></app-options-manager>
-        </mat-tab>
-        <mat-tab label="Setup Options">
-            <app-trigger-manager [area]="area"></app-trigger-manager>
-        </mat-tab>
-    </mat-tab-group>
+    <app-action [action]="area?.actions[0]"></app-action>
 </section>

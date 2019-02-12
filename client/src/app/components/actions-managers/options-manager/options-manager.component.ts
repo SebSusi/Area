@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Area} from '../../../objects/area';
+import {Action} from '../../../objects/action';
 
 @Component({
     selector: 'app-options-manager',
@@ -9,12 +9,11 @@ import {Area} from '../../../objects/area';
 export class OptionsManagerComponent implements OnInit {
 
     @Input()
-    public area: Area;
+    public action: Action;
 
     constructor() {
     }
 
     ngOnInit() {
     }
-
 }

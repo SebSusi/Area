@@ -1,0 +1,5 @@
+<div class="type-container d-flex align-content-end flex-wrap">
+    <mat-card *ngFor="let type of types" class="mat-card type-icon {{type}}-icon" [ngClass]="{'selected': isTypeSelected(type)}" (click)="setSelectedType(type)">
+        <h4>{{type}}</h4>
+    </mat-card>
+</div>

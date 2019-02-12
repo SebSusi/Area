@@ -46,4 +46,9 @@ export class AreaService {
             this._areas[id] = data;
         }
     }
+
+    getTypes() {
+        const url = 'https://next.json-generator.com/api/json/get/EyVDxyoNU';
+        return this._http.get<String[]>(url);
+    }
 }

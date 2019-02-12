@@ -1,0 +1,8 @@
+
+$types-list: facebook, gmail, twitter, outlook, youtube;
+
+@each $type in $types-list {
+  ::ng-deep .#{$type}-icon {
+    background-image: url("/assets/types/#{$type}.svg") !important;
+  }
+}

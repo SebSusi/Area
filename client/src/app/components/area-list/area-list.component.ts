@@ -19,7 +19,7 @@ export class AreaListComponent implements OnInit {
     constructor(private http: HttpClient, private areaService: AreaService) {
         const names = ['Envois des mails', 'GregStalker', 'Activity Alert', 'Dis bonjour sur facebook', 'Mail Translator'];
         areaService.getAreas().subscribe(value => {this.areas = value; });
-        areaService.getArea(2).subscribe(value => {this.areas.push(value); });
+        areaService.getArea('id').subscribe(value => {this.areas.push(value); });
     }
 
     ngOnInit() {

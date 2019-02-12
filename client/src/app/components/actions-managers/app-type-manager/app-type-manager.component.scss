@@ -1,0 +1,32 @@
+@import '~@angular/material/theming';
+
+.type-icon {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  background-image: url("../../../../assets/area-logo-grey.svg");
+  background-position: center 30px;
+  background-size: 40%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  border-color: transparent;
+  border-style: solid;
+
+  & > * {
+    text-align: center;
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    right: 0;
+    text-transform: capitalize;
+  }
+
+  &:hover {
+    @include mat-elevation(12);
+  }
+
+  &.selected {
+    border-color: #009ba4;
+    border-style: solid;
+  }
+}

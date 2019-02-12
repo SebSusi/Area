@@ -33,9 +33,10 @@ import {AreaListComponent} from './components/area-list/area-list.component';
 import {AreaItemComponent} from './components/area-item/area-item.component';
 import { EditorComponent } from './components/pages/editor/editor.component';
 import { UserAppComponent } from './components/pages/user-app/user-app.component';
-import { AppTypeManagerComponent } from './components/components-managers/app-type-manager/app-type-manager.component';
-import { TriggerManagerComponent } from './components/components-managers/trigger-manager/trigger-manager.component';
-import { OptionsManagerComponent } from './components/components-managers/options-manager/options-manager.component';
+import { AppTypeManagerComponent } from './components/actions-managers/app-type-manager/app-type-manager.component';
+import { TriggerManagerComponent } from './components/actions-managers/trigger-manager/trigger-manager.component';
+import { OptionsManagerComponent } from './components/actions-managers/options-manager/options-manager.component';
+import { ActionComponent } from './components/actions-managers/action/action.component';
 const appRoutes: Routes = [
     {
         path: '',
@@ -92,7 +93,8 @@ const appRoutes: Routes = [
         UserAppComponent,
         AppTypeManagerComponent,
         TriggerManagerComponent,
-        OptionsManagerComponent
+        OptionsManagerComponent,
+        ActionComponent
     ],
     entryComponents: [],
     imports: [
