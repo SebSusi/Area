@@ -1,50 +1,66 @@
-mat-card {
-  cursor: pointer;
-  ol {
-    position: relative;
-    list-style-type: none;
-    padding: 0;
-    width: 160px;
-    li:not(:last-child) {
-      margin-right: 25px;
-    }
-    li {
-      &:not(:last-child) svg-icon::after {
-        content: '';
-        width: 0;
-        height: 0;
-        position: absolute;
-        top: calc(50% - 5px);
-        border-left-color: grey !important;
-        border: 5px solid transparent;
-        margin-left: 10px;
-      }
+mat-card.mat-card {
+  padding: 0;
+  .area-infos {
+    cursor: pointer;
+    ol {
+      position: relative;
+      list-style-type: none;
+      padding: 0;
+      width: 160px;
 
-      ::ng-deep svg-icon {
-        svg {
-          height: 30px !important;
-          width: 30px !important;
+      li:not(:last-child) {
+        margin-right: 25px;
+      }
+      li {
+        &:not(:last-child) svg-icon::after {
+          content: '';
+          width: 0;
+          height: 0;
+          position: absolute;
+          top: calc(50% - 5px);
+          border-left-color: grey !important;
+          border: 5px solid transparent;
+          margin-left: 10px;
+        }
+
+        ::ng-deep svg-icon {
+          svg {
+            height: 30px !important;
+            width: 30px !important;
+          }
         }
       }
+    }
+
+    p {
+      margin: auto auto auto 0;
     }
   }
 
   & > * {
     margin: auto !important;
+    padding: 20px;
   }
 }
 
 $break-phone: 778px;
 
 @media screen and (max-width: $break-phone) {
-  mat-card {
-    padding: 0;
+  mat-card.mat-card {
     flex-direction: column !important;
-    ol {
+    .area-infos ol {
       width: auto;
     }
     & > * {
-      margin: 10px auto !important;
+      flex-direction: column !important;
+      & > * {
+        margin: 10px auto !important;
+      }
+    }
+    .area-options {
+      background-color: #0002;
+      width: 100%;
+      text-align: center;
     }
   }
 }

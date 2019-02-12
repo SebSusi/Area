@@ -108,3 +108,11 @@
     }
   }
 }
+
+$break-phone: 778px;
+
+@media screen and (max-width: $break-phone) {
+  .username {
+    display: none;
+  }
+}
