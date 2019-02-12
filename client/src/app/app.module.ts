@@ -37,6 +37,7 @@ import { AppTypeManagerComponent } from './components/actions-managers/app-type-
 import { TriggerManagerComponent } from './components/actions-managers/trigger-manager/trigger-manager.component';
 import { OptionsManagerComponent } from './components/actions-managers/options-manager/options-manager.component';
 import { ActionComponent } from './components/actions-managers/action/action.component';
+import { AccountManagerComponent } from './components/actions-managers/account-manager/account-manager.component';
 const appRoutes: Routes = [
     {
         path: '',
@@ -94,7 +95,8 @@ const appRoutes: Routes = [
         AppTypeManagerComponent,
         TriggerManagerComponent,
         OptionsManagerComponent,
-        ActionComponent
+        ActionComponent,
+        AccountManagerComponent
     ],
     entryComponents: [],
     imports: [
