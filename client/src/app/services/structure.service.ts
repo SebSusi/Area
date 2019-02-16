@@ -16,9 +16,8 @@ export class StructureService {
     }
 
     initStructure() {
-        console.log('LOOOOL1');
         const url = 'https://next.json-generator.com/api/json/get/VyOVzLxHL';
-        this._http.get(url).pipe(map(data => this.adapater.adapt(data)), tap(data => {this._template = data; console.log(data)})).subscribe();
+        this._http.get(url).pipe(map(data => this.adapater.adapt(data)), tap(data => this._template = data)).subscribe();
     }
 
     get template(): AreaTemplate {

@@ -18,7 +18,6 @@ export class TriggerManagerComponent implements OnInit {
 
     ngOnInit() {
         this.triggers = Array.from( this.structureS.template.options.get(this.action.type).keys() );
-        console.log(this.triggers);
     }
 
 }

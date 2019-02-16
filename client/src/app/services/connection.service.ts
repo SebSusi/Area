@@ -29,9 +29,6 @@ export class ConnectionService {
     }
 
     loginSocial(socialId, userData) {
-        console.log(socialId);
-        console.log(GoogleLoginProvider.PROVIDER_ID);
-        console.log(this.socials[socialId]);
         return this.s.apiPost('/auth/' + socialId.toLowerCase(), userData)
             .pipe(tap(res => console.log(res)), tap(res => {window.localStorage.setItem('token', res['token']); }));
     }
@@ -81,7 +78,7 @@ export class ConnectionService {
     }
 
     getAccounts(type: string) {
-        const url = '';
+        const url = 'https://next.json-generator.com/api/json/get/Vk_WtKgrU';
         return this.http.get(url).pipe(map((data: Account[]) => data.map(item => AccountAdapter.adapt(item))));
     }
 }

@@ -37,7 +37,6 @@ export class AreaService {
 
     private updateArea(data: Area) {
         const id = this._areas.findIndex(item => item.id === data.id);
-        console.log(data);
         if (id === -1) {
             this._areas.push(data);
         } else {

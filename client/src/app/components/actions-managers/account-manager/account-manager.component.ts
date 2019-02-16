@@ -19,7 +19,7 @@ export class AccountManagerComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._connectionService.getAccounts(this.action.type).subscribe(d => this._accounts = d);
+        this._connectionService.getAccounts(this.action.type).subscribe(d => {this._accounts = d});
     }
 
 }

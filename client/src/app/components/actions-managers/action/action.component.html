@@ -10,9 +10,11 @@
             <mat-tab label="Connect account">
                 <app-account-manager [action]="action"></app-account-manager>
             </mat-tab>
-            <mat-tab label="Setup Options">
-                <app-options-manager [action]="action"></app-options-manager>
-            </mat-tab>
+            <ng-template [ngIf]="action.id">
+                <mat-tab label="Setup Options">
+                    <app-options-manager [action]="action"></app-options-manager>
+                </mat-tab>
+            </ng-template>
         </ng-template>
     </ng-template>
 </mat-tab-group>
