@@ -12,7 +12,7 @@ import {ActionService} from '../../../services/action.service';
 export class EditorComponent implements OnInit {
     public area: Area;
 
-    constructor(private route: ActivatedRoute, private areaService: AreaService, private actionService: ActionService) {
+    constructor(private route: ActivatedRoute, private areaService: AreaService, public actionService: ActionService) {
     }
 
     ngOnInit(): void {
@@ -24,8 +24,12 @@ export class EditorComponent implements OnInit {
         this.areaService.getArea(id)
             .subscribe(area => {
                 this.area = area;
-                this.actionService.getActions(this.area.id).subscribe(
-                    actions => {this.area.actions = actions}
+                this.actionService.getActions(this.area).subscribe(
+                    actions => {
+                        this.area.actions = actions;
+                        this.actionService.setActiveAction(0);
+                        this.actionService.emitActions('');
+                    }
                 );
             });
     }

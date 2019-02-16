@@ -1,25 +1,29 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ConnectionService} from '../../../services/connection.service';
 import {Action} from '../../../objects/action';
+import {AbstractManager} from '../abstract-manager';
+import {ActionService} from '../../../services/action.service';
 
 @Component({
     selector: 'app-account-manager',
     templateUrl: './account-manager.component.html',
     styleUrls: ['./account-manager.component.scss']
 })
-export class AccountManagerComponent implements OnInit {
+export class AccountManagerComponent extends AbstractManager implements OnInit {
 
-    @Input()
-    public action: Action;
     public _accounts: Account[];
     private _connectionService: ConnectionService;
 
-    constructor(connectionService: ConnectionService) {
+    constructor(private actionService: ActionService, connectionService: ConnectionService) {
+        super(actionService);
         this._connectionService = connectionService;
     }
 
     ngOnInit() {
-        this._connectionService.getAccounts(this.action.type).subscribe(d => {this._accounts = d});
+        this._connectionService.getAccounts(this.action.service).subscribe(d => {this._accounts = d});
+    }
+
+    receiveActionUpdate() {
     }
 
 }

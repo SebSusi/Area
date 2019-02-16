@@ -1,23 +1,25 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Action} from '../../../objects/action';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {StructureService} from '../../../services/structure.service';
+import {AbstractManager} from '../abstract-manager';
+import {ActionService} from '../../../services/action.service';
 
 @Component({
     selector: 'app-trigger-manager',
     templateUrl: './trigger-manager.component.html',
     styleUrls: ['./trigger-manager.component.scss']
 })
-export class TriggerManagerComponent implements OnInit {
+export class TriggerManagerComponent extends AbstractManager implements OnInit {
 
-    @Input()
-    public action: Action;
     public triggers;
 
-    constructor(public structureS: StructureService) {
+    constructor(public structureS: StructureService, private actionService: ActionService) {
+        super(actionService);
     }
 
     ngOnInit() {
-        this.triggers = Array.from( this.structureS.template.options.get(this.action.type).keys() );
     }
 
+    receiveActionUpdate() {
+        this.triggers = this.structureS.getTriggers(this.action);
+    }
 }

@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {ApiService} from './api.service';
 import {AreaTemplate, AreaTemplateAdapter} from '../objects/area-template';
 import {map, tap} from 'rxjs/operators';
+import {ActionType} from '../objects/action-template';
+import {Action} from '../objects/action';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +19,30 @@ export class StructureService {
 
     initStructure() {
         const url = 'https://next.json-generator.com/api/json/get/VyOVzLxHL';
-        this._http.get(url).pipe(map(data => this.adapater.adapt(data)), tap(data => this._template = data)).subscribe();
+        this._http.get(url).pipe(map(data => this.adapater.adapt(data)),
+            tap(data => {this._template = data})).subscribe();
     }
 
     get template(): AreaTemplate {
         return this._template;
     }
+
+    getServices() {
+        if (this.template === undefined)
+            return undefined;
+        return this.template.getServices();
+    }
+
+    getOptions(action: Action) {
+        if (this.template === undefined)
+            return undefined;
+        return this.template.getOptions(action.service, action.type, action.name);
+    }
+
+    getTriggers(action: Action) {
+        if (this.template === undefined)
+            return undefined;
+        return this.template.getTriggers(action.service, action.type);
+    }
+
 }

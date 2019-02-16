@@ -1,3 +1,23 @@
-<p>
-  options-manager works!
-</p>
+<!--div class="form-group" *ngFor="let item of action.options | keyvalue">
+  <mat-form-field *ngIf="getType(item.key) === OptionTypes.STRING">
+    <input service="text" placeholder="{{item.key}}" matInput="" [(ngModel)]="item.value">
+  </mat-form-field>
+  <mat-form-field *ngIf="checkType(key, 'number')">
+    <input service="number" placeholder="{{key}}" matInput="" [(ngModel)]="params[key]">
+  </mat-form-field>
+  <mat-checkbox [(ngModel)]="params[key]" *ngIf="checkType(key, 'Boolean')">{{key}}</mat-checkbox>
+  <mat-form-field *ngIf="checkType(key, 'List')">
+    <input service="text" placeholder="{{key}}" aria-label="Number" matInput [(ngModel)]="params[key]" [formControl]="controllers[key]"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of infos[key].filter | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field *ngIf="checkType(key, 'Date')">
+    <input matInput [matDatepicker]="picker" placeholder="{{key}}" [(ngModel)]="params[key]" [formControl]="controllers[key]">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div-->

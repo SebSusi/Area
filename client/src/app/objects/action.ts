@@ -1,21 +1,29 @@
-import {Adapter} from './adapter';
-import {Area} from './area';
-import {Option} from './option';
+import {ActionType} from './action-template';
 
 export class Action {
     private _id: string;
-    private _type: string;
+    private _service: string;
     private _name: string;
+    private _type: ActionType;
     private _connectedAccountId: string;
     private _options: Map<string, (string|number|boolean)>[];
 
-    constructor(id: string = '', type: string = '', name: string = '',
+    constructor(id: string = '', service: string = '', name: string = '', type: ActionType,
                 connectedAccountId: string = '', options: Map<string, string | number | boolean>[] = []) {
         this._id = id;
-        this._type = type;
+        this._service = service;
         this._name = name;
         this._connectedAccountId = connectedAccountId;
         this._options = options;
+        this._type = type;
+    }
+
+    get type(): ActionType {
+        return this._type;
+    }
+
+    set type(value: ActionType) {
+        this._type = value;
     }
 
     get name(): string {
@@ -34,12 +42,12 @@ export class Action {
         this._id = value;
     }
 
-    get type(): string {
-        return this._type;
+    get service(): string {
+        return this._service;
     }
 
-    set type(value: string) {
-        this._type = value;
+    set service(value: string) {
+        this._service = value;
     }
 
     get options(): Map<string, string | number | boolean>[] {
@@ -52,7 +60,7 @@ export class Action {
 }
 
 export class ActionAdapter {
-    static adapt(item: any): Action {
-        return new Action(item.id, item.type, item.connectedAccount, item.params);
+    static adapt(item: any, type: ActionType): Action {
+        return new Action(item.id, item.type, type, item.connectedAccount, item.params);
     }
 }

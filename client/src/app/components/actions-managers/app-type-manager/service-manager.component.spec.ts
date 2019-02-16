@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppTypeManagerComponent } from './app-type-manager.component';
+import { ServiceManagerComponent } from './service-manager.component';
 
-describe('AppTypeManagerComponent', () => {
-  let component: AppTypeManagerComponent;
-  let fixture: ComponentFixture<AppTypeManagerComponent>;
+describe('ServiceManagerComponent', () => {
+  let component: ServiceManagerComponent;
+  let fixture: ComponentFixture<ServiceManagerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppTypeManagerComponent ]
+      declarations: [ ServiceManagerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppTypeManagerComponent);
+    fixture = TestBed.createComponent(ServiceManagerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

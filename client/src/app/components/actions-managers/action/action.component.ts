@@ -1,18 +1,21 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Action} from '../../../objects/action';
+import {ActionService} from '../../../services/action.service';
+import {AbstractManager} from '../abstract-manager';
 
 @Component({
-  selector: 'app-action',
-  templateUrl: './action.component.html',
-  styleUrls: ['./action.component.scss']
+    selector: 'app-action',
+    templateUrl: './action.component.html',
+    styleUrls: ['./action.component.scss']
 })
-export class ActionComponent implements OnInit {
-  @Input()
-  public action: Action;
+export class ActionComponent extends AbstractManager implements OnInit {
 
-  constructor() { }
+    constructor(actionService: ActionService) {
+        super(actionService);
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
+    receiveActionUpdate() {
+    }
 }

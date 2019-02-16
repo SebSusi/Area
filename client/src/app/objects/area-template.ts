@@ -1,43 +1,62 @@
-import {Option, OptionAdapter} from './option';
-import {Adapter} from './adapter';
-import {forEach} from '@angular/router/src/utils/collection';
+import {ActionTemplate, ActionType} from './action-template';
 
 export class AreaTemplate {
-    private _options = new Map<string, Map<string, Option[]>>();
+    public _services = new Map<string, ActionTemplate[]>();
 
     constructor() {
     }
 
-    get options(): Map<string, Map<string, Option[]>> {
-        return this._options;
+
+    get services(): Map<string, ActionTemplate[]> {
+        return this._services;
     }
 
-    set options(value: Map<string, Map<string, Option[]>>) {
-        this._options = value;
+    set services(value: Map<string, ActionTemplate[]>) {
+        this._services = value;
     }
 
-    public push(area: string, type: string, option: Option) {
-        if (!this.options.has(area))
-            this.options.set(area, new Map());
-        if (!this.options.get(area).has(type))
-            this.options.get(area).set(type, []);
-        this.options.get(area).get(type).push(option);
+    public push(serviceType: string, service) {
+        if (!this._services.has(serviceType))
+            this.services.set(serviceType, []);
+        Object.keys(service).forEach(function (actionType) {     // ex: action, reaction, trigger
+            this.services.get(serviceType).push(new ActionTemplate(actionType, service[actionType]));
+        }.bind(this));
+    }
+
+    getActions(service: string) {
+        return this._services.get(service);
+    }
+
+    getAction(service: string, action: ActionType) {
+        if (service === undefined || this.getActions(service) === undefined)
+            return undefined;
+        return this.getActions(service).find(item => item.type === action);
+    }
+
+    getServices() {
+        return Array.from(this._services.keys());
+    }
+
+    getTriggers(service: string, actionType: ActionType = ActionType.TRIGGER) {
+        if (service === undefined)
+            return [];
+        const action = this.getAction(service, actionType);
+        return action === undefined ? undefined : action.getTriggers();
+    }
+
+    getOptions(service: string, actionType: ActionType = ActionType.TRIGGER, trigger: string) {
+        if (service === undefined || trigger === undefined)
+            return [];
+        const action = this.getAction(service, actionType);
+        return action === undefined ? undefined : action.getOptions(trigger);
     }
 }
 
-export class AreaTemplateAdapter implements Adapter<AreaTemplate> {
+export class AreaTemplateAdapter {
     adapt(areas: any): AreaTemplate {
         const at = new AreaTemplate();
-        const adapter = new OptionAdapter();
-        Object.keys(areas).forEach(function (area) {                 // ex: Twitter
-            Object.keys(areas[area]).forEach(function (action) {     // ex: action, reaction, trigger
-                Object.keys(areas[area][action]).forEach(function (type) {  // ex: userTweet, createTweet
-                    const options = areas[area][action][type]['options'];
-                    Object.keys(options).forEach(function (name) { // ex:
-                        at.push(area, type, OptionAdapter.adapt(name, options[name]));
-                    });
-                });
-            });
+        Object.keys(areas).forEach(function (service) {  // ex: service = Twitter
+            at.push(service, areas[service]);
         });
         return at;
     }
