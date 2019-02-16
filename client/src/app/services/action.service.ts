@@ -1,0 +1,53 @@
+import { Injectable } from '@angular/core';
+import {Area, AreaAdapter} from '../objects/area';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {ApiService} from './api.service';
+import {Observable} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
+import {Action, ActionAdapter} from '../objects/action';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ActionService {
+    private _actions: Action[] = [];
+    private _selected: number;
+
+    constructor(private _http: HttpClient, private _router: Router, private api: ApiService) {
+
+    }
+
+    get actions(): Action[] {
+        return this._actions;
+    }
+
+    getAction(id: string): Action {
+        this.setActiveAction(this._actions.findIndex(item => item.id === id));
+        if (this._selected <= -1)
+            throw new Error('Can\'t find this action');
+        return this._actions[this._selected];
+    }
+
+    getActions(area: Area) {
+        const url = 'https://next.json-generator.com/api/json/get/4kkwTFkBI';
+        return this._http.get(url).pipe(
+            map((data: any[]) => data.map(item => ActionAdapter.adapt(item))),
+            tap(data => this._actions = data)
+        );
+    }
+
+    updateAction(actionId: string) {
+        const url = 'blablabla.fr';
+        return this._http.put(url, this._actions[actionId]);
+    }
+
+    setAction(action: Action) {
+        this.getAction(action.id);
+        this._actions[this._selected] = action;
+    }
+
+    setActiveAction(index) {
+        this._selected = index;
+    }
+}

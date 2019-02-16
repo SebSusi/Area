@@ -2,32 +2,32 @@ import {Action} from './action';
 import {Adapter} from './adapter';
 
 export class Area {
-    private _name: String;
+    private _name: string;
     private _actions: Action[];
     private _on = false;
-    private _id: String;
+    private _id: string;
 
 
-    constructor(id: String, name: String = 'Basic Area', actions: Action[] = [], on: boolean = false) {
+    constructor(id: string, name: string = 'Basic Area', actions: Action[] = [], on: boolean = false) {
         this._name = name;
         this._actions = actions;
         this._on = on;
         this._id = id;
     }
 
-    get id(): String {
+    get id(): string {
         return this._id;
     }
 
-    set id(value: String) {
+    set id(value: string) {
         this._id = value;
     }
 
-    get name(): String {
+    get name(): string {
         return this._name;
     }
 
-    set name(value: String) {
+    set name(value: string) {
         this._name = value;
     }
 
@@ -48,8 +48,8 @@ export class Area {
     }
 }
 
-export class AreaAdapter implements Adapter<Area> {
-    adapt(item: any): Area {
+export class AreaAdapter {
+    static adapt(item: any): Area {
         return new Area(item.id, item.name, item.actions);
     }
 }

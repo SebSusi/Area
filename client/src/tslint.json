@@ -1,6 +1,10 @@
 {
     "extends": "../tslint.json",
     "rules": {
+      "curly": [
+        true,
+        "as-needed"
+      ],
         "directive-selector": [
             true,
             "attribute",

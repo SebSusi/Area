@@ -15,7 +15,7 @@ import {map} from 'rxjs/operators';
 })
 
 export class NavbarComponent implements OnInit {
-    displayName: String;
+    displayName: string;
 
     constructor(private http: HttpClient, private router: Router,
                 private themeService: ThemeService, private connectionService: ConnectionService, private userService: UserService) {
@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit() {
         this.userService.getConnectionInfo().subscribe(
-            data => {this.displayName = data['displayName']; console.log('MDR'); }
+            data => this.displayName = data['displayName']
         );
     }
 

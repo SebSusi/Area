@@ -15,7 +15,7 @@ import {
     MatDialogModule,
     MatDividerModule, MatFormFieldModule,
     MatIconModule, MatInputModule, MatListModule, MatProgressBarModule, MatProgressSpinnerModule,
-    MatSlideToggle, MatSlideToggleModule, MatTabsModule, MatTreeModule
+    MatSlideToggle, MatSlideToggleModule, MatTabsModule, MatTreeModule, MatRadioModule
 } from '@angular/material';
 
 
@@ -127,6 +127,7 @@ const appRoutes: Routes = [
         MatProgressBarModule,
         MatProgressSpinnerModule,
         MatSlideToggleModule,
+        MatRadioModule,
         ButtonsModule,
         SocialLoginModule
     ],

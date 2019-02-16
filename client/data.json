@@ -1,0 +1,27 @@
+{
+  "twitter": {
+    "action": {
+      "userTweet": {
+        "options": { // (paramsInfos)
+          "username": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "reaction": {
+      "createTweet": {
+        "options": { // (paramsInfos)
+          "message": {
+            "type": "string"
+          },
+          "shouldShortenURLs": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "facebook": {
+  }
+}

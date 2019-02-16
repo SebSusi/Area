@@ -17,8 +17,8 @@ export class UserComponent implements OnInit {
     emailForm: FormGroup;
     passwordForm: FormGroup;
     linkForm: FormGroup;
-    userInfo: String;
-    userError: String;
+    userInfo: string;
+    userError: string;
     linkLocal: Boolean;
     showBlindtest: Boolean;
     showGoogle: Boolean;

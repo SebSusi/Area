@@ -12,7 +12,7 @@ export class AppTypeManagerComponent implements OnInit {
 
     @Input()
     public action: Action;
-    public types: String[];
+    public types: string[];
 
     constructor(private areaService: AreaService) {
     }
@@ -26,6 +26,6 @@ export class AppTypeManagerComponent implements OnInit {
     }
 
     setSelectedType(type) {
-        this.action.type = type;
+        this.action._type = type;
     }
 }

@@ -11,11 +11,9 @@ import {Observable, of} from 'rxjs';
 })
 
 export class AreaService {
-    private _adapter = new AreaAdapter();
     private _areas: Area[] = [];
     constructor(private _http: HttpClient, private _router: Router, private api: ApiService) {
     }
-
 
     get areas(): Area[] {
         return this._areas;
@@ -24,15 +22,15 @@ export class AreaService {
     getAreas(): Observable<Area[]> {
         const url = 'https://next.json-generator.com/api/json/get/EkdygAcV8';
         return this._http.get(url).pipe(
-            map((data: any[]) => data.map(item => this._adapter.adapt(item))),
+            map((data: any[]) => data.map(item => AreaAdapter.adapt(item))),
             tap(data => this._areas = data)
         );
     }
 
-    getArea(id: String): Observable<Area> {
+    getArea(id: string): Observable<Area> {
         const url = 'https://next.json-generator.com/api/json/get/4JboGC5VU';
         return this._http.get(url).pipe(
-            map(data => this._adapter.adapt(data)),
+            map(data => AreaAdapter.adapt(data)),
             tap(data => this.updateArea(data))
         );
     }
@@ -49,6 +47,6 @@ export class AreaService {
 
     getTypes() {
         const url = 'https://next.json-generator.com/api/json/get/EyVDxyoNU';
-        return this._http.get<String[]>(url);
+        return this._http.get<string[]>(url);
     }
 }

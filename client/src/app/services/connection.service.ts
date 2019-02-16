@@ -3,14 +3,18 @@ import {ApiService} from './api.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login';
-import {tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
+import {AccountAdapter, Account} from '../objects/account';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class ConnectionService {
-    private socials: Map<any, any> = new Map([[GoogleLoginProvider.PROVIDER_ID, 'google'], [FacebookLoginProvider.PROVIDER_ID, 'facebook']]);
+
+    private socials: Map<any, any> = new Map(
+        [[GoogleLoginProvider.PROVIDER_ID, 'google'],
+                [FacebookLoginProvider.PROVIDER_ID, 'facebook']]);
 
     constructor(private http: HttpClient, private router: Router, private s: ApiService) {
     }
@@ -74,5 +78,10 @@ export class ConnectionService {
 
     unlinkFacebook() {
         return this.s.apiDelete('/auth/facebook');
+    }
+
+    getAccounts(type: string) {
+        const url = '';
+        return this.http.get(url).pipe(map((data: Account[]) => data.map(item => AccountAdapter.adapt(item))));
     }
 }

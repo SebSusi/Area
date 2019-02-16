@@ -1,4 +1,5 @@
 <mat-tab-group>
+  <ng-template [ngIf]="action">
   <mat-tab label="Choose App">
     <app-app-type-manager [action]="action"></app-app-type-manager>
   </mat-tab>
@@ -11,4 +12,5 @@
   <mat-tab label="Setup Options">
     <app-trigger-manager [action]="action"></app-trigger-manager>
   </mat-tab>
+  </ng-template>
 </mat-tab-group>

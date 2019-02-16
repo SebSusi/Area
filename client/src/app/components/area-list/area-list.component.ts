@@ -12,7 +12,6 @@ import {AreaService} from '../../services/area.service';
 export class AreaListComponent implements OnInit {
 
     public areas: Area[] = [];
-    private adapter = new AreaAdapter();
 
     constructor(private http: HttpClient, private areaService: AreaService) {
         areaService.getAreas().subscribe(value => {this.areas = value; });

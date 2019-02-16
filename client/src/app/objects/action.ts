@@ -1,54 +1,50 @@
 import {Adapter} from './adapter';
 import {Area} from './area';
+import {Option} from './option';
 
 export class Action {
-    private _name: String;
-    private _type: String;
-    private _params: Map<string, (string|number|boolean)>[];
-    private _infos: Map<string, (string|number|boolean)>[];
+    private _id: string;
+    private _type: string;
+    private _name: string;
+    private _connectedAccountId: string;
+    private _options: Map<string, (string|number|boolean)>[];
 
-    constructor(name: string = 'basic action', type: string = 'unknown', params: Map<string, string | number | boolean>[] = [], infos: Map<string, string | number | boolean>[] = []) {
-        this._name = name;
+    constructor(id: string = '', type: string = '', name: string = '',
+                connectedAccountId: string = '', options: Map<string, string | number | boolean>[] = []) {
+        this._id = id;
         this._type = type;
-        this._params = params;
-        this._infos = infos;
+        this._name = name;
+        this._connectedAccountId = connectedAccountId;
+        this._options = options;
     }
 
-    get name(): String {
-        return this._name;
+    get id(): string {
+        return this._id;
     }
 
-    set name(value: String) {
-        this._name = value;
+    set id(value: string) {
+        this._id = value;
     }
 
-    get type(): String {
+    get type(): string {
         return this._type;
     }
 
-    set type(value: String) {
+    set type(value: string) {
         this._type = value;
     }
 
-    get params(): Map<string, string | number | boolean>[] {
-        return this._params;
+    get options(): Map<string, string | number | boolean>[] {
+        return this._options;
     }
 
-    set params(value: Map<string, string | number | boolean>[]) {
-        this._params = value;
-    }
-
-    get infos(): Map<string, string | number | boolean>[] {
-        return this._infos;
-    }
-
-    set infos(value: Map<string, string | number | boolean>[]) {
-        this._infos = value;
+    set options(value: Map<string, string | number | boolean>[]) {
+        this._options = value;
     }
 }
 
-export class ActionAdapter implements Adapter<Action> {
-    adapt(item: any): Action {
-        return new Action(item.name, item.type);
+export class ActionAdapter {
+    static adapt(item: any): Action {
+        return new Action(item.id, item.type, item.connectedAccount, item.params);
     }
 }
