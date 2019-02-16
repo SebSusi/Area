@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Action} from '../../../objects/action';
+import {StructureService} from '../../../services/structure.service';
 
 @Component({
     selector: 'app-trigger-manager',
@@ -10,11 +11,14 @@ export class TriggerManagerComponent implements OnInit {
 
     @Input()
     public action: Action;
+    public triggers;
 
-    constructor() {
+    constructor(public structureS: StructureService) {
     }
 
     ngOnInit() {
+        this.triggers = Array.from( this.structureS.template.options.get(this.action.type).keys() );
+        console.log(this.triggers);
     }
 
 }

@@ -17,17 +17,18 @@ export class AreaTemplate {
     }
 
     public push(area: string, type: string, option: Option) {
-        if (this.options[area] === undefined)
-            this.options[area] = new Map();
-        if (this.options[area][type] === undefined)
-            this.options[area][type] = [];
-        this.options[area][type].push(option);
+        if (!this.options.has(area))
+            this.options.set(area, new Map());
+        if (!this.options.get(area).has(type))
+            this.options.get(area).set(type, []);
+        this.options.get(area).get(type).push(option);
     }
 }
 
 export class AreaTemplateAdapter implements Adapter<AreaTemplate> {
     adapt(areas: any): AreaTemplate {
         const at = new AreaTemplate();
+        const adapter = new OptionAdapter();
         Object.keys(areas).forEach(function (area) {                 // ex: Twitter
             Object.keys(areas[area]).forEach(function (action) {     // ex: action, reaction, trigger
                 Object.keys(areas[area][action]).forEach(function (type) {  // ex: userTweet, createTweet

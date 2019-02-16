@@ -10,7 +10,6 @@ enum OptionTypes {
 
 export class Option {
     private _name: string;
-    private _displayable_name: string;
     private _type: OptionTypes;
     private _constraint: any;
 
@@ -18,7 +17,6 @@ export class Option {
         this._name = name;
         this._type = type;
         this._constraint = constraint;
-        this._displayable_name = this._name.replace(/([A-Z])/g, ' $1').toLowerCase();
     }
 
     get name(): string {
@@ -27,14 +25,6 @@ export class Option {
 
     set name(value: string) {
         this._name = value;
-    }
-
-    get displayable_name(): string {
-        return this._displayable_name;
-    }
-
-    set displayable_name(value: string) {
-        this._displayable_name = value;
     }
 
     get type(): OptionTypes {

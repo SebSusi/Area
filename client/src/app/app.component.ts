@@ -25,3 +25,7 @@ export class AppComponent implements OnInit {
         this.themeService.saveTheme();
     }
 }
+
+String.prototype.uncamelize = function(): string {
+    return this.replace(/([A-Z])/g, ' $1').toLowerCase();
+};
