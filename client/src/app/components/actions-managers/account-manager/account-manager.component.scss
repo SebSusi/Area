@@ -1,8 +1,22 @@
-.example-radio-group {
+.accounts-group {
   display: inline-flex;
   flex-direction: column;
   margin: 10px 0 10px 10px;
-  .example-radio-button {
+  .account {
     margin: 5px;
+    ::ng-deep .mat-radio-label {
+      white-space: normal;
+    }
+    p {
+      margin: 0;
+      padding-left: 20px;
+      &.title {
+        font-weight: normal;
+      }
+      &.description {
+        font-weight: lighter;
+        text-wrap: normal;
+      }
+    }
   }
 }

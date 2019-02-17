@@ -61,6 +61,6 @@ export class Action {
 
 export class ActionAdapter {
     static adapt(item: any, type: ActionType): Action {
-        return new Action(item.id, item.type, type, item.connectedAccount, item.params);
+        return new Action(item.id, item.type, item.name, type, item.connectedAccount, item.params);
     }
 }

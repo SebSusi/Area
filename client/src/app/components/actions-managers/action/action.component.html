@@ -1,4 +1,4 @@
-<mat-tab-group>
+<mat-tab-group [dynamicHeight]="true">
     <ng-template [ngIf]="_action">
         <mat-tab label="Choose App">
             <app-app-type-manager></app-app-type-manager>
