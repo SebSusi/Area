@@ -70,12 +70,12 @@ export class OptionsManagerComponent extends AbstractManager implements OnInit {
             type: 'radiobutton',
             label: 'Gender',
             name: 'gender',
-            options: ['Male', 'Female'],
-            value: 'Male'
+            value: 'Male',
+            constraint: ['Male', 'Female', 'Appache Helicoptere'],
         },
         {
             type: 'date',
-            label: 'DOB',
+            label: 'Date of Birth',
             name: 'dob',
             validations: [
                 {
@@ -89,8 +89,8 @@ export class OptionsManagerComponent extends AbstractManager implements OnInit {
             type: 'select',
             label: 'Country',
             name: 'country',
-            value: 'UK',
-            options: ['India', 'UAE', 'UK', 'US']
+            value: 'Russie',
+            constraint: ['France', 'Belgique', 'Russie', 'Mongolie']
         },
         {
             type: 'checkbox',
@@ -106,7 +106,7 @@ export class OptionsManagerComponent extends AbstractManager implements OnInit {
 
     submit(value: any) {}
 
-    constructor(actionService: ActionService, public structureS: StructureService) {
+    constructor(private actionService: ActionService, public structureS: StructureService) {
         super(actionService);
     }
 
