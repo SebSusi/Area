@@ -1,9 +1,5 @@
-.accounts-group {
-  display: inline-flex;
-  flex-direction: column;
-  margin: 10px 0 10px 10px;
-  .account {
-    margin: 5px;
-    text-transform: capitalize;
-  }
+@import "../account-manager/account-manager.component";
+
+.accounts-group .account {
+  text-transform: capitalize;
 }

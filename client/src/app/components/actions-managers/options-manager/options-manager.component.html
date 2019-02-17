@@ -1,5 +1,5 @@
-<!--div class="form-group" *ngFor="let item of action.options | keyvalue">
-  <mat-form-field *ngIf="getType(item.key) === OptionTypes.STRING">
+<div class="form-group" *ngFor="let item of action.options | keyvalue">
+  <!--mat-form-field *ngIf="getType(item.key) === OptionTypes.STRING">
     <input service="text" placeholder="{{item.key}}" matInput="" [(ngModel)]="item.value">
   </mat-form-field>
   <mat-form-field *ngIf="checkType(key, 'number')">
@@ -15,9 +15,12 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <mat-form-field *ngIf="checkType(key, 'Date')">
+  <mat-form-field-- *ngIf="checkType(key, 'Date')">
     <input matInput [matDatepicker]="picker" placeholder="{{key}}" [(ngModel)]="params[key]" [formControl]="controllers[key]">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</div-->
+  </mat-form-field-->
+</div>
+
+<app-dynamic-form [fields]="regConfig" (submit)="submit($event)">
+</app-dynamic-form>
