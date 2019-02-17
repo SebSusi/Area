@@ -25,7 +25,7 @@ const componentMapper = {
 };
 
 @Directive({
-  selector: '[dynamicField]'
+  selector: '[appDynamicField]'
 })
 export class DynamicFieldDirective implements OnInit {
   @Input() field: FieldConfig;
