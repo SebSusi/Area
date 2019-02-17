@@ -108,7 +108,7 @@ const appRoutes: Routes = [
         CheckboxComponent,
         DateComponent,
         DynamicFieldDirective,
-        DynamicFormComponent
+        DynamicFormComponent,
         EditorComponent,
         Error404Component,
         HomeComponent,
