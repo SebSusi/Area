@@ -1,11 +1,16 @@
 <resources>
     <string name="app_name">Area</string>
     <string name="area_api_baseurl">http://10.0.2.2:8080/</string>
+    <string name="area_site_baseurl">http://10.0.2.2:4242/</string>
 
     <string name="logged_in">Logged in.</string>
     <string name="logged_out">Logged out.</string>
     <string name="connect">Connect !</string>
 
+    <string name="google_server_id">1078734813685-aomhaobh12lm6lha2f38iq6f9vaunoc2.apps.googleusercontent.com</string>
+    <string name="google_server_secret">s_HUO3MnP3yBTt642RxKVuwn</string>
+    <string name="google_client_id">243631290369-0q6tdt11a46b9hh8ti7orsgpa6mevl59.apps.googleusercontent.com</string>
+    <string name="google_client_secret">LgGp47dqpAtfzw_WP3BA5kvE</string>
     <string name="imgur_client_id">42f867cae60d6a4</string>
     <string name="imgur_client_secret">c42928317b1582bf17f1fca357af62055d348aee</string>
 
