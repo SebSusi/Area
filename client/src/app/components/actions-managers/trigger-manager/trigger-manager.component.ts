@@ -12,7 +12,7 @@ export class TriggerManagerComponent extends AbstractManager implements OnInit {
 
     public triggers;
 
-    constructor(public structureS: StructureService, private actionService: ActionService) {
+    constructor(public structureS: StructureService, actionService: ActionService) {
         super(actionService);
     }
 

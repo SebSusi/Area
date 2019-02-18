@@ -1,5 +1,3 @@
-import {Adapter} from './adapter';
-
 export class Account {
     private _id: string;
     private _name: string;

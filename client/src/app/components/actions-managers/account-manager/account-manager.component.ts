@@ -14,13 +14,13 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
     public _accounts: Account[];
     private _connectionService: ConnectionService;
 
-    constructor(private actionService: ActionService, connectionService: ConnectionService) {
+    constructor(actionService: ActionService, connectionService: ConnectionService) {
         super(actionService);
         this._connectionService = connectionService;
     }
 
     ngOnInit() {
-        this._connectionService.getAccounts(this.action.service).subscribe(d => {this._accounts = d});
+//        this._connectionService.getAccounts(this.action.service).subscribe(d => {this._accounts = d});
     }
 
     receiveActionUpdate() {

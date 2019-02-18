@@ -1,5 +1,4 @@
 import {Action} from './action';
-import {Adapter} from './adapter';
 
 export class Area {
     private _name: string;

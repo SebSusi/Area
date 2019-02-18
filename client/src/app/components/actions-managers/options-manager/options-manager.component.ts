@@ -106,7 +106,7 @@ export class OptionsManagerComponent extends AbstractManager implements OnInit {
 
     submit(value: any) {}
 
-    constructor(private actionService: ActionService, public structureS: StructureService) {
+    constructor(actionService: ActionService, public structureS: StructureService) {
         super(actionService);
     }
 
