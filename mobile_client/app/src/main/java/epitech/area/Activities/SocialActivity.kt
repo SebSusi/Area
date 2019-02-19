@@ -5,9 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.GoogleApiClient
+import com.twitter.sdk.android.core.Result
+import com.twitter.sdk.android.core.TwitterException
+import com.twitter.sdk.android.core.TwitterSession
 import epitech.area.R
 import epitech.area.Storages.SocialToken
 import kotlinx.android.synthetic.main.activity_social.*
@@ -23,15 +30,46 @@ class SocialActivity : FragmentActivity() {
     private var socialToken: SocialToken = SocialToken()
     private lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var mGoogleSignInOptions: GoogleSignInOptions
+    private lateinit var mCallbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initGoogleLogin()
+        mCallbackManager = CallbackManager.Factory.create()
         setContentView(R.layout.activity_social)
         buttonGoogle.setOnClickListener {
             val intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
             startActivityForResult(intent, RC_GOOGLE_SIGN_IN)
         }
+        buttonFacebook.setReadPermissions("email", "public_profile")
+        buttonFacebook.registerCallback(mCallbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(loginResult: LoginResult) {
+                socialToken.provider = "facebook"
+                socialToken.token = loginResult.accessToken.token
+            }
+
+            override fun onCancel() {
+                Log.d("Facebook Login", "Canceled by user")
+            }
+
+            override fun onError(error: FacebookException) {
+                Log.d("Facebook Login Error", error.message)
+                applicationContext.longToast("Cannot connect to Facebook server")
+            }
+        })
+
+        buttonTwitter.callback = object : com.twitter.sdk.android.core.Callback<TwitterSession>() {
+            override fun success(result: Result<TwitterSession>) {
+                socialToken.provider = "twitter"
+                socialToken.token = result.data.authToken.token
+            }
+
+            override fun failure(exception: TwitterException) {
+                Log.d("Facebook Login Error", exception.message)
+                applicationContext.longToast("Cannot connect to Twitter server")
+            }
+        }
+
     }
 
     fun initGoogleLogin() {
@@ -80,11 +118,15 @@ class SocialActivity : FragmentActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RC_GOOGLE_SIGN_IN) {
-            val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
-            if (result.isSuccess) {
-                val account = result.signInAccount
-                getGoogleAccessToken(account?.serverAuthCode!!)
+        mCallbackManager.onActivityResult(requestCode, resultCode, data)
+        buttonTwitter.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == RC_GOOGLE_SIGN_IN) {
+                val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+                if (result.isSuccess) {
+                    val account = result.signInAccount
+                    getGoogleAccessToken(account?.serverAuthCode!!)
+                }
             }
         }
     }

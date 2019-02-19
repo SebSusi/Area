@@ -28,7 +28,7 @@ class HomeActivity : FragmentActivity() {
     fun logout(item: MenuItem): Boolean
     {
         AreaAuthorization.instance.removeAccessToken(applicationContext)
-        Toast.makeText(this@HomeActivity, R.string.logged_out, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this@HomeActivity, R.string.logged_out, Toast.LENGTH_SHORT).show()
         finish()
         return true
     }

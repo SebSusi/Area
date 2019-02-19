@@ -7,14 +7,10 @@
     tools:context=".Activities.MainActivity"
     android:exported="true">
 
-    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+    <com.google.android.gms.common.SignInButton
         android:id="@+id/buttonGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         app:floating_background_color="@color/colorAccent"
         app:floating_left_icon="@drawable/ic_menu_vector"
         app:floating_title="Google"
@@ -24,35 +20,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/buttonFacebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:floating_background_color="@color/colorAccent"
-        app:floating_left_icon="@drawable/ic_menu_vector"
-        app:floating_title="Facebook"
-        app:floating_title_color="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+    <com.twitter.sdk.android.core.identity.TwitterLoginButton
         android:id="@+id/buttonTwitter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:floating_background_color="@color/colorAccent"
-        app:floating_left_icon="@drawable/ic_menu_vector"
-        app:floating_title="Twitter"
-        app:floating_title_color="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
