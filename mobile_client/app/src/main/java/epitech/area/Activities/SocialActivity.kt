@@ -16,6 +16,7 @@ import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException
 import com.twitter.sdk.android.core.TwitterSession
 import epitech.area.R
+import epitech.area.Storages.OAuthInfo
 import epitech.area.Storages.SocialToken
 import kotlinx.android.synthetic.main.activity_social.*
 import okhttp3.*
@@ -27,6 +28,7 @@ import java.io.IOException
 
 class SocialActivity : FragmentActivity() {
     private val RC_GOOGLE_SIGN_IN: Int = 1
+    private val RC_OAUTH_SIGN_IN: Int = 2
     private var socialToken: SocialToken = SocialToken()
     private lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var mGoogleSignInOptions: GoogleSignInOptions
@@ -69,7 +71,15 @@ class SocialActivity : FragmentActivity() {
                 applicationContext.longToast("Cannot connect to Twitter server")
             }
         }
-
+        buttonImgur.setOnClickListener {
+            val imageIntent = Intent(this, OAuthActivity::class.java)
+            imageIntent.putExtra("OAuthInfo", OAuthInfo("imgur",
+                    getString(R.string.imgur_oauth_url),
+                    getString(R.string.imgur_redirect_url),
+                    getString(R.string.imgur_client_id),
+                    getString(R.string.imgur_client_secret)))
+            startActivityForResult(imageIntent, RC_OAUTH_SIGN_IN)
+        }
     }
 
     fun initGoogleLogin() {
@@ -128,12 +138,19 @@ class SocialActivity : FragmentActivity() {
                     getGoogleAccessToken(account?.serverAuthCode!!)
                 }
             }
+            else if (requestCode == RC_OAUTH_SIGN_IN) {
+                val token: SocialToken = data?.getSerializableExtra("SocialToken") as SocialToken
+                if (token.token.isNotBlank()) {
+                    socialToken = token
+                    finish()
+                }
+            }
         }
     }
 
     override fun finish() {
         val returnIntent = Intent()
-        if (socialToken.provider.isNotEmpty()) {
+        if (socialToken.token.isNotBlank()) {
             returnIntent.putExtra("SocialToken", socialToken)
             setResult(Activity.RESULT_OK, returnIntent)
         } else {

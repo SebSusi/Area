@@ -38,4 +38,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonFacebook" />
 
+    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+        android:id="@+id/buttonImgur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:floating_background_color="@color/colorPrimary"
+        app:floating_left_icon="@drawable/ic_menu_vector"
+        app:floating_title="Imgur Login"
+        app:floating_title_color="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

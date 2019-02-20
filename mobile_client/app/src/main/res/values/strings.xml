@@ -7,13 +7,18 @@
     <string name="google_server_secret">s_HUO3MnP3yBTt642RxKVuwn</string>
     <string name="google_client_id">243631290369-0q6tdt11a46b9hh8ti7orsgpa6mevl59.apps.googleusercontent.com</string>
     <string name="google_client_secret">LgGp47dqpAtfzw_WP3BA5kvE</string>
+
     <string name="facebook_protocol_scheme">fb397242161046289</string>
     <string name="facebook_client_id">397242161046289</string>
     <string name="facebook_client_secret">d6073ae76bae394495b8046dc4142dd6</string>
+
     <string name="twitter_client_id">id</string>
     <string name="twitter_client_secret">secret</string>
+
     <string name="imgur_client_id">42f867cae60d6a4</string>
     <string name="imgur_client_secret">c42928317b1582bf17f1fca357af62055d348aee</string>
+    <string name="imgur_oauth_url">https://api.imgur.com/oauth2/authorize</string>
+    <string name="imgur_redirect_url">epicture://register</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_dark">Dark Mode</string>
