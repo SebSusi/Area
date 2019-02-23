@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ConnectionService} from '../../../services/connection.service';
-import {Action} from '../../../objects/action';
 import {AbstractManager} from '../abstract-manager';
+import {Component, OnInit} from '@angular/core';
+import {ConnectionService} from '../../../services/connection.service';
 import {ActionService} from '../../../services/action.service';
+import {Connection} from '../../../objects/connection';
 
 @Component({
     selector: 'app-account-manager',
@@ -11,7 +11,7 @@ import {ActionService} from '../../../services/action.service';
 })
 export class AccountManagerComponent extends AbstractManager implements OnInit {
 
-    public _accounts: Account[];
+    public _accounts: Connection[];
     private _connectionService: ConnectionService;
 
     constructor(actionService: ActionService, connectionService: ConnectionService) {
@@ -20,7 +20,7 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
     }
 
     ngOnInit() {
-//        this._connectionService.getAccounts(this.action.service).subscribe(d => {this._accounts = d});
+        this._connectionService.getAccounts(this.action.service).subscribe(data => {this._accounts = data});
     }
 
     receiveActionUpdate() {

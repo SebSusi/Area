@@ -20,8 +20,8 @@ export class ActionTemplate {
 
     pushTrigger(trigger, optionsJson) {
         const options = [];
-        Object.keys(optionsJson['options']).forEach(function (name) { // ex:
-            options.push(OptionAdapter.adapt(name, optionsJson['options'][name]));
+        Object.keys(optionsJson['fields']).forEach(function (name) { // ex:
+            options.push(OptionAdapter.adapt(name, optionsJson['fields'][name]));
         });
         this.triggers.set(trigger, options);
     }

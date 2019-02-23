@@ -4,7 +4,9 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login';
 import {map, tap} from 'rxjs/operators';
-import {AccountAdapter, Account} from '../objects/account';
+import {AccountAdapter, Connection} from '../objects/connection';
+import {AreaAdapter} from '../objects/area';
+import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -77,8 +79,9 @@ export class ConnectionService {
         return this.s.apiDelete('/auth/facebook');
     }
 
-    getAccounts(type: string) {
+    getAccounts(type: string): Observable<Connection[]> {
         const url = 'https://next.json-generator.com/api/json/get/Vk_WtKgrU';
-        return this.http.get(url).pipe(map((data: Account[]) => data.map(item => AccountAdapter.adapt(item))));
+        return this.http.get(url).pipe(map((data: any[]) => data.map(item => AccountAdapter.adapt(item))));
     }
 }
+map((data: any[]) => data.map(item => AreaAdapter.adapt(item)))
