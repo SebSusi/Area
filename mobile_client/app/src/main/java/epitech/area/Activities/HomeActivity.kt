@@ -8,7 +8,7 @@ import android.os.Bundle
 import androidx.annotation.RequiresApi
 import android.widget.*
 import android.view.MenuItem
-import epitech.area.*
+import epitech.area.R
 import epitech.area.Managers.AreaAuthorization
 
 class HomeActivity : FragmentActivity() {
@@ -28,7 +28,7 @@ class HomeActivity : FragmentActivity() {
     fun logout(item: MenuItem): Boolean
     {
         AreaAuthorization.instance.removeAccessToken(applicationContext)
-        Toast.makeText(this@HomeActivity, R.string.logged_out, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this@HomeActivity, R.string.logged_out, Toast.LENGTH_SHORT).show()
         finish()
         return true
     }

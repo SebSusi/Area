@@ -5,7 +5,7 @@ import android.util.Log
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpPost
 import epitech.area.Managers.AreaAuthorization
-import epitech.area.Storages.LoginResponse
+import epitech.area.Storages.TokenResponse
 import org.jetbrains.anko.toast
 
 class AreaService {
@@ -14,7 +14,7 @@ class AreaService {
         try {
             "auth/local/up".httpPost()
                     .body("{\"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"}")
-                    .responseObject(LoginResponse.Deserializer()) { _, _, result ->
+                    .responseObject(TokenResponse.Deserializer()) { _, _, result ->
                         val(res, err) = result
                         if (res?.success == true) {
                             AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
@@ -32,7 +32,7 @@ class AreaService {
         try {
             "auth/local/in".httpPost()
                     .body("{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}")
-                    .responseObject(LoginResponse.Deserializer()) { _, _, result ->
+                    .responseObject(TokenResponse.Deserializer()) { _, _, result ->
                         val(res, err) = result
                         if (res?.success == true) {
                             AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
