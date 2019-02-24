@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
 @import 'app/components/pages/login/login-theme';
+@import 'app/components/actions-managers/sidebar/sidebar-theme';
 @import './app/components/navbar/navbar-theme';
 @include mat-core();
 
@@ -148,6 +149,7 @@ $theme-dark: mat-dark-theme($primary, $accent, $warn);
 @include angular-material-theme($theme-dark);
 @include login-theme($theme-dark);
 @include navbar-theme($theme-dark);
+@include sidebar-theme($theme-dark);
 
 .light {
         @include angular-material-theme($theme-light);
@@ -155,6 +157,7 @@ $theme-dark: mat-dark-theme($primary, $accent, $warn);
         $background: map-get($theme-light, background);
         @include login-theme($theme-light);
         @include navbar-theme($theme-light);
+        @include sidebar-theme($theme-light);
 }
 
 .area-primary, .area-primary:hover, .area-primary:focus, .area-primary:visited {

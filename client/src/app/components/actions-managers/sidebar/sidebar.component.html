@@ -1,4 +1,7 @@
-<div class="sidebar">
+<div class="sidebar" [class.mat-elevation-12]="true">
+    <mat-form-field class="sidebar-form">
+      <input matInput placeholder="Area Name" value="{{area.name}}">
+    </mat-form-field>
   <mat-card *ngFor="let action of area.actions">
     {{action.name}}<br>
     {{action.id}}<br>

@@ -1,0 +1,20 @@
+@import "sidebar-theme";
+
+.sidebar {
+  position: fixed;
+  padding: 60px 30px 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 400px;
+
+  & .sidebar-form {
+    width: 100%;
+    margin: 10px 0 0;
+  }
+
+  & > * {
+    margin-bottom: 20px;
+  }
+}
