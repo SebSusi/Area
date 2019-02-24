@@ -54,6 +54,7 @@ import {
     MatTabsModule,
     MatTreeModule
 } from '@angular/material';
+import { SidebarComponent } from './components/actions-managers/sidebar/sidebar.component';
 
 const appRoutes: Routes = [
     {
@@ -122,6 +123,7 @@ const appRoutes: Routes = [
         TriggerManagerComponent,
         UserAppComponent,
         UserComponent,
+        SidebarComponent,
     ],
     entryComponents: [
         InputComponent,
