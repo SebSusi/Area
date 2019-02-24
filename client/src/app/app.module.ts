@@ -55,6 +55,7 @@ import {
     MatTreeModule
 } from '@angular/material';
 import { SidebarComponent } from './components/actions-managers/sidebar/sidebar.component';
+import { ActionStepComponent } from './components/actions-managers/sidebar/action-step/action-step.component';
 
 const appRoutes: Routes = [
     {
@@ -124,6 +125,7 @@ const appRoutes: Routes = [
         UserAppComponent,
         UserComponent,
         SidebarComponent,
+        ActionStepComponent,
     ],
     entryComponents: [
         InputComponent,

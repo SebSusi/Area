@@ -9,32 +9,32 @@
           <mat-card-subtitle>{{act.type.uncamelize()}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content [hidden]="act.id !== action.id">
-          <mat-list>
-              <mat-list-item>
-                  <button mat-icon-button [disabled]="true" color="primary" >
-                      <mat-icon mat-list-icon>settings</mat-icon>
-                  </button>
-                  <p mat-line>{{act.service.uncamelize()}}</p>
+          <mat-action-list>
+              <mat-list-item (click)="save()">
+                  <app-action-step
+                          [icon]='"settings"'
+                          [content]="act.service.uncamelize()">
+                  </app-action-step>
               </mat-list-item>
               <mat-list-item>
-                  <button mat-icon-button [disabled]="true" color="primary" >
-                      <mat-icon mat-list-icon>offline_bolt</mat-icon>
-                  </button>
-                  <p mat-line>{{act.name.uncamelize()}}</p>
+                  <app-action-step
+                          [icon]='"offline_bolt"'
+                          [content]="act.name.uncamelize()">
+                  </app-action-step>
               </mat-list-item>
               <mat-list-item>
-                  <button mat-icon-button [disabled]="true" color="primary" >
-                      <mat-icon mat-list-icon>person</mat-icon>
-                  </button>
-                  <p mat-line>connect account</p>
+                  <app-action-step
+                          [icon]='"person"'
+                          [content]='"connect account"'>
+                  </app-action-step>
               </mat-list-item>
               <mat-list-item>
-                  <button mat-icon-button [disabled]="true" color="primary" >
-                      <mat-icon mat-list-icon>list</mat-icon>
-                  </button>
-                  <p mat-line>set up template</p>
+                  <app-action-step
+                          [icon]='"list"'
+                          [content]='"set up template"'>
+                  </app-action-step>
               </mat-list-item>
-          </mat-list>
+          </mat-action-list>
       </mat-card-content>
   </mat-card>
 </div>
