@@ -5,6 +5,6 @@
   $background: map-get($theme, background);
 
   .sidebar {
-    background-color: darken(map-get($background, card), 5%);
+    background-color: map-get($background, card);
   }
 }

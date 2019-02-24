@@ -18,6 +18,11 @@ export class Action {
         this._type = type;
     }
 
+
+    get connectedAccountId(): string {
+        return this._connectedAccountId;
+    }
+
     get type(): ActionType {
         return this._type;
     }

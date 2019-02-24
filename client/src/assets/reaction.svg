@@ -29,14 +29,7 @@
      id="layer1">
     <path
        id="rect894"
-       transform="matrix(0.26458333,0,0,0.26458333,47.247024,-63.967262)"
-       d="M 0 0 L 0 60 L 60 60 L 60 0 L 0 0 z M 10 10 L 23.626953 10 L 34.234375 10 L 50 10 L 50 50 L 10 50 L 10 10 z "
-       style="opacity:1;fill:#999999;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    <circle
-       r="2.6458333"
-       cy="-56.029762"
-       cx="55.184525"
-       id="path854"
-       style="opacity:1;fill:#999999;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       d="m 47.247024,-63.967262 v 15.875 h 15.875 v -15.875 z m 2.645833,2.645833 h 3.605464 l 1.626775,4.598686 a 2.6458333,2.6458333 0 0 0 -0.635103,1.718241 2.6458333,2.6458333 0 0 0 2.645833,2.645834 2.6458333,2.6458333 0 0 0 2.645833,-2.645834 2.6458333,2.6458333 0 0 0 -2.161624,-2.599324 l -1.315165,-3.717603 h 4.171321 v 10.583334 H 49.892857 Z"
+       style="opacity:1;fill:#00acb4;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
 </svg>

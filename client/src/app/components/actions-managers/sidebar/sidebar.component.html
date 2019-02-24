@@ -1,10 +1,40 @@
-<div class="sidebar" [class.mat-elevation-12]="true">
+<div class="sidebar" [class.mat-elevation-12]="true" *ngIf="area">
     <mat-form-field class="sidebar-form">
       <input matInput placeholder="Area Name" value="{{area.name}}">
     </mat-form-field>
-  <mat-card *ngFor="let action of area.actions">
-    {{action.name}}<br>
-    {{action.id}}<br>
-    {{action.type}}
+  <mat-card *ngFor="let act of area.actions">
+      <mat-card-header class="card-header">
+          <div mat-card-avatar class="{{act.service}}-icon {{act.type}}-image mat-card-avatar"></div>
+          <mat-card-title>{{act.name.uncamelize()}}</mat-card-title>
+          <mat-card-subtitle>{{act.type.uncamelize()}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content [hidden]="act.id !== action.id">
+          <mat-list>
+              <mat-list-item>
+                  <button mat-icon-button [disabled]="true" color="primary" >
+                      <mat-icon mat-list-icon>settings</mat-icon>
+                  </button>
+                  <p mat-line>{{act.service.uncamelize()}}</p>
+              </mat-list-item>
+              <mat-list-item>
+                  <button mat-icon-button [disabled]="true" color="primary" >
+                      <mat-icon mat-list-icon>offline_bolt</mat-icon>
+                  </button>
+                  <p mat-line>{{act.name.uncamelize()}}</p>
+              </mat-list-item>
+              <mat-list-item>
+                  <button mat-icon-button [disabled]="true" color="primary" >
+                      <mat-icon mat-list-icon>person</mat-icon>
+                  </button>
+                  <p mat-line>connect account</p>
+              </mat-list-item>
+              <mat-list-item>
+                  <button mat-icon-button [disabled]="true" color="primary" >
+                      <mat-icon mat-list-icon>list</mat-icon>
+                  </button>
+                  <p mat-line>set up template</p>
+              </mat-list-item>
+          </mat-list>
+      </mat-card-content>
   </mat-card>
 </div>
