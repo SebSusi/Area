@@ -28,7 +28,7 @@ export class EditorComponent implements OnInit {
                     actions => {
                         this.area.actions = actions;
                         this.actionService.setActiveAction(0);
-                        this.actionService.emitActions('');
+                        this.actionService.emitActions();
                     }
                 );
             });

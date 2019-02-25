@@ -1,5 +1,4 @@
-import {Action} from './action';
-import {Adapter} from './adapter';
+import {Action, ActionAdapter} from './action';
 
 export class Area {
     private _name: string;
@@ -50,6 +49,6 @@ export class Area {
 
 export class AreaAdapter {
     static adapt(item: any): Area {
-        return new Area(item.id, item.name, item.actions);
+        return new Area(item.id, item.name, ActionAdapter.adaptArea(item));
     }
 }

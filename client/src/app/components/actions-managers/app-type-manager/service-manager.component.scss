@@ -4,13 +4,12 @@
   width: 150px;
   height: 150px;
   margin: 10px;
-  background-image: url("../../../../assets/area-logo-grey.svg");
+  background-image: url("../../../../assets/types/basic.svg");
   background-position: center 30px;
   background-size: 40%;
   background-repeat: no-repeat;
   cursor: pointer;
-  border-color: transparent;
-  border-style: solid;
+  box-shadow: none !important;
 
   & > * {
     text-align: center;
@@ -26,7 +25,6 @@
   }
 
   &.selected {
-    border-color: #009ba4;
-    border-style: solid;
+    background-color: #0002;
   }
 }

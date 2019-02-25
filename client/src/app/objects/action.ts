@@ -18,6 +18,11 @@ export class Action {
         this._type = type;
     }
 
+
+    get connectedAccountId(): string {
+        return this._connectedAccountId;
+    }
+
     get type(): ActionType {
         return this._type;
     }
@@ -60,7 +65,13 @@ export class Action {
 }
 
 export class ActionAdapter {
+    static adaptArea(item: any): Action[] {
+        const i = item['reactions'].map(data => ActionAdapter.adapt(data, ActionType.REACTION));
+        i.unshift(ActionAdapter.adapt(item['action'], ActionType.TRIGGER));
+        return i;
+    }
+
     static adapt(item: any, type: ActionType): Action {
-        return new Action(item.id, item.type, item.name, type, item.connectedAccount, item.params);
+        return new Action(item.id, item.serviceName, item.name, type, item.connectedAccount, item.params);
     }
 }

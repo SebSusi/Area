@@ -1,6 +1,4 @@
-import {Adapter} from './adapter';
-
-export class Account {
+export class Connection {
     private _id: string;
     private _name: string;
 
@@ -27,7 +25,7 @@ export class Account {
 }
 
 export class AccountAdapter {
-    static adapt(item: any): Account {
-        return new Account(item.id, item.name);
+    static adapt(item: any): Connection {
+        return new Connection(item.id, item.name);
     }
 }

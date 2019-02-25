@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "243631290369",
+    "firebase_url": "https://area-8ad4d.firebaseio.com",
+    "project_id": "area-8ad4d",
+    "storage_bucket": "area-8ad4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243631290369:android:d6a0b0eb661cd62f",
+        "android_client_info": {
+          "package_name": "epitech.area"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243631290369-0q6tdt11a46b9hh8ti7orsgpa6mevl59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8sJsRNcTCEgBy_G_hiegx6O5BsAnTxI4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

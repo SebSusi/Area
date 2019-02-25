@@ -1,0 +1,40 @@
+<div class="sidebar" [class.mat-elevation-12]="true" *ngIf="area">
+    <mat-form-field class="sidebar-form">
+      <input matInput placeholder="Area Name" value="{{area.name}}">
+    </mat-form-field>
+  <mat-card *ngFor="let act of area.actions">
+      <mat-card-header class="card-header">
+          <div mat-card-avatar class="{{act.service}}-icon {{act.type}}-image mat-card-avatar"></div>
+          <mat-card-title>{{act.name.uncamelize()}}</mat-card-title>
+          <mat-card-subtitle>{{act.type.uncamelize()}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content [hidden]="act.id !== action.id">
+          <mat-action-list>
+              <mat-list-item (click)="save()">
+                  <app-action-step
+                          [icon]='"settings"'
+                          [content]="act.service.uncamelize()">
+                  </app-action-step>
+              </mat-list-item>
+              <mat-list-item>
+                  <app-action-step
+                          [icon]='"offline_bolt"'
+                          [content]="act.name.uncamelize()">
+                  </app-action-step>
+              </mat-list-item>
+              <mat-list-item>
+                  <app-action-step
+                          [icon]='"person"'
+                          [content]='"connect account"'>
+                  </app-action-step>
+              </mat-list-item>
+              <mat-list-item>
+                  <app-action-step
+                          [icon]='"list"'
+                          [content]='"set up template"'>
+                  </app-action-step>
+              </mat-list-item>
+          </mat-action-list>
+      </mat-card-content>
+  </mat-card>
+</div>

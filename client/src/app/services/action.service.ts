@@ -39,9 +39,9 @@ export class ActionService {
     }
 
     getActions(area: Area, type: ActionType = ActionType.TRIGGER) {
-        const url = 'https://next.json-generator.com/api/json/get/4kkwTFkBI';
+        const url = 'https://next.json-generator.com/api/json/get/4JboGC5VU';
         return this._http.get(url).pipe(
-            map((data: any[]) => data.map(item => ActionAdapter.adapt(item, type))),
+            map(data => ActionAdapter.adaptArea(data)),
             tap(data => this._actions = data)
         );
     }

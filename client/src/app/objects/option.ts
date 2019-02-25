@@ -1,4 +1,3 @@
-import {Adapter} from './adapter';
 import {AreaTemplate} from './area-template';
 
 enum OptionTypes {
