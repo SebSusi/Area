@@ -5,6 +5,7 @@ import com.google.gson.Gson
 
 data class ValidationObject (
         val type: String = "",
+        val value: Int = 0,
         val pattern: String = "",
         val message: String = "") {
 
@@ -12,19 +13,39 @@ data class ValidationObject (
         override fun deserialize(content: String) = Gson().fromJson(content, Array<ValidationObject>::class.java)
     }
 
-    fun isValid(value: String) : Boolean {
-        when (type) {
-            "required" -> return requiredValidation(value)
-            "pattern" -> return patternValidation(value)
+    fun isValid(content: String) : Boolean {
+        when (content) {
+            "required" -> return requiredValidation(content)
+            "pattern" -> return patternValidation(content)
+            "maxLength" -> return maxLengthValidation(content)
+            "minLength" -> return minLengthValidation(content)
+            "max" -> return maxValidation(content)
+            "min" -> return minValidation(content)
         }
         return false
     }
 
-    private fun requiredValidation(value: String) : Boolean {
-        return value.isNotEmpty()
+    private fun requiredValidation(content: String) : Boolean {
+        return content.isNotEmpty()
     }
 
-    private fun patternValidation(value: String) : Boolean {
-        return pattern.toRegex().matches(value)
+    private fun patternValidation(content: String) : Boolean {
+        return pattern.toRegex().matches(content)
+    }
+
+    private fun maxLengthValidation(content: String) : Boolean {
+        return content.length <= value
+    }
+
+    private fun minLengthValidation(content: String) : Boolean {
+        return content.length >= value
+    }
+
+    private fun maxValidation(content: String) : Boolean {
+        return content.toInt() <= value
+    }
+
+    private fun minValidation(content: String) : Boolean {
+        return content.toInt() >= value
     }
 }

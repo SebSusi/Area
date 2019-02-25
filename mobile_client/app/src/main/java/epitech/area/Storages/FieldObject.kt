@@ -8,8 +8,8 @@ data class FieldObject (
         val name: String = "",
         val label: String = "",
         val placeHolder: String = "",
-        val options: Array<OptionObject>,
-        val validations: Array<ValidationObject>,
+        val options: Array<OptionObject> = arrayOf(),
+        val validations: Array<ValidationObject> = arrayOf(),
         val value: String = "") {
 
     class ArrayDeserializer : ResponseDeserializable<Array<FieldObject>> {

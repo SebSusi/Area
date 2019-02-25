@@ -2,47 +2,33 @@ package epitech.area.Tools
 
 import android.content.Context
 import android.util.Log
+import androidx.recyclerview.widget.RecyclerView
 import com.github.kittinunf.fuel.core.FuelManager
+import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import epitech.area.Managers.AreaAuthorization
-import epitech.area.Storages.TokenResponse
-import org.jetbrains.anko.toast
+import epitech.area.Storages.AreaObject
 
 class AreaService {
 
-    fun signUp(applicationContext: Context, username: String, email: String, password: String) {
-        try {
-            "auth/local/up".httpPost()
-                    .body("{\"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"}")
-                    .responseObject(TokenResponse.Deserializer()) { _, _, result ->
-                        val(res, err) = result
-                        if (res?.success == true) {
-                            AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
-                            changeFuelHeaders(applicationContext)
-                        } else {
-                            applicationContext.toast(res?.message.toString())
-                        }
-                    }
-        } catch (e: Exception) {
-            Log.d("SignUp Exception", e.toString())
-        }
+    private object Holder { val INSTANCE = AreaService() }
+
+    companion object {
+        val instance: AreaService by lazy { AreaService.Holder.INSTANCE }
     }
 
-    fun login(applicationContext: Context, email: String, password: String) {
+    fun getAreas(recyclerView: RecyclerView) {
+        FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
         try {
-            "auth/local/in".httpPost()
-                    .body("{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}")
-                    .responseObject(TokenResponse.Deserializer()) { _, _, result ->
-                        val(res, err) = result
-                        if (res?.success == true) {
-                            AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
-                            changeFuelHeaders(applicationContext)
-                        } else {
-                            applicationContext.toast(res?.message.toString())
+            "https://next.json-generator.com/api/json/get/EkdygAcV8".httpGet()
+                    .responseObject(AreaObject.ArrayDeserializer()) { _, _, result ->
+                        val (res, err) = result
+                        if (err == null) {
+                            (recyclerView.adapter as AreaAdapter).setAreas(res!!)
                         }
                     }
         } catch (e: Exception) {
-            Log.d("Login Exception", e.toString())
+            Log.d("getAreas Exception", e.toString())
         }
     }
 

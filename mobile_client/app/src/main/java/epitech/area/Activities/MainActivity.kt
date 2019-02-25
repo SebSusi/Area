@@ -7,30 +7,22 @@ import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpPost
-import com.google.android.gms.auth.api.Auth
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.GoogleApiClient
 import epitech.area.Managers.AreaAuthorization
 import epitech.area.R
 import epitech.area.Storages.SocialToken
 import epitech.area.Storages.TokenResponse
 import epitech.area.Tools.AreaService
 import kotlinx.android.synthetic.main.activity_main.*
-import okhttp3.*
 import org.jetbrains.anko.longToast
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.IOException
 
 class MainActivity : FragmentActivity() {
     private val RC_SOCIAL_SIGN_IN: Int = 1
-    private val areaService: AreaService = AreaService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FuelManager.instance.basePath = getString(R.string.area_api_baseurl)
         AreaAuthorization.instance.removeAccessToken(applicationContext)
-        areaService.changeFuelHeaders(applicationContext)
+        AreaService.instance.changeFuelHeaders(applicationContext)
         setContentView(R.layout.activity_main)
         signUpChangeButton.setOnClickListener {
             changeLayout()
@@ -59,7 +51,7 @@ class MainActivity : FragmentActivity() {
     override fun onResume() {
         super.onResume()
         AreaAuthorization.instance.removeAccessToken(applicationContext)
-        areaService.changeFuelHeaders(applicationContext)
+        AreaService.instance.changeFuelHeaders(applicationContext)
     }
 
     private fun changeLayout() {
@@ -76,7 +68,7 @@ class MainActivity : FragmentActivity() {
                         val(res, err) = result
                         if (res?.success == true) {
                             AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
-                            areaService.changeFuelHeaders(applicationContext)
+                            AreaService.instance.changeFuelHeaders(applicationContext)
                             val intent = Intent(this, HomeActivity::class.java)
                             startActivity(intent)
                         } else {
@@ -100,7 +92,7 @@ class MainActivity : FragmentActivity() {
                         val(res, err) = result
                         if (res?.success == true) {
                             AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
-                            areaService.changeFuelHeaders(applicationContext)
+                            AreaService.instance.changeFuelHeaders(applicationContext)
                             val intent = Intent(this, HomeActivity::class.java)
                             startActivity(intent)
                         } else {
@@ -124,7 +116,7 @@ class MainActivity : FragmentActivity() {
                         val(res, err) = result
                         if (res?.success == true) {
                             AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
-                            areaService.changeFuelHeaders(applicationContext)
+                            AreaService.instance.changeFuelHeaders(applicationContext)
                             val intent = Intent(this, HomeActivity::class.java)
                             startActivity(intent)
                         } else {

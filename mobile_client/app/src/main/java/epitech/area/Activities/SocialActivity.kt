@@ -60,7 +60,7 @@ class SocialActivity : FragmentActivity() {
             }
         })
 
-        buttonTwitter.callback = object : com.twitter.sdk.android.core.Callback<TwitterSession>() {
+/*        buttonTwitter.callback = object : com.twitter.sdk.android.core.Callback<TwitterSession>() {
             override fun success(result: Result<TwitterSession>) {
                 socialToken.provider = "twitter"
                 socialToken.token = result.data.authToken.token
@@ -70,7 +70,7 @@ class SocialActivity : FragmentActivity() {
                 Log.d("Facebook Login Error", exception.message)
                 applicationContext.longToast("Cannot connect to Twitter server")
             }
-        }
+        }*/
         buttonImgur.setOnClickListener {
             val imageIntent = Intent(this, OAuthActivity::class.java)
             imageIntent.putExtra("OAuthInfo", OAuthInfo("imgur",
@@ -129,7 +129,7 @@ class SocialActivity : FragmentActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         mCallbackManager.onActivityResult(requestCode, resultCode, data)
-        buttonTwitter.onActivityResult(requestCode, resultCode, data)
+//        buttonTwitter.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == RC_GOOGLE_SIGN_IN) {
                 val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)

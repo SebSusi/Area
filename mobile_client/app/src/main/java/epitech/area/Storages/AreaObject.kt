@@ -6,8 +6,8 @@ import com.google.gson.Gson
 data class AreaObject (
         val name: String = "",
         val uniqueId: String = "",
-        val action: ActionObject,
-        val reactions: Array<ReactionObject>) {
+        val action: ActionObject = ActionObject(),
+        val reactions: Array<ReactionObject> = arrayOf()) {
 
     class Deserializer : ResponseDeserializable<AreaObject> {
         override fun deserialize(content: String) = Gson().fromJson(content, AreaObject::class.java)

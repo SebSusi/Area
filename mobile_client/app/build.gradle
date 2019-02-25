@@ -43,6 +43,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.annotation:annotation:1.0.1'
     implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.beust:klaxon:0.32'
     implementation 'com.facebook.android:facebook-android-sdk:4.40.0'
     implementation 'com.google.android.material:material:1.1.0-alpha03'

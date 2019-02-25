@@ -8,7 +8,7 @@ data class ActionObject (
         val serviceName: String = "",
         val id: String = "",
         val accountId: String = "",
-        val fields: Array<FieldObject>) {
+        val fields: Array<FieldObject> = arrayOf()) {
 
     class Deserializer : ResponseDeserializable<ActionObject>{
         override fun deserialize(content: String) = Gson().fromJson(content, ActionObject::class.java)
