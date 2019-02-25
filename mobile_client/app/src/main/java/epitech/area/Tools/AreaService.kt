@@ -2,11 +2,13 @@ package epitech.area.Tools
 
 import android.content.Context
 import android.util.Log
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import epitech.area.Managers.AreaAuthorization
+import epitech.area.R
 import epitech.area.Storages.AreaObject
 
 class AreaService {
@@ -17,19 +19,56 @@ class AreaService {
         val instance: AreaService by lazy { AreaService.Holder.INSTANCE }
     }
 
-    fun getAreas(recyclerView: RecyclerView) {
+    fun getAreas(areaAdapter: AreaAdapter) {
+        FuelManager.instance.basePath = "" //remove this when using real server
         FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
         try {
             "https://next.json-generator.com/api/json/get/EkdygAcV8".httpGet()
                     .responseObject(AreaObject.ArrayDeserializer()) { _, _, result ->
                         val (res, err) = result
                         if (err == null) {
-                            (recyclerView.adapter as AreaAdapter).setAreas(res!!)
+                            areaAdapter.setAreas(res!!)
                         }
                     }
         } catch (e: Exception) {
             Log.d("getAreas Exception", e.toString())
         }
+        FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
+    }
+
+    fun getArea(areaAdapter: AreaAdapter, position: Int, uniqueId: String) {
+        FuelManager.instance.basePath = "" //remove this when using real server
+        FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
+        try {
+            "https://next.json-generator.com/api/json/get/4JboGC5VU".httpGet()
+                    .responseObject(AreaObject.Deserializer()) { _, _, result ->
+                        val (res, err) = result
+                        if (err == null) {
+                            areaAdapter.setArea(res!!, position)
+                        }
+                    }
+        } catch (e: Exception) {
+            Log.d("getArea Exception", e.toString())
+        }
+        FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
+    }
+
+    fun getArea(reActionAdapter: ReActionAdapter, textView: TextView,  uniqueId: String) {
+        FuelManager.instance.basePath = "" //remove this when using real server
+        FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
+        try {
+            "https://next.json-generator.com/api/json/get/4JboGC5VU".httpGet()
+                    .responseObject(AreaObject.Deserializer()) { _, _, result ->
+                        val (res, err) = result
+                        if (err == null) {
+                            textView.text = res?.name
+                            reActionAdapter.setReActions(res!!)
+                        }
+                    }
+        } catch (e: Exception) {
+            Log.d("getArea Exception", e.toString())
+        }
+        FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
     }
 
     fun changeFuelHeaders(applicationContext: Context) {
