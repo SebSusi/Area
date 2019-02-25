@@ -10,7 +10,7 @@
     android:exported="true">
 
     <ImageView
-        android:id="@+id/actionImage"
+        android:id="@+id/reActionImage"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
@@ -21,33 +21,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/arrowImage"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/actionImage"
-        app:layout_constraintStart_toEndOf="@+id/actionImage"
-        app:layout_constraintTop_toTopOf="@+id/actionImage"
-        android:src="@drawable/ic_arrow_right"/>
-
-    <ImageView
-        android:id="@+id/reactionImage"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintStart_toEndOf="@+id/arrowImage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
-        android:id="@+id/areaName"
+        android:id="@+id/reActionName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/actionImage"
-        app:layout_constraintStart_toEndOf="@+id/reactionImage"
-        app:layout_constraintTop_toTopOf="@+id/actionImage" />
+        app:layout_constraintStart_toEndOf="@+id/reActionImage"
+        app:layout_constraintTop_toTopOf="@+id/reActionImage" />
+
+    <TextView
+        android:id="@+id/reActionType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/reActionImage"
+        app:layout_constraintStart_toEndOf="@+id/reActionImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

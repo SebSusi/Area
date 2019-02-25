@@ -4,11 +4,12 @@ import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.google.gson.Gson
 
 data class ActionObject (
-        val name: String = "",
-        val serviceName: String = "",
-        val id: String = "",
-        val accountId: String = "",
-        val fields: Array<FieldObject> = arrayOf()) {
+        override var name: String = "",
+        override val serviceName: String = "",
+        override val id: String = "",
+        override val accountId: String = "",
+        override val fields: Array<FieldObject> = arrayOf(),
+        override val type: String = "ACTION") : AReActionObject() {
 
     class Deserializer : ResponseDeserializable<ActionObject>{
         override fun deserialize(content: String) = Gson().fromJson(content, ActionObject::class.java)
@@ -16,14 +17,5 @@ data class ActionObject (
 
     class ArrayDeserializer : ResponseDeserializable<Array<ActionObject>> {
         override fun deserialize(content: String) = Gson().fromJson(content, Array<ActionObject>::class.java)
-    }
-
-    fun isValid() : Boolean {
-        fields.forEach {
-            if (!(it.isValid())) {
-                return false
-            }
-        }
-        return true
     }
 }
