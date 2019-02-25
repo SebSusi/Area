@@ -1,6 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
+    <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColorHint">@color/colorLogoPrimary</item>
+        <item name="android:textColorHintInverse">#fff</item>
+        <item name="android:textColor">@color/colorLogoPrimary</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/colorLogoPrimary</item>
+        <item name="colorControlHighlight">@color/colorLogoPrimary</item>
+
+    </style>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
