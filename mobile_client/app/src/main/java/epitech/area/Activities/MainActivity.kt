@@ -12,6 +12,7 @@ import epitech.area.R
 import epitech.area.Storages.SocialToken
 import epitech.area.Storages.TokenResponse
 import epitech.area.Tools.AreaService
+import epitech.area.Tools.InfoService
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.longToast
 
@@ -23,6 +24,7 @@ class MainActivity : FragmentActivity() {
         FuelManager.instance.basePath = getString(R.string.area_api_baseurl)
         AreaAuthorization.instance.removeAccessToken(applicationContext)
         AreaService.instance.changeFuelHeaders(applicationContext)
+        InfoService.instance.getInfos()
         setContentView(R.layout.activity_main)
         signUpChangeButton.setOnClickListener {
             changeLayout()

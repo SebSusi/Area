@@ -1,6 +1,8 @@
 package epitech.area.Storages
 
-abstract class AReActionObject {
+import java.io.Serializable
+
+abstract class AReActionObject : Serializable {
     abstract val name: String
     abstract val serviceName: String
     abstract val id: String

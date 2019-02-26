@@ -5,19 +5,52 @@ import androidx.fragment.app.FragmentActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import epitech.area.R
+import epitech.area.Storages.AreaObject
 import epitech.area.Tools.AreaService
 import epitech.area.Tools.ReActionAdapter
 import kotlinx.android.synthetic.main.activity_area.*
+import kotlinx.android.synthetic.main.view_re_action.view.*
 
 class AreaActivity : FragmentActivity() {
-    private var areaId: String = ""
+    private var area: AreaObject = AreaObject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_area)
-        areaId = intent?.extras?.getString("AreaId")!!
+        area = intent?.extras?.getSerializable("AreaObject") as AreaObject
         reActionList.layoutManager = LinearLayoutManager(this)
         reActionList.adapter = ReActionAdapter(this)
-        AreaService.instance.getArea(reActionList.adapter as ReActionAdapter, areaName, areaId)
+        updateDisplay(false)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateDisplay(true)
+    }
+
+    private fun updateDisplay(fromInternet: Boolean = false) {
+        if (fromInternet) {
+            if (area.uniqueId.isNotBlank())
+                AreaService.instance.getArea(reActionList.adapter as ReActionAdapter, areaName, area.uniqueId)
+        } else {
+            if (area.uniqueId.isNotBlank()) {
+                areaName.text = area.name
+                (reActionList.adapter as ReActionAdapter).setReActions(area)
+            } else {
+                areaName.text = "New Area"
+            }
+        }
+        initNewReActionButton((reActionList.adapter as ReActionAdapter).getReActions().size)
+    }
+
+    private fun initNewReActionButton(nb: Int = 0) {
+        if (nb > 0) {
+            reActionNew.reActionName.text = "Create new reaction"
+            reActionNew.reActionImage.setImageResource(R.drawable.ic_reaction)
+        } else {
+            reActionNew.reActionName.text = "Create new action"
+            reActionNew.reActionImage.setImageResource(R.drawable.ic_action)
+        }
     }
 }

@@ -56,9 +56,8 @@ class AreaAdapter(private val context: Context, private var areas : ArrayList<Ar
         }
         holder.itemView.setOnClickListener {
             val intent = Intent(context, AreaActivity::class.java)
-            intent.putExtra("AreaId", areas[position].uniqueId)
+            intent.putExtra("AreaObject", areas[position])
             startActivity(context, intent, null)
-            AreaService.instance.getArea(this, position, areas[position].uniqueId)
         }
     }
 }
