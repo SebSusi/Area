@@ -1,13 +1,18 @@
 package epitech.area.Tools
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import epitech.area.Activities.ReActionActivity
 import epitech.area.R
 import epitech.area.Storages.AReActionObject
+import epitech.area.Storages.ActionObject
 import epitech.area.Storages.AreaObject
+import epitech.area.Storages.ReactionObject
 
 import kotlinx.android.synthetic.main.view_re_action.view.*
 
@@ -64,11 +69,11 @@ class ReActionAdapter(private val context: Context, private var reActions : Arra
             holder.reActionImage.setImageResource(IconService.instance.getReactionIcon(reActions[position].serviceName))
         }
 
-        /*holder.itemView.setOnClickListener {
-            val intent = Intent(context, AreaActivity::class.java)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, ReActionActivity::class.java)
+            intent.putExtra("ReActionObject", reActions[position])
             startActivity(context, intent, null)
-            AreaService.instance.getArea(this, position, areas[position].uniqueId)
-        }*/
+        }
     }
 }
 

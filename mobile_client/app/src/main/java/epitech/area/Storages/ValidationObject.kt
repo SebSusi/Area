@@ -2,12 +2,13 @@ package epitech.area.Storages
 
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.google.gson.Gson
+import java.io.Serializable
 
 data class ValidationObject (
         val type: String = "",
         val value: Int = 0,
         val pattern: String = "",
-        val message: String = "") {
+        val message: String = "") : Serializable {
 
     class ArrayDeserializer : ResponseDeserializable<Array<ValidationObject>> {
         override fun deserialize(content: String) = Gson().fromJson(content, Array<ValidationObject>::class.java)

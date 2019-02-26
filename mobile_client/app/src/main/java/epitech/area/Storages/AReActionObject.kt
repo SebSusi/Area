@@ -3,12 +3,12 @@ package epitech.area.Storages
 import java.io.Serializable
 
 abstract class AReActionObject : Serializable {
-    abstract val name: String
-    abstract val serviceName: String
-    abstract val id: String
-    abstract val accountId: String
-    abstract val fields: Array<FieldObject>
-    abstract val type: String
+    abstract var name: String
+    abstract var serviceName: String
+    abstract var id: String
+    abstract var accountId: String
+    abstract var fields: Array<FieldObject>
+    abstract var type: String
 
     fun isValid() : Boolean {
         fields.forEach {

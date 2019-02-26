@@ -1,11 +1,14 @@
 package epitech.area.Activities
 
-
+import android.content.Intent
 import androidx.fragment.app.FragmentActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import epitech.area.R
+import epitech.area.Storages.ActionObject
 import epitech.area.Storages.AreaObject
+import epitech.area.Storages.ReactionObject
 import epitech.area.Tools.AreaService
 import epitech.area.Tools.ReActionAdapter
 import kotlinx.android.synthetic.main.activity_area.*
@@ -21,7 +24,6 @@ class AreaActivity : FragmentActivity() {
         reActionList.layoutManager = LinearLayoutManager(this)
         reActionList.adapter = ReActionAdapter(this)
         updateDisplay(false)
-
     }
 
     override fun onResume() {
@@ -41,16 +43,26 @@ class AreaActivity : FragmentActivity() {
                 areaName.text = "New Area"
             }
         }
-        initNewReActionButton((reActionList.adapter as ReActionAdapter).getReActions().size)
+        updateNewReActionButton((reActionList.adapter as ReActionAdapter).getReActions().size)
     }
 
-    private fun initNewReActionButton(nb: Int = 0) {
+    private fun updateNewReActionButton(nb: Int = 0) {
         if (nb > 0) {
             reActionNew.reActionName.text = "Create new reaction"
             reActionNew.reActionImage.setImageResource(R.drawable.ic_reaction)
+            reActionNew.setOnClickListener {
+                val intent = Intent(this, ReActionActivity::class.java)
+                intent.putExtra("ReActionObject", ReactionObject())
+                startActivity(intent)
+            }
         } else {
             reActionNew.reActionName.text = "Create new action"
             reActionNew.reActionImage.setImageResource(R.drawable.ic_action)
+            reActionNew.setOnClickListener {
+                val intent = Intent(this, ReActionActivity::class.java)
+                intent.putExtra("ReActionObject", ActionObject())
+                startActivity(intent)
+            }
         }
     }
 }
