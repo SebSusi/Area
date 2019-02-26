@@ -22,120 +22,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/buttonGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="-4dp"
+            android:layout_marginRight="-5dp"
+            android:visibility="visible"
+            app:floating_background_color="@color/colorAccent"
+            app:floating_left_icon="@drawable/common_google_signin_btn_icon_dark"
+            app:floating_title="Google"
+            app:floating_title_color="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/buttonFacebook"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/buttonFacebook"
-                android:layout_width="50dp"
-                android:layout_height="60dp"
-                android:paddingTop="25dp"
-                android:paddingBottom="10dp"
-                android:translationX="6dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_facebook"
-                android:translationX="-45dp" />
+                android:id="@+id/imageView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="3dp"
+                android:src="@drawable/google" />
+        </com.google.android.gms.common.SignInButton>
 
-            <ru.dimorinny.floatingtextbutton.FloatingTextButton
-                android:id="@+id/buttonImgur"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="40dp"
-                app:floating_background_color="@android:color/transparent"
-                app:floating_left_icon="@android:color/transparent"
-                app:floating_title_color="@android:color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="65dp"
-                    android:layout_height="55dp"
-                    android:elevation="10dp"
-                    android:src="@drawable/imgur" />
-            </ru.dimorinny.floatingtextbutton.FloatingTextButton>
-
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/buttonGoogle"
-                android:layout_width="54dp"
-                android:layout_height="54dp"
-                android:visibility="visible"
-                app:floating_background_color="@color/colorAccent"
-                app:floating_left_icon="@drawable/common_google_signin_btn_icon_dark"
-                app:floating_title="Google"
-                app:floating_title_color="@android:color/white"
-                app:layout_constraintBottom_toTopOf="@+id/buttonFacebook"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="63dp"
-                    android:layout_height="65dp"
-                    android:elevation="10dp"
-                    android:src="@drawable/common_google_signin_btn_icon_light_normal"
-                    android:translationX="-5dp"
-                    android:translationY="-6dp"
-                    android:visibility="visible" />
-            </com.google.android.gms.common.SignInButton>
-        </LinearLayout>
-
-        <LinearLayout
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/buttonFacebook"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal"
+            android:layout_height="100dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:scaleX="1"
+            android:scaleY="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.twitter.sdk.android.core.identity.TwitterLoginButton
-                android:id="@+id/buttonTwitter"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_marginLeft="7dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_twitter"
-                android:translationX="-140px" />
-        </LinearLayout>
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
+            android:id="@+id/buttonTwitter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     </LinearLayout>
 
