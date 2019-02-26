@@ -5,8 +5,8 @@
     android:id="@+id/arealayout"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:background="@color/darkColorPrimary"
     android:layout_margin="8dp"
+    android:background="@color/darkColorPrimary"
     android:exported="true">
 
     <ImageView
