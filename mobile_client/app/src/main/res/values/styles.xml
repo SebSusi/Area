@@ -17,6 +17,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorLogoSecondary</item>
+        <item name="android:textColorPrimary">@color/darkColorAccentWhite</item>
+        <item name="android:windowBackground">@color/darkColorPrimary</item>
+    </style>
+
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>

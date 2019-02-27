@@ -1,6 +1,7 @@
 package epitech.area.Activities
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import epitech.area.Storages.TokenResponse
 import epitech.area.Tools.AreaService
 import epitech.area.Tools.InfoService
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.view_server_url.view.*
 import org.jetbrains.anko.longToast
 
 class MainActivity : FragmentActivity() {
@@ -47,6 +49,19 @@ class MainActivity : FragmentActivity() {
         socialLoginButton.setOnClickListener {
             val intent = Intent(this, SocialActivity::class.java)
             startActivityForResult(intent, RC_SOCIAL_SIGN_IN)
+        }
+        serverUrlButton.setOnClickListener {
+            val view = layoutInflater.inflate(R.layout.view_server_url, null)
+            view.serverUrl.setText(FuelManager.instance.basePath)
+            val alert = AlertDialog.Builder(this, R.style.CustomDialogTheme).setTitle("Server URL").setView(view)
+            alert.setPositiveButton(android.R.string.ok) { dialog, _ ->
+                FuelManager.instance.basePath = view.serverUrl.text.toString()
+//                dialog.dismiss()
+            }
+            alert.setNegativeButton(android.R.string.cancel) { dialog, _ ->
+                dialog.cancel()
+            }
+            alert.show()
         }
     }
 
@@ -138,7 +153,7 @@ class MainActivity : FragmentActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == RC_SOCIAL_SIGN_IN) {
-                    socialLogin(data?.getSerializableExtra("SocialToken") as SocialToken)
+                socialLogin(data?.getSerializableExtra("SocialToken") as SocialToken)
             }
         }
     }

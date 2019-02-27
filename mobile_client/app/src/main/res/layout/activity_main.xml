@@ -231,6 +231,22 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ru.dimorinny.floatingtextbutton.FloatingTextButton
+        android:id="@+id/serverUrlButton"
+        android:layout_width="154dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:floating_background_color="@color/colorLogoPrimary"
+        app:floating_left_icon="@mipmap/ic_social_button"
+        app:floating_title="Change Server URL"
+        app:floating_title_color="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@id/socialLoginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:floating_left_icon="@drawable/Social" />
+
+    <ru.dimorinny.floatingtextbutton.FloatingTextButton
         android:id="@+id/socialLoginButton"
         android:layout_width="154dp"
         android:layout_height="42dp"
