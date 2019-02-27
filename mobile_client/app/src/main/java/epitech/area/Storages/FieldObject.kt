@@ -11,18 +11,27 @@ data class FieldObject (
         val placeHolder: String = "",
         val options: Array<OptionObject> = arrayOf(),
         val validations: Array<ValidationObject> = arrayOf(),
-        val value: String = "") : Serializable {
+        var value: String = "") : Serializable {
 
     class ArrayDeserializer : ResponseDeserializable<Array<FieldObject>> {
         override fun deserialize(content: String) = Gson().fromJson(content, Array<FieldObject>::class.java)
     }
 
     fun isValid() : Boolean {
-        validations.forEach {
-            if (!(it.isValid(value))) {
+        validations.forEach { validation ->
+            if (!(validation.isValid(value))) {
                 return false
             }
         }
         return true
+    }
+
+    fun getInvalidString() : String {
+        validations.forEach { validation ->
+            if (!(validation.isValid(value))) {
+                return validation.message
+            }
+        }
+        return ""
     }
 }
