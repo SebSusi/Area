@@ -15,7 +15,7 @@ data class ValidationObject (
     }
 
     fun isValid(content: String) : Boolean {
-        when (content) {
+        when (type) {
             "required" -> return requiredValidation(content)
             "pattern" -> return patternValidation(content)
             "maxLength" -> return maxLengthValidation(content)
