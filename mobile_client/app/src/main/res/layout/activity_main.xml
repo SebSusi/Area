@@ -197,21 +197,6 @@
             app:layout_constraintTop_toBottomOf="@+id/signUpPasswordConfirm">
 
             <ru.dimorinny.floatingtextbutton.FloatingTextButton
-                android:id="@+id/signUpConnectButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp"
-                app:floating_background_color="@color/colorLogoSecondary"
-                app:floating_left_icon="@drawable/ic_person_black"
-                app:floating_title="Sign Up"
-                app:floating_title_color="@color/tw__composer_black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/signUpChangeButton" />
-
-            <ru.dimorinny.floatingtextbutton.FloatingTextButton
                 android:id="@+id/signUpChangeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -226,6 +211,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/signUpPasswordConfirm" />
 
+            <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                android:id="@+id/signUpConnectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                app:floating_background_color="@color/colorLogoSecondary"
+                app:floating_left_icon="@drawable/ic_person_black"
+                app:floating_title="Sign Up"
+                app:floating_title_color="@color/tw__composer_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/signUpChangeButton" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -238,7 +238,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         app:floating_background_color="@color/colorLogoPrimary"
-        app:floating_left_icon="@mipmap/ic_social_button"
+        app:floating_left_icon="@drawable/ic_settings"
         app:floating_title="Change Server URL"
         app:floating_title_color="@android:color/white"
         app:layout_constraintBottom_toTopOf="@id/socialLoginButton"
