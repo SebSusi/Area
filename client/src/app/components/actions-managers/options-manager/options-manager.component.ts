@@ -4,7 +4,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FieldConfig} from '../../../objects/form-configs';
 import {Option} from '../../../objects/option';
 import {StructureService} from '../../../services/structure.service';
-import {Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-options-manager',
@@ -106,8 +106,8 @@ export class OptionsManagerComponent extends AbstractManager implements OnInit {
 
     submit(value: any) {}
 
-    constructor(actionService: ActionService, public structureS: StructureService) {
-        super(actionService);
+    constructor(actionService: ActionService, formBuilder: FormBuilder, public structureS: StructureService) {
+        super(actionService, formBuilder);
     }
 
     ngOnInit() {

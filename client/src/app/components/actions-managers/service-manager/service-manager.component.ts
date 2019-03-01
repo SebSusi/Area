@@ -3,6 +3,7 @@ import {AreaService} from '../../../services/area.service';
 import {StructureService} from '../../../services/structure.service';
 import {AbstractManager} from '../abstract-manager';
 import {ActionService} from '../../../services/action.service';
+import {FormBuilder, FormArray, Validators, FormControl} from '@angular/forms';
 
 @Component({
     selector: 'app-service-manager',
@@ -12,13 +13,21 @@ import {ActionService} from '../../../services/action.service';
 
 export class ServiceManagerComponent extends AbstractManager implements OnInit{
 
+    constructor(actionService: ActionService, formBuilder: FormBuilder, private areaService: AreaService,
+                private structureService: StructureService) {
+        super(actionService, formBuilder);
+    }
+
     public services: string[];
 
-    constructor(actionService: ActionService, private areaService: AreaService, private structureService: StructureService) {
-        super(actionService);
+    getFormGroup() {
+        return {
+            typeControl: [this.action.service, Validators.required]
+        };
     }
 
     ngOnInit() {
+        this.initManager();
         this.services = this.structureService.getServices();
     }
 

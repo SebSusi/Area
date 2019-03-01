@@ -15,7 +15,6 @@ export class AreaListComponent implements OnInit {
 
     constructor(private http: HttpClient, private areaService: AreaService) {
         areaService.getAreas().subscribe(value => {this.areas = value; });
-        areaService.getArea('id').subscribe(value => {this.areas.push(value); });
     }
 
     ngOnInit() {

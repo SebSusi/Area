@@ -1,20 +1,36 @@
-<mat-tab-group [dynamicHeight]="true">
-    <ng-template [ngIf]="_action">
-        <mat-tab label="Choose App">
-            <app-service-manager></app-service-manager>
-        </mat-tab>
-        <mat-tab label="Select Trigger">
-            <app-trigger-manager></app-trigger-manager>
-        </mat-tab>
-        <ng-template [ngIf]="_action.name">
-            <mat-tab label="Connect account">
-                <app-account-manager></app-account-manager>
-            </mat-tab>
-            <ng-template [ngIf]="_action.id">
-                <mat-tab label="Setup Options">
-                    <app-options-manager></app-options-manager>
-                </mat-tab>
-            </ng-template>
-        </ng-template>
-    </ng-template>
-</mat-tab-group>
+<ng-template [ngIf]="form && action">
+    <mat-horizontal-stepper linear #stepper>
+        <mat-step [stepControl]="form" [optional]="false" label="Choose App">
+            <form [formGroup]="form">
+                <app-service-manager [form]="form"></app-service-manager>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="forms.at(1)" [optional]="false" label="Select Trigger">
+            <form [formGroup]="forms.at(1)">
+                <app-account-manager [form]="forms.at(1)"></app-account-manager>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="forms.at(2)" [optional]="false" label="Connect account">
+            <form [formGroup]="forms.at(2)">
+                <app-trigger-manager [form]="forms.at(2)"></app-trigger-manager>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="forms.at(3)" [optional]="false" label="Setup Options">
+            <form [formGroup]="forms.at(3)">
+                <app-options-manager [form]="forms.at(3)"></app-options-manager>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-horizontal-stepper>
+</ng-template>
