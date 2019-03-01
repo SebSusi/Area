@@ -1,4 +1,4 @@
-<mat-radio-group class="accounts-group" [(ngModel)]="action.name">
+<mat-radio-group class="accounts-group" [(ngModel)]="action.name" [formControl]="form.get('triggerControl')">
   <mat-radio-button class="account" *ngFor="let item of structureS.getTriggers(action)" [value]="item">
     <p class="mat-subheading-1 title">{{item.uncamelize()}}</p>
     <p class="mat-subheading-1 description">Triggers when any user creates a new Tweet that contains a specific search term (like a word, phrase, username or hashtag).</p>

@@ -12,18 +12,20 @@ export class ActionComponent implements OnInit {
     forms: FormArray;
     _action: Action = undefined;
     public form: FormGroup;
+    public managers: string[];
 
     constructor(private actionService: ActionService, private formBuilder: FormBuilder) {
         this.actionService.actionsObservable.subscribe(value => {
             this._action = this.actionService.getAction(undefined);
             console.log(this._action);
         });
-        this.forms = new FormArray([
-            new FormGroup({}),
-            new FormGroup({}),
-            new FormGroup({}),
-            new FormGroup({})
-        ]);
+        this.forms = [
+            {group: new FormGroup({}), name: 'services', description: 'Select Service'},
+            {group: new FormGroup({}), name: 'triggers', description: 'Choose Action or Reaction'},
+            {group: new FormGroup({}), name: 'account', description: 'Connect Account'},
+            {group: new FormGroup({}), name: 'options', description: 'Set Up Template'}
+        ];
+        this.managers = ['services', 'triggers', 'account', 'options'];
     }
 
     get action(): Action {
@@ -36,7 +38,7 @@ export class ActionComponent implements OnInit {
 
 
     ngOnInit() {
-        this.form = this.formBuilder.group({});
+//        this.form = this.formBuilder.group({});
 //        this.forms.setValue(['Nancy', 'Drew', 'deed', 'zfezef']);
     }
 }

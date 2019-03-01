@@ -56,6 +56,7 @@ import {
 } from '@angular/material';
 import { SidebarComponent } from './components/actions-managers/sidebar/sidebar.component';
 import { ActionStepComponent } from './components/actions-managers/sidebar/action-step/action-step.component';
+import { DynamicActionDirective } from './components/actions-managers/dynamic-action.directive';
 
 const appRoutes: Routes = [
     {
@@ -126,6 +127,7 @@ const appRoutes: Routes = [
         UserComponent,
         SidebarComponent,
         ActionStepComponent,
+        DynamicActionDirective,
     ],
     entryComponents: [
         InputComponent,
@@ -133,7 +135,11 @@ const appRoutes: Routes = [
         SelectComponent,
         DateComponent,
         RadiobuttonComponent,
-        CheckboxComponent
+        CheckboxComponent,
+        ServiceManagerComponent,
+        TriggerManagerComponent,
+        AccountManagerComponent,
+        OptionsManagerComponent
     ],
     imports: [
         RouterModule.forRoot(

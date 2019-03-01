@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {StructureService} from '../../../services/structure.service';
 import {AbstractManager} from '../abstract-manager';
 import {ActionService} from '../../../services/action.service';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-trigger-manager',
@@ -18,9 +18,17 @@ export class TriggerManagerComponent extends AbstractManager implements OnInit {
     }
 
     ngOnInit() {
+        this.initManager();
     }
 
     receiveActionUpdate() {
         this.triggers = this.structureS.getTriggers(this.action);
+    }
+
+
+    getFormGroup(): {} {
+        return {
+            triggerControl : [this.action.name, Validators.required]
+        };
     }
 }
