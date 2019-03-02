@@ -22,7 +22,7 @@ export class TriggerManagerComponent extends AbstractManager implements OnInit {
     }
 
     receiveActionUpdate() {
-        this.triggers = this.structureS.getTriggers(this.action);
+        this.triggers = this.structureS.getActions(this.action);
     }
 
 

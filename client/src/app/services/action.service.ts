@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {ApiService} from './api.service';
 import {map, tap} from 'rxjs/operators';
 import {Action, ActionAdapter} from '../objects/action';
-import {ActionType} from '../objects/action-template';
+import {ActionType} from '../objects/actions-template';
 import {Subject} from 'rxjs';
 
 @Injectable({

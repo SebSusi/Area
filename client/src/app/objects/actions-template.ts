@@ -6,33 +6,35 @@ export enum ActionType {
     FILTER = 'filter'
 }
 
-export class ActionTemplate {
+export class ActionsTemplate {
     type: ActionType;
-    triggers: Map<string, Option[]>;
+    actions: Map<string, {description: string, options: Option[]}>;
 
     constructor(type: ActionType, actions: any) {
         this.type = type;
-        this.triggers = new Map();
+        this.actions = new Map();
         if (!actions)
             return;
         for (const action of actions) {
-            this.pushTrigger(action);
+            this.pushAction(action);
         }
     }
 
-    pushTrigger(optionsJson) {
+    private pushAction(optionsJson) {
         const options = [];
         for (const field of optionsJson.fields) {
             options.push(OptionAdapter.adapt(field));
         }
-        this.triggers.set(optionsJson.name, options);
+        this.actions.set(optionsJson.name, {description: optionsJson.description, options: options});
     }
 
-    getTriggers(): string[] {
-        return Array.from(this.triggers.keys());
+    getActions(): string[] {
+        return Array.from(this.actions.keys());
     }
 
     getOptions(trigger: string): Option[] {
-        return this.triggers.get(trigger);
+        if (this.actions.get(trigger))
+            return this.actions.get(trigger).options;
+        return null;
     }
 }

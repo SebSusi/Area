@@ -1,4 +1,4 @@
-import {ActionType} from './action-template';
+import {ActionType} from './actions-template';
 
 export class Action {
     private _id: string;
@@ -6,19 +6,18 @@ export class Action {
     private _name: string;
     private _type: ActionType;
     private _connectedAccountId: string;
-    private _options;
+    private _options = new Map();
 
     constructor(id: string = '', service: string = '', name: string = '', type: ActionType,
-                connectedAccountId: string = '', options: Map<string, string | number | boolean>[] = []) {
+                connectedAccountId: string = '', options: any[] = []) {
         this._id = id;
         this._service = service;
         this._name = name;
         this._connectedAccountId = connectedAccountId;
         if (options !== undefined)
-            this._options = options.reduce(function(map, obj) {
-                map[Object.keys(obj)[0]] = obj[Object.keys(obj)[0]];
-                return map;
-                }, {});
+        for (const obj of options) {
+            this.options[obj.name] = obj.value;
+        }
         this._type = type;
     }
 
