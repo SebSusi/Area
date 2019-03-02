@@ -1,6 +1,7 @@
 package epitech.area.Tools
 
 import android.content.Context
+import android.icu.text.IDNA
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,10 @@ import epitech.area.Storages.FieldObject
 import kotlinx.android.synthetic.main.view_field.view.*
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.CompoundButton
+import org.jetbrains.anko.sdk27.coroutines.onItemSelectedListener
 
 
 class FieldAdapter(private val context: Context, private var fields : ArrayList<FieldObject> = arrayListOf(), private val reActionActivity: ReActionActivity) : RecyclerView.Adapter<FieldViewHolder>() {
@@ -51,7 +55,7 @@ class FieldAdapter(private val context: Context, private var fields : ArrayList<
     private fun initSwitch(holder: FieldViewHolder, position: Int) {
         holder.fieldSwitch.visibility = View.VISIBLE
         holder.fieldSwitch.text = fields[position].label
-        holder.fieldSwitch.isActivated = (fields[position].value == "true")
+        holder.fieldSwitch.isChecked = (fields[position].value == "true")
         holder.fieldSwitch.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener {
             override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
                 if (isChecked)
@@ -76,12 +80,10 @@ class FieldAdapter(private val context: Context, private var fields : ArrayList<
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-            }
+                                           count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-            }
+                                       before: Int, count: Int) {}
         })
     }
 
@@ -90,6 +92,19 @@ class FieldAdapter(private val context: Context, private var fields : ArrayList<
         holder.fieldLabel.text = fields[position].label
         holder.fieldList.visibility = View.VISIBLE
         holder.fieldList.visibility = View.VISIBLE
+        holder.fieldList.adapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, fields[position].getOptionArray())
+        holder.fieldList.setSelection(fields[position].getOptionPosition())
+        holder.fieldList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                fields[position].value = ""
+                reActionActivity.checkField(fields[position].name, fields[position].value)
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+                fields[position].value = fields[position].getOptionValueByPosition(pos)
+                reActionActivity.checkField(fields[position].name, fields[position].value)
+            }
+        }
     }
 }
 

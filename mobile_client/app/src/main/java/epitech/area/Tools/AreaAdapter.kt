@@ -55,7 +55,7 @@ class AreaAdapter(private val context: Context, private var areas : ArrayList<Ar
             holder.reactionImage.setImageDrawable(null)
             holder.arrowImage.visibility = View.INVISIBLE
         }
-        holder.clicker.setOnClickListener {
+        holder.areaClicker.setOnClickListener {
             val intent = Intent(context, AreaActivity::class.java)
             intent.putExtra("AreaObject", areas[position])
             startActivity(context, intent, null)
@@ -68,5 +68,5 @@ class AreaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val actionImage = view.actionImage
     val reactionImage = view.reactionImage
     val arrowImage = view.arrowImage
-    val clicker = view.clicker2
+    val areaClicker = view.areaClicker
 }

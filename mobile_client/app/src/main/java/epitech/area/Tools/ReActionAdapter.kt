@@ -69,7 +69,7 @@ class ReActionAdapter(private val context: Context, private var reActions : Arra
             holder.reActionImage.setImageResource(IconService.instance.getReactionIcon(reActions[position].serviceName))
         }
 
-        holder.clicker.setOnClickListener {
+        holder.reActionClicker.setOnClickListener {
             val intent = Intent(context, ReActionActivity::class.java)
             intent.putExtra("ReActionObject", reActions[position])
             startActivity(context, intent, null)
@@ -81,5 +81,5 @@ class ReActionViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val reActionName = view.reActionName
     val reActionType = view.reActionType
     val reActionImage = view.reActionImage
-    val clicker = view.clicker
+    val reActionClicker = view.reActionClicker
 }

@@ -50,7 +50,7 @@ class AreaActivity : FragmentActivity() {
         if (nb > 0) {
             reActionNew.reActionName.text = "Create new reaction"
             reActionNew.reActionImage.setImageResource(R.drawable.ic_reaction)
-            reActionNew.clicker.setOnClickListener {
+            reActionNew.reActionClicker.setOnClickListener {
                 val intent = Intent(this, ReActionActivity::class.java)
                 intent.putExtra("ReActionObject", ReactionObject())
                 startActivity(intent)
@@ -58,7 +58,7 @@ class AreaActivity : FragmentActivity() {
         } else {
             reActionNew.reActionName.text = "Create new action"
             reActionNew.reActionImage.setImageResource(R.drawable.ic_action)
-            reActionNew.clicker.setOnClickListener {
+            reActionNew.reActionClicker.setOnClickListener {
                 val intent = Intent(this, ReActionActivity::class.java)
                 intent.putExtra("ReActionObject", ActionObject())
                 startActivity(intent)

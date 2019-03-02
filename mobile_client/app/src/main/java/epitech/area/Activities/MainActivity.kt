@@ -32,7 +32,6 @@ class MainActivity : FragmentActivity() {
             changeLayout()
         }
         loginChangeButton.setOnClickListener {
-
             changeLayout()
         }
         signUpConnectButton.setOnClickListener {
@@ -56,7 +55,6 @@ class MainActivity : FragmentActivity() {
             val alert = AlertDialog.Builder(this, R.style.CustomDialogTheme).setTitle("Server URL").setView(view)
             alert.setPositiveButton(android.R.string.ok) { dialog, _ ->
                 FuelManager.instance.basePath = view.serverUrl.text.toString()
-//                dialog.dismiss()
             }
             alert.setNegativeButton(android.R.string.cancel) { dialog, _ ->
                 dialog.cancel()

@@ -32,7 +32,7 @@ class HomeActivity : FragmentActivity() {
         areaNew.areaName.text = "Create new area"
         areaNew.actionImage.setImageResource(R.drawable.ic_basic)
         areaNew.arrowImage.visibility = View.INVISIBLE
-        areaNew.setOnClickListener {
+        areaNew.areaClicker.setOnClickListener {
             val intent = Intent(this, AreaActivity::class.java)
             intent.putExtra("AreaObject", AreaObject())
             startActivity(intent, null)

@@ -19,7 +19,7 @@ class InfoService {
         FuelManager.instance.basePath = "" //remove this when using real server
         FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
         try {
-            "https://next.json-generator.com/api/json/get/E1ZPLg0BL".httpGet()
+            "https://next.json-generator.com/api/json/get/VyOVzLxHL".httpGet()
                     .responseObject(ServiceObject.ArrayDeserializer()) { _, _, result ->
                         val (res, err) = result
                         if (err == null) {
