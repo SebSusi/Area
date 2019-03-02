@@ -16,7 +16,6 @@ export class ActionComponent implements OnInit {
     constructor(private actionService: ActionService, private formBuilder: FormBuilder) {
         this.actionService.actionsObservable.subscribe(value => {
             this._action = this.actionService.getAction(undefined);
-            console.log(this._action);
         });
         this.forms = [
             {group: new FormGroup({}), name: 'services', description: 'Select Service'},

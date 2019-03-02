@@ -18,10 +18,10 @@ import { CheckboxComponent } from '../checkbox/checkbox.component';
 const componentMapper = {
   input: InputComponent,
   button: ButtonComponent,
-  select: SelectComponent,
+  list: SelectComponent,
   date: DateComponent,
   radiobutton: RadiobuttonComponent,
-  checkbox: CheckboxComponent
+  boolean: CheckboxComponent
 };
 
 @Directive({

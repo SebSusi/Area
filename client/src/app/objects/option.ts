@@ -1,4 +1,6 @@
 import {AreaTemplate} from './area-template';
+import {Validators} from '@angular/forms';
+import {ValidatorsFactory} from './validators-factory';
 
 enum OptionTypes {
     LIST = 'list',
@@ -10,12 +12,14 @@ enum OptionTypes {
 export class Option {
     private _name: string;
     private _type: OptionTypes;
-    private _constraint: any;
+    private _options: any;
+    private _validators: Validators[];
 
-    constructor(name: string, type: OptionTypes, constraint: any) {
+    constructor(name: string, type: OptionTypes, validators: any, options: any) {
         this._name = name;
         this._type = type;
-        this._constraint = constraint;
+        this._validators = ValidatorsFactory.parseValidators(validators);
+        this._options = options;
     }
 
     get name(): string {
@@ -34,16 +38,24 @@ export class Option {
         this._type = value;
     }
 
-    get constraint(): any {
-        return this._constraint;
+    get options(): any {
+        return this._options;
     }
 
-    set constraint(value: any) {
-        this._constraint = value;
+    set options(value: any) {
+        this._options = value;
+    }
+
+    get validators(): Validators[] {
+        return this._validators;
+    }
+
+    set validators(value: Validators[]) {
+        this._validators = value;
     }
 }
 
-export class OptionAdapter{
+export class OptionAdapter {
 
     private static parseType(type: string): OptionTypes {
         if (Object.values(OptionTypes).includes(type)) {
@@ -53,7 +65,7 @@ export class OptionAdapter{
         return OptionTypes.STRING;
     }
 
-    static adapt(name: string, option: any): Option {
-        return new Option(name, OptionAdapter.parseType(option.type), option.constraint);
+    static adapt(option: any): Option {
+        return new Option(option.name, OptionAdapter.parseType(option.type), option.validations, option.options);
     }
 }

@@ -26,7 +26,6 @@ export class DynamicActionDirective implements OnInit {
         private container: ViewContainerRef
     ) {}
     ngOnInit() {
-        console.log(this.type);
         const factory = this.resolver.resolveComponentFactory(
             componentMapper[this.type]
         );

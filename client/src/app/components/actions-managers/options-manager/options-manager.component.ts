@@ -111,9 +111,12 @@ export class OptionsManagerComponent extends AbstractManager implements OnInit {
     }
 
     ngOnInit() {
+        this.initManager();
+        this.options = this.structureS.getOptions(this.action);
     }
 
     receiveActionUpdate() {
         this.options = this.structureS.getOptions(this.action);
+        console.log(this.options);
     }
 }

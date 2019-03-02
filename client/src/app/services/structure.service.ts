@@ -20,7 +20,7 @@ export class StructureService {
     initStructure() {
         const url = 'https://next.json-generator.com/api/json/get/VyOVzLxHL';
         this._http.get(url).pipe(map(data => this.adapater.adapt(data)),
-            tap(data => {this._template = data}), tap(data => console.log(data))).subscribe();
+            tap(data => {this._template = data})).subscribe();
     }
 
     get template(): AreaTemplate {
@@ -28,7 +28,6 @@ export class StructureService {
     }
 
     getServices() {
-        console.log(this.template);
         if (this.template === undefined)
             return undefined;
         return this.template.getServices();

@@ -21,7 +21,7 @@ export class ActionTemplate {
     pushTrigger(trigger, optionsJson) {
         const options = [];
         Object.keys(optionsJson['fields']).forEach(function (name) { // ex:
-            options.push(OptionAdapter.adapt(name, optionsJson['fields'][name]));
+            options.push(OptionAdapter.adapt(optionsJson['fields'][name]));
         });
         this.triggers.set(trigger, options);
     }

@@ -142,6 +142,7 @@ const appRoutes: Routes = [
         OptionsManagerComponent
     ],
     imports: [
+        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
         RouterModule.forRoot(
             appRoutes,
             {enableTracing: false}
