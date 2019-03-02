@@ -13,13 +13,27 @@ export class Option {
     private _name: string;
     private _type: OptionTypes;
     private _options: any;
+    private _label: string;
+    private _placeHolder: string;
     private _validators: Validators[];
+    private _value: string;
 
-    constructor(name: string, type: OptionTypes, validators: any, options: any) {
+    constructor(name: string, type: OptionTypes, validators: any, options: any, label: string, placeHolder: string) {
         this._name = name;
         this._type = type;
         this._validators = ValidatorsFactory.parseValidators(validators);
         this._options = options;
+        this._label = label;
+        this._placeHolder = placeHolder;
+        this._value = undefined;
+    }
+
+    get value(): string {
+        return this._value;
+    }
+
+    set value(value: string) {
+        this._value = value;
     }
 
     get name(): string {
@@ -53,6 +67,22 @@ export class Option {
     set validators(value: Validators[]) {
         this._validators = value;
     }
+
+    get label(): string {
+        return this._label;
+    }
+
+    set label(value: string) {
+        this._label = value;
+    }
+
+    get placeHolder(): string {
+        return this._placeHolder;
+    }
+
+    set placeHolder(value: string) {
+        this._placeHolder = value;
+    }
 }
 
 export class OptionAdapter {
@@ -66,6 +96,6 @@ export class OptionAdapter {
     }
 
     static adapt(option: any): Option {
-        return new Option(option.name, OptionAdapter.parseType(option.type), option.validations, option.options);
+        return new Option(option.name, OptionAdapter.parseType(option.type), option.validations, option.options, option.label, option.placeHolder);
     }
 }

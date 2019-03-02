@@ -15,12 +15,11 @@ export class AreaTemplate {
         this._services = value;
     }
 
-    public push(serviceType: string, service) {
-        if (!this._services.has(serviceType))
-            this.services.set(serviceType, []);
-        Object.keys(service).forEach(function (actionType) {     // ex: action, reaction, trigger
-            this.services.get(serviceType).push(new ActionTemplate(actionType, service[actionType]));
-        }.bind(this));
+    public push(service) {
+        if (!this._services.has(service.name))
+            this.services.set(service.name, []);
+        this.services.get(service.name).push(new ActionTemplate(ActionType.TRIGGER, service.actions));
+        this.services.get(service.name).push(new ActionTemplate(ActionType.REACTION, service.reactions));
     }
 
     getActions(service: string) {
@@ -55,9 +54,9 @@ export class AreaTemplate {
 export class AreaTemplateAdapter {
     adapt(areas: any): AreaTemplate {
         const at = new AreaTemplate();
-        Object.keys(areas).forEach(function (service) {  // ex: service = Twitter
-            at.push(service, areas[service]);
-        });
+        for (const service of areas) {
+            at.push(service);
+        }
         return at;
     }
 }

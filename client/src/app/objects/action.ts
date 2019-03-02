@@ -6,7 +6,7 @@ export class Action {
     private _name: string;
     private _type: ActionType;
     private _connectedAccountId: string;
-    private _options: Map<string, (string|number|boolean)>[];
+    private _options;
 
     constructor(id: string = '', service: string = '', name: string = '', type: ActionType,
                 connectedAccountId: string = '', options: Map<string, string | number | boolean>[] = []) {
@@ -14,7 +14,11 @@ export class Action {
         this._service = service;
         this._name = name;
         this._connectedAccountId = connectedAccountId;
-        this._options = options;
+        if (options !== undefined)
+            this._options = options.reduce(function(map, obj) {
+                map[Object.keys(obj)[0]] = obj[Object.keys(obj)[0]];
+                return map;
+                }, {});
         this._type = type;
     }
 

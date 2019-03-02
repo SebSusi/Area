@@ -10,20 +10,22 @@ export class ActionTemplate {
     type: ActionType;
     triggers: Map<string, Option[]>;
 
-    constructor(type: ActionType, triggers: any) {
+    constructor(type: ActionType, actions: any) {
         this.type = type;
         this.triggers = new Map();
-        Object.keys(triggers).forEach(function (trigger) {
-            this.pushTrigger(trigger, triggers[trigger]);
-        }, this);
+        if (!actions)
+            return;
+        for (const action of actions) {
+            this.pushTrigger(action);
+        }
     }
 
-    pushTrigger(trigger, optionsJson) {
+    pushTrigger(optionsJson) {
         const options = [];
-        Object.keys(optionsJson['fields']).forEach(function (name) { // ex:
-            options.push(OptionAdapter.adapt(optionsJson['fields'][name]));
-        });
-        this.triggers.set(trigger, options);
+        for (const field of optionsJson.fields) {
+            options.push(OptionAdapter.adapt(field));
+        }
+        this.triggers.set(optionsJson.name, options);
     }
 
     getTriggers(): string[] {

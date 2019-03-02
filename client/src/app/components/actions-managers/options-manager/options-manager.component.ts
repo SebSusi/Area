@@ -5,6 +5,7 @@ import {FieldConfig} from '../../../objects/form-configs';
 import {Option} from '../../../objects/option';
 import {StructureService} from '../../../services/structure.service';
 import {FormBuilder, Validators} from '@angular/forms';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
     selector: 'app-options-manager',
@@ -13,96 +14,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 })
 export class OptionsManagerComponent extends AbstractManager implements OnInit {
 
-    public options: Option[];
-    regConfig: FieldConfig[] = [
-        {
-            type: 'input',
-            label: 'Username',
-            inputType: 'text',
-            name: 'name',
-            validations: [
-                {
-                    name: 'required',
-                    validator: Validators.required,
-                    message: 'Name Required'
-                },
-                {
-                    name: 'pattern',
-                    validator: Validators.pattern('^[a-zA-Z]+$'),
-                    message: 'Accept only text'
-                }
-            ]
-        },
-        {
-            type: 'input',
-            label: 'Email Address',
-            inputType: 'email',
-            name: 'email',
-            validations: [
-                {
-                    name: 'required',
-                    validator: Validators.required,
-                    message: 'Email Required'
-                },
-                {
-                    name: 'pattern',
-                    validator: Validators.pattern(
-                        '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
-                    ),
-                    message: 'Invalid email'
-                }
-            ]
-        },
-        {
-            type: 'input',
-            label: 'Password',
-            inputType: 'password',
-            name: 'password',
-            validations: [
-                {
-                    name: 'required',
-                    validator: Validators.required,
-                    message: 'Password Required'
-                }
-            ]
-        },
-        {
-            type: 'radiobutton',
-            label: 'Gender',
-            name: 'gender',
-            value: 'Male',
-            constraint: ['Male', 'Female', 'Appache Helicoptere'],
-        },
-        {
-            type: 'date',
-            label: 'Date of Birth',
-            name: 'dob',
-            validations: [
-                {
-                    name: 'required',
-                    validator: Validators.required,
-                    message: 'Date of Birth Required'
-                }
-            ]
-        },
-        {
-            type: 'select',
-            label: 'Country',
-            name: 'country',
-            value: 'Russie',
-            constraint: ['France', 'Belgique', 'Russie', 'Mongolie']
-        },
-        {
-            type: 'checkbox',
-            label: 'Accept Terms',
-            name: 'term',
-            value: true
-        },
-        {
-            type: 'button',
-            label: 'Save'
-        }
-    ];
+    public options: any;
 
     submit(value: any) {}
 
@@ -112,11 +24,14 @@ export class OptionsManagerComponent extends AbstractManager implements OnInit {
 
     ngOnInit() {
         this.initManager();
-        this.options = this.structureS.getOptions(this.action);
+        this.receiveActionUpdate();
     }
 
     receiveActionUpdate() {
         this.options = this.structureS.getOptions(this.action);
-        console.log(this.options);
+        if (this.action.options !== undefined)
+            for (const i in this.options) {
+                this.options[i].value = this.action.options[this.options[i].name];
+            }
     }
 }

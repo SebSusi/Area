@@ -11,5 +11,7 @@ export class CheckboxComponent implements OnInit {
   field: FieldConfig;
   group: FormGroup;
   constructor() {}
-  ngOnInit() {}
+  ngOnInit() {
+//      this.group.get(this.field.name).setValue(this.field.value);
+  }
 }

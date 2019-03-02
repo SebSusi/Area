@@ -8,9 +8,10 @@ import { FieldConfig } from '../../../../../objects/form-configs';
   styles: []
 })
 export class SelectComponent implements OnInit {
-  field: FieldConfig;
+  field: any;
   group: FormGroup;
 
   constructor() {}
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }
