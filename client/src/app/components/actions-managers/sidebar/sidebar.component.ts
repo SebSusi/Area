@@ -27,4 +27,8 @@ export class SidebarComponent extends AbstractManager implements OnInit {
     }
 
     public save() {}
+
+    changeActiveAction(id: any) {
+        this.action = this.actionService.getAction(id);
+    }
 }

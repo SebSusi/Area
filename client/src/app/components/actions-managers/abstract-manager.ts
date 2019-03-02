@@ -9,6 +9,7 @@ export abstract class AbstractManager {
     protected constructor(protected actionService: ActionService, protected formBuilder: FormBuilder) {
         this._action = actionService.getAction(undefined);
         this.actionService.actionsObservable.subscribe(value => {
+            this.receiveActionUpdateBefore();
             this._action = this.actionService.getAction(undefined);
             this.receiveActionUpdate();
         });
@@ -44,5 +45,7 @@ export abstract class AbstractManager {
     }
 
     abstract receiveActionUpdate();
+
+    private receiveActionUpdateBefore() {}
 }
 

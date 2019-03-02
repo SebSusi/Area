@@ -32,9 +32,10 @@ export class ActionService {
     getAction(id: string): Action {
         if (id === undefined)
             return this._actions[this._selected];
-        this.setActiveAction(this._actions.findIndex(item => item.id === id));
+        this.setActiveActionById(id);
         if (this._selected <= -1)
             throw new Error('Can\'t find this action');
+        this.emitActions();
         return this._actions[this._selected];
     }
 
@@ -54,6 +55,10 @@ export class ActionService {
     setAction(action: Action) {
         this.getAction(action.id);
         this._actions[this._selected] = action;
+    }
+
+    setActiveActionById(id: string) {
+        this.setActiveAction(this._actions.findIndex(item => item.id === id));
     }
 
     setActiveAction(index) {

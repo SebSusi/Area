@@ -6,7 +6,7 @@ export class Action {
     private _name: string;
     private _type: ActionType;
     private _connectedAccountId: string;
-    private _options = new Map();
+    private _options = new Map<string, string>();
 
     constructor(id: string = '', service: string = '', name: string = '', type: ActionType,
                 connectedAccountId: string = '', options: any[] = []) {
@@ -58,11 +58,11 @@ export class Action {
         this._service = value;
     }
 
-    get options(): Map<string, string | number | boolean>[] {
+    get options(): Map<string, string> {
         return this._options;
     }
 
-    set options(value: Map<string, string | number | boolean>[]) {
+    set options(value: Map<string, string>) {
         this._options = value;
     }
 }

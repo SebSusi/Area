@@ -2,7 +2,7 @@
 
 .sidebar {
 //  position: fixed;
-  padding: 60px 30px 0;
+  padding: 15px 20px 0;
   top: 0;
   left: 0;
   bottom: 0;
@@ -33,8 +33,18 @@
       background-color: #0002;
       text-transform: capitalize;
       border: 0;
+      cursor: pointer;
       .mat-card-subtitle {
         margin-bottom: 0;
+      }
+    }
+    .mat-card-content {
+      max-height: 168px;
+      overflow: hidden;
+      transition: max-height .4s;
+
+      &.mh-0 {
+        max-height: 0;
       }
     }
 

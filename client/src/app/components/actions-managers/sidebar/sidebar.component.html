@@ -3,12 +3,12 @@
       <input matInput placeholder="Area Name" value="{{area.name}}">
     </mat-form-field>
   <mat-card *ngFor="let act of area.actions">
-      <mat-card-header class="card-header">
+      <mat-card-header class="card-header" (click)="changeActiveAction(act.id)">
           <div mat-card-avatar class="{{act.service}}-icon {{act.type}}-image mat-card-avatar"></div>
           <mat-card-title>{{act.name.uncamelize()}}</mat-card-title>
           <mat-card-subtitle>{{act.type.uncamelize()}}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content [hidden]="act.id !== action.id">
+      <mat-card-content [ngClass]="{'mh-0': act.id !== action.id}">
           <mat-action-list>
               <mat-list-item (click)="save()">
                   <app-action-step

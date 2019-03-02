@@ -4,7 +4,7 @@ import {ValidatorsFactory} from './validators-factory';
 
 enum OptionTypes {
     LIST = 'list',
-    STRING = 'string',
+    TEXT = 'text',
     NUMBER = 'number',
     BOOLEAN = 'boolean'
 }
@@ -92,10 +92,11 @@ export class OptionAdapter {
                 // @ts-ignore
                 return type;
             }
-        return OptionTypes.STRING;
+        return OptionTypes.TEXT;
     }
 
     static adapt(option: any): Option {
-        return new Option(option.name, OptionAdapter.parseType(option.type), option.validations, option.options, option.label, option.placeHolder);
+        return new Option(option.name, OptionAdapter.parseType(option.type), option.validations,
+            option.options, option.label, option.placeHolder);
     }
 }
