@@ -9,14 +9,33 @@
     android:background="@color/darkColorPrimary"
     android:exported="true">
 
+    <Button
+        android:id="@+id/clicker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reActionType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/reActionImage"
+        app:layout_constraintStart_toEndOf="@+id/reActionImage" />
+
     <ImageView
         android:id="@+id/reActionImage"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:contentDescription="@string/common_google_play_services_enable_button"
+        android:elevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,17 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:elevation="3dp"
         app:layout_constraintStart_toEndOf="@+id/reActionImage"
         app:layout_constraintTop_toTopOf="@+id/reActionImage" />
-
-    <TextView
-        android:id="@+id/reActionType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/reActionImage"
-        app:layout_constraintStart_toEndOf="@+id/reActionImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

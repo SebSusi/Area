@@ -8,6 +8,19 @@
     android:exported="true">
 
 
+    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+        android:id="@+id/serverUrlButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        app:floating_background_color="@android:color/transparent"
+        app:floating_left_icon="@drawable/ic_settings"
+        app:floating_title_color="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:floating_left_icon="@drawable/Social" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loginLayout"
         android:layout_width="wrap_content"
@@ -230,29 +243,68 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ru.dimorinny.floatingtextbutton.FloatingTextButton
-        android:id="@+id/serverUrlButton"
-        android:layout_width="154dp"
-        android:layout_height="42dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:floating_background_color="@color/colorLogoPrimary"
-        app:floating_left_icon="@drawable/ic_settings"
-        app:floating_title="Change Server URL"
-        app:floating_title_color="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@id/socialLoginButton"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:floating_left_icon="@drawable/Social" />
+        app:layout_constraintTop_toBottomOf="@+id/loginLayout">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/buttonGoogle"
+            android:layout_width="185dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="-4dp"
+            android:layout_marginRight="-5dp"
+            android:layout_marginBottom="15dp"
+            android:visibility="visible"
+            app:floating_background_color="@color/colorAccent"
+            app:floating_left_icon="@drawable/common_google_signin_btn_icon_dark"
+            app:floating_title="Google"
+            app:floating_title_color="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/buttonFacebook"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="3dp"
+                android:src="@drawable/google" />
+        </com.google.android.gms.common.SignInButton>
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/buttonFacebook"
+            android:layout_width="180dp"
+            android:layout_height="102dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:scaleX="1"
+            android:scaleY="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
 
     <ru.dimorinny.floatingtextbutton.FloatingTextButton
         android:id="@+id/socialLoginButton"
         android:layout_width="154dp"
         android:layout_height="42dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:visibility="invisible"
         app:floating_background_color="@color/colorLogoPrimary"
         app:floating_left_icon="@mipmap/ic_social_button"
         app:floating_title="Social Login"
@@ -260,6 +312,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginLayout"
         tools:floating_left_icon="@drawable/Social" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
