@@ -22,11 +22,12 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
 
     getFormGroup() {
         return {
-            lol: ['', Validators.required]
+            accountControl : [this.action.connectedAccountId, Validators.required]
         };
     }
 
     ngOnInit() {
+        this.initManager();
         this._connectionService.getAccounts(this.action.service).subscribe(data => {this._accounts = data});
     }
 

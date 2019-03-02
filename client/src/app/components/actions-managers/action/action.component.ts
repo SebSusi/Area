@@ -9,10 +9,9 @@ import {Action} from '../../../objects/action';
     styleUrls: ['./action.component.scss']
 })
 export class ActionComponent implements OnInit {
-    forms: FormArray;
+    forms;
     _action: Action = undefined;
-    public form: FormGroup;
-    public managers: string[];
+    managers: string[];
 
     constructor(private actionService: ActionService, private formBuilder: FormBuilder) {
         this.actionService.actionsObservable.subscribe(value => {
