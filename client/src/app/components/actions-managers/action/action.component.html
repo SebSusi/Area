@@ -1,4 +1,5 @@
 <ng-template [ngIf]="action">
+    <button (click)="resetStepper()">TEST</button>
     <mat-horizontal-stepper linear #stepper>
         <mat-step *ngFor="let form of forms" [stepControl]="form.group" [optional]="false" [label]="form.description">
             <form [formGroup]="form.group">

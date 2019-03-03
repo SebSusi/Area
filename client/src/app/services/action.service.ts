@@ -21,8 +21,8 @@ export class ActionService {
 
     }
 
-    emitActions() {
-        this.actionsObservable.next();
+    emitActions(reset: boolean = false) {
+        this.actionsObservable.next(reset);
     }
 
     get actions(): Action[] {
@@ -35,7 +35,7 @@ export class ActionService {
         this.setActiveActionById(id);
         if (this._selected <= -1)
             throw new Error('Can\'t find this action');
-        this.emitActions();
+        this.emitActions(true);
         return this._actions[this._selected];
     }
 

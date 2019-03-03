@@ -8,9 +8,10 @@ export abstract class AbstractManager {
 
     protected constructor(protected actionService: ActionService, protected formBuilder: FormBuilder) {
         this._action = actionService.getAction(undefined);
-        this.actionService.actionsObservable.subscribe(value => {
-            this.receiveActionUpdateBefore();
+        this.actionService.actionsObservable.subscribe(reset => {
             this._action = this.actionService.getAction(undefined);
+            /*if (reset)
+                this.refreshFormGroup();*/
             this.receiveActionUpdate();
         });
         this.formControls = this.getFormGroup();
@@ -32,10 +33,9 @@ export abstract class AbstractManager {
     public formControls;
 
     protected initManager() {
-        for (const key in this.formControls) {
-            this.form.addControl(key, new FormControl(this.formControls[key][0], this.formControls[key][1]));
-        }
+        this.refreshFormGroup();
     }
+
     getFormGroup() {
         return {};
     }
@@ -46,6 +46,13 @@ export abstract class AbstractManager {
 
     abstract receiveActionUpdate();
 
-    private receiveActionUpdateBefore() {}
+    private refreshFormGroup() {
+        if (this.form)
+            this.form.reset();
+        console.log(this.action);
+        for (const key in this.formControls) {
+            this.form.addControl(key, new FormControl(this.formControls[key][0], this.formControls[key][1]));
+        }
+    }
 }
 
