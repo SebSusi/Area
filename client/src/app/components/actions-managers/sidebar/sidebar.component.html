@@ -1,44 +1,47 @@
 <div *ngIf="area && action" class="sidebar" [class.mat-elevation-12]="true">
     <mat-form-field class="sidebar-form">
-      <input matInput placeholder="Area Name" value="{{area.name}}">
+        <input matInput placeholder="Area Name" value="{{area.name}}">
     </mat-form-field>
-  <mat-card *ngFor="let act of area.actions">
-      <mat-card-header class="card-header" (click)="changeActiveAction(act.id)">
-          <div mat-card-avatar class="{{act.service}}-icon {{act.type}}-image mat-card-avatar"></div>
-          <mat-card-title>{{act.name?.uncamelize()}}</mat-card-title>
-          <mat-card-subtitle>{{act.type?.uncamelize()}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content [ngClass]="{'mh-0': act.id !== action.id}">
-          <mat-action-list>
-              <mat-list-item (click)="stepperService.changeStep(0)">
-                  <app-action-step
-                          [icon]='"settings"'
-                          [content]="act.service?.uncamelize()"
-                          [step]="0">
-                  </app-action-step>
-              </mat-list-item>
-              <mat-list-item (click)="stepperService.changeStep(1)">
-                  <app-action-step
-                          [icon]='"offline_bolt"'
-                          [content]="act.name?.uncamelize()"
-                          [step]="1">
-                  </app-action-step>
-              </mat-list-item>
-              <mat-list-item (click)="stepperService.changeStep(2)">
-                  <app-action-step
-                          [icon]='"person"'
-                          [content]='"connect account"'
-                          [step]="2">
-                  </app-action-step>
-              </mat-list-item>
-              <mat-list-item (click)="stepperService.changeStep(3)">
-                  <app-action-step
-                          [icon]='"list"'
-                          [content]='"set up template"'
-                          [step]="3">
-                  </app-action-step>
-              </mat-list-item>
-          </mat-action-list>
-      </mat-card-content>
-  </mat-card>
+    <mat-card *ngFor="let act of area.actions">
+        <mat-card-header class="card-header" (click)="changeActiveAction(act.id)">
+            <div mat-card-avatar class="{{act.service}}-icon {{act.type}}-image mat-card-avatar"></div>
+            <mat-card-title>{{act.name?.uncamelize()}}</mat-card-title>
+            <mat-card-subtitle>{{act.type?.uncamelize()}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content [ngClass]="{'mh-0': act.id !== action.id}">
+            <mat-action-list>
+                <mat-list-item (click)="stepperService.changeStep(0)">
+                    <app-action-step
+                            [icon]='"settings"'
+                            [content]="act.service?.uncamelize()"
+                            [step]="0">
+                    </app-action-step>
+                </mat-list-item>
+                <mat-list-item (click)="stepperService.changeStep(1)">
+                    <app-action-step
+                            [icon]='"offline_bolt"'
+                            [content]="act.name?.uncamelize()"
+                            [step]="1">
+                    </app-action-step>
+                </mat-list-item>
+                <mat-list-item (click)="stepperService.changeStep(2)">
+                    <app-action-step
+                            [icon]='"person"'
+                            [content]='"connect account"'
+                            [step]="2">
+                    </app-action-step>
+                </mat-list-item>
+                <mat-list-item (click)="stepperService.changeStep(3)">
+                    <app-action-step
+                            [icon]='"list"'
+                            [content]='"set up template"'
+                            [step]="3">
+                    </app-action-step>
+                </mat-list-item>
+            </mat-action-list>
+        </mat-card-content>
+    </mat-card>
+    <div class="add-step-container">
+        <button mat-raised-button color="accent" (click)="addAction()"> Add a step </button>
+    </div>
 </div>

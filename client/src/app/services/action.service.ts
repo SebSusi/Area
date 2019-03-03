@@ -64,4 +64,13 @@ export class ActionService {
     setActiveAction(index) {
         this._selected = index;
     }
+
+    getNewAction() {
+        const url = 'https://next.json-generator.com/api/json/get/VkTIxMH8L';
+        return this._http.get(url).pipe(
+            map(data => ActionAdapter.adapt(data, ActionType.REACTION)),
+            tap(data => data.id = Math.random().toString(36).substring(7)),
+            tap(data => this._actions.push(data))
+        );
+    }
 }
