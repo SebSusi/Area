@@ -21,6 +21,9 @@ export class Action {
         this._type = type;
     }
 
+    set connectedAccountId(value: string) {
+        this._connectedAccountId = value;
+    }
 
     get connectedAccountId(): string {
         return this._connectedAccountId;

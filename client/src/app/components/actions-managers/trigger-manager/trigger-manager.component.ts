@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {StructureService} from '../../../services/structure.service';
 import {AbstractManager} from '../abstract-manager';
 import {ActionService} from '../../../services/action.service';
@@ -22,7 +22,7 @@ export class TriggerManagerComponent extends AbstractManager implements OnInit {
     }
 
     receiveActionUpdate() {
-        this.triggers = this.structureS.getActions(this.action);
+        this.triggers = this.structureS.getActionsTypes(this.action);
     }
 
 
