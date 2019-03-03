@@ -120,6 +120,7 @@ class SocialActivity : FragmentActivity() {
                     socialToken.token = jsonObject.getString("access_token")
                     finish()
                 } catch (e: JSONException) {
+                    applicationContext.longToast("Could not get access token from Google server")
                     e.printStackTrace()
                 }
             }

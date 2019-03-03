@@ -26,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
+        app:layout_constraintVertical_bias=".5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +39,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:src="@drawable/area"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -84,21 +86,6 @@
             app:layout_constraintTop_toBottomOf="@+id/loginPassword">
 
             <ru.dimorinny.floatingtextbutton.FloatingTextButton
-                android:id="@+id/loginConnectButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp"
-                app:floating_background_color="@color/colorLogoPrimary"
-                app:floating_left_icon="@drawable/ic_person"
-                app:floating_title="Login"
-                app:floating_title_color="@android:color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
-
-            <ru.dimorinny.floatingtextbutton.FloatingTextButton
                 android:id="@+id/loginChangeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,6 +100,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/loginConnectButton" />
 
+            <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                android:id="@+id/loginConnectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                app:floating_background_color="@color/colorLogoPrimary"
+                app:floating_left_icon="@drawable/ic_person"
+                app:floating_title="Login"
+                app:floating_title_color="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -122,6 +124,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
+        app:layout_constraintVertical_bias=".25"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -210,21 +213,6 @@
             app:layout_constraintTop_toBottomOf="@+id/signUpPasswordConfirm">
 
             <ru.dimorinny.floatingtextbutton.FloatingTextButton
-                android:id="@+id/signUpChangeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp"
-                app:floating_background_color="@color/colorLogoPrimary"
-                app:floating_left_icon="@drawable/ic_person"
-                app:floating_title="Login"
-                app:floating_title_color="@android:color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/signUpPasswordConfirm" />
-
-            <ru.dimorinny.floatingtextbutton.FloatingTextButton
                 android:id="@+id/signUpConnectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -238,6 +226,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/signUpChangeButton" />
+
+            <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                android:id="@+id/signUpChangeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                app:floating_background_color="@color/colorLogoPrimary"
+                app:floating_left_icon="@drawable/ic_person"
+                app:floating_title="Login"
+                app:floating_title_color="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/signUpPasswordConfirm" />
 
         </LinearLayout>
 
@@ -254,7 +257,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginLayout">
+        app:layout_constraintTop_toBottomOf="@+id/signUpLayout">
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/buttonGoogle"
@@ -296,7 +299,7 @@
 
     </LinearLayout>
 
-    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+    <!--ru.dimorinny.floatingtextbutton.FloatingTextButton
         android:id="@+id/socialLoginButton"
         android:layout_width="154dp"
         android:layout_height="42dp"
@@ -304,7 +307,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:visibility="invisible"
         app:floating_background_color="@color/colorLogoPrimary"
         app:floating_left_icon="@mipmap/ic_social_button"
         app:floating_title="Social Login"
@@ -313,6 +315,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginLayout"
-        tools:floating_left_icon="@drawable/Social" />
+        tools:floating_left_icon="@drawable/Social" /-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
