@@ -24,6 +24,10 @@ class AreaActivity : FragmentActivity() {
         reActionList.layoutManager = LinearLayoutManager(this)
         reActionList.adapter = ReActionAdapter(this)
         updateDisplay(false)
+        areaRefresh.setOnRefreshListener {
+            updateDisplay(true)
+            areaRefresh.isRefreshing = false
+        }
     }
 
     override fun onResume() {

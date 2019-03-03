@@ -21,6 +21,10 @@ class HomeActivity : FragmentActivity() {
         areaList.layoutManager = LinearLayoutManager(this)
         areaList.adapter = AreaAdapter(this)
         AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
+        areasRefresh.setOnRefreshListener {
+            AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
+            areasRefresh.isRefreshing = false
+        }
     }
 
     override fun onResume() {
