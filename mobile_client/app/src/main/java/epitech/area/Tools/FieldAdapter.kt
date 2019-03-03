@@ -1,7 +1,6 @@
 package epitech.area.Tools
 
 import android.content.Context
-import android.icu.text.IDNA
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +10,11 @@ import epitech.area.R
 import epitech.area.Storages.FieldObject
 import kotlinx.android.synthetic.main.view_field.view.*
 import android.text.Editable
+import android.text.InputType.*
 import android.text.TextWatcher
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CompoundButton
-import org.jetbrains.anko.sdk27.coroutines.onItemSelectedListener
 
 
 class FieldAdapter(private val context: Context, private var fields : ArrayList<FieldObject> = arrayListOf(), private val reActionActivity: ReActionActivity) : RecyclerView.Adapter<FieldViewHolder>() {
@@ -48,7 +47,8 @@ class FieldAdapter(private val context: Context, private var fields : ArrayList<
         when (fields[position].type) {
             "boolean" -> initSwitch(holder, position)
             "list" -> initList(holder, position)
-            "text" -> initText(holder, position)
+            "text" -> initText(holder, position, TYPE_CLASS_TEXT or TYPE_TEXT_FLAG_MULTI_LINE)
+            "number" -> initText(holder, position, TYPE_CLASS_NUMBER)
         }
     }
 
@@ -67,12 +67,16 @@ class FieldAdapter(private val context: Context, private var fields : ArrayList<
         })
     }
 
-    private fun initText(holder: FieldViewHolder, position: Int) {
+    private fun initText(holder: FieldViewHolder, position: Int, inputType: Int = TYPE_CLASS_TEXT) {
         holder.fieldLabel.visibility = View.VISIBLE
         holder.fieldLabel.text = fields[position].label
         holder.fieldText.visibility = View.VISIBLE
+        holder.fieldText.inputType = inputType
         holder.fieldText.hint = fields[position].placeHolder
-        holder.fieldText.setText(fields[position].value)
+        if (fields[position].value.isNotEmpty())
+            holder.fieldText.setText(fields[position].value)
+        else
+            holder.fieldText.text!!.clear()
         holder.fieldText.addTextChangedListener (object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 fields[position].value = s.toString()

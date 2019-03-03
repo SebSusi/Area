@@ -15,7 +15,7 @@ class InfoService {
 
     private var areaInfos: Array<ServiceObject> = arrayOf()
 
-    fun getInfos() {
+    private fun getInfos() {
         FuelManager.instance.basePath = "" //remove this when using real server
         FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
         try {
@@ -30,6 +30,11 @@ class InfoService {
             Log.d("getInfos Exception", e.toString())
         }
         FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
+    }
+
+    fun checkAreaInfos() {
+        if (areaInfos.isEmpty())
+            getInfos()
     }
 
     fun getServices(): Array<ServiceObject> {

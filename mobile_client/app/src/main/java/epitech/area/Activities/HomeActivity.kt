@@ -9,6 +9,7 @@ import epitech.area.R
 import epitech.area.Storages.AreaObject
 import epitech.area.Tools.AreaAdapter
 import epitech.area.Tools.AreaService
+import epitech.area.Tools.InfoService
 import kotlinx.android.synthetic.main.view_area.view.*
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -16,6 +17,7 @@ class HomeActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        InfoService.instance.checkAreaInfos()
         setContentView(R.layout.activity_home)
         initNewAreaButton()
         areaList.layoutManager = LinearLayoutManager(this)

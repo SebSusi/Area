@@ -10,6 +10,7 @@ import epitech.area.Storages.ActionObject
 import epitech.area.Storages.AreaObject
 import epitech.area.Storages.ReactionObject
 import epitech.area.Tools.AreaService
+import epitech.area.Tools.InfoService
 import epitech.area.Tools.ReActionAdapter
 import kotlinx.android.synthetic.main.activity_area.*
 import kotlinx.android.synthetic.main.view_re_action.view.*
@@ -19,6 +20,7 @@ class AreaActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        InfoService.instance.checkAreaInfos()
         setContentView(R.layout.activity_area)
         area = intent?.extras?.getSerializable("AreaObject") as AreaObject
         reActionList.layoutManager = LinearLayoutManager(this)

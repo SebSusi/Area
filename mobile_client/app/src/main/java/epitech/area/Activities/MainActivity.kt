@@ -26,7 +26,7 @@ class MainActivity : FragmentActivity() {
         FuelManager.instance.basePath = getString(R.string.area_api_baseurl)
         AreaAuthorization.instance.removeAccessToken(applicationContext)
         AreaService.instance.changeFuelHeaders(applicationContext)
-        InfoService.instance.getInfos()
+        InfoService.instance.checkAreaInfos()
         setContentView(R.layout.activity_main)
         signUpChangeButton.setOnClickListener {
             changeLayout()
