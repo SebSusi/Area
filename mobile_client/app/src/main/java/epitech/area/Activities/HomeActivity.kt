@@ -9,6 +9,7 @@ import epitech.area.R
 import epitech.area.Storages.AreaObject
 import epitech.area.Tools.AreaAdapter
 import epitech.area.Tools.AreaService
+import epitech.area.Tools.InfoService
 import kotlinx.android.synthetic.main.view_area.view.*
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -16,11 +17,16 @@ class HomeActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        InfoService.instance.checkAreaInfos()
         setContentView(R.layout.activity_home)
         initNewAreaButton()
         areaList.layoutManager = LinearLayoutManager(this)
         areaList.adapter = AreaAdapter(this)
         AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
+        areasRefresh.setOnRefreshListener {
+            AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
+            areasRefresh.isRefreshing = false
+        }
     }
 
     override fun onResume() {
@@ -32,7 +38,7 @@ class HomeActivity : FragmentActivity() {
         areaNew.areaName.text = "Create new area"
         areaNew.actionImage.setImageResource(R.drawable.ic_basic)
         areaNew.arrowImage.visibility = View.INVISIBLE
-        areaNew.setOnClickListener {
+        areaNew.areaClicker.setOnClickListener {
             val intent = Intent(this, AreaActivity::class.java)
             intent.putExtra("AreaObject", AreaObject())
             startActivity(intent, null)

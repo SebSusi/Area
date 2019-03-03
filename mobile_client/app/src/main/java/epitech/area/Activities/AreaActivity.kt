@@ -10,6 +10,7 @@ import epitech.area.Storages.ActionObject
 import epitech.area.Storages.AreaObject
 import epitech.area.Storages.ReactionObject
 import epitech.area.Tools.AreaService
+import epitech.area.Tools.InfoService
 import epitech.area.Tools.ReActionAdapter
 import kotlinx.android.synthetic.main.activity_area.*
 import kotlinx.android.synthetic.main.view_re_action.view.*
@@ -19,11 +20,16 @@ class AreaActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        InfoService.instance.checkAreaInfos()
         setContentView(R.layout.activity_area)
         area = intent?.extras?.getSerializable("AreaObject") as AreaObject
         reActionList.layoutManager = LinearLayoutManager(this)
         reActionList.adapter = ReActionAdapter(this)
         updateDisplay(false)
+        areaRefresh.setOnRefreshListener {
+            updateDisplay(true)
+            areaRefresh.isRefreshing = false
+        }
     }
 
     override fun onResume() {
@@ -50,7 +56,7 @@ class AreaActivity : FragmentActivity() {
         if (nb > 0) {
             reActionNew.reActionName.text = "Create new reaction"
             reActionNew.reActionImage.setImageResource(R.drawable.ic_reaction)
-            reActionNew.clicker.setOnClickListener {
+            reActionNew.reActionClicker.setOnClickListener {
                 val intent = Intent(this, ReActionActivity::class.java)
                 intent.putExtra("ReActionObject", ReactionObject())
                 startActivity(intent)
@@ -58,7 +64,7 @@ class AreaActivity : FragmentActivity() {
         } else {
             reActionNew.reActionName.text = "Create new action"
             reActionNew.reActionImage.setImageResource(R.drawable.ic_action)
-            reActionNew.clicker.setOnClickListener {
+            reActionNew.reActionClicker.setOnClickListener {
                 val intent = Intent(this, ReActionActivity::class.java)
                 intent.putExtra("ReActionObject", ActionObject())
                 startActivity(intent)

@@ -29,6 +29,7 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        InfoService.instance.checkAreaInfos()
         setContentView(R.layout.activity_re_action)
         reAction = intent?.extras?.getSerializable("ReActionObject") as AReActionObject
         updateTitle()

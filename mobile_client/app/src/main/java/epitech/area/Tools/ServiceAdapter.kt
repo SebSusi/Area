@@ -73,4 +73,5 @@ class ServiceViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val serviceName = view.serviceName
     val serviceImage = view.serviceImage
     val serviceLayout = view.servicelayout
+//    val serviceClicker = view.serviceClicker
 }
