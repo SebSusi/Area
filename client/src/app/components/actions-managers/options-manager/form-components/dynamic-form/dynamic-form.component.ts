@@ -39,10 +39,10 @@ export class DynamicFormComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (this.actionId !== this.actionIdSave) {
+//        if (this.actionId !== this.actionIdSave) {
             this.form = this.createControl();
             this.actionIdSave = this.actionId;
-        }
+//        }
     }
 
     receiveActionUpdate() {

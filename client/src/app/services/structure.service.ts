@@ -42,7 +42,7 @@ export class StructureService {
     getActionsTypes(action: Action) {
         if (this.template === undefined)
             return undefined;
-        return this.template.getActions(action.service, action.type);
+        return this.template.getActionsTypes(action.service, action.type);
     }
 
 }

@@ -28,8 +28,8 @@ export class ActionsTemplate {
         this.actions.set(optionsJson.name, {description: optionsJson.description, options: options});
     }
 
-    getActions(): string[] {
-        return Array.from(this.actions.keys());
+    getActionsTypes() {
+        return this.actions;
     }
 
     getOptions(trigger: string): Option[] {

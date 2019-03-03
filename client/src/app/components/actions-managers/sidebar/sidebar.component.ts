@@ -5,6 +5,7 @@ import {StructureService} from '../../../services/structure.service';
 import {AreaService} from '../../../services/area.service';
 import {Area} from '../../../objects/area';
 import {FormBuilder} from '@angular/forms';
+import {StepperService} from '../../../services/stepper.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +16,7 @@ export class SidebarComponent extends AbstractManager implements OnInit {
     @Input()
     area: Area;
 
-    constructor(actionS: ActionService, formB: FormBuilder, public areaS: AreaService) {
+    constructor(actionS: ActionService, formB: FormBuilder, public stepperService: StepperService) {
         super(actionS, formB);
 //        this.areaS.getArea("").subscribe(data => this.area) {
     }

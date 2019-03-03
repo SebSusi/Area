@@ -1,7 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActionService} from '../../../services/action.service';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 import {Action} from '../../../objects/action';
+import {StepperService} from '../../../services/stepper.service';
+import {MatStepper} from '@angular/material';
 
 @Component({
     selector: 'app-action',
@@ -9,13 +11,15 @@ import {Action} from '../../../objects/action';
     styleUrls: ['./action.component.scss']
 })
 export class ActionComponent implements OnInit {
-    @ViewChild('stepper') stepper;
+    @ViewChild('stepper') set stepper(stepper: MatStepper) {
+        this.stepperService.stepper = stepper;
+    };
     forms;
     _action: Action = undefined;
     managers: string[];
     private lastActionId = '';
 
-    constructor(private actionService: ActionService, private formBuilder: FormBuilder) {
+    constructor(private actionService: ActionService, private stepperService: StepperService) {
         this.actionService.actionsObservable.subscribe(reset => {
             this._action = this.actionService.getAction(undefined);
             if (reset)
@@ -40,15 +44,18 @@ export class ActionComponent implements OnInit {
     }
 
     public resetStepper() {
-        if (this.stepper) {
-            this.stepper.selectedIndex = 0;
-            this.stepper.selectedIndex = 0;
-        }
+        if (!this.stepperService.stepper)
+            this.stepperService.stepper = this.stepper;
+        this.stepperService.reset();
     }
 
 
     ngOnInit() {
+        this.stepperService.stepper = this.stepper;
 //        this.form = this.formBuilder.group({});
 //        this.forms.setValue(['Nancy', 'Drew', 'deed', 'zfezef']);
+    }
+
+    onStepChange(event) {
     }
 }

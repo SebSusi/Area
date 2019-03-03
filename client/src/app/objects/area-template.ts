@@ -36,11 +36,11 @@ export class AreaTemplate {
         return Array.from(this._services.keys());
     }
 
-    getActions(service: string, actionType: ActionType = ActionType.TRIGGER) {
+    getActionsTypes(service: string, actionType: ActionType = ActionType.TRIGGER) {
         if (service === undefined)
             return [];
         const action = this.getAction(service, actionType);
-        return action === undefined ? undefined : action.getActions();
+        return action === undefined ? undefined : action.getActionsTypes();
     }
 
     getOptions(service: string, actionType: ActionType = ActionType.TRIGGER, trigger: string) {
