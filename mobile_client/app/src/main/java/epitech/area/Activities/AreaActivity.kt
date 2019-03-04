@@ -43,10 +43,10 @@ class AreaActivity : FragmentActivity() {
                 AreaService.instance.getArea(reActionList.adapter as ReActionAdapter, areaName, area.uniqueId)
         } else {
             if (area.uniqueId.isNotBlank()) {
-                areaName.text = area.name
+                areaName.setText(area.name)
                 (reActionList.adapter as ReActionAdapter).setReActions(area)
             } else {
-                areaName.text = "New Area"
+                areaName.setText("New Area")
             }
         }
         updateNewReActionButton((reActionList.adapter as ReActionAdapter).getReActions().size)

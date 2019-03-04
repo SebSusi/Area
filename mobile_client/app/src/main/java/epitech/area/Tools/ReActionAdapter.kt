@@ -64,8 +64,10 @@ class ReActionAdapter(private val context: Context, private var reActions : Arra
         holder.reActionName.text = reActions[position].name.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim()
         holder.reActionType.text = reActions[position].type.toLowerCase().capitalize()
         if (reActions[position].type.toUpperCase() == "ACTION") {
+            holder.reActionDelete.visibility = View.INVISIBLE
             holder.reActionImage.setImageResource(IconService.instance.getActionIcon(reActions[position].serviceName))
         } else {
+            holder.reActionDelete.visibility = View.VISIBLE
             holder.reActionImage.setImageResource(IconService.instance.getReactionIcon(reActions[position].serviceName))
         }
 
@@ -82,4 +84,5 @@ class ReActionViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val reActionType = view.reActionType
     val reActionImage = view.reActionImage
     val reActionClicker = view.reActionClicker
+    val reActionDelete = view.reActionDelete
 }

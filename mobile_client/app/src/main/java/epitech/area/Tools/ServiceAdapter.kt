@@ -60,10 +60,10 @@ class ServiceAdapter(private val context: Context, private var services : ArrayL
         holder.serviceName.text = services[position].name.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim()
         holder.serviceImage.setImageResource(IconService.instance.getServiceIcon(services[position].name))
         if (selected == services[position].name)
-            holder.serviceLayout.backgroundColor = getColor(context, R.color.darkColorPrimary)
+            holder.serviceClicker.backgroundColor = getColor(context, R.color.darkColorPrimary)
         else
-            holder.serviceLayout.backgroundColor = getColor(context, R.color.darkColorPrimaryDark)
-        holder.itemView.setOnClickListener {
+            holder.serviceClicker.backgroundColor = getColor(context, R.color.darkColorPrimaryDark)
+        holder.serviceClicker.setOnClickListener {
             setSelected(services[position].name)
         }
     }
@@ -72,6 +72,5 @@ class ServiceAdapter(private val context: Context, private var services : ArrayL
 class ServiceViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val serviceName = view.serviceName
     val serviceImage = view.serviceImage
-    val serviceLayout = view.servicelayout
-//    val serviceClicker = view.serviceClicker
+    val serviceClicker = view.serviceClicker
 }

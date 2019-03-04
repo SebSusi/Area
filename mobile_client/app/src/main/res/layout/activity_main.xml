@@ -18,8 +18,7 @@
         app:floating_left_icon="@drawable/ic_settings"
         app:floating_title_color="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:floating_left_icon="@drawable/Social" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loginLayout"

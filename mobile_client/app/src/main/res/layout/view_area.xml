@@ -61,4 +61,30 @@
         app:layout_constraintStart_toEndOf="@+id/reactionImage"
         app:layout_constraintTop_toTopOf="@+id/actionImage" />
 
+    <Switch
+        android:id="@+id/areaSwitch"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:elevation="10dp"
+        android:textColor="@color/darkColorAccentWhite"
+        android:theme="@style/AreaSwitch"
+        app:layout_constraintEnd_toStartOf="@+id/areaDelete"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+        android:id="@+id/areaDelete"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:elevation="10dp"
+        app:floating_background_color="@android:color/transparent"
+        app:floating_left_icon="@drawable/ic_delete"
+        app:floating_title_color="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.FacebookSdk
 import com.facebook.login.LoginResult
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpPost
@@ -98,7 +99,7 @@ class MainActivity : FragmentActivity() {
         }
     }
 
-    fun initGoogleLogin() {
+    private fun initGoogleLogin() {
         mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestServerAuthCode(getString(R.string.google_client_id), true)
                 .requestIdToken(getString(R.string.google_client_id))
