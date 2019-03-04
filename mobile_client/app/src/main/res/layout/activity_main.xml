@@ -7,7 +7,6 @@
     tools:context=".Activities.MainActivity"
     android:exported="true">
 
-
     <ru.dimorinny.floatingtextbutton.FloatingTextButton
         android:id="@+id/serverUrlButton"
         android:layout_width="60dp"
@@ -51,7 +50,6 @@
             android:layout_marginRight="8dp"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textColorLink="@color/colorAccent"
             android:theme="@style/TextAppearence.App.TextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

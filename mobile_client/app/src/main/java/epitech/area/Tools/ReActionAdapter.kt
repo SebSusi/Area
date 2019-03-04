@@ -1,5 +1,6 @@
 package epitech.area.Tools
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import epitech.area.Activities.ReActionActivity
 import epitech.area.R
 import epitech.area.Storages.AReActionObject
-import epitech.area.Storages.ActionObject
 import epitech.area.Storages.AreaObject
-import epitech.area.Storages.ReactionObject
 
 import kotlinx.android.synthetic.main.view_re_action.view.*
 
@@ -52,6 +51,11 @@ class ReActionAdapter(private val context: Context, private var reActions : Arra
         notifyItemInserted(reActions.size - 1)
     }
 
+    fun removeReActionAt(position: Int) {
+        reActions.removeAt(position)
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
         return reActions.size
     }
@@ -75,6 +79,19 @@ class ReActionAdapter(private val context: Context, private var reActions : Arra
             val intent = Intent(context, ReActionActivity::class.java)
             intent.putExtra("ReActionObject", reActions[position])
             startActivity(context, intent, null)
+        }
+        holder.reActionDelete.setOnClickListener {
+            val alert = AlertDialog.Builder(context, R.style.CustomDialogTheme)
+                    .setTitle("Delete reaction")
+                    .setMessage("Do you really want to delete reaction '" + reActions[position].name.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim() + "' ?")
+            alert.setPositiveButton(android.R.string.ok) { _, _ ->
+                AreaService.instance.deleteReaction(reActions[position].id)
+                removeReActionAt(position)
+            }
+            alert.setNegativeButton(android.R.string.cancel) { dialog, _ ->
+                dialog.cancel()
+            }
+            alert.show()
         }
     }
 }

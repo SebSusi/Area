@@ -89,7 +89,7 @@ class MainActivity : FragmentActivity() {
             val view = layoutInflater.inflate(R.layout.view_server_url, null)
             view.serverUrl.setText(FuelManager.instance.basePath)
             val alert = AlertDialog.Builder(this, R.style.CustomDialogTheme).setTitle("Server URL").setView(view)
-            alert.setPositiveButton(android.R.string.ok) { dialog, _ ->
+            alert.setPositiveButton(android.R.string.ok) { _, _ ->
                 FuelManager.instance.basePath = view.serverUrl.text.toString()
             }
             alert.setNegativeButton(android.R.string.cancel) { dialog, _ ->
