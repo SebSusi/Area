@@ -71,7 +71,7 @@ class SocialActivity : FragmentActivity() {
                 applicationContext.longToast("Cannot connect to Twitter server")
             }
         }*/
-        buttonImgur.setOnClickListener {
+        /*buttonImgur.setOnClickListener {
             val imageIntent = Intent(this, OAuthActivity::class.java)
             imageIntent.putExtra("OAuthInfo", OAuthInfo("imgur",
                     getString(R.string.imgur_oauth_url),
@@ -79,7 +79,7 @@ class SocialActivity : FragmentActivity() {
                     getString(R.string.imgur_client_id),
                     getString(R.string.imgur_client_secret)))
             startActivityForResult(imageIntent, RC_OAUTH_SIGN_IN)
-        }
+        }*/
     }
 
     fun initGoogleLogin() {
@@ -120,6 +120,7 @@ class SocialActivity : FragmentActivity() {
                     socialToken.token = jsonObject.getString("access_token")
                     finish()
                 } catch (e: JSONException) {
+                    applicationContext.longToast("Could not get access token from Google server")
                     e.printStackTrace()
                 }
             }

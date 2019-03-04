@@ -1,4 +1,4 @@
-import {ActionType} from './action-template';
+import {ActionType} from './actions-template';
 
 export class Action {
     private _id: string;
@@ -6,18 +6,24 @@ export class Action {
     private _name: string;
     private _type: ActionType;
     private _connectedAccountId: string;
-    private _options: Map<string, (string|number|boolean)>[];
+    private _options = new Map<string, string>();
 
     constructor(id: string = '', service: string = '', name: string = '', type: ActionType,
-                connectedAccountId: string = '', options: Map<string, string | number | boolean>[] = []) {
+                connectedAccountId: string = '', options: any[] = []) {
         this._id = id;
         this._service = service;
         this._name = name;
         this._connectedAccountId = connectedAccountId;
-        this._options = options;
+        if (options !== undefined)
+        for (const obj of options) {
+            this.options[obj.name] = obj.value;
+        }
         this._type = type;
     }
 
+    set connectedAccountId(value: string) {
+        this._connectedAccountId = value;
+    }
 
     get connectedAccountId(): string {
         return this._connectedAccountId;
@@ -55,11 +61,11 @@ export class Action {
         this._service = value;
     }
 
-    get options(): Map<string, string | number | boolean>[] {
+    get options(): Map<string, string> {
         return this._options;
     }
 
-    set options(value: Map<string, string | number | boolean>[]) {
+    set options(value: Map<string, string>) {
         this._options = value;
     }
 }
@@ -72,6 +78,6 @@ export class ActionAdapter {
     }
 
     static adapt(item: any, type: ActionType): Action {
-        return new Action(item.id, item.serviceName, item.name, type, item.connectedAccount, item.params);
+        return new Action(item.id, item.serviceName, item.name, type, item.accountId, item.fields);
     }
 }

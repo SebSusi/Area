@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
     title = 'BlindTest';
     private themeService: ThemeService;
 
-    constructor(private theme: ThemeService, private structureService: StructureService) {
+    constructor(private theme: ThemeService, public structureService: StructureService) {
         this.themeService = theme;
     }
 

@@ -16,12 +16,12 @@ import { RadiobuttonComponent } from '../radiobutton/radiobutton.component';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 
 const componentMapper = {
-  input: InputComponent,
+  text: InputComponent,
   button: ButtonComponent,
-  select: SelectComponent,
+  list: SelectComponent,
   date: DateComponent,
   radiobutton: RadiobuttonComponent,
-  checkbox: CheckboxComponent
+  boolean: CheckboxComponent
 };
 
 @Directive({
@@ -31,10 +31,10 @@ export class DynamicFieldDirective implements OnInit {
   @Input() field: FieldConfig;
   @Input() group: FormGroup;
   componentRef: any;
-  constructor(
-    private resolver: ComponentFactoryResolver,
-    private container: ViewContainerRef
-  ) {}
+
+  constructor(private resolver: ComponentFactoryResolver, private container: ViewContainerRef) {
+  }
+
   ngOnInit() {
     const factory = this.resolver.resolveComponentFactory(
       componentMapper[this.field.type]

@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {ApiService} from './api.service';
 import {AreaTemplate, AreaTemplateAdapter} from '../objects/area-template';
 import {map, tap} from 'rxjs/operators';
-import {ActionType} from '../objects/action-template';
+import {ActionType} from '../objects/actions-template';
 import {Action} from '../objects/action';
 
 @Injectable({
@@ -39,10 +39,10 @@ export class StructureService {
         return this.template.getOptions(action.service, action.type, action.name);
     }
 
-    getTriggers(action: Action) {
+    getActionsTypes(action: Action) {
         if (this.template === undefined)
             return undefined;
-        return this.template.getTriggers(action.service, action.type);
+        return this.template.getActionsTypes(action.service, action.type);
     }
 
 }

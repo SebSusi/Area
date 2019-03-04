@@ -15,10 +15,19 @@
     <string name="twitter_client_id">id</string>
     <string name="twitter_client_secret">secret</string>
 
-    <string name="imgur_client_id">42f867cae60d6a4</string>
-    <string name="imgur_client_secret">c42928317b1582bf17f1fca357af62055d348aee</string>
+    <string name="outlook_client_id">03496de1-bdf4-4904-8050-4a6efc688188</string>
+    <string name="outlook_client_secret">ouyOCUD05|;#yvyoULP923~</string>
+    <string name="outlook_oauth_url">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</string>
+    <string name="outlook_token_url">https://login.microsoftonline.com/common/oauth2/v2.0/token</string>
+    <string name="outlook_response_type">code</string>
+    <string name="outlook_scope">openid+Mail.Send+Mail.ReadWrite</string>
+    <string name="outlook_grant_type">authorization_code</string>
+    <string name="outlook_redirect_url">msal03496de1-bdf4-4904-8050-4a6efc688188://auth</string>
+
+    <string name="imgur_client_id">f4eb8dae6619fdf</string>
+    <string name="imgur_client_secret">a3e4508a1427b29a7216a03d20d166f3ff9aeece</string>
     <string name="imgur_oauth_url">https://api.imgur.com/oauth2/authorize</string>
-    <string name="imgur_redirect_url">epicture://register</string>
+    <string name="imgur_redirect_url">area://register</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_dark">Dark Mode</string>

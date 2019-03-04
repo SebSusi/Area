@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {ApiService} from './api.service';
 import {map, tap} from 'rxjs/operators';
 import {Action, ActionAdapter} from '../objects/action';
-import {ActionType} from '../objects/action-template';
+import {ActionType} from '../objects/actions-template';
 import {Subject} from 'rxjs';
 
 @Injectable({
@@ -21,8 +21,8 @@ export class ActionService {
 
     }
 
-    emitActions() {
-        this.actionsObservable.next();
+    emitActions(reset: boolean = false) {
+        this.actionsObservable.next(reset);
     }
 
     get actions(): Action[] {
@@ -32,9 +32,10 @@ export class ActionService {
     getAction(id: string): Action {
         if (id === undefined)
             return this._actions[this._selected];
-        this.setActiveAction(this._actions.findIndex(item => item.id === id));
+        this.setActiveActionById(id);
         if (this._selected <= -1)
             throw new Error('Can\'t find this action');
+        this.emitActions(true);
         return this._actions[this._selected];
     }
 
@@ -56,7 +57,20 @@ export class ActionService {
         this._actions[this._selected] = action;
     }
 
+    setActiveActionById(id: string) {
+        this.setActiveAction(this._actions.findIndex(item => item.id === id));
+    }
+
     setActiveAction(index) {
         this._selected = index;
+    }
+
+    getNewAction() {
+        const url = 'https://next.json-generator.com/api/json/get/VkTIxMH8L';
+        return this._http.get(url).pipe(
+            map(data => ActionAdapter.adapt(data, ActionType.REACTION)),
+            tap(data => data.id = Math.random().toString(36).substring(7)),
+            tap(data => this._actions.push(data))
+        );
     }
 }

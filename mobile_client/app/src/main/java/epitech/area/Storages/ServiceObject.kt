@@ -5,8 +5,8 @@ import com.google.gson.Gson
 
 data class ServiceObject (
         val name: String = "",
-        val action: Array<ReactionObject>,
-        val reaction: Array<ReactionObject>) {
+        val actions: Array<ActionObject> = arrayOf(),
+        val reactions: Array<ReactionObject> = arrayOf()) {
 
     class Deserializer : ResponseDeserializable<ServiceObject> {
         override fun deserialize(content: String) = Gson().fromJson(content, ServiceObject::class.java)

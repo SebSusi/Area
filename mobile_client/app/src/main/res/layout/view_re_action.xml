@@ -5,18 +5,37 @@
     android:id="@+id/arealayout"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:background="@color/darkColorPrimary"
     android:layout_margin="8dp"
+    android:background="@color/darkColorPrimary"
     android:exported="true">
+
+    <Button
+        android:id="@+id/reActionClicker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reActionType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/reActionImage"
+        app:layout_constraintStart_toEndOf="@+id/reActionImage" />
 
     <ImageView
         android:id="@+id/reActionImage"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:contentDescription="@string/common_google_play_services_enable_button"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,17 +45,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:elevation="10dp"
         app:layout_constraintStart_toEndOf="@+id/reActionImage"
         app:layout_constraintTop_toTopOf="@+id/reActionImage" />
 
-    <TextView
-        android:id="@+id/reActionType"
+    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+        android:id="@+id/reActionDelete"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/reActionImage"
-        app:layout_constraintStart_toEndOf="@+id/reActionImage" />
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:elevation="10dp"
+        app:floating_background_color="@android:color/transparent"
+        app:floating_left_icon="@drawable/ic_delete"
+        app:floating_title_color="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

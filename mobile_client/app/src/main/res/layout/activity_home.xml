@@ -17,11 +17,34 @@
         app:layout_constraintTop_toTopOf="parent"
         android:text="Areas"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/areaList"
-        android:layout_margin="8dp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/areasRefresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/areasLabel"/>
+        android:layout_height="525dp"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/areasLabel" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/areaList"
+            android:layout_width="0dp"
+            android:layout_height="525dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/areasLabel" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <include
+        android:id="@+id/areaNew"
+        layout="@layout/view_area"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

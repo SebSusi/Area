@@ -8,15 +8,28 @@
     android:exported="true">
 
 
+    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+        android:id="@+id/serverUrlButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        app:floating_background_color="@android:color/transparent"
+        app:floating_left_icon="@drawable/ic_settings"
+        app:floating_title_color="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loginLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintVertical_bias=".5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="visible">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/loginLogo"
@@ -24,71 +37,84 @@
             android:layout_height="75dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_area"
+            android:src="@drawable/area"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/loginEmail"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
             android:hint="Email"
             android:inputType="textEmailAddress"
+            android:textColorLink="@color/colorAccent"
+            android:theme="@style/TextAppearence.App.TextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginLogo"/>
+            app:layout_constraintTop_toBottomOf="@+id/loginLogo" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/loginPassword"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
             android:hint="Password"
             android:inputType="textPassword"
+            android:theme="@style/TextAppearence.App.TextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginEmail"/>
+            app:layout_constraintTop_toBottomOf="@+id/loginEmail" />
 
-        <ru.dimorinny.floatingtextbutton.FloatingTextButton
-            android:id="@+id/loginConnectButton"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:floating_background_color="@color/colorPrimary"
-            app:floating_left_icon="@drawable/ic_person"
-            app:floating_title="Login"
-            app:floating_title_color="@android:color/white"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginPassword"/>
+            app:layout_constraintTop_toBottomOf="@+id/loginPassword">
 
-        <ru.dimorinny.floatingtextbutton.FloatingTextButton
-            android:id="@+id/loginChangeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:floating_background_color="@color/colorAccent"
-            app:floating_left_icon="@drawable/ic_person"
-            app:floating_title="Sign Up"
-            app:floating_title_color="@android:color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginConnectButton" />
+            <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                android:id="@+id/loginChangeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                app:floating_background_color="@color/colorLogoSecondary"
+                app:floating_left_icon="@drawable/ic_person_black"
+                app:floating_title="Sign Up"
+                app:floating_title_color="@color/tw__composer_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginConnectButton" />
+
+            <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                android:id="@+id/loginConnectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                app:floating_background_color="@color/colorLogoPrimary"
+                app:floating_left_icon="@drawable/ic_person"
+                app:floating_title="Login"
+                app:floating_title_color="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -97,10 +123,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".25"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/signUpLogo"
@@ -110,7 +137,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_area"
+            android:src="@drawable/area"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -124,8 +151,8 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
             android:hint="Username"
+            android:theme="@style/TextAppearence.App.TextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signUpLogo" />
@@ -137,9 +164,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
             android:hint="Email"
             android:inputType="textEmailAddress"
+            android:theme="@style/TextAppearence.App.TextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signUpUsername" />
@@ -151,9 +178,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
             android:hint="Password"
             android:inputType="textPassword"
+            android:theme="@style/TextAppearence.App.TextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signUpEmail" />
@@ -165,60 +192,128 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
             android:hint="Confirm Password"
             android:inputType="textPassword"
+            android:theme="@style/TextAppearence.App.TextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signUpPassword" />
 
-        <ru.dimorinny.floatingtextbutton.FloatingTextButton
-            android:id="@+id/signUpChangeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            app:floating_background_color="@color/colorPrimary"
-            app:floating_left_icon="@drawable/ic_person"
-            app:floating_title="Login"
-            app:floating_title_color="@android:color/white"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signUpPasswordConfirm" />
+            app:layout_constraintTop_toBottomOf="@+id/signUpPasswordConfirm">
 
-        <ru.dimorinny.floatingtextbutton.FloatingTextButton
-            android:id="@+id/signUpConnectButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            app:floating_background_color="@color/colorAccent"
-            app:floating_left_icon="@drawable/ic_person"
-            app:floating_title="Sign Up"
-            app:floating_title_color="@android:color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signUpChangeButton" />
+            <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                android:id="@+id/signUpConnectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                app:floating_background_color="@color/colorLogoSecondary"
+                app:floating_left_icon="@drawable/ic_person_black"
+                app:floating_title="Sign Up"
+                app:floating_title_color="@color/tw__composer_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/signUpChangeButton" />
+
+            <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                android:id="@+id/signUpChangeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                app:floating_background_color="@color/colorLogoPrimary"
+                app:floating_left_icon="@drawable/ic_person"
+                app:floating_title="Login"
+                app:floating_title_color="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/signUpPasswordConfirm" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ru.dimorinny.floatingtextbutton.FloatingTextButton
-        android:id="@+id/socialLoginButton"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpLayout">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/buttonGoogle"
+            android:layout_width="185dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="-4dp"
+            android:layout_marginRight="-5dp"
+            android:layout_marginBottom="15dp"
+            android:visibility="visible"
+            app:floating_background_color="@color/colorAccent"
+            app:floating_left_icon="@drawable/common_google_signin_btn_icon_dark"
+            app:floating_title="Google"
+            app:floating_title_color="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/buttonFacebook"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="3dp"
+                android:src="@drawable/google" />
+        </com.google.android.gms.common.SignInButton>
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/buttonFacebook"
+            android:layout_width="180dp"
+            android:layout_height="102dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:scaleX="1"
+            android:scaleY="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
+
+    <!--ru.dimorinny.floatingtextbutton.FloatingTextButton
+        android:id="@+id/socialLoginButton"
+        android:layout_width="154dp"
+        android:layout_height="42dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        app:floating_background_color="@color/colorAccent"
-        app:floating_left_icon="@drawable/ic_menu_vector"
+        app:floating_background_color="@color/colorLogoPrimary"
+        app:floating_left_icon="@mipmap/ic_social_button"
         app:floating_title="Social Login"
         app:floating_title_color="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginLayout"
+        tools:floating_left_icon="@drawable/Social" /-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

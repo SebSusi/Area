@@ -28,11 +28,11 @@ import {OptionsManagerComponent} from './components/actions-managers/options-man
 import {RadiobuttonComponent} from './components/actions-managers/options-manager/form-components/radiobutton/radiobutton.component';
 import {RouterModule, Routes} from '@angular/router';
 import {SelectComponent} from './components/actions-managers/options-manager/form-components/select/select.component';
-import {ServiceManagerComponent} from './components/actions-managers/app-type-manager/service-manager.component';
+import {ServiceManagerComponent} from './components/actions-managers/service-manager/service-manager.component';
 import {TriggerManagerComponent} from './components/actions-managers/trigger-manager/trigger-manager.component';
 import {UserAppComponent} from './components/pages/user-app/user-app.component';
 import {UserComponent} from './components/pages/user/user.component';
-
+import {MatRippleModule} from '@angular/material/core';
 import {
     MatAutocompleteModule,
     MatButtonModule,
@@ -50,12 +50,13 @@ import {
     MatProgressSpinnerModule,
     MatRadioModule,
     MatSelectModule,
-    MatSlideToggleModule,
+    MatSlideToggleModule, MatStepperModule,
     MatTabsModule,
     MatTreeModule
 } from '@angular/material';
 import { SidebarComponent } from './components/actions-managers/sidebar/sidebar.component';
 import { ActionStepComponent } from './components/actions-managers/sidebar/action-step/action-step.component';
+import { DynamicActionDirective } from './components/actions-managers/dynamic-action.directive';
 
 const appRoutes: Routes = [
     {
@@ -126,6 +127,7 @@ const appRoutes: Routes = [
         UserComponent,
         SidebarComponent,
         ActionStepComponent,
+        DynamicActionDirective,
     ],
     entryComponents: [
         InputComponent,
@@ -133,9 +135,14 @@ const appRoutes: Routes = [
         SelectComponent,
         DateComponent,
         RadiobuttonComponent,
-        CheckboxComponent
+        CheckboxComponent,
+        ServiceManagerComponent,
+        TriggerManagerComponent,
+        AccountManagerComponent,
+        OptionsManagerComponent
     ],
     imports: [
+        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
         RouterModule.forRoot(
             appRoutes,
             {enableTracing: false}
@@ -155,6 +162,7 @@ const appRoutes: Routes = [
         MatNativeDateModule,
         MatDialogModule,
         MatDividerModule,
+        MatStepperModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
@@ -162,6 +170,7 @@ const appRoutes: Routes = [
         MatProgressBarModule,
         MatProgressSpinnerModule,
         MatRadioModule,
+        MatRippleModule,
         MatSelectModule,
         MatSlideToggleModule,
         MatTabsModule,

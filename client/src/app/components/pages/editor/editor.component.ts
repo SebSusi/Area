@@ -33,4 +33,7 @@ export class EditorComponent implements OnInit {
                 );
             });
     }
+
+    onStepChange(event) {
+    }
 }

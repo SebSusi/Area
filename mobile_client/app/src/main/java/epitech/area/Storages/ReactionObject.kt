@@ -5,11 +5,11 @@ import com.google.gson.Gson
 
 data class ReactionObject (
         override var name: String = "",
-        override val serviceName: String = "",
-        override val id: String = "",
-        override val accountId: String = "",
-        override val fields: Array<FieldObject> = arrayOf(),
-        override val type: String = "REACTION") : AReActionObject() {
+        override var serviceName: String = "",
+        override var id: String = "",
+        override var accountId: String = "",
+        override var fields: Array<FieldObject> = arrayOf(),
+        override var type: String = "REACTION") : AReActionObject() {
 
     class Deserializer : ResponseDeserializable<ReactionObject>{
         override fun deserialize(content: String) = Gson().fromJson(content, ReactionObject::class.java)
