@@ -3,6 +3,9 @@ package epitech.area.Activities
 import android.content.Intent
 import androidx.fragment.app.FragmentActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import epitech.area.R
@@ -30,6 +33,25 @@ class AreaActivity : FragmentActivity() {
             updateDisplay(true)
             areaRefresh.isRefreshing = false
         }
+        areaNameButton.setOnClickListener {
+            areaNameButton.visibility = View.INVISIBLE
+            area.name = areaName.text.toString()
+            AreaService.instance.changeAreaName(area.uniqueId, area.name)
+        }
+        areaName.addTextChangedListener (object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                if (s.toString() == area.name)
+                    areaNameButton.visibility = View.INVISIBLE
+                else
+                    areaNameButton.visibility = View.VISIBLE
+            }
+        })
     }
 
     override fun onResume() {
@@ -39,14 +61,16 @@ class AreaActivity : FragmentActivity() {
 
     private fun updateDisplay(fromInternet: Boolean = false) {
         if (fromInternet) {
-            if (area.uniqueId.isNotBlank())
+            if (area.uniqueId.isNotBlank()) {
                 AreaService.instance.getArea(reActionList.adapter as ReActionAdapter, areaName, area.uniqueId)
+            }
         } else {
             if (area.uniqueId.isNotBlank()) {
                 areaName.setText(area.name)
                 (reActionList.adapter as ReActionAdapter).setReActions(area)
-            } else {
+            } else if (areaName.text!!.isBlank()) {
                 areaName.setText("New Area")
+                areaNameButton.visibility = View.VISIBLE
             }
         }
         updateNewReActionButton((reActionList.adapter as ReActionAdapter).getReActions().size)

@@ -75,12 +75,27 @@ class AreaService {
         "".httpPost()
     }
 
+    fun changeAreaName(areaId: String, name: String) {
+        return
+        "".httpPost()
+    }
+
+    fun deleteArea(areaId: String) {
+        return
+        "".httpPost()
+    }
+
     fun postReAction(reAction: AReActionObject) {
         return
         if (reAction.id.isNotBlank())
             "".httpPost()
         else
             "".httpPost()
+    }
+
+    fun deleteReaction(areaId: String) {
+        return
+        "".httpPost()
     }
 
     fun changeFuelHeaders(applicationContext: Context) {

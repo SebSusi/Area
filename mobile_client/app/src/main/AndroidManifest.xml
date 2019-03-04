@@ -60,7 +60,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="@string/facebook_client_secret" />
+                <data android:scheme="@string/facebook_protocol_scheme" />
             </intent-filter>
         </activity>
     </application>
