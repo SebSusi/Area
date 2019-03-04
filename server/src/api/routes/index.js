@@ -13,6 +13,8 @@ router
 
 router.use('/auth', auth);
 router.use('/account', account);
+//const test = require('../controllers/area/widget/getters');
+//console.log(test.getActionByServiceNameAndActionName("weather", "current"));
 
 module.exports = router;
 

@@ -3,11 +3,11 @@
 const _ = require('lodash');
 
 const widgetGlobalParams = {
-    user: {
+    account: {
+        type: String,
         id: String,
     },
     params: {
-        timer: {type: Number, default: 0},
     }
 };
 
