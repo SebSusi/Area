@@ -5,7 +5,6 @@ import {ValidatorsFactory} from './validators-factory';
 enum OptionTypes {
     LIST = 'list',
     TEXT = 'text',
-    NUMBER = 'number',
     BOOLEAN = 'boolean'
 }
 

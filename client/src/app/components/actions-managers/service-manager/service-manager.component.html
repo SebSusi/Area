@@ -6,4 +6,6 @@
     </mat-card>
 </div>
 
-<input [formControl]="stepsService.getController(type, 'typeControl')" [hidden]="false">
+<input [(ngModel)]="this.action.service"
+       [formControl]="stepsService.getController(type, 'typeControl')"
+       [hidden]="true">
