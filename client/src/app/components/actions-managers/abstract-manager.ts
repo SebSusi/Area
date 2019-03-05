@@ -1,12 +1,13 @@
 import {Injectable, Input} from '@angular/core';
 import {Action} from '../../objects/action';
 import {ActionService} from '../../services/action.service';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
+import {Steps, StepsService} from '../../services/steps.service';
 
 @Injectable()
 export abstract class AbstractManager {
 
-    protected constructor(protected actionService: ActionService, protected formBuilder: FormBuilder) {
+    protected constructor(protected actionService: ActionService, public stepsService: StepsService) {
         this.action = actionService.getAction(undefined);
         this.actionService.actionsObservable.subscribe(reset => {
             this.action = this.actionService.getAction(undefined);
@@ -14,15 +15,12 @@ export abstract class AbstractManager {
                 this.refreshFormGroup();
             this.receiveActionUpdate();
         });
-        this.formControls = this.getFormGroup();
     }
 
     @Input()
-    public form: FormGroup;
+    public type: Steps;
 
     public action: Action;
-
-    public formControls;
 
     protected initManager() {
         this.refreshFormGroup();
@@ -39,11 +37,7 @@ export abstract class AbstractManager {
     abstract receiveActionUpdate();
 
     private refreshFormGroup() {
-        this.form = new FormGroup({});
-        this.formControls = this.getFormGroup();
-        for (const key in this.formControls) {
-            this.form.addControl(key, new FormControl(this.formControls[key][0], this.formControls[key][1]));
-        }
+        this.stepsService.reset(this.type, this.getFormGroup());
     }
 }
 

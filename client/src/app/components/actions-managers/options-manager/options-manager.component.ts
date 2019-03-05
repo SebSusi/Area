@@ -1,11 +1,8 @@
 import {AbstractManager} from '../abstract-manager';
 import {ActionService} from '../../../services/action.service';
 import {Component, Input, OnInit} from '@angular/core';
-import {FieldConfig} from '../../../objects/form-configs';
-import {Option} from '../../../objects/option';
 import {StructureService} from '../../../services/structure.service';
-import {FormBuilder, Validators} from '@angular/forms';
-import {forEach} from '@angular/router/src/utils/collection';
+import {StepsService} from '../../../services/steps.service';
 
 @Component({
     selector: 'app-options-manager',
@@ -18,8 +15,8 @@ export class OptionsManagerComponent extends AbstractManager implements OnInit {
 
     submit(value: any) {}
 
-    constructor(actionService: ActionService, formBuilder: FormBuilder, public structureS: StructureService) {
-        super(actionService, formBuilder);
+    constructor(as: ActionService, ss: StepsService, public structureS: StructureService) {
+        super(as, ss);
     }
 
     ngOnInit() {

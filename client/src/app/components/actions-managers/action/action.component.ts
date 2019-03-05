@@ -2,8 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActionService} from '../../../services/action.service';
 import {FormGroup} from '@angular/forms';
 import {Action} from '../../../objects/action';
-import {StepperService} from '../../../services/stepper.service';
+import {Steps, StepsService} from '../../../services/steps.service';
 import {MatStepper} from '@angular/material';
+import {KeyValue} from '@angular/common';
 
 @Component({
     selector: 'app-action',
@@ -12,50 +13,31 @@ import {MatStepper} from '@angular/material';
 })
 export class ActionComponent implements OnInit {
     @ViewChild('stepper') set stepper(stepper: MatStepper) {
-        this.stepperService.stepper = stepper;
-    };
-    forms;
-    _action: Action = undefined;
-    managers: string[];
+        this.stepsService.stepper = stepper;
+    }
+
+    public action: Action = undefined;
     private lastActionId = '';
 
-    constructor(private actionService: ActionService, private stepperService: StepperService) {
+    constructor(private actionService: ActionService, public stepsService: StepsService) {
         this.actionService.actionsObservable.subscribe(reset => {
-            this._action = this.actionService.getAction(undefined);
-            if (reset)
-                this.resetStepper();
+            this.action = this.actionService.getAction(undefined);
             this.lastActionId = this.action.id;
         });
-        this.forms = [
-            {group: new FormGroup({}), name: 'services', description: 'Select Service'},
-            {group: new FormGroup({}), name: 'triggers', description: 'Choose Action or Reaction'},
-            {group: new FormGroup({}), name: 'account', description: 'Connect Account'},
-            {group: new FormGroup({}), name: 'options', description: 'Set Up Template'}
-        ];
-        this.managers = ['services', 'triggers', 'account', 'options'];
+        stepsService.addStep(Steps.SERVICE, 'Select Service');
+        stepsService.addStep(Steps.TYPE, 'Choose Action or Reaction');
+        stepsService.addStep(Steps.ACCOUNT, 'Connect Account');
+        stepsService.addStep(Steps.OPTIONS, 'Set Up Template');
     }
 
-    get action(): Action {
-        return this._action;
-    }
+    indexOrderAsc = (akv: KeyValue<string, any>, bkv: KeyValue<string, any>): number => {
+        const a = akv.value.index;
+        const b = bkv.value.index;
 
-    set action(value: Action) {
-        this._action = value;
+        return a > b ? 1 : (b > a ? -1 : 0);
     }
-
-    public resetStepper() {
-        if (!this.stepperService.stepper)
-            this.stepperService.stepper = this.stepper;
-        this.stepperService.reset();
-    }
-
 
     ngOnInit() {
-        this.stepperService.stepper = this.stepper;
-//        this.form = this.formBuilder.group({});
-//        this.forms.setValue(['Nancy', 'Drew', 'deed', 'zfezef']);
-    }
-
-    onStepChange(event) {
+        this.stepsService.stepper = this.stepper;
     }
 }

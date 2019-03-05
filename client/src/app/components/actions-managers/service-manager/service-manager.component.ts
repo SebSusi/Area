@@ -4,6 +4,7 @@ import {StructureService} from '../../../services/structure.service';
 import {AbstractManager} from '../abstract-manager';
 import {ActionService} from '../../../services/action.service';
 import {FormBuilder, FormArray, Validators, FormControl} from '@angular/forms';
+import {StepsService} from '../../../services/steps.service';
 
 @Component({
     selector: 'app-service-manager',
@@ -13,9 +14,9 @@ import {FormBuilder, FormArray, Validators, FormControl} from '@angular/forms';
 
 export class ServiceManagerComponent extends AbstractManager implements OnInit{
 
-    constructor(actionService: ActionService, formBuilder: FormBuilder, private areaService: AreaService,
+    constructor(as: ActionService, ss: StepsService, private areaService: AreaService,
                 private structureService: StructureService) {
-        super(actionService, formBuilder);
+        super(as, ss);
     }
 
     public services: string[];

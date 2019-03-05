@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, ElementRef, Injectable, Input, OnInit} from '@angular/core';
 import {MatList, MatListItem, MatNavList} from '@angular/material';
-import {StepperService} from '../../../../services/stepper.service';
+import {StepsService} from '../../../../services/steps.service';
 
 @Component({
   selector: 'app-action-step',
@@ -12,7 +12,7 @@ export class ActionStepComponent implements OnInit {
     @Input() content: string;
     @Input() step: number;
 
-    constructor(public stepperService: StepperService) {
+    constructor(public stepperService: StepsService) {
     }
 
   ngOnInit() {

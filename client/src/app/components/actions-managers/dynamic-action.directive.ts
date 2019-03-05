@@ -4,21 +4,21 @@ import {TriggerManagerComponent} from './trigger-manager/trigger-manager.compone
 import {AccountManagerComponent} from './account-manager/account-manager.component';
 import {OptionsManagerComponent} from './options-manager/options-manager.component';
 import {FormGroup} from '@angular/forms';
+import {Steps} from '../../services/steps.service';
 
 
-const componentMapper = {
-    services: ServiceManagerComponent,
-    triggers: TriggerManagerComponent,
-    account: AccountManagerComponent,
-    options: OptionsManagerComponent
-};
+const componentMapper: Map<Steps, any> = new Map<Steps, any>([
+    [Steps.SERVICE, ServiceManagerComponent],
+    [Steps.TYPE, TriggerManagerComponent],
+    [Steps.ACCOUNT, AccountManagerComponent],
+    [Steps.OPTIONS, OptionsManagerComponent]
+]);
 
 @Directive({
     selector: '[appDynamicAction]'
 })
 export class DynamicActionDirective implements OnInit {
-    @Input() type: string;
-    @Input() form: FormGroup;
+    @Input() type: Steps;
 
     componentRef: any;
     constructor(
@@ -27,9 +27,9 @@ export class DynamicActionDirective implements OnInit {
     ) {}
     ngOnInit() {
         const factory = this.resolver.resolveComponentFactory(
-            componentMapper[this.type]
+            componentMapper.get(this.type)
         );
         this.componentRef = this.container.createComponent(factory);
-        this.componentRef.instance.form = this.form;
+        this.componentRef.instance.type = this.type;
     }
 }

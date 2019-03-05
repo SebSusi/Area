@@ -1,4 +1,6 @@
-<mat-radio-group class="accounts-group" [(ngModel)]="this.action.name" [formControl]="form.get('triggerControl')">
+<mat-radio-group class="accounts-group"
+                 [(ngModel)]="this.action.name"
+                 [formControl]="stepsService.getController(type, 'triggerControl')">
   <mat-radio-button class="account" *ngFor="let item of structureS.getActionsTypes(action) | keyvalue" [value]="item.key">
     <p class="mat-subheading-1 title">{{item.key.uncamelize()}}</p>
     <p class="mat-subheading-1 description">{{item.value.description}}</p>

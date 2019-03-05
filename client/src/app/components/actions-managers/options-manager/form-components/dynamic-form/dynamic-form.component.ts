@@ -24,11 +24,11 @@ import {ActionService} from '../../../../../services/action.service';
 export class DynamicFormComponent implements OnInit, OnChanges {
     @Input() fields: any = [];
     @Input() actionId: string;
+    @Input() form: FormGroup;
 
     @Output()
     submit: EventEmitter<any> = new EventEmitter<any>();
 
-    form: FormGroup;
     private actionIdSave = '';
 
     get value() {

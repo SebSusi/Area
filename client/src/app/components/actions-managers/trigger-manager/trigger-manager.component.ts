@@ -3,6 +3,7 @@ import {StructureService} from '../../../services/structure.service';
 import {AbstractManager} from '../abstract-manager';
 import {ActionService} from '../../../services/action.service';
 import {FormBuilder, Validators} from '@angular/forms';
+import {StepsService} from '../../../services/steps.service';
 
 @Component({
     selector: 'app-trigger-manager',
@@ -13,8 +14,8 @@ export class TriggerManagerComponent extends AbstractManager implements OnInit {
 
     public triggers;
 
-    constructor(public structureS: StructureService, actionService: ActionService, formB: FormBuilder) {
-        super(actionService, formB);
+    constructor(public structureS: StructureService, as: ActionService, ss: StepsService) {
+        super(as, ss);
     }
 
     ngOnInit() {

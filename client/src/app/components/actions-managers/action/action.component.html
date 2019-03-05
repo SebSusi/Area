@@ -1,12 +1,13 @@
 <ng-template [ngIf]="action">
-    <mat-horizontal-stepper linear #stepper (selectionChange)="onStepChange($event)">
-        <mat-step *ngFor="let form of forms" [stepControl]="form.group" [optional]="false" [label]="form.description">
-            <form [formGroup]="form.group">
-                <ng-template appDynamicAction [type]="form.name" [form]="form.group"> </ng-template>
+    <mat-horizontal-stepper linear #stepper>
+        <mat-step *ngFor="let step of stepsService.steps | keyvalue:indexOrderAsc" [stepControl]="step.value.group" [label]="step.value.description">
+            <form [formGroup]="step.value.group">
+                <ng-template appDynamicAction [type]="step.key"> </ng-template>
             </form>
             <div>
-                <button *ngIf="form.name != forms[0].name" mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button *ngIf="step.key != stepsService.firstStep" mat-button matStepperPrevious>Back</button>
+                <button *ngIf="step.key != stepsService.lastStep" mat-button matStepperNext>Next</button>
+                <button *ngIf="step.key === stepsService.lastStep" mat-raised-button color="primary">Save</button>
             </div>
         </mat-step>
     </mat-horizontal-stepper>

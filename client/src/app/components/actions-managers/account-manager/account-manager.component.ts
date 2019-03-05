@@ -4,6 +4,7 @@ import {ConnectionService} from '../../../services/connection.service';
 import {ActionService} from '../../../services/action.service';
 import {Connection} from '../../../objects/connection';
 import {FormBuilder, Validators} from '@angular/forms';
+import {StepsService} from '../../../services/steps.service';
 
 @Component({
     selector: 'app-account-manager',
@@ -15,8 +16,8 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
     public accounts: Connection[];
     public test: '';
 
-    constructor(actionService: ActionService, formBuilder: FormBuilder, public connectionService: ConnectionService) {
-        super(actionService, formBuilder);
+    constructor(as: ActionService, ss: StepsService, public connectionService: ConnectionService) {
+        super(as, ss);
     }
 
     ngOnInit() {

@@ -5,32 +5,36 @@ import {StructureService} from '../../../services/structure.service';
 import {AreaService} from '../../../services/area.service';
 import {Area} from '../../../objects/area';
 import {FormBuilder} from '@angular/forms';
-import {StepperService} from '../../../services/stepper.service';
+import {StepsService} from '../../../services/steps.service';
+import {Action} from '../../../objects/action';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent extends AbstractManager implements OnInit {
+export class SidebarComponent implements OnInit {
     @Input()
     area: Area;
+    public action: Action;
 
-    constructor(actionS: ActionService, formB: FormBuilder, public stepperService: StepperService) {
-        super(actionS, formB);
-//        this.areaS.getArea("").subscribe(data => this.area) {
+    constructor(private actionService: ActionService, formB: FormBuilder, public stepperService: StepsService) {
+        this.actionService.actionsObservable.subscribe(reset => {
+            this.action = this.actionService.getAction(undefined);
+        });
     }
 
     ngOnInit() {
     }
 
-    receiveActionUpdate() {
-    }
-
     public save() {}
 
     changeActiveAction(id: any) {
+        const lastId = this.action.id;
         this.action = this.actionService.getAction(id);
+        if (lastId !== this.action.id) {
+            this.stepperService.changeStep(0);
+        }
     }
 
     addAction() {
@@ -38,4 +42,5 @@ export class SidebarComponent extends AbstractManager implements OnInit {
             this.changeActiveAction(newAction.id);
         });
     }
+
 }
