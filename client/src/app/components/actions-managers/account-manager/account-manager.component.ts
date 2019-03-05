@@ -35,7 +35,7 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
 
     getFormGroup() {
         return {
-            accountControl: [this.action.connectedAccountId, Validators.required]
+            accountControl: [this.action.account.id, Validators.required]
         };
     }
 

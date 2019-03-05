@@ -9,10 +9,13 @@ export abstract class AbstractManager {
 
     protected constructor(protected actionService: ActionService, public stepsService: StepsService) {
         this.action = actionService.getAction(undefined);
-        this.actionService.actionsObservable.subscribe(reset => {
+        this.actionService.actionsObservable.subscribe(changePage => {
             this.action = this.actionService.getAction(undefined);
-            if (reset)
+            if (this.stepsService.getStepIndex() < this.stepsService.getMyStepIndex(this.type)) {
+                if (!changePage)
+                    this.stepsService.getFormGroup(this.type).reset();
                 this.refreshFormGroup();
+            }
             this.receiveActionUpdate();
         });
     }

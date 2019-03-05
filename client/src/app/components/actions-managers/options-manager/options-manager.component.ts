@@ -3,6 +3,7 @@ import {ActionService} from '../../../services/action.service';
 import {Component, Input, OnInit} from '@angular/core';
 import {StructureService} from '../../../services/structure.service';
 import {StepsService} from '../../../services/steps.service';
+import {FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-options-manager',
@@ -20,15 +21,57 @@ export class OptionsManagerComponent extends AbstractManager implements OnInit {
     }
 
     ngOnInit() {
+        this.options = this.structureS.getOptions(this.action);
         this.initManager();
         this.receiveActionUpdate();
     }
 
     receiveActionUpdate() {
         this.options = this.structureS.getOptions(this.action);
-        if (this.action.options !== undefined)
-            for (const i in this.options) {
-                this.options[i].value = this.action.options[this.options[i].name];
-            }
+    }
+
+    onSubmit(event: Event) {
+/*        event.preventDefault();
+        event.stopPropagation();
+        if (this.stepsService.getFormGroup(this.type).valid) {
+            this.submit.emit(this.stepsService.getFormGroup(this.type).value);
+        } else {
+            this.validateAllFormFields(this.form);
+        }*/
+    }
+
+    getFormGroup() {
+        this.options = this.structureS.getOptions(this.action);
+        return this.createControl();
+    }
+
+    createControl() {
+        const group: any = {};
+        if (this.options)
+            this.options.forEach(field => {
+                group[field.name] = [
+                    this.action.options.get(field.name),
+                    this.bindValidations(field.validations || [])
+                ];
+            });
+        return group;
+    }
+
+    bindValidations(validations: any) {
+        if (validations.length > 0) {
+            const validList = [];
+            validations.forEach(valid => {
+                validList.push(valid.validator);
+            });
+            return Validators.compose(validList);
+        }
+        return null;
+    }
+
+    validateAllFormFields(formGroup: FormGroup) {
+        Object.keys(formGroup.controls).forEach(field => {
+            const control = formGroup.get(field);
+            control.markAsTouched({onlySelf: true});
+        });
     }
 }

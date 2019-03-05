@@ -38,21 +38,6 @@ export class DynamicFormComponent implements OnInit, OnChanges {
     constructor(public formBuilder: FormBuilder) {
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-//        if (this.actionId !== this.actionIdSave) {
-            this.form = this.createControl();
-            this.actionIdSave = this.actionId;
-//        }
-    }
-
-    receiveActionUpdate() {
-    }
-
-    ngOnInit() {
-        this.actionIdSave = this.actionId;
-        this.form = this.createControl();
-    }
-
     onSubmit(event: Event) {
         event.preventDefault();
         event.stopPropagation();
@@ -63,16 +48,18 @@ export class DynamicFormComponent implements OnInit, OnChanges {
         }
     }
 
+    getFormGroup() {
+        return this.createControl();
+    }
+
     createControl() {
-        const group = this.formBuilder.group({});
+        const group: any = {};
         if (this.fields)
             this.fields.forEach(field => {
-                if (field.type === 'button') return;
-                const control = this.formBuilder.control(
+                group[field.name] = [
                     field.value,
                     this.bindValidations(field.validations || [])
-                );
-                group.addControl(field.name, control);
+                ];
             });
         return group;
     }

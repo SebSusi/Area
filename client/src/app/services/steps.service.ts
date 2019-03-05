@@ -72,4 +72,8 @@ export class StepsService {
   changeStep(index: number) {
       this.stepper.selectedIndex = index;
   }
+
+    getMyStepIndex(type: Steps) {
+        return this.steps.get(type).index;
+    }
 }

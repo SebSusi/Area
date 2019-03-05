@@ -1,2 +1,6 @@
-<app-dynamic-form [fields]="options" (submit)="submit($event)" [actionId]="action.id">
-</app-dynamic-form>
+<ng-container *ngFor="let field of options;">
+    <ng-container *ngIf="stepsService.getFormGroup(type).contains(field.name)"
+                  appDynamicField [field]="field"
+                  [group]="stepsService.getFormGroup(type)">
+    </ng-container>
+</ng-container>

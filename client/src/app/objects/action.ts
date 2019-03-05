@@ -5,28 +5,28 @@ export class Action {
     private _service: string;
     private _name: string;
     private _type: ActionType;
-    private _connectedAccountId: string;
+    private _account: {id: string, type: string};
     private _options = new Map<string, string>();
 
     constructor(id: string = '', service: string = '', name: string = '', type: ActionType,
-                connectedAccountId: string = '', options: any[] = []) {
+                connectedAccountId: any, options: any[]) {
         this._id = id;
         this._service = service;
         this._name = name;
-        this._connectedAccountId = connectedAccountId;
+        this._account = connectedAccountId;
         if (options !== undefined)
         for (const obj of options) {
-            this.options[obj.name] = obj.value;
+            this.options.set(obj.name, obj.value);
         }
         this._type = type;
     }
 
-    set connectedAccountId(value: string) {
-        this._connectedAccountId = value;
+    set account(value: {id: string, type: string}) {
+        this._account = value;
     }
 
-    get connectedAccountId(): string {
-        return this._connectedAccountId;
+    get account(): {id: string, type: string} {
+        return this._account;
     }
 
     get type(): ActionType {
@@ -78,6 +78,6 @@ export class ActionAdapter {
     }
 
     static adapt(item: any, type: ActionType): Action {
-        return new Action(item.id, item.serviceName, item.name, type, item.accountId, item.fields);
+        return new Action(item.id, item.serviceName, item.name, type, item.account, item.fields);
     }
 }

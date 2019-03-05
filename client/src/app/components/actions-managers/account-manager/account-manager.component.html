@@ -1,8 +1,8 @@
 <mat-radio-group class="accounts-group"
-                 [(ngModel)]="action.connectedAccountId"
+                 [(ngModel)]="action.account.id"
                  [formControl]="stepsService.getController(type, 'accountControl')"
                  (change)="actionService.emitActions()">
     <mat-radio-button class="account" *ngFor="let item of accounts" [value]="item.id">
-        <p class="mat-subheading-1 title">{{item.name}}</p>
+        <p class="mat-subheading-1 title">{{item.id}}</p>
     </mat-radio-button>
 </mat-radio-group>
