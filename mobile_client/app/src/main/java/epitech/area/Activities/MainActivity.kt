@@ -62,10 +62,6 @@ class MainActivity : FragmentActivity() {
         loginConnectButton.setOnClickListener {
             login(loginEmail.text.toString(), loginPassword.text.toString())
         }
-        /*socialLoginButton.setOnClickListener {
-            val intent = Intent(this, SocialActivity::class.java)
-            startActivityForResult(intent, RC_SOCIAL_SIGN_IN)
-        }*/
         buttonGoogle.setOnClickListener {
             val intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
             startActivityForResult(intent, RC_GOOGLE_SIGN_IN)

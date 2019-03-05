@@ -1,15 +1,6 @@
 package epitech.area.Tools
 
-import android.app.Service
-import android.content.Context
-import android.util.Log
-import androidx.recyclerview.widget.RecyclerView
-import com.github.kittinunf.fuel.core.FuelManager
-import com.github.kittinunf.fuel.httpGet
-import com.github.kittinunf.fuel.httpPost
-import epitech.area.Managers.AreaAuthorization
 import epitech.area.R
-import epitech.area.Storages.AreaObject
 
 class IconService {
 

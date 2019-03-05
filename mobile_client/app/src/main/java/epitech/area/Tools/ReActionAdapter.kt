@@ -65,7 +65,7 @@ class ReActionAdapter(private val context: Context, private var reActions : Arra
     }
 
     override fun onBindViewHolder(holder: ReActionViewHolder, position: Int) {
-        holder.reActionName.text = reActions[position].name.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim()
+        holder.reActionName.text = reActions[position].getReActionName()
         holder.reActionType.text = reActions[position].type.toLowerCase().capitalize()
         if (reActions[position].type.toUpperCase() == "ACTION") {
             holder.reActionDelete.visibility = View.INVISIBLE
@@ -83,7 +83,7 @@ class ReActionAdapter(private val context: Context, private var reActions : Arra
         holder.reActionDelete.setOnClickListener {
             val alert = AlertDialog.Builder(context, R.style.CustomDialogTheme)
                     .setTitle("Delete reaction")
-                    .setMessage("Do you really want to delete reaction '" + reActions[position].name.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim() + "' ?")
+                    .setMessage("Do you really want to delete the reaction '" + reActions[position].getReActionName() + "' ?")
             alert.setPositiveButton(android.R.string.ok) { _, _ ->
                 AreaService.instance.deleteReaction(reActions[position].id)
                 removeReActionAt(position)

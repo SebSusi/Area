@@ -23,6 +23,10 @@ class HomeActivity : FragmentActivity() {
         areaList.layoutManager = LinearLayoutManager(this)
         areaList.adapter = AreaAdapter(this)
         AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
+        accountsButton.setOnClickListener {
+            val intent = Intent(this, AccountActivity::class.java)
+            startActivity(intent)
+        }
         areasRefresh.setOnRefreshListener {
             AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
             areasRefresh.isRefreshing = false
@@ -41,7 +45,7 @@ class HomeActivity : FragmentActivity() {
         areaNew.areaClicker.setOnClickListener {
             val intent = Intent(this, AreaActivity::class.java)
             intent.putExtra("AreaObject", AreaObject())
-            startActivity(intent, null)
+            startActivity(intent)
             AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
         }
     }

@@ -15,4 +15,10 @@ data class ServiceObject (
     class ArrayDeserializer : ResponseDeserializable<Array<ServiceObject>> {
         override fun deserialize(content: String) = Gson().fromJson(content, Array<ServiceObject>::class.java)
     }
+
+    fun getServiceName() : String {
+        if (name.isNotBlank())
+            return name.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim()
+        return ""
+    }
 }

@@ -51,7 +51,7 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
             title += "New "
         title += reAction.type.toLowerCase().capitalize()
         if (reAction.name.isNotBlank())
-            title += " : " + reAction.name.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim()
+            title += " : " + reAction.getReActionName()
         reActionName.text = title
     }
 
@@ -103,7 +103,7 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
         reActionList.forEachIndexed { index, reActionObject ->
             val radioButton: RadioButton = RadioButton(this)
             radioButton.buttonTintList = colorStateList
-            radioButton.setText(reActionObject.name.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim())
+            radioButton.setText(reActionObject.getReActionName())
             reActionView.addView(radioButton)
             if (reActionObject.name == reAction.name)
                 radioButton.isChecked = true
@@ -113,15 +113,15 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
     override fun onStepOpening(stepNumber: Int) {
         when (stepNumber) {
             0 -> checkService(reAction.serviceName)
-            1 -> checkReAction(reAction.name.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim())
+            1 -> checkReAction(reAction.getReActionName())
             2 -> checkField()
         }
     }
 
     fun checkService(serviceName: String) {
         reAction.serviceName = serviceName
-        if (serviceName.isNotBlank()) {
-            reActionStepper.setStepTitle(0, "Service : " + serviceName.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim())
+        if (reAction.serviceName.isNotBlank()) {
+            reActionStepper.setStepTitle(0, "Service : " + reAction.getService())
             reActionStepper.setStepAsCompleted(0)
             if (reAction.type.capitalize() == "ACTION") {
                 reActionList = InfoService.instance.getActions(serviceName) as Array<AReActionObject>
@@ -138,12 +138,12 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
     fun checkReAction(reActionName: String) {
         var index: Int = -1
         reActionList.forEachIndexed { i, reActionObject ->
-            if (reActionObject.name.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim() == reActionName)
+            if (reActionObject.getReActionName() == reActionName)
                 index = i
         }
         if (index >= 0) {
             reAction.name = reActionList[index].name
-            reActionStepper.setStepTitle(1, reAction.type.toLowerCase().capitalize() + " : " + reAction.name.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim())
+            reActionStepper.setStepTitle(1, reAction.type.toLowerCase().capitalize() + " : " + reAction.getReActionName())
             reActionStepper.setStepAsCompleted(1)
             reAction.changeFields(InfoService.instance.getReActionFields(reAction))
             (fieldView.adapter as FieldAdapter).setFields(reAction.fields)
