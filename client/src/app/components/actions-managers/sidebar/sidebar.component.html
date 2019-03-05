@@ -7,6 +7,7 @@
             <div mat-card-avatar class="{{act.service}}-icon {{act.type}}-image mat-card-avatar"></div>
             <mat-card-title>{{act.name?.uncamelize()}}</mat-card-title>
             <mat-card-subtitle>{{act.type?.uncamelize()}}</mat-card-subtitle>
+            <mat-icon class="position-absolute">trash</mat-icon>
         </mat-card-header>
         <mat-card-content [ngClass]="{'mh-0': act.id !== action.id}">
             <mat-action-list>

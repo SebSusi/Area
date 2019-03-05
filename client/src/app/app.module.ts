@@ -12,7 +12,6 @@ import {ButtonsModule} from 'angular-bootstrap-md';
 import {CheckboxComponent} from './components/actions-managers/options-manager/form-components/checkbox/checkbox.component';
 import {DateComponent} from './components/actions-managers/options-manager/form-components/date/date.component';
 import {DynamicFieldDirective} from './components/actions-managers/options-manager/form-components/dynamic-field/dynamic-field.directive';
-import {DynamicFormComponent} from './components/actions-managers/options-manager/form-components/dynamic-form/dynamic-form.component';
 import {EditorComponent} from './components/pages/editor/editor.component';
 import {Error404Component} from './components/error404/error404.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -111,7 +110,6 @@ const appRoutes: Routes = [
         CheckboxComponent,
         DateComponent,
         DynamicFieldDirective,
-        DynamicFormComponent,
         EditorComponent,
         Error404Component,
         HomeComponent,
