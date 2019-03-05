@@ -14,6 +14,7 @@ import android.widget.RadioGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import epitech.area.Tools.AreaService
 import epitech.area.Tools.FieldAdapter
 import epitech.area.Tools.InfoService
 import epitech.area.Tools.ServiceAdapter
@@ -55,6 +56,8 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
     }
 
     override fun sendData() {
+        AreaService.instance.postReAction(reAction)
+        finish()
     }
 
     override fun createStepContentView(stepNumber: Int): View? {

@@ -3,12 +3,11 @@ package epitech.area.Tools
 import android.content.Context
 import android.util.Log
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import epitech.area.Managers.AreaAuthorization
-import epitech.area.R
+import epitech.area.Storages.AReActionObject
 import epitech.area.Storages.AreaObject
 
 class AreaService {
@@ -69,6 +68,34 @@ class AreaService {
             Log.d("getArea Exception", e.toString())
         }
         FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
+    }
+
+    fun changeAreaState(areaId: String, state: Boolean) {
+        return
+        "".httpPost()
+    }
+
+    fun changeAreaName(areaId: String, name: String) {
+        return
+        "".httpPost()
+    }
+
+    fun deleteArea(areaId: String) {
+        return
+        "".httpPost()
+    }
+
+    fun postReAction(reAction: AReActionObject) {
+        return
+        if (reAction.id.isNotBlank())
+            "".httpPost()
+        else
+            "".httpPost()
+    }
+
+    fun deleteReaction(areaId: String) {
+        return
+        "".httpPost()
     }
 
     fun changeFuelHeaders(applicationContext: Context) {

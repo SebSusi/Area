@@ -7,14 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".Activities.HomeActivity">
 
-    <TextView
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/areaName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:hint="Area name"
+        android:inputType="text"
+        android:theme="@style/TextAppearence.App.TextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+        android:id="@+id/areaNameButton"
+        android:visibility="invisible"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        app:floating_background_color="@color/colorLogoPrimary"
+        app:floating_left_icon="@drawable/ic_check"
+        app:floating_title_color="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

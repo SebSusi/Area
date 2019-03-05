@@ -1,6 +1,5 @@
 'use strict';
 
-const moment = require('moment');
 const _ = require('lodash');
 const modelGenerator = require('../models/widget/generator');
 
@@ -30,7 +29,7 @@ let widgets = function () {
                 {
                     name: 'current',
                     description: 'Daily weather',
-                    controller: require('../controllers/weather/action/current'),
+                    controller: require('../controllers/services/weather/actions/current'),
                     modelName: 'weatherCurrent',
                     params: {
                         city: {type: String, default: 'Nancy'},

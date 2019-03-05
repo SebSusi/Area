@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.FacebookSdk
 import com.facebook.login.LoginResult
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpPost
@@ -88,7 +89,7 @@ class MainActivity : FragmentActivity() {
             val view = layoutInflater.inflate(R.layout.view_server_url, null)
             view.serverUrl.setText(FuelManager.instance.basePath)
             val alert = AlertDialog.Builder(this, R.style.CustomDialogTheme).setTitle("Server URL").setView(view)
-            alert.setPositiveButton(android.R.string.ok) { dialog, _ ->
+            alert.setPositiveButton(android.R.string.ok) { _, _ ->
                 FuelManager.instance.basePath = view.serverUrl.text.toString()
             }
             alert.setNegativeButton(android.R.string.cancel) { dialog, _ ->
@@ -98,7 +99,7 @@ class MainActivity : FragmentActivity() {
         }
     }
 
-    fun initGoogleLogin() {
+    private fun initGoogleLogin() {
         mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestServerAuthCode(getString(R.string.google_client_id), true)
                 .requestIdToken(getString(R.string.google_client_id))

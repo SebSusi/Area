@@ -5,8 +5,9 @@ import com.google.gson.Gson
 import java.io.Serializable
 
 data class AreaObject(
-        val name: String = "",
-        val uniqueId: String = "",
+        var name: String = "",
+        var uniqueId: String = "",
+        var activated: Boolean = false,
         val action: ActionObject = ActionObject(),
         val reactions: Array<ReactionObject> = arrayOf()) : Serializable {
 
