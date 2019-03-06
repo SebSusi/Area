@@ -7,35 +7,37 @@
             <div mat-card-avatar class="{{act.service}}-icon {{act.type}}-image mat-card-avatar"></div>
             <mat-card-title>{{act.name?.uncamelize()}}</mat-card-title>
             <mat-card-subtitle>{{act.type?.uncamelize()}}</mat-card-subtitle>
-            <mat-icon class="position-absolute">trash</mat-icon>
+            <button class="action-icon" mat-icon-button (click)="deleteAction(act.id)">
+                <mat-icon >delete</mat-icon>
+            </button>
         </mat-card-header>
         <mat-card-content [ngClass]="{'mh-0': act.id !== action.id}">
             <mat-action-list>
                 <mat-list-item (click)="stepperService.changeStep(0)">
                     <app-action-step
                             [icon]='"settings"'
-                            [content]="act.service?.uncamelize()"
+                            [content]="act.service ? act.service.uncamelize() : stepperService.getStep(Steps.SERVICE).description"
                             [step]="0">
                     </app-action-step>
                 </mat-list-item>
                 <mat-list-item (click)="stepperService.changeStep(1)">
                     <app-action-step
                             [icon]='"offline_bolt"'
-                            [content]="act.name?.uncamelize()"
+                            [content]="act.name ? act.name.uncamelize() : stepperService.getStep(Steps.TYPE).description"
                             [step]="1">
                     </app-action-step>
                 </mat-list-item>
                 <mat-list-item (click)="stepperService.changeStep(2)">
                     <app-action-step
                             [icon]='"person"'
-                            [content]='"connect account"'
+                            [content]='stepperService.getStep(Steps.ACCOUNT).description'
                             [step]="2">
                     </app-action-step>
                 </mat-list-item>
                 <mat-list-item (click)="stepperService.changeStep(3)">
                     <app-action-step
                             [icon]='"list"'
-                            [content]='"set up template"'
+                            [content]='stepperService.getStep(Steps.OPTIONS).description'
                             [step]="3">
                     </app-action-step>
                 </mat-list-item>

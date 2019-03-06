@@ -5,7 +5,7 @@ export class Action {
     private _service: string;
     private _name: string;
     private _type: ActionType;
-    private _account: {id: string, type: string};
+    private _account: { id: string, type: string };
     private _options = new Map<string, string>();
 
     constructor(id: string = '', service: string = '', name: string = '', type: ActionType,
@@ -13,19 +13,19 @@ export class Action {
         this._id = id;
         this._service = service;
         this._name = name;
-        this._account = connectedAccountId;
+        this.account = connectedAccountId;
         if (options !== undefined)
-        for (const obj of options) {
-            this.options.set(obj.name, obj.value);
-        }
+            for (const obj of options) {
+                this.options.set(obj.name, obj.value);
+            }
         this._type = type;
     }
 
-    set account(value: {id: string, type: string}) {
-        this._account = value;
+    set account(value: { id: string, type: string }) {
+        this._account = value ? value : {id: '', type: ''};
     }
 
-    get account(): {id: string, type: string} {
+    get account(): { id: string, type: string } {
         return this._account;
     }
 

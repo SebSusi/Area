@@ -1,4 +1,5 @@
-<mat-radio-group class="accounts-group"
+<mat-radio-group *ngIf="action.account"
+                 class="accounts-group"
                  [(ngModel)]="action.account.id"
                  [formControl]="stepsService.getController(type, 'accountControl')"
                  (change)="actionService.emitActions()">
