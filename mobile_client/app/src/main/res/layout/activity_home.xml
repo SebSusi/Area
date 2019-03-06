@@ -8,6 +8,18 @@
     tools:context=".Activities.HomeActivity">
 
     <ru.dimorinny.floatingtextbutton.FloatingTextButton
+        android:id="@+id/managerbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:floating_background_color="@android:color/transparent"
+        app:floating_left_icon="@drawable/ic_delete"
+        app:floating_title_color="@color/colorLogoSecondary"
+        app:layout_constraintBottom_toBottomOf="@+id/areasLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/areasLabel" />
+
+    <ru.dimorinny.floatingtextbutton.FloatingTextButton
         android:id="@+id/accountsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,7 +28,9 @@
         app:floating_title_color="@color/colorLogoSecondary"
         app:layout_constraintBottom_toBottomOf="@+id/areasLabel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/areasLabel" />
+        app:layout_constraintTop_toTopOf="@+id/areasLabel" >
+
+    </ru.dimorinny.floatingtextbutton.FloatingTextButton>
 
     <TextView
         android:id="@+id/areasLabel"

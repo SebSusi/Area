@@ -16,6 +16,14 @@ import kotlinx.android.synthetic.main.view_area.view.*
 
 class AreaAdapter(private val context: Context, private var areas : ArrayList<AreaObject> = arrayListOf()) : RecyclerView.Adapter<AreaViewHolder>() {
 
+    var visible = View.INVISIBLE;
+    var widthButton = 65
+
+    fun changeVisible(){
+        visible = if(View.INVISIBLE == visible)View.VISIBLE else View.INVISIBLE
+        widthButton = if(0 == widthButton)65 else 0
+    }
+
     fun getAreas(): ArrayList<AreaObject> {
         return areas
     }
@@ -52,7 +60,8 @@ class AreaAdapter(private val context: Context, private var areas : ArrayList<Ar
     override fun onBindViewHolder(holder: AreaViewHolder, position: Int) {
         holder.arrowImage.visibility = View.VISIBLE
         holder.areaSwitch.visibility = View.VISIBLE
-        holder.areaDelete.visibility = View.VISIBLE
+        holder.areaDelete.visibility = visible
+        holder.areaDelete.layoutParams.width = widthButton
         holder.areaName.text = areas[position].name
         holder.actionImage.setImageResource(IconService.instance.getActionIcon(areas[position].action.serviceName))
         if (areas[position].reactions.size > 1) {

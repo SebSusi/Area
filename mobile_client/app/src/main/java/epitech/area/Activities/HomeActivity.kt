@@ -23,6 +23,12 @@ class HomeActivity : FragmentActivity() {
         areaList.layoutManager = LinearLayoutManager(this)
         areaList.adapter = AreaAdapter(this)
         AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
+        var adapter = areaList.adapter as AreaAdapter
+        managerbutton.setOnClickListener {
+            adapter.changeVisible()
+            AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
+            areasRefresh.isRefreshing = false
+        }
         accountsButton.setOnClickListener {
             val intent = Intent(this, AccountActivity::class.java)
             startActivity(intent)
