@@ -4,10 +4,13 @@ import android.content.Context
 import android.util.Log
 import android.widget.TextView
 import com.github.kittinunf.fuel.core.FuelManager
+import com.github.kittinunf.fuel.httpDelete
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
+import epitech.area.Activities.ReActionActivity
 import epitech.area.Managers.AreaAuthorization
 import epitech.area.Storages.AReActionObject
+import epitech.area.Storages.AccountObject
 import epitech.area.Storages.AreaObject
 
 class AreaService {
@@ -82,7 +85,7 @@ class AreaService {
 
     fun deleteArea(areaId: String) {
         return
-        "".httpPost()
+        "".httpDelete()
     }
 
     fun postReAction(reAction: AReActionObject) {
@@ -96,6 +99,46 @@ class AreaService {
     fun deleteReaction(areaId: String) {
         return
         "".httpPost()
+    }
+
+    fun getAccounts(accountAdapter: AccountAdapter) {
+        FuelManager.instance.basePath = "" //remove this when using real server
+        FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
+        try {
+            "https://next.json-generator.com/api/json/get/Vk_WtKgrU".httpGet()
+                    .responseObject(AccountObject.ArrayDeserializer()) { _, _, result ->
+                        val (res, err) = result
+                        if (err == null) {
+                            accountAdapter.setAccounts(res!!)
+                        }
+                    }
+        } catch (e: Exception) {
+            Log.d("getAreas Exception", e.toString())
+        }
+        FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
+    }
+
+    fun getServiceAccounts(serviceName: String, reActionActivity: ReActionActivity) {
+        FuelManager.instance.basePath = "" //remove this when using real server
+        FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
+        try {
+            "https://next.json-generator.com/api/json/get/Vk_WtKgrU".httpGet()
+                    .responseObject(AccountObject.ArrayDeserializer()) { _, _, result ->
+                        val (res, err) = result
+                        if (err == null) {
+                            reActionActivity.setAccounts(res!!)
+                            reActionActivity.updateAccountStep()
+                        }
+                    }
+        } catch (e: Exception) {
+            Log.d("getAreas Exception", e.toString())
+        }
+        FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
+    }
+
+    fun deleteAccount(acountId: String) {
+        return
+        "".httpDelete()
     }
 
     fun changeFuelHeaders(applicationContext: Context) {

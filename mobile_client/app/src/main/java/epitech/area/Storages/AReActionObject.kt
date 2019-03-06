@@ -10,6 +10,19 @@ abstract class AReActionObject : Serializable {
     abstract var fields: Array<FieldObject>
     abstract var type: String
 
+    fun getReActionName() : String {
+        if (name.isNotBlank())
+            return name.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim()
+        return ""
+    }
+
+    fun getService() : String {
+        if (serviceName.isNotBlank())
+            return serviceName.capitalize().replace(Regex("(.)([A-Z])"), "$1 $2").trim()
+        return ""
+    }
+
+
     fun isValid() : Boolean {
         fields.forEach { field ->
             if (!(field.isValid())) {

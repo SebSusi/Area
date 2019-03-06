@@ -1,15 +1,6 @@
 package epitech.area.Tools
 
-import android.app.Service
-import android.content.Context
-import android.util.Log
-import androidx.recyclerview.widget.RecyclerView
-import com.github.kittinunf.fuel.core.FuelManager
-import com.github.kittinunf.fuel.httpGet
-import com.github.kittinunf.fuel.httpPost
-import epitech.area.Managers.AreaAuthorization
 import epitech.area.R
-import epitech.area.Storages.AreaObject
 
 class IconService {
 
@@ -36,6 +27,7 @@ class IconService {
         when (serviceName.toUpperCase()) {
             "MULTIPLE" -> return R.drawable.ic_more_horiz
             "FACEBOOK" -> return R.drawable.ic_facebook
+            "GOOGLE" -> return R.drawable.ic_google
             "GMAIL" -> return R.drawable.ic_gmail
             "OUTLOOK" -> return R.drawable.ic_outlook
             "TWITTER" -> return R.drawable.ic_twitter

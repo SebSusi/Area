@@ -7,57 +7,40 @@
     android:layout_height="match_parent"
     tools:context=".Activities.HomeActivity">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/areaName"
+    <TextView
+        android:id="@+id/accountsLabel"
+        android:textSize="32sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
         android:layout_margin="8dp"
-        android:hint="Area name"
-        android:inputType="text"
-        android:theme="@style/TextAppearence.App.TextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ru.dimorinny.floatingtextbutton.FloatingTextButton
-        android:id="@+id/areaNameButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="8dp"
-        android:visibility="invisible"
-        app:floating_background_color="@color/colorLogoPrimary"
-        app:floating_left_icon="@drawable/ic_check"
-        app:floating_title_color="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/areaName"
-        app:layout_constraintBottom_toBottomOf="@+id/areaName" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Accounts"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/areaRefresh"
+        android:id="@+id/accountRefresh"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_margin="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/areaName" >
+        app:layout_constraintTop_toBottomOf="@+id/accountsLabel" >
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reActionList"
+            android:id="@+id/accountList"
             android:layout_width="0dp"
             android:layout_height="500dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/areaName"
-            tools:itemCount="6" />
+            app:layout_constraintTop_toBottomOf="@+id/accountsLabel" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <include
-        android:id="@+id/reActionNew"
-        layout="@layout/view_re_action"
+        android:id="@+id/accountNew"
+        layout="@layout/view_account"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_margin="16dp"

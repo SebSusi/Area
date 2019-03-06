@@ -78,8 +78,8 @@ class AreaAdapter(private val context: Context, private var areas : ArrayList<Ar
         }
         holder.areaDelete.setOnClickListener {
             val alert = AlertDialog.Builder(context, R.style.CustomDialogTheme)
-                    .setTitle("Delete AREA")
-                    .setMessage("Do you really want to delete AREA '" + areas[position].name + "' ?")
+                    .setTitle("Delete area")
+                    .setMessage("Do you really want to delete the area '" + areas[position].name + "' ?")
             alert.setPositiveButton(android.R.string.ok) { _, _ ->
                 AreaService.instance.deleteArea(areas[position].uniqueId)
                 removeAreaAt(position)
