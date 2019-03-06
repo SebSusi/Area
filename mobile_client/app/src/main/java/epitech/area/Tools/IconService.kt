@@ -27,6 +27,7 @@ class IconService {
         when (serviceName.toUpperCase()) {
             "MULTIPLE" -> return R.drawable.ic_more_horiz
             "FACEBOOK" -> return R.drawable.ic_facebook
+            "GOOGLE" -> return R.drawable.ic_google
             "GMAIL" -> return R.drawable.ic_gmail
             "OUTLOOK" -> return R.drawable.ic_outlook
             "TWITTER" -> return R.drawable.ic_twitter

@@ -14,6 +14,7 @@ import android.widget.RadioGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import epitech.area.Storages.AccountObject
 import epitech.area.Tools.AreaService
 import epitech.area.Tools.FieldAdapter
 import epitech.area.Tools.InfoService
@@ -24,9 +25,11 @@ import ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout
 class ReActionActivity : FragmentActivity(), VerticalStepperForm {
     private var reAction: AReActionObject = ActionObject()
     private var reActionList: Array<AReActionObject> = arrayOf()
+    private var accountList: Array<AccountObject> = arrayOf()
     private lateinit var serviceView: RecyclerView
     private lateinit var reActionView: RadioGroup
     private lateinit var fieldView: RecyclerView
+    private lateinit var accountView: RadioGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +37,7 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
         setContentView(R.layout.activity_re_action)
         reAction = intent?.extras?.getSerializable("ReActionObject") as AReActionObject
         updateTitle()
-        VerticalStepperFormLayout.Builder.newInstance(reActionStepper, arrayOf("Service", reAction.type.toLowerCase().capitalize(), "Fields"), this, this)
+        VerticalStepperFormLayout.Builder.newInstance(reActionStepper, arrayOf("Service", reAction.type.toLowerCase().capitalize(), "Fields", "Account"), this, this)
                 .primaryColor(getColor(R.color.colorLogoPrimary))
                 .primaryDarkColor(getColor(R.color.colorLogoSecondary))
                 .buttonBackgroundColor(getColor(R.color.colorLogoSecondary))
@@ -55,6 +58,26 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
         reActionName.text = title
     }
 
+    fun setAccounts(accounts: Array<AccountObject>) {
+        accountList = accounts
+    }
+
+    private fun getAccountById(accountId: String) : AccountObject {
+        accountList.forEach { accountObject ->
+            if (accountObject.id == accountId)
+                return accountObject
+        }
+        return AccountObject()
+    }
+
+    private fun getAccountByName(accountName: String) : AccountObject {
+        accountList.forEach { accountObject ->
+            if (accountObject.name == accountName)
+                return accountObject
+        }
+        return AccountObject()
+    }
+
     override fun sendData() {
         AreaService.instance.postReAction(reAction)
         finish()
@@ -66,6 +89,7 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
             0 -> view = createServiceStep()
             1 -> view = createReActionStep()
             2 -> view = createFieldStep()
+            3 -> view = createAccountStep()
         }
         return view
     }
@@ -83,7 +107,7 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
         reActionView.setOnCheckedChangeListener { group, checkedId ->
             checkReAction(group.findViewById<RadioButton>(checkedId).text.toString())
         }
-        updateReaCtionStep()
+        updateReActionStep()
         return reActionView
     }
 
@@ -95,17 +119,41 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
         return fieldView
     }
 
-    private fun updateReaCtionStep() {
+    private fun createAccountStep() : View {
+        accountView = RadioGroup(this)
+        accountView.setOnCheckedChangeListener { group, checkedId ->
+            checkAccount(getAccountByName(group.findViewById<RadioButton>(checkedId).text.toString()))
+        }
+        updateAccountStep()
+        return accountView
+    }
+
+    private fun updateReActionStep() {
         reActionView.removeAllViews()
         val colorStateList = ColorStateList(
                 arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf(android.R.attr.state_enabled)),
                 intArrayOf(getColor(R.color.colorLogoSecondary), getColor(R.color.colorLogoSecondary)))
-        reActionList.forEachIndexed { index, reActionObject ->
+        reActionList.forEach { reActionObject ->
             val radioButton: RadioButton = RadioButton(this)
             radioButton.buttonTintList = colorStateList
-            radioButton.setText(reActionObject.getReActionName())
+            radioButton.text = reActionObject.getReActionName()
             reActionView.addView(radioButton)
             if (reActionObject.name == reAction.name)
+                radioButton.isChecked = true
+        }
+    }
+
+    fun updateAccountStep() {
+        accountView.removeAllViews()
+        val colorStateList = ColorStateList(
+                arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf(android.R.attr.state_enabled)),
+                intArrayOf(getColor(R.color.colorLogoSecondary), getColor(R.color.colorLogoSecondary)))
+        accountList.forEach { accountObject ->
+            val radioButton: RadioButton = RadioButton(this)
+            radioButton.buttonTintList = colorStateList
+            radioButton.text = accountObject.name
+            accountView.addView(radioButton)
+            if (accountObject.id == reAction.accountId)
                 radioButton.isChecked = true
         }
     }
@@ -115,6 +163,7 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
             0 -> checkService(reAction.serviceName)
             1 -> checkReAction(reAction.getReActionName())
             2 -> checkField()
+            3 -> checkAccount(getAccountById(reAction.accountId))
         }
     }
 
@@ -128,10 +177,11 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
             } else {
                 reActionList = InfoService.instance.getReactions(serviceName) as Array<AReActionObject>
             }
-            updateReaCtionStep()
+            AreaService.instance.getServiceAccounts(reAction.serviceName, this)
+            updateReActionStep()
         } else {
             reActionStepper.setStepTitle(0, "Service")
-            reActionStepper.setStepAsUncompleted(0, "You must select a service to continue")
+            reActionStepper.setStepAsUncompleted(0, "You must select a service to continue.")
         }
     }
 
@@ -150,7 +200,10 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
         } else {
             reAction.name = ""
             reActionStepper.setStepTitle(1, reAction.type.toLowerCase().capitalize())
-            reActionStepper.setStepAsUncompleted(1, "You must select a " + reAction.type.toLowerCase() + " to continue")
+            if (reAction.type == "ACTION")
+                reActionStepper.setStepAsUncompleted(1, "You must select an action to continue.")
+            else
+                reActionStepper.setStepAsUncompleted(1, "You must select a reaction to continue.")
         }
         updateTitle()
     }
@@ -161,6 +214,15 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
             reActionStepper.setStepAsCompleted(2)
         } else {
             reActionStepper.setStepAsUncompleted(2, reAction.getInvalidString())
+        }
+    }
+
+    fun checkAccount(account: AccountObject) {
+        if (account.id.isNotBlank()) {
+            reAction.accountId = account.id
+            reActionStepper.setStepAsCompleted(3)
+        } else {
+            reActionStepper.setStepAsUncompleted(3, "You must select an account to continue.")
         }
     }
 }
