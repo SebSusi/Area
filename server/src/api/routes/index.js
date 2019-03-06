@@ -24,7 +24,7 @@ router
 router
     .get('/area_info', async (req, res) => {
         try {
-            res.json(await areaInfo.getAbout(req));
+            res.json((await areaInfo.getAbout(req)).server.services);
         } catch (e) {
             res.json({success: false})
         }

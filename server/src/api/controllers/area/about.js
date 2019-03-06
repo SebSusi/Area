@@ -56,10 +56,3 @@ module.exports.getAbout = async function (req) {
     }
 };
 
-module.exports.sendAbout = async function (req, res) {
-    try {
-        res.json(await exports.getAbout(req));
-    } catch (e) {
-        res.json({success: false})
-    }
-};
