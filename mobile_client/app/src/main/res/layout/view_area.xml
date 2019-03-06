@@ -58,7 +58,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="1dp"
         android:elevation="10dp"
-        android:textColor="@color/colorLogoPrimary"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/actionImage"
         app:layout_constraintStart_toEndOf="@+id/reactionImage"

@@ -22,9 +22,16 @@
     </style>
 
     <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">@color/colorLogoSecondary</item>
-        <item name="android:textColorPrimary">@color/colorLogoPrimary</item>
+        <item name="android:textColor">@color/colorLogoPrimary</item>
+        <item name="android:textColorPrimary">@color/white</item>
         <item name="android:windowBackground">@color/darkColorPrimary</item>
+        <item name="android:textColorTertiary">@color/white</item>
+        <item name="android:buttonBarButtonStyle">@style/MyApp.DialogButton</item>
+    </style>
+
+    <style name="MyApp.DialogButton" parent="@android:style/TextAppearance.Material.Button">
+        <item name="android:textColor">@color/colorLogoSecondary</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="Divider">
