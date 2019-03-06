@@ -65,7 +65,7 @@ let widgets = function () {
                         },
                     ],
                     output: {
-                        temperature: {type: Number, value: 10},
+                        temperature: {type: "Number", value: 10},
                     },
                 },
             ],
