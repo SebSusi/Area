@@ -4,6 +4,6 @@
                  [formControl]="stepsService.getController(type, 'accountControl')"
                  (change)="actionService.emitActions()">
     <mat-radio-button class="account" *ngFor="let item of accounts" [value]="item.id">
-        <p class="mat-subheading-1 title">{{item.id}}</p>
+        <p class="mat-subheading-1 title">{{item.name}}</p>
     </mat-radio-button>
 </mat-radio-group>

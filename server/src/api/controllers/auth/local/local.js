@@ -37,6 +37,7 @@ passport.use('local-signup', new LocalStrategy({
             if (!req.user) {
                 User.findOneByEmail(email, function (err, user) {
                     if (!user) {
+                        console.log(req.body);
                         return addNewUser(email, req.body.username, password, done);
                     } else
                         return utils.returnError(done, false, "User with email already exist");
