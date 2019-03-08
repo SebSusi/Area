@@ -16,7 +16,7 @@ function getModelByServiceNameAndActionName(service, name, type) {
     let element = getByServiceNameAndActionName(service, name, type);
     if (element === false || element === undefined || element.model === undefined)
         return false;
-    return element.model
+    return element.model;
 }
 
 exports.getActionModelByServiceNameAndActionName = function (service, action) {

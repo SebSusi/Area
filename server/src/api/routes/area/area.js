@@ -20,8 +20,8 @@ router.get('/:areaId', jwt.canAuth, function (req, res) {
     res.json(areaGetters.getFormattedAreaById(req.user, areaId))
 });
 
-router.use('/:areaId/action', actionRouter);
-router.use('/:areaId/reaction', reactionRouter);
+router.use('/:areaId/actions', actionRouter);
+router.use('/:areaId/reactions', reactionRouter);
 
 module.exports = router;
 
