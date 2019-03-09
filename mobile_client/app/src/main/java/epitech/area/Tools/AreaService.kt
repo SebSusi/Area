@@ -8,17 +8,16 @@ import com.github.kittinunf.fuel.httpDelete
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.fuel.httpPut
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import epitech.area.Activities.ReActionActivity
 import epitech.area.Managers.AreaAuthorization
-import epitech.area.Storages.AReActionObject
-import epitech.area.Storages.AccountObject
-import epitech.area.Storages.AreaObject
-import epitech.area.Storages.ReactionObject
+import epitech.area.Storages.*
 
 class AreaService {
 
-    val gson = Gson()
+    val gson = GsonBuilder().create()
+    val reActionGson = GsonBuilder().registerTypeAdapter(Array<FieldObject>::class.java, FieldsAdapter()).create()
+
 
     private object Holder { val INSTANCE = AreaService() }
 
@@ -81,6 +80,11 @@ class AreaService {
         try {
             "area/".httpPost()
                     .body("{\"name\": \"" + name + "\", \"activated\": \"" + activated + "\", \"timer\": \"" + timer + "\"}")
+                    .response() { _, _, result ->
+                        val (res, err) = result
+                        Log.d("test", err.toString())
+
+                    }
         } catch (e: Exception) {
             Log.d("Create Area Exception", e.toString())
         }
@@ -97,9 +101,9 @@ class AreaService {
     fun postReAction(reAction: AReActionObject) {
         try {
             if (reAction.id.isNotBlank())
-                ("area/" + reAction.areaId  + "/" + reAction.id).httpPut().body(gson.toJson(reAction))
+                ("area/" + reAction.areaId  + "/" + reAction.id).httpPut().body(reActionGson.toJson(reAction))
             else
-                ("area/" + reAction.areaId  + "/").httpPost().body(gson.toJson(reAction))
+                ("area/" + reAction.areaId  + "/").httpPost().body(reActionGson.toJson(reAction))
         } catch (e: Exception) {
             Log.d("Create Area Exception", e.toString())
         }

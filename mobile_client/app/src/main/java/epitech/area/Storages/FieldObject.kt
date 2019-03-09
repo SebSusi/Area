@@ -2,6 +2,9 @@ package epitech.area.Storages
 
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.google.gson.Gson
+import com.google.gson.TypeAdapter
+import com.google.gson.stream.JsonReader
+import com.google.gson.stream.JsonWriter
 import java.io.Serializable
 import java.lang.Exception
 
@@ -62,6 +65,12 @@ data class FieldObject (
         return options[position - 1].value.toString()
     }
 
+    fun getOptionNameByPosition(position: Int): String {
+        if (position <= 0 || position > options.size)
+            return ""
+        return options[position - 1].name
+    }
+
     fun getOptionPosition(optionValue: Int = getValueAsInt()) : Int {
         options.forEachIndexed {index, option ->
             if (option.value == optionValue)
@@ -76,5 +85,20 @@ data class FieldObject (
         } catch (e: Exception) {
         }
         return -1
+    }
+}
+
+class FieldsAdapter : TypeAdapter<Array<FieldObject>>() {
+
+    override fun write(writer: JsonWriter?, fields: Array<FieldObject>?) {
+        writer?.beginObject()
+        fields?.forEach { field ->
+            writer?.name(field.name)?.value(field.value)
+        }
+        writer?.endObject()
+    }
+
+    override fun read(reader: JsonReader?): Array<FieldObject> {
+        return arrayOf()
     }
 }

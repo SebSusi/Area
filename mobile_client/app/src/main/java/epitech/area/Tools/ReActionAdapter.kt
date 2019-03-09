@@ -30,7 +30,8 @@ class ReActionAdapter(private val context: Context, private var reActions : Arra
     fun setReActions(areaObject: AreaObject) {
         reActions.clear()
         areaObject.setReActionAreaId()
-        reActions.add(areaObject.action)
+        if (areaObject.action.id.isNotBlank())
+            reActions.add(areaObject.action)
         areaObject.reactions.forEach { reaction ->
             reActions.add(reaction)
         }

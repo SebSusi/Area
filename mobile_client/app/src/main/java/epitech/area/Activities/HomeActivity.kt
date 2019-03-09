@@ -23,7 +23,7 @@ class HomeActivity : FragmentActivity() {
         areaList.layoutManager = LinearLayoutManager(this)
         areaList.adapter = AreaAdapter(this)
         AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
-        var adapter = areaList.adapter as AreaAdapter
+        val adapter = areaList.adapter as AreaAdapter
         managerbutton.setOnClickListener {
             adapter.changeVisibility()
         }
