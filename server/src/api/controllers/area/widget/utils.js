@@ -1,9 +1,12 @@
 async function save(widget) {
-    return await widget.save(function (err, object) {
+    let save = await widget.save(function (err, object) {
         if (err)
             return false;
         return object;
     });
+    if (save === false)
+        return false;
+    return widget;
 }
 
 exports.saveActionData = async function (action, data) {

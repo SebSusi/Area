@@ -5,11 +5,14 @@ const schemaGetter = require('../../../models/widget/schemaGetter');
 const areaSetter = require('../setters');
 
 async function save(widget) {
-    return await widget.save(function (err, object) {
+    let save = await widget.save(function (err, object) {
         if (err)
             return false;
         return object;
     });
+    if (save === false)
+        return false;
+    return widget;
 }
 
 exports.setParamIfExist = function (paramsObj, paramKey, valueObj, valueKey, params, update) {

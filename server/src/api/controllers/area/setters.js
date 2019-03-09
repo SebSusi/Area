@@ -52,9 +52,13 @@ exports.updateArea = async function (req, area) {
         return {success: false};
     if (req.user !== undefined)
         area.ownerId = req.user.id;
-    area.name = req.body.name;
-    area.activated = req.body.activated;
-    area.timer = req.body.timer;
+    else return {success: false};
+    if (req.body.name !== undefined)
+        area.name = req.body.name;
+    if (req.body.activated !== undefined)
+        area.activated = req.body.activated;
+    if (req.body.timer !== undefined)
+        area.timer = req.body.timer;
     await save(area);
     return {id: area.id, success: true};
 };
