@@ -19,9 +19,10 @@ exports.deleteActionWithoutSaveArea = async function (action) {
 exports.deleteAction = async function (area, actionId) {
     if (area.action.id !== actionId)
         return {success: false};
-    let action = widgetGetter.getReactionWidgetByAreaReaction(area.action);
+    let action = await widgetGetter.getActionWidgetByAreaAction(area.action);
     let status = await action.remove();
     if (status !== false && status !== null && status !== undefined) {
+        area.action = {};
         if ((await save(area)) === false)
             return {success: false};
         return {success: true};
@@ -40,7 +41,7 @@ exports.deleteReaction = async function (area, reactionId) {
     if (evens.empty())
         return {success: false};
     let reaction = evens[0];
-    let reactionObject = widgetGetter.getReactionWidgetByAreaReaction(reaction);
+    let reactionObject = await widgetGetter.getReactionWidgetByAreaReaction(reaction);
     let status = await reactionObject.remove();
     if (status !== false && status !== null && status !== undefined) {
         if ((await save(area)) === false)

@@ -3,6 +3,9 @@
 const _ = require('lodash');
 
 const widgetGlobalParams = {
+    user: {
+        id: String,
+    },
     account: {
         type: String,
         id: String,

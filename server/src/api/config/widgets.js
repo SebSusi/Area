@@ -568,10 +568,41 @@ let widgets = function () {
                                         },
                                     ]
                                 },
+                                {
+                                    type: "checkbox",
+                                    name: 'country',
+                                    label: 'Country',
+                                    placeholder: 'France',
+                                    options: [
+                                        {
+                                            value: 1,
+                                            label: 'Felicien'
+                                        },
+                                        {
+                                            value: 2,
+                                            label: 'Felicienne'
+                                        }
+                                    ],
+                                    validations: [
+                                        {
+                                            type: 'required',
+                                            message: 'Name Required'
+                                        },
+                                        {
+                                            type: 'pattern',
+                                            pattern: '\'^[a-zA-Z]+$\'',
+                                            message: 'Accept only text'
+                                        },
+                                    ]
+                                },
                             ],
-                            output: {
-                                temperature: {type: "Number", value: 10},
-                            },
+                            output: [
+                                {
+                                    name: "temperature",
+                                    description: "Temperature actuelle"
+                                },
+                            ],
+
                         },
                     ],
                 reactions: [],

@@ -36,13 +36,15 @@ exports.setWidgetParams = function (req, model, params, update) {
     let paramsObj = {};
     let modelParams = schemaGetter.getModelSchemaParams(model);
     modelParams.forEach(function (modelParam) {
-        exports.setParamIfExist(paramsObj, modelParam, req, 'body.fields' + modelParam, params, update);
+        exports.setParamIfExist(paramsObj, modelParam, req, 'body.fields.' + modelParam, params, update);
     });
     return paramsObj;
 };
 
 exports.addAction = async function (req, area) {
     let action = widgetGetter.getActionByServiceNameAndActionName(req.body.serviceName, req.body.name);
+    if (action === false)
+        return {success: false};
     let model = action.model;
     let params = exports.setWidgetParams(req, model, undefined, false);
     if (params === false)
@@ -64,6 +66,8 @@ exports.updateAction = async function (req, area, actionObject) {
     if (actionObject.serviceName !== req.body.serviceName || actionObject.name !== req.body.name)
         return exports.updateActionWithDelete(req, area, actionObject);
     let action = widgetGetter.getActionByServiceNameAndActionName(req.body.serviceName, req.body.name);
+    if (action === false)
+        return {success: false};
     let model = action.model;
     let params = exports.setWidgetParams(req, model, actionObject.params, false);
     if (params === false)
@@ -76,6 +80,8 @@ exports.updateAction = async function (req, area, actionObject) {
 
 exports.addReaction = async function (req, area) {
     let reaction = widgetGetter.getReactionByServiceNameAndReactionName(req.body.serviceName, req.body.name);
+    if (reaction === false)
+        return {success: false};
     let model = reaction.model;
     let params = exports.setWidgetParams(req, model, undefined, false);
     if (params === false)
@@ -96,8 +102,10 @@ exports.updateReactionWithDelete = async function (req, area, reactionObject) {
 exports.updateReaction = async function (req, area, reactionObject) {
     if (reactionObject.serviceName !== req.body.serviceName || reactionObject.name !== req.body.name)
         return exports.updateReactionWithDelete(req, area, reactionObject);
-    let action = widgetGetter.getActionByServiceNameAndActionName(req.body.serviceName, req.body.name);
-    let model = action.model;
+    let reaction = widgetGetter.getReactionByServiceNameAndReactionName(req.body.serviceName, req.body.name);
+    if (reaction === false)
+        return {success: false};
+    let model = reaction.model;
     let params = exports.setWidgetParams(req, model, reactionObject.params, false);
     if (params === false)
         return {id: false, success: false};

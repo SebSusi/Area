@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('express').Router({mergeParams: true});
 const jwt = require('../../../../controllers/auth/jwtAuth');
 const displayName = require('../../../../controllers/account/profile/edit/displayName');
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const router = require('express').Router();
+const router = require('express').Router({mergeParams: true});
 
 const apiRouter = require('../../api/routes/index');
 const errorRoutes = require('./errors');

@@ -1,6 +1,6 @@
 'use strict';
 
-const router = require('express').Router();
+const router = require('express').Router({mergeParams: true});
 const local = require('./localAuth');
 const google = require('./googleAuth');
 const facebook = require('./facebookAuth');

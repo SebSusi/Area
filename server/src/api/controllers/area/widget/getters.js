@@ -67,8 +67,8 @@ async function getFormattedAreaActionReaction(type, object) {
     let fields = [];
     for (let i = 0; i < fieldsOption.length; i++) {
         fields.push({
-            'name': fieldsOption.name,
-            'value': databaseObject.params[fieldsOption.name]
+            'name': fieldsOption[i].name,
+            'value': databaseObject.params[fieldsOption[i].name]
         });
     }
     return {
@@ -81,7 +81,6 @@ async function getFormattedAreaActionReaction(type, object) {
 }
 
 exports.getFormattedAreaActionByAction = async function (action) {
-    console.log(action);
     if (action === null || action === undefined || String(action) === "{}")
         return {};
     return getFormattedAreaActionReaction("actions", action)
