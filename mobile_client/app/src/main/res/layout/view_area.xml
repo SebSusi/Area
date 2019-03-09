@@ -5,7 +5,6 @@
     android:id="@+id/arealayout"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:background="@color/darkColorPrimary"
     android:layout_margin="8dp"
     android:exported="true">
 
@@ -25,6 +24,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:contentDescription="@string/action_image"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +34,7 @@
         android:id="@+id/arrowImage"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:contentDescription="@string/arrow_image"
         android:elevation="10dp"
         android:src="@drawable/ic_arrow_right"
         app:layout_constraintBottom_toBottomOf="@+id/actionImage"
@@ -46,6 +47,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:contentDescription="@string/reaction_image"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/arrowImage"
@@ -65,15 +67,15 @@
 
     <Switch
         android:id="@+id/areaSwitch"
-        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
         android:elevation="10dp"
         android:textColor="@color/darkColorAccentWhite"
         android:theme="@style/AreaSwitch"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/areaDelete"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ru.dimorinny.floatingtextbutton.FloatingTextButton
         android:id="@+id/areaDelete"
