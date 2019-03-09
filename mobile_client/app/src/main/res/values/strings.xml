@@ -31,4 +31,15 @@
 
     <string name="action_settings">Settings</string>
     <string name="action_dark">Dark Mode</string>
+
+    <string name="main_logo">main</string>
+
+    <string name="action_image">action</string>
+    <string name="arrow_image">arrow</string>
+    <string name="reaction_image">reaction</string>
+
+    <string name="user_input">Username</string>
+    <string name="mail_input">Email</string>
+    <string name="password_input">Password</string>
+    <string name="cpassword_input">Confirm Password</string>
 </resources>

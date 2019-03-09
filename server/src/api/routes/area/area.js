@@ -1,6 +1,6 @@
 'use strict';
 
-const router = require('express').Router();
+const router = require('express').Router({mergeParams: true});
 const jwt = require('../../controllers/auth/jwtAuth');
 const areaGetters = require('../../controllers/area/getters');
 const areaSetters = require('../../controllers/area/setters');
@@ -28,7 +28,7 @@ router.delete('/:areaId', jwt.requireAuth, async function (req, res) {
 
 router.put('/:areaId', jwt.requireAuth, async function (req, res) {
     let areaId = req.params.areaId;
-    res.json(await areaSetters.updateArea(req, areaGetters.getAreaById(req.user, areaId)))
+    res.json(await areaSetters.updateArea(req, await areaGetters.getAreaById(req.user, areaId)))
 });
 
 router.use('/:areaId/action', actionRouter);

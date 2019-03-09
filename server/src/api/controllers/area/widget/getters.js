@@ -60,6 +60,9 @@ async function getFormattedAreaActionReaction(type, object) {
     if (object === null || object === undefined || String(object) === "{}")
         return {};
     let databaseObject = await exports.getWidgetByObjectAndType(object, type);
+    console.log(databaseObject);
+    if (databaseObject === false || databaseObject === null)
+        return false;
     let account = databaseObject.account;
     if (account === {} || account === undefined)
         account = null;
@@ -67,8 +70,8 @@ async function getFormattedAreaActionReaction(type, object) {
     let fields = [];
     for (let i = 0; i < fieldsOption.length; i++) {
         fields.push({
-            'name': fieldsOption.name,
-            'value': databaseObject.params[fieldsOption.name]
+            'name': fieldsOption[i].name,
+            'value': databaseObject.params[fieldsOption[i].name]
         });
     }
     return {
@@ -81,7 +84,6 @@ async function getFormattedAreaActionReaction(type, object) {
 }
 
 exports.getFormattedAreaActionByAction = async function (action) {
-    console.log(action);
     if (action === null || action === undefined || String(action) === "{}")
         return {};
     return getFormattedAreaActionReaction("actions", action)
@@ -98,7 +100,9 @@ exports.getFormattedAreaReactionsByReactions = async function (reactions) {
         return [];
     let formattedReactions = [];
     for (let i = 0; i < reactions.length; i++) {
-        formattedReactions.push(await getFormattedAreaActionReaction("reactions", reactions[i]))
+        let reaction = await getFormattedAreaActionReaction("reactions", reactions[i]);
+        if (reaction !== false)
+            formattedReactions.push(reaction)
     }
     return formattedReactions;
 };

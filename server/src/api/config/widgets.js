@@ -559,10 +559,20 @@ let widgets = function () {
                                     ]
                                 },
                                 {
-                                    type: "text",
+                                    type: "checkbox",
                                     name: 'country',
                                     label: 'Country',
-                                    placeholder: 'Type a country',
+                                    placeholder: 'France',
+                                    options: [
+                                        {
+                                            value: 1,
+                                            label: 'Felicien'
+                                        },
+                                        {
+                                            value: 2,
+                                            label: 'Felicienne'
+                                        }
+                                    ],
                                     validations: [
                                         {
                                             type: 'required',
@@ -571,9 +581,13 @@ let widgets = function () {
                                     ]
                                 }
                             ],
-                            output: {
-                                temperature: {type: "Number", value: 10},
-                            },
+                            output: [
+                                {
+                                    name: "temperature",
+                                    description: "Temperature actuelle"
+                                },
+                            ],
+
                         },
                     ],
                 reactions: [],

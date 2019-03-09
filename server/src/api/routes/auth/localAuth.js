@@ -1,6 +1,6 @@
 'use strict';
 
-const router = require('express').Router();
+const router = require('express').Router({mergeParams: true});
 const passport = require('../../controllers/auth/local/local');
 const jwt = require('../../controllers/auth/jwtAuth');
 const authUtils = require('../../controllers/auth/common/utils');

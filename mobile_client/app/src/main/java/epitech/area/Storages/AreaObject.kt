@@ -19,4 +19,11 @@ data class AreaObject(
     class ArrayDeserializer : ResponseDeserializable<Array<AreaObject>> {
         override fun deserialize(content: String) = Gson().fromJson(content, Array<AreaObject>::class.java)
     }
+
+    fun setReActionAreaId(areaId: String = uniqueId) {
+        action.areaId = areaId
+        reactions.forEach { reactionObject ->
+            reactionObject.areaId = areaId
+        }
+    }
 }

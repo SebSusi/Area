@@ -15,4 +15,8 @@ export class AreaItemComponent implements OnInit {
   ngOnInit() {
   }
 
+  public print() {
+//      console.log(this.area);
+  }
+
 }

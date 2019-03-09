@@ -16,10 +16,8 @@ class InfoService {
     private var areaInfos: Array<ServiceObject> = arrayOf()
 
     private fun getInfos() {
-        FuelManager.instance.basePath = "" //remove this when using real server
-        FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
         try {
-            "https://next.json-generator.com/api/json/get/VyOVzLxHL".httpGet()
+            "area_info".httpGet()
                     .responseObject(ServiceObject.ArrayDeserializer()) { _, _, result ->
                         val (res, err) = result
                         if (err == null) {
@@ -29,7 +27,6 @@ class InfoService {
         } catch (e: Exception) {
             Log.d("getInfos Exception", e.toString())
         }
-        FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
     }
 
     fun checkAreaInfos() {

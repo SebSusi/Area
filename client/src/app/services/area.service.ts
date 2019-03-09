@@ -21,22 +21,23 @@ export class AreaService {
     }
 
     getAreas(): Observable<Area[]> {
-//        const url = 'https://next.json-generator.com/api/json/get/EkdygAcV8';
-
         return this.api.apiGet('/area').pipe(
             map((data: any[]) => data.map(item => AreaAdapter.adapt(item))),
-            tap(data => this._areas = data)
+            tap(data => this._areas = data),
+            tap(data => console.log(data))
         );
     }
 
-    getArea(id: string, name: string = 'twitter'): Observable<Area> {
-//        const url = 'https://next.json-generator.com/api/json/get/4JboGC5VU';
-        if (id === undefined || id.length === 0)
+    getArea(id: string, name: string = 'Basic Area'): Observable<Area> {
+        console.log(id.length);
+        if (id === undefined || id.length === 0) {
             return this.api.apiPost('/area/', {name: name, timer: 5, activated: true}).pipe(
                 map(data => AreaAdapter.adaptFromNew(data['id'], name)),
                 tap(data => this.updateArea(data)),
-                tap(data => this.id = data['id'])
+                tap(data => this.id = data['id']),
+                tap(data => console.log(data))
             );
+        }
         return this.api.apiGet(id.concat('/area/')).pipe(
             map(data => AreaAdapter.adapt(data)),
             tap(data => this.updateArea(data)),

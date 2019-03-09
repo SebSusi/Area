@@ -1,6 +1,6 @@
 'use strict';
 
-const router = require('express').Router();
+const router = require('express').Router({mergeParams: true});
 const profile = require('../../../controllers/account/profile/profile');
 const edit = require('./info/edit');
 const localEdit = require('./local/edit');
