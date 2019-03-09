@@ -47,7 +47,9 @@ class FieldAdapter(private val context: Context, private var fields : ArrayList<
         when (fields[position].type) {
             "boolean" -> initSwitch(holder, position)
             "list" -> initList(holder, position)
+            "checkbox" -> initList(holder, position)
             "text" -> initText(holder, position, TYPE_CLASS_TEXT or TYPE_TEXT_FLAG_MULTI_LINE)
+            "multiligne" -> initText(holder, position, TYPE_CLASS_TEXT or TYPE_TEXT_FLAG_MULTI_LINE)
             "number" -> initText(holder, position, TYPE_CLASS_NUMBER)
         }
     }
@@ -58,6 +60,8 @@ class FieldAdapter(private val context: Context, private var fields : ArrayList<
         holder.fieldSwitch.isChecked = (fields[position].value == "true")
         holder.fieldSwitch.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener {
             override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+                if (position >= fields.size)
+                    return
                 if (isChecked)
                     fields[position].value = "true"
                 else
@@ -100,12 +104,17 @@ class FieldAdapter(private val context: Context, private var fields : ArrayList<
         holder.fieldList.setSelection(fields[position].getOptionPosition())
         holder.fieldList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
+                if (position >= fields.size)
+                    return
                 fields[position].value = ""
                 reActionActivity.checkField(fields[position].name, fields[position].value)
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-                fields[position].value = fields[position].getOptionValueByPosition(pos)
+                if (position >= fields.size)
+                    return
+//                fields[position].value = fields[position].getOptionValueByPosition(pos)
+                fields[position].value = fields[position].getOptionNameByPosition(pos)
                 reActionActivity.checkField(fields[position].name, fields[position].value)
             }
         }
