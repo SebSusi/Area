@@ -8,27 +8,27 @@ const areaDeleters = require('../../controllers/area/deleters');
 const actionRouter = require('./action');
 const reactionRouter = require('./reaction');
 
-router.get('/', jwt.requireAuth, function (req, res) {
-    res.json(areaGetters.getFormattedAreasByUser(req.user))
+router.get('/', jwt.requireAuth, async function (req, res) {
+    res.json(await areaGetters.getFormattedAreasByUser(req.user))
 });
 
-router.post('/', function (req, res) {
-    res.json(res.json(areaSetters.createArea(req)))
+router.post('/', jwt.requireAuth, async function (req, res) {
+    res.json(await areaSetters.createArea(req))
 });
 
-router.get('/:areaId', jwt.requireAuth, function (req, res) {
+router.get('/:areaId', jwt.requireAuth, async function (req, res) {
     let areaId = req.params.areaId;
-    res.json(areaGetters.getFormattedAreaById(req.user, areaId))
+    res.json(await areaGetters.getFormattedAreaById(req.user, areaId))
 });
 
-router.delete('/:areaId', jwt.requireAuth, function (req, res) {
+router.delete('/:areaId', jwt.requireAuth, async function (req, res) {
     let areaId = req.params.areaId;
-    res.json(areaDeleters.deleteArea(req, areaGetters.getAreaById(req.user, areaId)))
+    res.json(await areaDeleters.deleteArea(req, await areaGetters.getAreaById(req.user, areaId)))
 });
 
-router.put('/:areaId', jwt.requireAuth, function (req, res) {
+router.put('/:areaId', jwt.requireAuth, async function (req, res) {
     let areaId = req.params.areaId;
-    res.json(areaSetters.updateArea(req, areaGetters.getAreaById(req.user, areaId)))
+    res.json(await areaSetters.updateArea(req, areaGetters.getAreaById(req.user, areaId)))
 });
 
 router.use('/:areaId/action', actionRouter);

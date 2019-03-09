@@ -36,27 +36,29 @@ exports.getReactionByServiceNameAndReactionName = function (service, reaction) {
 };
 
 exports.getActionWidgetByAreaAction = async function (areaAction) {
-    if (areaAction === {} || areaAction === undefined || areaAction === null)
+    if (String(areaAction) === "{}" || areaAction === undefined || areaAction === null)
         return false;
     let model = getModelByServiceNameAndActionName(areaAction.serviceName, areaAction.name, "actions");
     return await model.findOne({"_id": areaAction.id})
 };
 
 exports.getReactionWidgetByAreaReaction = async function (areaReaction) {
-    if (areaReaction === {} || areaReaction === undefined || areaReaction === null)
+    if (String(areaReaction) === "{}" || areaReaction === undefined || areaReaction === null)
         return false;
     let model = getModelByServiceNameAndActionName(areaReaction.serviceName, areaReaction.name, "reactions");
     return await model.findOne({"_id": areaReaction.id})
 };
 
 exports.getWidgetByObjectAndType = async function (object, type) {
-    if (object === {} || object === undefined || object === null)
+    if (String(object) === "{}" || object === undefined || object === null)
         return false;
     let model = getModelByServiceNameAndActionName(object.serviceName, object.name, type);
     return await model.findOne({"_id": object.id})
 };
 
 async function getFormattedAreaActionReaction(type, object) {
+    if (object === null || object === undefined || String(object) === "{}")
+        return {};
     let databaseObject = await exports.getWidgetByObjectAndType(object, type);
     let account = databaseObject.account;
     if (account === {} || account === undefined)
@@ -79,14 +81,21 @@ async function getFormattedAreaActionReaction(type, object) {
 }
 
 exports.getFormattedAreaActionByAction = async function (action) {
+    console.log(action);
+    if (action === null || action === undefined || String(action) === "{}")
+        return {};
     return getFormattedAreaActionReaction("actions", action)
 };
 
 exports.getFormattedAreaReactionByReaction = async function (reaction) {
+    if (reaction === null || reaction === undefined || String(reaction) === "{}")
+        return {};
     return getFormattedAreaActionReaction("reactions", reaction)
 };
 
 exports.getFormattedAreaReactionsByReactions = async function (reactions) {
+    if (reactions === null || reactions === undefined || String(reactions) === "{}" || reactions === [])
+        return [];
     let formattedReactions = [];
     for (let i = 0; i < reactions.length; i++) {
         formattedReactions.push(await getFormattedAreaActionReaction("reactions", reactions[i]))
@@ -95,9 +104,13 @@ exports.getFormattedAreaReactionsByReactions = async function (reactions) {
 };
 
 exports.getFormattedAreaActionByArea = async function (area) {
+    if (area === null || area === undefined || String(area) === "{}")
+        return {};
     return exports.getFormattedAreaActionByAction(area.action)
 };
 
 exports.getFormattedAreaReactionsByArea = async function (area) {
-    return exports.getFormattedAreaActionByAction(area.reactions)
+    if (area === null || area === undefined || String(area) === "{}")
+        return [];
+    return exports.getFormattedAreaReactionsByReactions(area.reactions)
 };

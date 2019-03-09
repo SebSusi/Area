@@ -2,11 +2,14 @@ const _ = require('lodash');
 const Area = require('../../models/area/Area');
 
 async function save(area) {
-    return await area.save(function (err, object) {
+    let save = await area.save(function (err, object) {
         if (err)
             return false;
         return object;
     });
+    if (save === false)
+        return false;
+    return area;
 }
 
 exports.saveAction = async function (area, id, serviceName, name) {
@@ -47,22 +50,31 @@ exports.deleteAction = async function (area) {
 exports.updateArea = async function (req, area) {
     if (area === false)
         return {success: false};
-    area.params = params;
-    area.ownerId = req.user._id;
+    if (req.user !== undefined)
+        area.ownerId = req.user.id;
     area.name = req.body.name;
     area.activated = req.body.activated;
     area.timer = req.body.timer;
     await save(area);
-    return {id: area._id, success: true};
+    return {id: area.id, success: true};
 };
 
 exports.createArea = async function (req) {
     let newArea = new Area();
-    newArea.params = params;
-    newArea.ownerId = req.user._id;
-    newArea.name = req.body.name;
-    newArea.activated = req.body.activated;
-    newArea.timer = req.body.timer;
+    if (req.user !== undefined)
+        newArea.ownerId = req.user.id;
+    else return {success: false};
+    if (req.body.name !== undefined)
+        newArea.name = req.body.name;
+    else return {success: false};
+    if (req.body.activated !== undefined)
+        newArea.activated = req.body.activated;
+    else return {success: false};
+    if (req.body.timer !== undefined)
+        newArea.timer = req.body.timer;
+    else return {success: false};
     newArea = await save(newArea);
-    return {id: newArea._id, success: true};
+    if (newArea === false)
+        return {success: false};
+    return {id: newArea.id, success: true};
 };

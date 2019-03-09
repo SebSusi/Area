@@ -19,7 +19,7 @@ exports.getFormattedAreasByUser = async function (user) {
             "name": area.name,
             "activated": area.activated,
             "timer": area.timer,
-            "uniqueId": area._id,
+            "uniqueId": area.id,
             "action": area.action,
             "reactions": area.reactions
         })
@@ -29,15 +29,15 @@ exports.getFormattedAreasByUser = async function (user) {
 
 exports.getFormattedAreaById = async function (user, id) {
     let findArea = await Area.findOne({'_id': id, 'ownerId': user.id});
-    if (findArea === false)
-        return false;
+    if (findArea === false || findArea === null)
+        return {success: false};
     let action = await widgetGetter.getFormattedAreaActionByArea(findArea);
     let reactions = await widgetGetter.getFormattedAreaReactionsByArea(findArea);
     return {
         "name": findArea.name,
         "activated": findArea.activated,
         "timer": findArea.timer,
-        "uniqueId": findArea._id,
+        "uniqueId": findArea.id,
         "action": action,
         "reactions": reactions
     };
@@ -45,7 +45,7 @@ exports.getFormattedAreaById = async function (user, id) {
 
 exports.getAreaById = async function (user, id) {
     let findArea = await Area.findOne({'_id': id, 'ownerId': user.id});
-    if (findArea === false)
+    if (findArea === false || findArea === null)
         return false;
     return findArea;
 };

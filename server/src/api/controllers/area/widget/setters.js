@@ -46,10 +46,10 @@ exports.addAction = async function (req, area) {
         return {id: false, success: false};
     let newAction = new model();
     newAction.params = params;
-    newAction.user.id = req.user._id;
+    newAction.user.id = req.user.id;
     newAction = await save(newAction);
-    await areaSetter.saveAction(area, newAction._id, req.body.serviceName, req.body.name);
-    return {id: newAction._id, success: true};
+    await areaSetter.saveAction(area, newAction.id, req.body.serviceName, req.body.name);
+    return {id: newAction.id, success: true};
 };
 
 exports.updateActionWithDelete = async function (req, area, actionObject) {
@@ -67,7 +67,7 @@ exports.updateAction = async function (req, area, actionObject) {
         return {id: false, success: false};
     actionObject.params = params;
     await save(actionObject);
-    return {id: actionObject._id, success: true};
+    return {id: actionObject.id, success: true};
 };
 
 
@@ -79,10 +79,10 @@ exports.addReaction = async function (req, area) {
         return {id: false, success: false};
     let newReaction = new model();
     newReaction.params = params;
-    newReaction.user.id = req.user._id;
+    newReaction.user.id = req.user.id;
     newReaction = await save(newReaction);
-    await areaSetter.addReaction(area, newReaction._id, req.body.serviceName, req.body.name);
-    return {id: newReaction._id, success: true};
+    await areaSetter.addReaction(area, newReaction.id, req.body.serviceName, req.body.name);
+    return {id: newReaction.id, success: true};
 };
 
 exports.updateReactionWithDelete = async function (req, area, reactionObject) {
@@ -100,5 +100,5 @@ exports.updateReaction = async function (req, area, reactionObject) {
         return {id: false, success: false};
     reactionObject.params = params;
     await save(reactionObject);
-    return {id: reactionObject._id, success: true};
+    return {id: reactionObject.id, success: true};
 };

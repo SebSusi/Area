@@ -13,8 +13,6 @@ function getActionReactionAbout(object, type) {
     };
     if (type === 'actions')
         about.output = object.output;
-    else if (type === 'reactions')
-        about.input = object.input;
     return about;
 }
 
@@ -22,12 +20,14 @@ function getServiceAbout(service) {
     let actions = [];
     let reactions = [];
 
-    service.actions.forEach(function (action) {
-        actions.push(getActionReactionAbout(action, 'actions'));
-    });
-    service.reactions.forEach(function (reaction) {
-        reactions.push(getActionReactionAbout(reaction, 'reactions'));
-    });
+    if (service.actions !== undefined)
+        service.actions.forEach(function (action) {
+            actions.push(getActionReactionAbout(action, 'actions'));
+        });
+    if (service.reactions !== undefined)
+        service.reactions.forEach(function (reaction) {
+            reactions.push(getActionReactionAbout(reaction, 'reactions'));
+        });
     return {
         name: service.name,
         actions: actions,

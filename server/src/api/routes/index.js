@@ -4,7 +4,7 @@ const router = require('express').Router();
 const jwt = require('../controllers/auth/jwtAuth');
 const auth = require('./auth/auth');
 const account = require('./account/account');
-const area = require('./area/action');
+const area = require('./area/area');
 const areaInfo = require('../controllers/area/about');
 
 router
