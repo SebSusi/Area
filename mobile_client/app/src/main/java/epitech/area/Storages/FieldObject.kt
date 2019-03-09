@@ -9,7 +9,7 @@ data class FieldObject (
         val type: String = "",
         val name: String = "",
         val label: String = "",
-        val placeHolder: String = "",
+        val placeholder: String = "",
         val options: Array<OptionObject> = arrayOf(),
         val validations: Array<ValidationObject> = arrayOf(),
         var value: String = "") : Serializable {
@@ -41,16 +41,16 @@ data class FieldObject (
     }
 
     fun getOptionArray(): Array<String> {
-        var array: Array<String> = arrayOf(placeHolder)
+        var array: Array<String> = arrayOf(placeholder)
         options.forEach { option ->
-            array = array.plus(option.label)
+            array = array.plus(option.name)
         }
         return array
     }
 
     fun getOptionValue(name: String): String {
         options.forEach {option ->
-            if (option.label == name)
+            if (option.name == name)
                 return option.value.toString()
         }
         return ""

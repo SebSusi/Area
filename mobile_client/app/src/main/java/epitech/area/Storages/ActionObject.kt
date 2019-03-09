@@ -9,8 +9,9 @@ data class ActionObject (
         override var id: String = "",
         override var accountId: String = "",
         override var fields: Array<FieldObject> = arrayOf(),
-        var output: Array<OutputObject> = arrayOf(),
-        override var type: String = "ACTION") : AReActionObject() {
+        //var output: Array<OutputObject> = arrayOf(),
+        override var type: String = "ACTION",
+        override var areaId: String = "") : AReActionObject() {
 
     class Deserializer : ResponseDeserializable<ActionObject>{
         override fun deserialize(content: String) = Gson().fromJson(content, ActionObject::class.java)

@@ -72,20 +72,20 @@ class FieldAdapter(private val context: Context, private var fields : ArrayList<
         holder.fieldLabel.text = fields[position].label
         holder.fieldText.visibility = View.VISIBLE
         holder.fieldText.inputType = inputType
-        holder.fieldText.hint = fields[position].placeHolder
+        holder.fieldText.hint = fields[position].placeholder
         if (fields[position].value.isNotEmpty())
             holder.fieldText.setText(fields[position].value)
         else
             holder.fieldText.text!!.clear()
         holder.fieldText.addTextChangedListener (object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
+                if (position >= fields.size)
+                    return
                 fields[position].value = s.toString()
                 reActionActivity.checkField(fields[position].name, fields[position].value)
             }
-
             override fun beforeTextChanged(s: CharSequence, start: Int,
                                            count: Int, after: Int) {}
-
             override fun onTextChanged(s: CharSequence, start: Int,
                                        before: Int, count: Int) {}
         })

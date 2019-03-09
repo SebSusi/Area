@@ -12,6 +12,7 @@ import epitech.area.Activities.ReActionActivity
 import epitech.area.R
 import epitech.area.Storages.AReActionObject
 import epitech.area.Storages.AreaObject
+import epitech.area.Storages.ReactionObject
 
 import kotlinx.android.synthetic.main.view_re_action.view.*
 
@@ -28,6 +29,7 @@ class ReActionAdapter(private val context: Context, private var reActions : Arra
 
     fun setReActions(areaObject: AreaObject) {
         reActions.clear()
+        areaObject.setReActionAreaId()
         reActions.add(areaObject.action)
         areaObject.reactions.forEach { reaction ->
             reActions.add(reaction)
@@ -85,7 +87,7 @@ class ReActionAdapter(private val context: Context, private var reActions : Arra
                     .setTitle("Delete reaction")
                     .setMessage("Do you really want to delete the reaction '" + reActions[position].getReActionName() + "' ?")
             alert.setPositiveButton(android.R.string.ok) { _, _ ->
-                AreaService.instance.deleteReaction(reActions[position].id)
+                AreaService.instance.deleteReaction(reActions[position] as ReactionObject)
                 removeReActionAt(position)
             }
             alert.setNegativeButton(android.R.string.cancel) { dialog, _ ->

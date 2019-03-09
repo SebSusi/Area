@@ -7,12 +7,14 @@ import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpDelete
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
+import com.github.kittinunf.fuel.httpPut
 import com.google.gson.Gson
 import epitech.area.Activities.ReActionActivity
 import epitech.area.Managers.AreaAuthorization
 import epitech.area.Storages.AReActionObject
 import epitech.area.Storages.AccountObject
 import epitech.area.Storages.AreaObject
+import epitech.area.Storages.ReactionObject
 
 class AreaService {
 
@@ -25,10 +27,8 @@ class AreaService {
     }
 
     fun getAreas(areaAdapter: AreaAdapter) {
-        FuelManager.instance.basePath = "" //remove this when using real server
-        FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
         try {
-            "https://next.json-generator.com/api/json/get/EkdygAcV8".httpGet()
+            "area/".httpGet()
                     .responseObject(AreaObject.ArrayDeserializer()) { _, _, result ->
                         val (res, err) = result
                         if (err == null) {
@@ -38,14 +38,11 @@ class AreaService {
         } catch (e: Exception) {
             Log.d("getAreas Exception", e.toString())
         }
-        FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
     }
 
     fun getArea(areaAdapter: AreaAdapter, position: Int, uniqueId: String) {
-        FuelManager.instance.basePath = "" //remove this when using real server
-        FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
         try {
-            "https://next.json-generator.com/api/json/get/4JboGC5VU".httpGet()
+            ("area/" + uniqueId).httpGet()
                     .responseObject(AreaObject.Deserializer()) { _, _, result ->
                         val (res, err) = result
                         if (err == null) {
@@ -59,10 +56,8 @@ class AreaService {
     }
 
     fun getArea(reActionAdapter: ReActionAdapter, textView: TextView,  area: AreaObject) {
-        FuelManager.instance.basePath = "" //remove this when using real server
-        FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
         try {
-            "https://next.json-generator.com/api/json/get/4JboGC5VU".httpGet()
+            ("area/" + area.uniqueId).httpGet()
                     .responseObject(AreaObject.Deserializer()) { _, _, result ->
                         val (res, err) = result
                         if (err == null) {
@@ -76,23 +71,15 @@ class AreaService {
         } catch (e: Exception) {
             Log.d("getArea Exception", e.toString())
         }
-        FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
-    }
-
-    fun changeAreaState(areaId: String, state: Boolean) {
-        return
-        "".httpPost()
     }
 
     fun changeAreaInfos(area: AreaObject) {
-        return
-        "".httpPost()
+        ("area/" + area.uniqueId).httpPut().body(gson.toJson(area))
     }
 
     fun createArea(name: String = "New Area", activated: Boolean = true, timer: Int = 60) {
-        return
         try {
-            "".httpPost()
+            "area/".httpPost()
                     .body("{\"name\": \"" + name + "\", \"activated\": \"" + activated + "\", \"timer\": \"" + timer + "\"}")
         } catch (e: Exception) {
             Log.d("Create Area Exception", e.toString())
@@ -100,25 +87,30 @@ class AreaService {
     }
 
     fun deleteArea(areaId: String) {
-        return
-        "".httpDelete()
+        try {
+            ("area/" + areaId).httpDelete()
+        } catch (e: Exception) {
+            Log.d("Delete Area Exception", e.toString())
+        }
     }
 
     fun postReAction(reAction: AReActionObject) {
-        return
         try {
             if (reAction.id.isNotBlank())
-                "".httpPost()
+                ("area/" + reAction.areaId  + "/" + reAction.id).httpPut().body(gson.toJson(reAction))
             else
-                "".httpPost().body(gson.toJson(reAction))
+                ("area/" + reAction.areaId  + "/").httpPost().body(gson.toJson(reAction))
         } catch (e: Exception) {
             Log.d("Create Area Exception", e.toString())
         }
     }
 
-    fun deleteReaction(areaId: String) {
-        return
-        "".httpPost()
+    fun deleteReaction(reaction: ReactionObject) {
+        try {
+            ("area/" + reaction.areaId  + "/" + reaction.id).httpDelete()
+        } catch (e: Exception) {
+            Log.d("Create Area Exception", e.toString())
+        }
     }
 
     fun getAccounts(accountAdapter: AccountAdapter) {

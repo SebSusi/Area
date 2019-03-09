@@ -25,9 +25,7 @@ class HomeActivity : FragmentActivity() {
         AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
         var adapter = areaList.adapter as AreaAdapter
         managerbutton.setOnClickListener {
-            adapter.changeVisible()
-            AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
-            areasRefresh.isRefreshing = false
+            adapter.changeVisibility()
         }
         accountsButton.setOnClickListener {
             val intent = Intent(this, AccountActivity::class.java)
@@ -49,9 +47,7 @@ class HomeActivity : FragmentActivity() {
         areaNew.actionImage.setImageResource(R.drawable.ic_basic)
         areaNew.arrowImage.visibility = View.INVISIBLE
         areaNew.areaClicker.setOnClickListener {
-            val intent = Intent(this, AreaActivity::class.java)
-            intent.putExtra("AreaObject", AreaObject())
-            startActivity(intent)
+            AreaService.instance.createArea()
             AreaService.instance.getAreas(areaList.adapter as AreaAdapter)
         }
     }
