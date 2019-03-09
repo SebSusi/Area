@@ -35,12 +35,10 @@ exports.deleteReactionWithoutSaveArea = async function (reaction) {
 };
 
 exports.deleteReaction = async function (area, reactionId) {
-    const evens = _.remove(area.reactions, async function (reactionAtPos) {
-        return reactionAtPos.id === reactionId;
-    });
-    if (evens.empty())
+    let reaction = _.find(area.reactions, {id: reactionId});
+    if (reaction === undefined)
         return {success: false};
-    let reaction = evens[0];
+    await area.reactions.pull({'_id': reaction._id});
     let reactionObject = await widgetGetter.getReactionWidgetByAreaReaction(reaction);
     let status = await reactionObject.remove();
     if (status !== false && status !== null && status !== undefined) {
