@@ -76,7 +76,10 @@ class AreaAdapter(private val context: Context, private var areas : ArrayList<Ar
         holder.areaDelete.visibility = visible
         holder.areaDelete.layoutParams.width = widthButton
         holder.areaName.text = areas[position].name
-        holder.actionImage.setImageResource(IconService.instance.getActionIcon(areas[position].action.serviceName))
+        if (areas[position].action.id.isNotBlank())
+            holder.actionImage.setImageResource(IconService.instance.getActionIcon(areas[position].action.serviceName))
+        else
+            holder.actionImage.setImageResource(IconService.instance.getServiceIcon())
         if (areas[position].reactions.size > 1) {
             holder.reactionImage.setImageResource(IconService.instance.getActionIcon("MULTIPLE"))
         } else if (areas[position].reactions.isNotEmpty()) {
