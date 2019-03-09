@@ -27,7 +27,7 @@ exports.getFormattedAreasByUser = async function (user) {
     return areas;
 };
 
-exports.getAreaById = async function (user, id) {
+exports.getFormattedAreaById = async function (user, id) {
     let findArea = await Area.findOne({'_id': id, 'ownerId': user.id});
     if (findArea === false)
         return false;
@@ -43,7 +43,7 @@ exports.getAreaById = async function (user, id) {
     };
 };
 
-exports.getFormattedAreaById = async function (user, id) {
+exports.getAreaById = async function (user, id) {
     let findArea = await Area.findOne({'_id': id, 'ownerId': user.id});
     if (findArea === false)
         return false;
@@ -82,7 +82,7 @@ exports.getFormattedAreaReactionByAreaIdAndReactionId = async function (user, id
     let findArea = await exports.getAreaById(user, id);
     if (findArea === false)
         return false;
-    for (let i = 0; i < findArea.reactions; i++) {
+    for (let i = 0; i < findArea.reactions.length; i++) {
         if (findArea.reactions[i].id === reactionId) {
             return await widgetGetter.getFormattedAreaReactionByReaction(findArea.reactions[i]);
         }

@@ -8,6 +8,8 @@ const widgetGlobalParams = {
         id: String,
     },
     params: {
+    },
+    data: {
     }
 };
 

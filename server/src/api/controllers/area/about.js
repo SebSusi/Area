@@ -9,6 +9,7 @@ function getActionReactionAbout(object, type) {
         name: object.name,
         description: object.description,
         fields: object.fields,
+        outputs: object.outputs,
     };
     if (type === 'actions')
         about.output = object.output;
