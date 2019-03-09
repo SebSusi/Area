@@ -13,7 +13,7 @@ import {tap} from 'rxjs/operators';
 })
 export class ActionService {
     private _actions: Action[] = [];
-    private _selected: number;
+    private _selected = 0;
 
     public actionsObservable = new Subject();
 
@@ -25,16 +25,22 @@ export class ActionService {
     }
 
     get actions(): Action[] {
-        return this._actions;
+        if (!this.areaService.getCurrentArea())
+            return [];
+        return this.areaService.getCurrentArea().actions;
+    }
+
+    getActiveAction() {
+        return this.actions[this._selected];
     }
 
     getAction(id: string): Action {
         if (id === undefined)
-            return this._actions[this._selected];
+            return this.actions[this._selected];
         this.setActiveActionById(id);
         if (this._selected <= -1)
             throw new Error('Can\'t find this action');
-        return this._actions[this._selected];
+        return this.actions[this._selected];
     }
 
     postAction(action: Action) {
@@ -52,17 +58,17 @@ export class ActionService {
         if (index < 0 || !actionId)
             return;
         if (actionId.startsWith('local'))
-            return this.postAction(this._actions[index]);
-        return this.putAction(this._actions[index]);
+            return this.postAction(this.actions[index]);
+        return this.putAction(this.actions[index]);
     }
 
     setAction(action: Action) {
         this.getAction(action.id);
-        this._actions[this._selected] = action;
+        this.actions[this._selected] = action;
     }
 
     getActionIndex(id: string) {
-        return this._actions.findIndex(item => item.id === id);
+        return this.actions.findIndex(item => item.id === id);
     }
 
     setActiveActionById(id: string) {
@@ -80,7 +86,7 @@ export class ActionService {
     getNewAction(type = ActionType.TRIGGER) {
         const id = 'local' + Math.random().toString(36).substring(7);
         const data = ActionAdapter.adapt({id: id}, type);
-        this._actions.push(data);
+        this.actions.push(data);
         return id;
     }
 

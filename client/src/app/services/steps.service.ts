@@ -24,14 +24,14 @@ export class StepsService {
       this.steps = new Map();
   }
 
-  addStep(name, description) {
+  addStep(name, description, index) {
       if (!this.firstStep)
           this.firstStep = name;
       this.lastStep = name;
       this.steps.set(name, {
           group: new FormGroup({}),
           description: description,
-          index: this.steps.size});
+          index});
   }
 
   getStep(name) {
@@ -50,18 +50,6 @@ export class StepsService {
       for (const key in controls)
           this.getFormGroup(name).addControl(key, new FormControl(controls[key][0], controls[key][1]));
   }
-
-    bindValidations(validations: any) {
-        if (validations.length > 0) {
-            console.log(validations);
-            const validList = [];
-            validations.forEach(valid => {
-                validList.push(valid.validator);
-            });
-            return Validators.compose(validList);
-        }
-        return null;
-    }
 
   reset(name, controls = null) {
       this.getStep(name).group = new FormGroup({});

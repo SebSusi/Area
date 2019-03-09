@@ -16,17 +16,15 @@ export class ActionComponent implements OnInit {
     }
 
     public action: Action = undefined;
-    private lastActionId = '';
 
     constructor(private actionService: ActionService, public stepsService: StepsService) {
         this.actionService.actionsObservable.subscribe(reset => {
-            this.action = this.actionService.getAction(undefined);
-            this.lastActionId = this.action.id;
+            this.action = this.actionService.getActiveAction();
         });
-        stepsService.addStep(Steps.SERVICE, 'Select Service');
-        stepsService.addStep(Steps.TYPE, 'Choose Action or Reaction');
-        stepsService.addStep(Steps.ACCOUNT, 'Connect Account');
-        stepsService.addStep(Steps.OPTIONS, 'Set Up Template');
+        stepsService.addStep(Steps.SERVICE, 'Select Service', 0);
+        stepsService.addStep(Steps.TYPE, 'Choose Action or Reaction', 1);
+        stepsService.addStep(Steps.ACCOUNT, 'Connect Account', 2);
+        stepsService.addStep(Steps.OPTIONS, 'Set Up Template', 3);
     }
 
     indexOrderAsc = (akv: KeyValue<string, any>, bkv: KeyValue<string, any>): number => {

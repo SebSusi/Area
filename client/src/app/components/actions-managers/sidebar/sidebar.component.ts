@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit {
 
     constructor(public actionService: ActionService, formB: FormBuilder, public stepperService: StepsService) {
         this.actionService.actionsObservable.subscribe(reset => {
-            this.action = this.actionService.getAction(undefined);
+            this.action = this.actionService.getActiveAction();
         });
     }
 

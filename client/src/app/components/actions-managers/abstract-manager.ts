@@ -10,7 +10,7 @@ export abstract class AbstractManager {
     protected constructor(protected actionService: ActionService, public stepsService: StepsService) {
         this.action = actionService.getAction(undefined);
         this.actionService.actionsObservable.subscribe(changePage => {
-            this.action = this.actionService.getAction(undefined);
+            this.action = this.actionService.getActiveAction();
             if (this.stepsService.getStepIndex() < this.stepsService.getMyStepIndex(this.type)) {
                 if (!changePage)
                     this.stepsService.getFormGroup(this.type).reset();

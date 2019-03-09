@@ -20,28 +20,31 @@ export class AreaService {
         return this._areas;
     }
 
-    getAreas(): Observable<Area[]> {
+    getCurrentArea() {
+        if (!this.id)
+            return null;
+        return this.areas.find(e => e.id === this.id);
+    }
+
+    getAreas() {
         return this.api.apiGet('/area').pipe(
             map((data: any[]) => data.map(item => AreaAdapter.adapt(item))),
-            tap(data => this._areas = data),
-            tap(data => console.log(data))
+            tap(data => this._areas = data)
         );
     }
 
     getArea(id: string, name: string = 'Basic Area'): Observable<Area> {
-        console.log(id.length);
         if (id === undefined || id.length === 0) {
             return this.api.apiPost('/area/', {name: name, timer: 5, activated: true}).pipe(
                 map(data => AreaAdapter.adaptFromNew(data['id'], name)),
                 tap(data => this.updateArea(data)),
-                tap(data => this.id = data['id']),
-                tap(data => console.log(data))
+                tap(data => this.id = data['id'])
             );
         }
-        return this.api.apiGet(id.concat('/area/')).pipe(
+        return this.api.apiGet('/area/'.concat(id)).pipe(
             map(data => AreaAdapter.adapt(data)),
-            tap(data => this.updateArea(data)),
-            tap(data => this.id = data['id'])
+            tap(data => this.id = data['id']),
+            tap(data => this.updateArea(data))
         );
     }
 

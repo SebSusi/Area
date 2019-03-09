@@ -563,7 +563,7 @@ let widgets = function () {
                                         },
                                         {
                                             type: 'pattern',
-                                            pattern: '\'^[a-zA-Z]+$\'',
+                                            pattern: '^[a-zA-Z]+$',
                                             message: 'Accept only text'
                                         },
                                     ]
@@ -590,7 +590,7 @@ let widgets = function () {
                                         },
                                         {
                                             type: 'pattern',
-                                            pattern: '\'^[a-zA-Z]+$\'',
+                                            pattern: '^[a-zA-Z]+$',
                                             message: 'Accept only text'
                                         },
                                     ]
