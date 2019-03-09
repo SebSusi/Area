@@ -35,7 +35,7 @@ exports.deleteReactionWithoutSaveArea = async function (reaction) {
 };
 
 exports.deleteReaction = async function (area, reactionId) {
-    let reaction = _.find(area.reactions, {id: reactionId});
+    let reaction = await _.find(area.reactions, {id: reactionId});
     if (reaction === undefined)
         return {success: false};
     await area.reactions.pull({'_id': reaction._id});

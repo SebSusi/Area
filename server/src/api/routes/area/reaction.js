@@ -50,12 +50,13 @@ router.put('/:reactionId', jwt.requireAuth, async function (req, res) {
         res.json({success: false});
         return false;
     }
-    let reaction = await reactionGetters.getReactionWidgetByAreaReaction(area.reaction);
-    if (action === false || reaction.id !== reactionId) {
+    let reaction = await reactionGetters.getReactionWidgetByAreaReaction(
+        await reactionGetters.getAreaReactionByAreaAndId(area, reactionId));
+    if (reaction === false || reaction.id !== reactionId) {
         res.json({success: false});
         return false;
     }
-    res.json(await reactionSetters.updateReaction(req, areaGetters.getAreaById(req.user, areaId), reaction));
+    res.json(await reactionSetters.updateReaction(req, area, reaction));
 });
 
 module.exports = router;

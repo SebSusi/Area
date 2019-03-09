@@ -107,6 +107,10 @@ exports.getFormattedAreaReactionsByReactions = async function (reactions) {
     return formattedReactions;
 };
 
+exports.getAreaReactionByAreaAndId = async function (area, reactionId) {
+    return await _.find(area.reactions, {id: reactionId});
+};
+
 exports.getFormattedAreaActionByArea = async function (area) {
     if (area === null || area === undefined || String(area) === "{}")
         return {};

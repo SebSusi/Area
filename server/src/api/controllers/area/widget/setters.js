@@ -62,21 +62,6 @@ exports.updateActionWithDelete = async function (req, area, actionId) {
     return await exports.addAction(req, area);
 };
 
-exports.updateAction = async function (req, area, actionObject) {
-    if (area.action.serviceName !== req.body.serviceName || area.action.name !== req.body.name)
-        return exports.updateActionWithDelete(req, area, area.action.id);
-    let action = widgetGetter.getActionByServiceNameAndActionName(req.body.serviceName, req.body.name);
-    if (action === false)
-        return {success: false};
-    let model = action.model;
-    let params = exports.setWidgetParams(req, model, actionObject.params, false);
-    if (params === false)
-        return {id: false, success: false};
-    actionObject.params = params;
-    await save(actionObject);
-    return {id: actionObject.id, success: true};
-};
-
 
 exports.addReaction = async function (req, area) {
     let reaction = widgetGetter.getReactionByServiceNameAndReactionName(req.body.serviceName, req.body.name);
@@ -94,14 +79,30 @@ exports.addReaction = async function (req, area) {
     return {id: newReaction.id, success: true};
 };
 
-exports.updateReactionWithDelete = async function (req, area, reactionObject) {
-    await widgetDeleter.deleteReaction(req, area, reactionObject);
+exports.updateReactionWithDelete = async function (req, area, reactionId) {
+    await widgetDeleter.deleteReaction(area, reactionId);
     return await exports.addReaction(req, area);
 };
 
+exports.updateAction = async function (req, area, actionObject) {
+    if (area.action.serviceName !== req.body.serviceName || area.action.name !== req.body.name)
+        return exports.updateActionWithDelete(req, area, area.action.id);
+    let action = widgetGetter.getActionByServiceNameAndActionName(req.body.serviceName, req.body.name);
+    if (action === false)
+        return {success: false};
+    let model = action.model;
+    let params = exports.setWidgetParams(req, model, actionObject.params, false);
+    if (params === false)
+        return {id: false, success: false};
+    actionObject.params = params;
+    await save(actionObject);
+    return {id: actionObject.id, success: true};
+};
+
 exports.updateReaction = async function (req, area, reactionObject) {
-    if (reactionObject.serviceName !== req.body.serviceName || reactionObject.name !== req.body.name)
-        return exports.updateReactionWithDelete(req, area, reactionObject);
+    let areaReaction = await widgetGetter.getAreaReactionByAreaAndId(area, reactionObject.id);
+    if (areaReaction.serviceName !== req.body.serviceName || areaReaction.name !== req.body.name)
+        return exports.updateReactionWithDelete(req, area, areaReaction.id);
     let reaction = widgetGetter.getReactionByServiceNameAndReactionName(req.body.serviceName, req.body.name);
     if (reaction === false)
         return {success: false};
