@@ -6,7 +6,7 @@ import java.io.Serializable
 
 data class OptionObject (
         val value: Int = -1,
-        val label: String = "") : Serializable {
+        val name: String = "") : Serializable {
 
     class Deserializer : ResponseDeserializable<OptionObject> {
         override fun deserialize(content: String) = Gson().fromJson(content, OptionObject::class.java)

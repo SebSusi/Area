@@ -9,6 +9,7 @@ abstract class AReActionObject : Serializable {
     abstract var accountId: String
     abstract var fields: Array<FieldObject>
     abstract var type: String
+    abstract var areaId: String
 
     fun getReActionName() : String {
         if (name.isNotBlank())

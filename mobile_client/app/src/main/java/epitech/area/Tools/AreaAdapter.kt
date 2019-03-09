@@ -16,12 +16,18 @@ import kotlinx.android.synthetic.main.view_area.view.*
 
 class AreaAdapter(private val context: Context, private var areas : ArrayList<AreaObject> = arrayListOf()) : RecyclerView.Adapter<AreaViewHolder>() {
 
-    var visible = View.INVISIBLE;
+    var visible = View.INVISIBLE
     var widthButton = 65
 
-    fun changeVisible(){
-        visible = if(View.INVISIBLE == visible)View.VISIBLE else View.INVISIBLE
-        widthButton = if(0 == widthButton)65 else 0
+    fun changeVisibility() {
+        if (visible == View.VISIBLE) {
+            visible = View.INVISIBLE
+            widthButton = 65
+        } else {
+            visible = View.VISIBLE
+            widthButton = 0
+        }
+        notifyDataSetChanged()
     }
 
     fun getAreas(): ArrayList<AreaObject> {
@@ -29,17 +35,24 @@ class AreaAdapter(private val context: Context, private var areas : ArrayList<Ar
     }
 
     fun setAreas(areaList: ArrayList<AreaObject>) {
+        areaList.forEach { areaObject ->
+            areaObject.setReActionAreaId()
+        }
         areas = areaList
         notifyDataSetChanged()
     }
 
     fun setAreas(areaList: Array<AreaObject>) {
+        areaList.forEach { areaObject ->
+            areaObject.setReActionAreaId()
+        }
         areas.clear()
         areas.addAll(areaList)
         notifyDataSetChanged()
     }
 
     fun setArea(area: AreaObject, position: Int) {
+        area.setReActionAreaId()
         areas[position] = area
         notifyItemChanged(position)
     }
@@ -77,7 +90,7 @@ class AreaAdapter(private val context: Context, private var areas : ArrayList<Ar
         holder.areaSwitch.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener {
             override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
                 areas[position].activated = isChecked
-                AreaService.instance.changeAreaState(areas[position].uniqueId, isChecked)
+                AreaService.instance.changeAreaInfos(areas[position])
             }
         })
         holder.areaClicker.setOnClickListener {

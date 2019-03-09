@@ -6,7 +6,8 @@ import java.io.Serializable
 
 data class OutputObject (
         val type: String = "",
-        val name: String = "") : Serializable {
+        val name: String = "",
+        val value: Int = 0) : Serializable {
 
     class Deserializer : ResponseDeserializable<OutputObject> {
         override fun deserialize(content: String) = Gson().fromJson(content, OutputObject::class.java)
