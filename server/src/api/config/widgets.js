@@ -542,10 +542,20 @@ let widgets = function () {
                             },
                             fields: [
                                 {
-                                    type: "text",
+                                    type: "checkbox",
                                     name: 'city',
                                     label: 'City',
-                                    placeholder: 'Type a City',
+                                    placeholder: 'Nancy',
+                                    options: [
+                                        {
+                                            value: 1,
+                                            label: 'Felicien'
+                                        },
+                                        {
+                                            value: 2,
+                                            label: 'Felicienne'
+                                        }
+                                    ],
                                     validations: [
                                         {
                                             type: 'required',
@@ -553,7 +563,7 @@ let widgets = function () {
                                         },
                                         {
                                             type: 'pattern',
-                                            pattern: '^[a-zA-Z]+$',
+                                            pattern: '\'^[a-zA-Z]+$\'',
                                             message: 'Accept only text'
                                         },
                                     ]
@@ -577,9 +587,14 @@ let widgets = function () {
                                         {
                                             type: 'required',
                                             message: 'Name Required'
-                                        }
+                                        },
+                                        {
+                                            type: 'pattern',
+                                            pattern: '\'^[a-zA-Z]+$\'',
+                                            message: 'Accept only text'
+                                        },
                                     ]
-                                }
+                                },
                             ],
                             output: [
                                 {
