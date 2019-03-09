@@ -46,17 +46,22 @@ class AccountActivity : FragmentActivity() {
                     .body("{\"access_token\": \"" + socialToken.token + "\"}")
                     .responseObject(TokenResponse.Deserializer()) { _, _, result ->
                         val(res, err) = result
-                        if (res?.success == true) {
-                            AreaService.instance.getAccounts(areaList.adapter as AccountAdapter)
+                        if (err == null) {
+                            if (res?.success == true) {
+                                AreaService.instance.getAccounts(areaList.adapter as AccountAdapter)
+                            } else {
+                                if (res?.message.toString().isNotEmpty())
+                                    applicationContext.longToast(res?.message.toString())
+                                else
+                                    applicationContext.longToast("Cannot connect to the server")
+                            }
                         } else {
-                            if (res?.message.toString().isNotEmpty())
-                                applicationContext.longToast(res?.message.toString())
-                            else
-                                applicationContext.longToast("Cannot connect to the server")
+                            Log.d("Social Auth", err.toString())
+                            applicationContext.longToast("Error while connecting to the server")
                         }
                     }
         } catch (e: Exception) {
-            Log.d("Login Exception", e.toString())
+            Log.d("Social Auth Exception", e.toString())
             applicationContext.longToast("Cannot connect to the server")
         }
     }

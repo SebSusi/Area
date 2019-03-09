@@ -124,16 +124,21 @@ class MainActivity : FragmentActivity() {
                     .body("{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}")
                     .responseObject(TokenResponse.Deserializer()) { _, _, result ->
                         val(res, err) = result
-                        if (res?.success == true) {
-                            AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
-                            AreaService.instance.changeFuelHeaders(applicationContext)
-                            val intent = Intent(this, HomeActivity::class.java)
-                            startActivity(intent)
+                        if (err == null) {
+                            if (res?.success == true) {
+                                AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
+                                AreaService.instance.changeFuelHeaders(applicationContext)
+                                val intent = Intent(this, HomeActivity::class.java)
+                                startActivity(intent)
+                            } else {
+                                if (res?.message.toString().isNotEmpty())
+                                    applicationContext.longToast(res?.message.toString())
+                                else
+                                    applicationContext.longToast("Cannot connect to the server")
+                            }
                         } else {
-                            if (res?.message.toString().isNotEmpty())
-                                applicationContext.longToast(res?.message.toString())
-                            else
-                                applicationContext.longToast("Cannot connect to the server")
+                            Log.d("Login", err.toString())
+                            applicationContext.longToast("Error while connecting to the server")
                         }
                     }
         } catch (e: Exception) {
@@ -148,20 +153,25 @@ class MainActivity : FragmentActivity() {
                     .body("{\"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"}")
                     .responseObject(TokenResponse.Deserializer()) { _, _, result ->
                         val(res, err) = result
-                        if (res?.success == true) {
-                            AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
-                            AreaService.instance.changeFuelHeaders(applicationContext)
-                            val intent = Intent(this, HomeActivity::class.java)
-                            startActivity(intent)
+                        if (err == null) {
+                            if (res?.success == true) {
+                                AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
+                                AreaService.instance.changeFuelHeaders(applicationContext)
+                                val intent = Intent(this, HomeActivity::class.java)
+                                startActivity(intent)
+                            } else {
+                                if (res?.message.toString().isNotEmpty())
+                                    applicationContext.longToast(res?.message.toString())
+                                else
+                                    applicationContext.longToast("Cannot connect to the server")
+                            }
                         } else {
-                            if (res?.message.toString().isNotEmpty())
-                                applicationContext.longToast(res?.message.toString())
-                            else
-                                applicationContext.longToast("Cannot connect to the server")
+                            Log.d("Sign Up", err.toString())
+                            applicationContext.longToast("Error while connecting to the server")
                         }
                     }
         } catch (e: Exception) {
-            Log.d("Login Exception", e.toString())
+            Log.d("Sign Up Exception", e.toString())
             applicationContext.longToast("Cannot connect to the server")
         }
     }
@@ -172,16 +182,21 @@ class MainActivity : FragmentActivity() {
                     .body("{\"access_token\": \"" + socialToken.token + "\"}")
                     .responseObject(TokenResponse.Deserializer()) { _, _, result ->
                         val(res, err) = result
-                        if (res?.success == true) {
-                            AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
-                            AreaService.instance.changeFuelHeaders(applicationContext)
-                            val intent = Intent(this, HomeActivity::class.java)
-                            startActivity(intent)
+                        if (err == null) {
+                            if (res?.success == true) {
+                                AreaAuthorization.instance.saveAccessToken(applicationContext, res.token)
+                                AreaService.instance.changeFuelHeaders(applicationContext)
+                                val intent = Intent(this, HomeActivity::class.java)
+                                startActivity(intent)
+                            } else {
+                                if (res?.message.toString().isNotEmpty())
+                                    applicationContext.longToast(res?.message.toString())
+                                else
+                                    applicationContext.longToast("Cannot connect to the server")
+                            }
                         } else {
-                            if (res?.message.toString().isNotEmpty())
-                                applicationContext.longToast(res?.message.toString())
-                            else
-                                applicationContext.longToast("Cannot connect to the server")
+                            Log.d("Social Auth", err.toString())
+                            applicationContext.longToast("Error while connecting to the server")
                         }
                     }
         } catch (e: Exception) {
