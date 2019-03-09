@@ -18,20 +18,17 @@ passport.use('google-token-login', new GoogleTokenStrategy({
                     if (err)
                         return utils.returnError(done, false, err);
                     if (user) {
-                        if (!user.google.token || user.google.token !== token) {
+                        if (!user.google.token || user.google.token !== token)
                             return updateUserData(user, token, profile, done);
-                        } else
-                            return utils.generateTokenAndReturn(done, user, 'google');
-                    } else {
-                        if (err)
-                            return utils.returnError(done, false, err);
-                        User.findOneByEmail(profile.emails[0].value, function (err, user) {
-                            if (!user) {
-                                return addNewUser(token, profile, done);
-                            } else
-                                return utils.returnError(done, false, "User with email already exist");
-                        });
+                        return utils.generateTokenAndReturn(done, user, 'google');
                     }
+                    if (err)
+                        return utils.returnError(done, false, err);
+                    User.findOneByEmail(profile.emails[0].value, function (err, user) {
+                        if (!user)
+                            return addNewUser(token, profile, done);
+                        return utils.returnError(done, false, "User with email already exist");
+                    });
                 });
             } else {
                 return linkUser(req.user, token, profile, done);
