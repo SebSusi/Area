@@ -5,6 +5,11 @@ const _ = require('lodash');
 const Weather = require('weather-js');
 
 exports.checkData = async function(action, actionInfos, account) {
+    return true;
+};
+
+exports.getOutput = async function(action, actionInfos, account) {
+    const params = action.params;
     if (!_.hasIn(params, 'city') || !_.hasIn(params, 'country'))
         return false;
     return new Promise(function (resolve, reject) {
@@ -19,8 +24,4 @@ exports.checkData = async function(action, actionInfos, account) {
             }
         })
     });
-};
-
-exports.getOutput = async function(action, actionInfos, account) {
-
 };

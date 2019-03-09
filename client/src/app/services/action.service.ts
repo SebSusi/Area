@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Area} from '../objects/area';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {ApiService} from './api.service';
-import {map, tap} from 'rxjs/operators';
 import {Action, ActionAdapter} from '../objects/action';
 import {ActionType} from '../objects/actions-template';
 import {Subject} from 'rxjs';
+import {AreaService} from './area.service';
+import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class ActionService {
 
     public actionsObservable = new Subject();
 
-    constructor(private _http: HttpClient, private _router: Router, private api: ApiService) {
+    constructor(private _http: HttpClient, private _router: Router, private api: ApiService, private areaService: AreaService) {
     }
 
     emitActions(reset: boolean = false) {
@@ -37,17 +37,23 @@ export class ActionService {
         return this._actions[this._selected];
     }
 
-    getActions(area: Area, type: ActionType = ActionType.TRIGGER) {
-        const url = 'https://next.json-generator.com/api/json/get/4JboGC5VU';
-        return this._http.get(url).pipe(
-            map(data => ActionAdapter.adaptArea(data)),
-            tap(data => this._actions = data)
-        );
+    postAction(action: Action) {
+        this.api.apiPost(this.areaService.getPath() + '/' + (action.type === ActionType.TRIGGER ? 'action' : 'reaction'),
+            JSON.stringify(action)).pipe(tap(data => action.id = data['id'])).subscribe();
+    }
+
+    putAction(action) {
+        this.api.apiPut(this.areaService.getPath() + '/' + (action.type === ActionType.TRIGGER ? 'action/' : 'reaction/') + action.id,
+            JSON.stringify(action)).pipe(tap(data => action.id = data['id'])).subscribe();
     }
 
     updateAction(actionId: string) {
-        const url = 'blablabla.fr';
-        return this._http.put(url, this._actions[actionId]);
+        const index = this.getActionIndex(actionId);
+        if (index < 0 || !actionId)
+            return;
+        if (actionId.startsWith('local'))
+            return this.postAction(this._actions[index]);
+        return this.putAction(this._actions[index]);
     }
 
     setAction(action: Action) {
@@ -71,13 +77,11 @@ export class ActionService {
         this._selected = index;
     }
 
-    getNewAction() {
-        const url = 'https://next.json-generator.com/api/json/get/VkTIxMH8L';
-        return this._http.get(url).pipe(
-            map(data => ActionAdapter.adapt(data, ActionType.REACTION)),
-            tap(data => data.id = Math.random().toString(36).substring(7)),
-            tap(data => this._actions.push(data))
-        );
+    getNewAction(type = ActionType.TRIGGER) {
+        const id = 'local' + Math.random().toString(36).substring(7);
+        const data = ActionAdapter.adapt({id: id}, type);
+        this._actions.push(data);
+        return id;
     }
 
 

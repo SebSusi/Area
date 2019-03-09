@@ -23,7 +23,7 @@ export class ServiceManagerComponent extends AbstractManager implements OnInit{
 
     getFormGroup() {
         return {
-            typeControl: [this.action.service, Validators.required]
+            typeControl: [this.action.serviceName, Validators.required]
         };
     }
 
@@ -33,11 +33,11 @@ export class ServiceManagerComponent extends AbstractManager implements OnInit{
     }
 
     isTypeSelected(type) {
-        return this.action && type === this.action.service;
+        return this.action && type === this.action.serviceName;
     }
 
     setSelectedType(type) {
-        this.action.service = type;
+        this.action.serviceName = type;
         this.emitActionUpdate();
     }
 

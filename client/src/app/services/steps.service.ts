@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {MatStepper} from '@angular/material';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ValidatorsFactory} from '../objects/validators-factory';
 
 export enum Steps {
     SERVICE = 'services',
@@ -46,10 +47,21 @@ export class StepsService {
   }
 
   addControls(name, controls) {
-      for (const key in controls) {
+      for (const key in controls)
           this.getFormGroup(name).addControl(key, new FormControl(controls[key][0], controls[key][1]));
-      }
   }
+
+    bindValidations(validations: any) {
+        if (validations.length > 0) {
+            console.log(validations);
+            const validList = [];
+            validations.forEach(valid => {
+                validList.push(valid.validator);
+            });
+            return Validators.compose(validList);
+        }
+        return null;
+    }
 
   reset(name, controls = null) {
       this.getStep(name).group = new FormGroup({});
@@ -70,6 +82,8 @@ export class StepsService {
   }
 
   changeStep(index: number) {
+      if (this.stepper === undefined)
+          return;
       this.stepper.selectedIndex = index;
   }
 

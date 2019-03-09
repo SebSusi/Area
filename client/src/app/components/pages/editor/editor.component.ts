@@ -24,12 +24,6 @@ export class EditorComponent implements OnInit {
         this.areaService.getArea(id)
             .subscribe(area => {
                 this.area = area;
-                this.actionService.getActions(this.area).subscribe(
-                    actions => {
-                        this.area.actions = actions;
-                        this.actionService.setActiveAction(0);
-                    }
-                );
             });
     }
 

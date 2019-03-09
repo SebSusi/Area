@@ -542,20 +542,10 @@ let widgets = function () {
                             },
                             fields: [
                                 {
-                                    type: "checkbox",
+                                    type: "text",
                                     name: 'city',
                                     label: 'City',
-                                    placeholder: 'Nancy',
-                                    options: [
-                                        {
-                                            value: 1,
-                                            label: 'Felicien'
-                                        },
-                                        {
-                                            value: 2,
-                                            label: 'Felicienne'
-                                        }
-                                    ],
+                                    placeholder: 'Type a City',
                                     validations: [
                                         {
                                             type: 'required',
@@ -563,11 +553,23 @@ let widgets = function () {
                                         },
                                         {
                                             type: 'pattern',
-                                            pattern: '\'^[a-zA-Z]+$\'',
+                                            pattern: '^[a-zA-Z]+$',
                                             message: 'Accept only text'
                                         },
                                     ]
                                 },
+                                {
+                                    type: "text",
+                                    name: 'country',
+                                    label: 'Country',
+                                    placeholder: 'Type a country',
+                                    validations: [
+                                        {
+                                            type: 'required',
+                                            message: 'Name Required'
+                                        }
+                                    ]
+                                }
                             ],
                             output: {
                                 temperature: {type: "Number", value: 10},

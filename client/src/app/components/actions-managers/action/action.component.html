@@ -7,7 +7,7 @@
             <div>
                 <button *ngIf="step.key != stepsService.firstStep" mat-button matStepperPrevious>Back</button>
                 <button *ngIf="step.key != stepsService.lastStep" mat-button matStepperNext>Next</button>
-                <button *ngIf="step.key === stepsService.lastStep" mat-raised-button color="primary">Save</button>
+                <button *ngIf="step.key === stepsService.lastStep" mat-raised-button color="primary" (click)="saveAction()">Save</button>
             </div>
         </mat-step>
     </mat-horizontal-stepper>

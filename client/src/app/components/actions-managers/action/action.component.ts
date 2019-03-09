@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActionService} from '../../../services/action.service';
-import {FormGroup} from '@angular/forms';
 import {Action} from '../../../objects/action';
 import {Steps, StepsService} from '../../../services/steps.service';
 import {MatStepper} from '@angular/material';
@@ -39,5 +38,12 @@ export class ActionComponent implements OnInit {
 
     ngOnInit() {
         this.stepsService.stepper = this.stepper;
+    }
+
+    saveAction() {
+        if (this.stepsService.getFormGroup(Steps.OPTIONS).valid) {
+            this.action.fields = this.stepsService.getFormGroup(Steps.OPTIONS).getRawValue();
+            this.actionService.updateAction(this.action.id)
+        }
     }
 }

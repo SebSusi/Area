@@ -29,7 +29,7 @@ export class ApiService {
     }
 
     checkError(data) {
-        if (data['success']) {
+        if (data['success'] || !data['message']) {
             return;
         }
         if (data['field'] === 'Authorization') {

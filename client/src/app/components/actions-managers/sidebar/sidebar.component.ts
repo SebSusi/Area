@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
     public action: Action;
     Steps = Steps;
 
-    constructor(private actionService: ActionService, formB: FormBuilder, public stepperService: StepsService) {
+    constructor(public actionService: ActionService, formB: FormBuilder, public stepperService: StepsService) {
         this.actionService.actionsObservable.subscribe(reset => {
             this.action = this.actionService.getAction(undefined);
         });
@@ -28,16 +28,16 @@ export class SidebarComponent implements OnInit {
     public save() {}
 
     changeActiveAction(id: any) {
-        const lastId = this.action.id;
+        const isFirst = (this.action === undefined);
+        const lastId = isFirst ? id : this.action.id ;
         this.action = this.actionService.getAction(id);
-        if (lastId !== this.action.id)
+        if (lastId !== this.action.id || isFirst)
             this.stepperService.changeStep(0);
     }
 
     addAction() {
-        this.actionService.getNewAction().subscribe(newAction => {
-            this.changeActiveAction(newAction.id);
-        });
+        const id = this.actionService.getNewAction();
+        this.changeActiveAction(id);
     }
 
     deleteAction(id: string) {

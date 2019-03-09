@@ -1,10 +1,10 @@
-<div *ngIf="area && action" class="sidebar" [class.mat-elevation-12]="true">
+<div *ngIf="area" class="sidebar" [class.mat-elevation-12]="true">
     <mat-form-field class="sidebar-form">
         <input matInput placeholder="Area Name" value="{{area.name}}">
     </mat-form-field>
-    <mat-card *ngFor="let act of area.actions">
+    <mat-card *ngFor="let act of actionService.actions">
         <mat-card-header class="card-header" (click)="changeActiveAction(act.id)">
-            <div mat-card-avatar class="{{act.service}}-icon {{act.type}}-image mat-card-avatar"></div>
+            <div mat-card-avatar class="{{act.serviceName}}-icon {{act.type}}-image mat-card-avatar"></div>
             <mat-card-title>{{act.name?.uncamelize()}}</mat-card-title>
             <mat-card-subtitle>{{act.type?.uncamelize()}}</mat-card-subtitle>
             <button class="action-icon" mat-icon-button (click)="deleteAction(act.id)">
@@ -16,7 +16,7 @@
                 <mat-list-item (click)="stepperService.changeStep(0)">
                     <app-action-step
                             [icon]='"settings"'
-                            [content]="act.service ? act.service.uncamelize() : stepperService.getStep(Steps.SERVICE).description"
+                            [content]="act.serviceName ? act.serviceName.uncamelize() : stepperService.getStep(Steps.SERVICE).description"
                             [step]="0">
                     </app-action-step>
                 </mat-list-item>

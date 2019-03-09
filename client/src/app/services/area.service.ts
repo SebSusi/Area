@@ -12,6 +12,7 @@ import {Observable, of} from 'rxjs';
 
 export class AreaService {
     private _areas: Area[] = [];
+    public id: string;
     constructor(private _http: HttpClient, private _router: Router, private api: ApiService) {
     }
 
@@ -20,18 +21,26 @@ export class AreaService {
     }
 
     getAreas(): Observable<Area[]> {
-        const url = 'https://next.json-generator.com/api/json/get/EkdygAcV8';
-        return this._http.get(url).pipe(
+//        const url = 'https://next.json-generator.com/api/json/get/EkdygAcV8';
+
+        return this.api.apiGet('/area').pipe(
             map((data: any[]) => data.map(item => AreaAdapter.adapt(item))),
             tap(data => this._areas = data)
         );
     }
 
-    getArea(id: string): Observable<Area> {
-        const url = 'https://next.json-generator.com/api/json/get/4JboGC5VU';
-        return this._http.get(url).pipe(
+    getArea(id: string, name: string = 'twitter'): Observable<Area> {
+//        const url = 'https://next.json-generator.com/api/json/get/4JboGC5VU';
+        if (id === undefined || id.length === 0)
+            return this.api.apiPost('/area/', {name: name, timer: 5, activated: true}).pipe(
+                map(data => AreaAdapter.adaptFromNew(data['id'], name)),
+                tap(data => this.updateArea(data)),
+                tap(data => this.id = data['id'])
+            );
+        return this.api.apiGet(id.concat('/area/')).pipe(
             map(data => AreaAdapter.adapt(data)),
-            tap(data => this.updateArea(data))
+            tap(data => this.updateArea(data)),
+            tap(data => this.id = data['id'])
         );
     }
 
@@ -44,8 +53,7 @@ export class AreaService {
         }
     }
 
-    getTypes() {
-        const url = 'https://next.json-generator.com/api/json/get/EyVDxyoNU';
-        return this._http.get<string[]>(url);
+    public getPath() {
+        return  '/area/' + this.id;
     }
 }

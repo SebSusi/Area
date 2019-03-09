@@ -2,7 +2,7 @@
     <div routerLink="/app/editor/{{area.id}}" class="area-infos d-flex flex-fill align-content-center flex">
         <ol class="d-flex align-content-center">
             <li *ngFor="let item of area.actions" class="action-type-icon">
-                <svg-icon src="assets/types/{{item.service}}.svg"></svg-icon>
+                <svg-icon src="assets/types/{{item.serviceName}}.svg"></svg-icon>
             </li>
         </ol>
         <p >{{area.name}}</p>

@@ -1,24 +1,24 @@
 import {ActionType} from './actions-template';
 
 export class Action {
-    private _id: string;
-    private _service: string;
-    private _name: string;
-    private _type: ActionType;
-    private _account: { id: string, type: string };
-    private _options = new Map<string, string>();
+    public id: string;
+    public serviceName: string;
+    public name: string;
+    public type: ActionType;
+    public _account: { id: string, type: string };
+    public fields: any = {};
 
     constructor(id: string = '', service: string = '', name: string = '', type: ActionType,
                 connectedAccountId: any, options: any[]) {
-        this._id = id;
-        this._service = service;
-        this._name = name;
+        this.id = id;
+        this.serviceName = service;
+        this.name = name;
         this.account = connectedAccountId;
         if (options !== undefined)
             for (const obj of options) {
-                this.options.set(obj.name, obj.value);
+                this.fields[obj.name] = obj.value;
             }
-        this._type = type;
+        this.type = type;
     }
 
     set account(value: { id: string, type: string }) {
@@ -27,46 +27,6 @@ export class Action {
 
     get account(): { id: string, type: string } {
         return this._account;
-    }
-
-    get type(): ActionType {
-        return this._type;
-    }
-
-    set type(value: ActionType) {
-        this._type = value;
-    }
-
-    get name(): string {
-        return this._name;
-    }
-
-    set name(value: string) {
-        this._name = value;
-    }
-
-    get id(): string {
-        return this._id;
-    }
-
-    set id(value: string) {
-        this._id = value;
-    }
-
-    get service(): string {
-        return this._service;
-    }
-
-    set service(value: string) {
-        this._service = value;
-    }
-
-    get options(): Map<string, string> {
-        return this._options;
-    }
-
-    set options(value: Map<string, string>) {
-        this._options = value;
     }
 }
 
