@@ -44,6 +44,18 @@ exports.deleteAction = async function (area) {
     return await save(area);
 };
 
+exports.updateArea = async function (req, area) {
+    if (area === false)
+        return {success: false};
+    area.params = params;
+    area.ownerId = req.user._id;
+    area.name = req.body.name;
+    area.activated = req.body.activated;
+    area.timer = req.body.timer;
+    await save(area);
+    return {id: area._id, success: true};
+};
+
 exports.createArea = async function (req) {
     let newArea = new Area();
     newArea.params = params;

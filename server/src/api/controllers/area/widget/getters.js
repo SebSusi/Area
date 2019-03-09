@@ -36,16 +36,22 @@ exports.getReactionByServiceNameAndReactionName = function (service, reaction) {
 };
 
 exports.getActionWidgetByAreaAction = async function (areaAction) {
+    if (areaAction === {} || areaAction === undefined || areaAction === null)
+        return false;
     let model = getModelByServiceNameAndActionName(areaAction.serviceName, areaAction.name, "actions");
     return await model.findOne({"_id": areaAction.id})
 };
 
 exports.getReactionWidgetByAreaReaction = async function (areaReaction) {
+    if (areaReaction === {} || areaReaction === undefined || areaReaction === null)
+        return false;
     let model = getModelByServiceNameAndActionName(areaReaction.serviceName, areaReaction.name, "reactions");
     return await model.findOne({"_id": areaReaction.id})
 };
 
 exports.getWidgetByObjectAndType = async function (object, type) {
+    if (object === {} || object === undefined || object === null)
+        return false;
     let model = getModelByServiceNameAndActionName(object.serviceName, object.name, type);
     return await model.findOne({"_id": object.id})
 };
