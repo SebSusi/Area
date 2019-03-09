@@ -57,14 +57,14 @@ exports.addAction = async function (req, area) {
     return {id: newAction.id, success: true};
 };
 
-exports.updateActionWithDelete = async function (req, area, actionObject) {
-    await widgetDeleter.deleteAction(req, area, actionObject);
+exports.updateActionWithDelete = async function (req, area, actionId) {
+    await widgetDeleter.deleteAction(area, actionId);
     return await exports.addAction(req, area);
 };
 
 exports.updateAction = async function (req, area, actionObject) {
-    if (actionObject.serviceName !== req.body.serviceName || actionObject.name !== req.body.name)
-        return exports.updateActionWithDelete(req, area, actionObject);
+    if (area.action.serviceName !== req.body.serviceName || area.action.name !== req.body.name)
+        return exports.updateActionWithDelete(req, area, area.action.id);
     let action = widgetGetter.getActionByServiceNameAndActionName(req.body.serviceName, req.body.name);
     if (action === false)
         return {success: false};

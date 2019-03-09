@@ -53,7 +53,7 @@ router.put('/:actionId', jwt.requireAuth, async function (req, res) {
         res.json({success: false});
         return false;
     }
-    res.json(await actionSetters.updateAction(req, await areaGetters.getAreaById(req.user, areaId), action));
+    res.json(await actionSetters.updateAction(req, area, action));
 });
 
 module.exports = router;
