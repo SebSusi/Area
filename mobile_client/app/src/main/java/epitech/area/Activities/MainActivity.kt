@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
-import com.facebook.FacebookSdk
 import com.facebook.login.LoginResult
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpPost
@@ -57,7 +56,6 @@ class MainActivity : FragmentActivity() {
             } else {
                 applicationContext.longToast("Password don't match")
             }
-
         }
         loginConnectButton.setOnClickListener {
             login(loginEmail.text.toString(), loginPassword.text.toString())

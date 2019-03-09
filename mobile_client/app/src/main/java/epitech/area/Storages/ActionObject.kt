@@ -9,6 +9,7 @@ data class ActionObject (
         override var id: String = "",
         override var accountId: String = "",
         override var fields: Array<FieldObject> = arrayOf(),
+        var output: Array<OutputObject> = arrayOf(),
         override var type: String = "ACTION") : AReActionObject() {
 
     class Deserializer : ResponseDeserializable<ActionObject>{

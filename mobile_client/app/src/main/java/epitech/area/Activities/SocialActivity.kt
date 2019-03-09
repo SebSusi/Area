@@ -16,7 +16,6 @@ import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException
 import com.twitter.sdk.android.core.TwitterSession
 import epitech.area.R
-import epitech.area.Storages.OAuthInfo
 import epitech.area.Storages.SocialToken
 import kotlinx.android.synthetic.main.activity_social.*
 import okhttp3.*

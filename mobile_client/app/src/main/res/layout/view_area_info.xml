@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/serverUrlLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:exported="true">
+
+    <TextView
+        android:id="@+id/nameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        android:text="Name : "
+        android:textColor="@color/darkColorAccentWhite"
+        app:layout_constraintTop_toTopOf="@+id/areaEditName"
+        app:layout_constraintBottom_toBottomOf="@+id/areaEditName"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/areaEditName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint=" "
+        android:inputType="text"
+        android:textColorHint="@color/darkColorAccentWhite"
+        android:theme="@style/TextAppearence.App.TextInputLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nameLabel"/>
+
+    <TextView
+        android:id="@+id/timerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        android:text="Timer : "
+        android:textColor="@color/darkColorAccentWhite"
+        app:layout_constraintTop_toTopOf="@+id/areaTimer"
+        app:layout_constraintBottom_toBottomOf="@+id/areaTimer"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/areaTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="0"
+        android:inputType="number"
+        android:textColorHint="@color/darkColorAccentWhite"
+        android:theme="@style/TextAppearence.App.TextInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/areaEditName"
+        app:layout_constraintStart_toEndOf="@id/timerLabel" />
+
+    <TextView
+        android:id="@+id/secondsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        android:text="seconds"
+        android:textColor="@color/darkColorAccentWhite"
+        app:layout_constraintTop_toTopOf="@+id/areaTimer"
+        app:layout_constraintBottom_toBottomOf="@+id/areaTimer"
+        app:layout_constraintStart_toEndOf="@id/areaTimer" />
+
+    <Switch
+        android:id="@+id/areaActivated"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:elevation="10dp"
+        android:text="Activated :   "
+        android:textSize="16sp"
+        android:textColor="@color/darkColorAccentWhite"
+        android:theme="@style/AreaSwitch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/areaTimer"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

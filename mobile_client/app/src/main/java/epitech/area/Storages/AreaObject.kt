@@ -7,6 +7,7 @@ import java.io.Serializable
 data class AreaObject(
         var name: String = "",
         var uniqueId: String = "",
+        var timer: Int = 5,
         var activated: Boolean = false,
         val action: ActionObject = ActionObject(),
         val reactions: Array<ReactionObject> = arrayOf()) : Serializable {

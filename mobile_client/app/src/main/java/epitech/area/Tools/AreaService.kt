@@ -7,6 +7,7 @@ import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpDelete
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
+import com.google.gson.Gson
 import epitech.area.Activities.ReActionActivity
 import epitech.area.Managers.AreaAuthorization
 import epitech.area.Storages.AReActionObject
@@ -14,6 +15,8 @@ import epitech.area.Storages.AccountObject
 import epitech.area.Storages.AreaObject
 
 class AreaService {
+
+    val gson = Gson()
 
     private object Holder { val INSTANCE = AreaService() }
 
@@ -55,7 +58,7 @@ class AreaService {
         FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
     }
 
-    fun getArea(reActionAdapter: ReActionAdapter, textView: TextView,  uniqueId: String) {
+    fun getArea(reActionAdapter: ReActionAdapter, textView: TextView,  area: AreaObject) {
         FuelManager.instance.basePath = "" //remove this when using real server
         FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
         try {
@@ -63,8 +66,11 @@ class AreaService {
                     .responseObject(AreaObject.Deserializer()) { _, _, result ->
                         val (res, err) = result
                         if (err == null) {
-                            textView.text = res?.name
-                            reActionAdapter.setReActions(res!!)
+                            textView.text = res!!.name
+                            area.name = res.name
+                            area.timer = res.timer
+                            area.activated = res.activated
+                            reActionAdapter.setReActions(res)
                         }
                     }
         } catch (e: Exception) {
@@ -78,9 +84,19 @@ class AreaService {
         "".httpPost()
     }
 
-    fun changeAreaName(areaId: String, name: String) {
+    fun changeAreaInfos(area: AreaObject) {
         return
         "".httpPost()
+    }
+
+    fun createArea(name: String = "New Area", activated: Boolean = true, timer: Int = 60) {
+        return
+        try {
+            "".httpPost()
+                    .body("{\"name\": \"" + name + "\", \"activated\": \"" + activated + "\", \"timer\": \"" + timer + "\"}")
+        } catch (e: Exception) {
+            Log.d("Create Area Exception", e.toString())
+        }
     }
 
     fun deleteArea(areaId: String) {
@@ -90,10 +106,14 @@ class AreaService {
 
     fun postReAction(reAction: AReActionObject) {
         return
-        if (reAction.id.isNotBlank())
-            "".httpPost()
-        else
-            "".httpPost()
+        try {
+            if (reAction.id.isNotBlank())
+                "".httpPost()
+            else
+                "".httpPost().body(gson.toJson(reAction))
+        } catch (e: Exception) {
+            Log.d("Create Area Exception", e.toString())
+        }
     }
 
     fun deleteReaction(areaId: String) {

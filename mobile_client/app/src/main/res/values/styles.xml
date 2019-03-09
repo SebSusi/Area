@@ -23,9 +23,9 @@
 
     <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:textColor">@color/colorLogoPrimary</item>
-        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorPrimary">@color/darkColorAccentWhite</item>
         <item name="android:windowBackground">@color/darkColorPrimary</item>
-        <item name="android:textColorTertiary">@color/white</item>
+        <item name="android:textColorTertiary">@color/darkColorAccentWhite</item>
         <item name="android:buttonBarButtonStyle">@style/MyApp.DialogButton</item>
     </style>
 

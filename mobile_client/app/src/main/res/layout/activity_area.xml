@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Activities.HomeActivity">
 
-    <com.google.android.material.textfield.TextInputEditText
+    <!--com.google.android.material.textfield.TextInputEditText
         android:id="@+id/areaName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,17 +18,24 @@
         android:theme="@style/TextAppearence.App.TextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" /-->
+    <TextView
+        android:id="@+id/areaName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ru.dimorinny.floatingtextbutton.FloatingTextButton
-        android:id="@+id/areaNameButton"
+        android:id="@+id/areaInfoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginTop="8dp"
-        android:visibility="invisible"
-        app:floating_background_color="@color/colorLogoPrimary"
-        app:floating_left_icon="@drawable/ic_check"
+        app:floating_background_color="@android:color/transparent"
+        app:floating_left_icon="@drawable/ic_settings"
         app:floating_title_color="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/areaName"

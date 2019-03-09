@@ -5,14 +5,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
-import com.github.kittinunf.fuel.core.FuelManager
 import epitech.area.R
 import epitech.area.Storages.OAuthInfo
 import epitech.area.Storages.SocialToken
