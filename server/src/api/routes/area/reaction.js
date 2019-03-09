@@ -2,14 +2,27 @@
 
 const router = require('express').Router({mergeParams: true});
 const jwt = require('../../controllers/auth/jwtAuth');
+const areaGetters = require('../../controllers/area/getters');
+const areaSetters = require('../../controllers/area/setters');
 const reactionDeleters = require('../../controllers/area/widget/deleters');
 const reactionGetters = require('../../controllers/area/widget/getters');
 const reactionSetters = require('../../controllers/area/widget/setters');
-const areaGetters = require('../../controllers/area/getters');
+
 
 router.get('/', jwt.requireAuth, async function (req, res) {
     let areaId = req.params.areaId;
     res.json(await areaGetters.getFormattedAreaReactionsByAreaId(req.user, areaId))
+});
+
+
+router.post('/', jwt.requireAuth, async function (req, res) {
+    let areaId = req.params.areaId;
+    let area = await areaGetters.getAreaById(req.user, areaId);
+    if (area === false) {
+        res.json({success: false});
+        return false;
+    }
+    res.json(await reactionSetters.addReaction(req, area));
 });
 
 router.get('/:reactionId', jwt.requireAuth, async function (req, res) {
