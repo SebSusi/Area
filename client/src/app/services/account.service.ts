@@ -55,7 +55,7 @@ export class AccountService {
     }
 
     public getAccounts() {
-      this.api.apiGet('/account').subscribe(data => {this._accounts = data});
+      this.api.apiGet('/account').subscribe(data => {this._accounts = (data as any[]); });
     }
 
     public deleteAccount(type, id) {
