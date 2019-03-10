@@ -78,7 +78,10 @@ async function getFormattedAreaActionReaction(type, object) {
         "name": object.name,
         "serviceName": object.serviceName,
         "id": object.id,
-        "account": account,
+        "account": {
+            type: account.accountType,
+            id: account.id
+        },
         fields: fields
     }
 }

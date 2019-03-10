@@ -54,8 +54,10 @@ exports.addAction = async function (req, area) {
     if (account === undefined || account === null)
         newAction.account = null;
     else {
-        newAction.account.id = account.id;
-        newAction.account.type = account.type;
+        newAction.account = {
+            id: account.id,
+            accountType: account.type,
+        };
     }
     newAction.params = params;
     newAction.user.id = req.user.id;
@@ -84,8 +86,10 @@ exports.addReaction = async function (req, area) {
     if (account === undefined || account === null)
         newReaction.account = null;
     else {
-        newReaction.account.id = account.id;
-        newReaction.account.type = account.type;
+        newReaction.account = {
+            id: account.id,
+            accountType: account.type,
+        };
     }
     newReaction.user.id = req.user.id;
     newReaction = await save(newReaction);
@@ -112,8 +116,10 @@ exports.updateAction = async function (req, area, actionObject) {
     if (account === undefined || account === null)
         actionObject.account = null;
     else {
-        actionObject.account.id = account.id;
-        actionObject.account.type = account.type;
+        actionObject.account = {
+            id: account.id,
+            accountType: account.type,
+        };
     }
     actionObject.params = params;
     await save(actionObject);
@@ -135,8 +141,10 @@ exports.updateReaction = async function (req, area, reactionObject) {
     if (account === undefined || account === null)
         reactionObject.account = null;
     else {
-        reactionObject.account.id = account.id;
-        reactionObject.account.type = account.type;
+        reactionObject.account = {
+            id: account.id,
+            accountType: account.type,
+        };
     }
     reactionObject.params = params;
     await save(reactionObject);

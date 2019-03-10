@@ -7,7 +7,7 @@ const widgetGlobalParams = {
         id: String,
     },
     account: {
-        type: String,
+        accountType: String,
         id: String,
     },
     params: {
