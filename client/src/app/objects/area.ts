@@ -3,7 +3,7 @@ import {Action, ActionAdapter} from './action';
 export class Area {
     public name: string;
     public actions: Action[];
-    public on = false;
+    public activated = false;
     public id: string;
     public timer: number;
     public checked: boolean;
@@ -12,7 +12,7 @@ export class Area {
     constructor(id: string, name: string = 'Basic Area', on: boolean = false, timer = 5, actions: Action[] = []) {
         this.name = name;
         this.actions = actions;
-        this.on = on;
+        this.activated = on;
         this.id = id;
         this.timer = timer;
     }

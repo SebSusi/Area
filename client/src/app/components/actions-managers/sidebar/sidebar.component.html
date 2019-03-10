@@ -1,7 +1,15 @@
 <div *ngIf="area" class="sidebar" [class.mat-elevation-12]="true">
-    <mat-form-field class="sidebar-form">
-        <input matInput placeholder="Area Name" value="{{area.name}}">
-    </mat-form-field>
+    <form class="sidebar-form" *ngIf="area">
+        <mat-form-field>
+            <input matInput placeholder="Area Name" type="text" name="areaName" [(ngModel)]="area.name">
+        </mat-form-field>
+        <mat-form-field id="timer-field">
+            <input matInput placeholder="Timer" type="number" name="areaTimer" [(ngModel)]="area.timer">
+        </mat-form-field>
+        <button mat-icon-button (click)="saveArea()">
+            <mat-icon>save</mat-icon>
+        </button>
+    </form>
     <mat-card *ngFor="let act of actionService.actions">
         <mat-card-header class="card-header" (click)="changeActiveAction(act.id)">
             <div mat-card-avatar class="{{act.serviceName}}-icon {{act.type}}-image mat-card-avatar"></div>
@@ -55,6 +63,6 @@
         </mat-card-content>
     </mat-card>
     <div class="add-step-container">
-        <button mat-raised-button color="accent" (click)="addAction()"> Add a step </button>
+        <button mat-raised-button color="accent" (click)="addAction()"> Add a step</button>
     </div>
 </div>

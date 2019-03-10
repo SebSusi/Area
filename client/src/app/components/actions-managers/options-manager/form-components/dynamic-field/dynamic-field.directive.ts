@@ -14,9 +14,12 @@ import {SelectComponent} from '../select/select.component';
 import {DateComponent} from '../date/date.component';
 import {RadiobuttonComponent} from '../radiobutton/radiobutton.component';
 import {CheckboxComponent} from '../checkbox/checkbox.component';
+import {TextareaComponent} from '../textarea/textarea.component';
 
 const componentMapper = {
     text: InputComponent,
+    number: InputComponent,
+    textarea: TextareaComponent,
     button: ButtonComponent,
     list: SelectComponent,
     date: DateComponent,
@@ -36,6 +39,8 @@ export class DynamicFieldDirective implements OnInit, OnChanges {
     }
 
     ngOnInit() {
+        if (!componentMapper[this.field.type])
+            this.field.type = 'text';
         const factory = this.resolver.resolveComponentFactory(
             componentMapper[this.field.type]
         );

@@ -9,7 +9,7 @@
  *
  * The current setup is for so-called "evergreen" browsers; the last versions of browsers that
  * automatically update themselves. This includes Safari >= 10, Chrome >= 55 (including Opera),
- * Edge >= 13 on the desktop, and iOS 10 and Chrome on mobile.
+ * Edge >= 13 activated the desktop, and iOS 10 and Chrome activated mobile.
  *
  * Learn more in https://angular.io/docs/ts/latest/guide/browser-support.html
  */
@@ -34,7 +34,7 @@
 // import 'core-js/es6/weak-map';
 // import 'core-js/es6/set';
 
-/** IE10 and IE11 requires the following for NgClass support on SVG elements */
+/** IE10 and IE11 requires the following for NgClass support activated SVG elements */
 // import 'classlist.js';  // Run `npm install --save classlist.js`.
 
 /** IE10 and IE11 requires the following for the Reflect API. */
