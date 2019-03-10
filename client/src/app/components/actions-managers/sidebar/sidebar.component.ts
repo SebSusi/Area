@@ -38,6 +38,7 @@ export class SidebarComponent implements OnInit {
     addAction() {
         const id = this.actionService.getNewAction();
         this.changeActiveAction(id);
+        this.actionService.emitActions();
     }
 
     deleteAction(id: string) {
