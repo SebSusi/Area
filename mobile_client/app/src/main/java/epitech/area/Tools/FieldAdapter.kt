@@ -46,10 +46,11 @@ class FieldAdapter(private val context: Context, private var fields : ArrayList<
         holder.setEverythingInvisible()
         when (fields[position].type) {
             "boolean" -> initSwitch(holder, position)
+            "checkbox" -> initSwitch(holder, position)
             "list" -> initList(holder, position)
-            "checkbox" -> initList(holder, position)
-            "text" -> initText(holder, position, TYPE_CLASS_TEXT or TYPE_TEXT_FLAG_MULTI_LINE)
-            "multiligne" -> initText(holder, position, TYPE_CLASS_TEXT or TYPE_TEXT_FLAG_MULTI_LINE)
+            "radiobox" -> initList(holder, position)
+            "text" -> initText(holder, position, TYPE_CLASS_TEXT)
+            "textarea" -> initText(holder, position, TYPE_CLASS_TEXT or TYPE_TEXT_FLAG_MULTI_LINE)
             "number" -> initText(holder, position, TYPE_CLASS_NUMBER)
         }
     }

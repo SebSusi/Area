@@ -533,7 +533,7 @@ let widgets = function () {
                 [
                     {
                         name: 'temperatureChange',
-                        description: 'Triggered when the weather has changed',
+                        description: 'Triggered when the temperature has changed',
                         controller: require('../controllers/services/weather/actions/temperatureChange'),
                         modelName: 'weatherTemperatureChange',
                         params: {
@@ -542,20 +542,10 @@ let widgets = function () {
                         },
                         fields: [
                             {
-                                type: "checkbox",
+                                type: "text",
                                 name: 'city',
                                 label: 'City',
                                 placeholder: 'Nancy',
-                                options: [
-                                    {
-                                        value: 1,
-                                        label: 'Felicien'
-                                    },
-                                    {
-                                        value: 2,
-                                        label: 'Felicienne'
-                                    }
-                                ],
                                 validations: [
                                     {
                                         type: 'required',
@@ -569,20 +559,10 @@ let widgets = function () {
                                 ]
                             },
                             {
-                                type: "checkbox",
+                                type: "text",
                                 name: 'country',
                                 label: 'Country',
                                 placeholder: 'France',
-                                options: [
-                                    {
-                                        value: 1,
-                                        label: 'Felicien'
-                                    },
-                                    {
-                                        value: 2,
-                                        label: 'Felicienne'
-                                    }
-                                ],
                                 validations: [
                                     {
                                         type: 'required',
@@ -599,7 +579,7 @@ let widgets = function () {
                         output: [
                             {
                                 name: "temperature",
-                                description: "Temperature actuelle"
+                                description: "Actual temperature"
                             },
                             {
                                 name: "skyText",
@@ -638,7 +618,94 @@ let widgets = function () {
                                 description: "Image Url that represent the weather"
                             }
                         ],
-
+                    },
+                    {
+                        name: 'weatherChange',
+                        description: 'Triggered when the weather has changed',
+                        controller: require('../controllers/services/weather/actions/weatherChange'),
+                        modelName: 'weatherChange',
+                        params: {
+                            city: {type: String, default: 'Nancy'},
+                            country: {type: String, default: 'France'},
+                        },
+                        fields: [
+                            {
+                                type: "text",
+                                name: 'city',
+                                label: 'City',
+                                placeholder: 'Nancy',
+                                validations: [
+                                    {
+                                        type: 'required',
+                                        message: 'Name Required'
+                                    },
+                                    {
+                                        type: 'pattern',
+                                        pattern: '^[a-zA-Z]+$',
+                                        message: 'Accept only text'
+                                    },
+                                ]
+                            },
+                            {
+                                type: "text",
+                                name: 'country',
+                                label: 'Country',
+                                placeholder: 'France',
+                                validations: [
+                                    {
+                                        type: 'required',
+                                        message: 'Name Required'
+                                    },
+                                    {
+                                        type: 'pattern',
+                                        pattern: '^[a-zA-Z]+$',
+                                        message: 'Accept only text'
+                                    },
+                                ]
+                            },
+                        ],
+                        output: [
+                            {
+                                name: "temperature",
+                                description: "Actual temperature"
+                            },
+                            {
+                                name: "skyText",
+                                description: "Text that describe the weather"
+                            },
+                            {
+                                name: "date",
+                                description: "Actual date"
+                            },
+                            {
+                                name: "observationTime",
+                                description: "Actual time"
+                            },
+                            {
+                                name: "observationPoint",
+                                description: "From where the weather has been observed"
+                            },
+                            {
+                                name: "feelsLike",
+                                description: "Feels like temperature"
+                            },
+                            {
+                                name: "humidity",
+                                description: "Humidity in the air"
+                            },
+                            {
+                                name: "windDisplay",
+                                description: "Some wind infos"
+                            },
+                            {
+                                name: "day",
+                                description: "Day"
+                            },
+                            {
+                                name: "imageUrl",
+                                description: "Image Url that represent the weather"
+                            }
+                        ],
                     },
                 ],
             reactions: [],
