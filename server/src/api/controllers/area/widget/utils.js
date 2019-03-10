@@ -10,6 +10,10 @@ async function save(widget) {
 }
 
 exports.saveActionData = async function (action, data) {
-    action.data = data;
+    action.data = JSON.stringify(data);
     return await save(action);
+};
+
+exports.getActionData = async function (action) {
+    return JSON.parse(action.data);
 };

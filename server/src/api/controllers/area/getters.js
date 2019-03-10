@@ -43,6 +43,13 @@ exports.getFormattedAreaById = async function (user, id) {
     };
 };
 
+exports.getAreaByIdWithoutUser = async function (id) {
+    let findArea = await Area.findOne({'_id': id});
+    if (findArea === false || findArea === null)
+        return false;
+    return findArea;
+};
+
 exports.getAreaById = async function (user, id) {
     let findArea = await Area.findOne({'_id': id, 'ownerId': user.id});
     if (findArea === false || findArea === null)

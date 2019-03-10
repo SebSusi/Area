@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0';
 const app = express();
 const cors = require('cors');
+const trigger = require('./src/api/controllers/area/triggers');
 
 const serverRouter = require('./src/server/routes/index');
 
@@ -38,6 +39,7 @@ require('./src/api/controllers/auth/authTokenStrategy')(passport);
 app.use(passport.session());
 app.use('/', serverRouter);
 
-app.on('ready', function () {
+app.on('ready', async function () {
+    await trigger.serverStartCreateTimers();
     app.listen(PORT, HOST, listenerCallback.listenCallback(PORT));
 });
