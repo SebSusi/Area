@@ -1,5 +1,5 @@
 
-$types-list: facebook, gmail, twitter, outlook, youtube;
+$types-list: facebook, gmail, twitter, outlook, youtube, 'google+', google;
 
 @each $type in $types-list {
   ::ng-deep .#{$type}-icon {

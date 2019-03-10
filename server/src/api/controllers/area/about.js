@@ -5,8 +5,12 @@ const moment = require('moment');
 
 
 function getActionReactionAbout(object, type) {
+    let accountType = null;
+    if (object.accountType !== undefined && object.accountType !== null)
+        accountType = object.accountType;
     let about = {
         name: object.name,
+        accountType: accountType,
         description: object.description,
         fields: object.fields,
         outputs: object.outputs,
