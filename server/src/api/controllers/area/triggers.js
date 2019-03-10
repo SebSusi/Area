@@ -2,13 +2,27 @@ const AreaModel = require('../../models/area/Area');
 const _ = require('lodash');
 const areaGetter = require('../area/getters');
 const widgetGetter = require('../area/widget/getters');
+const schemaGetter = require('../../models/widget/schemaGetter');
 
-async function parseReactionParam(reaction, output) {
-    
+function parseReactionParam(param, output) {
+    let keys = Object.keys(output);
+    for (let i = 0; i < keys.length; i++) {
+        let key = keys[i];
+        param.replace("{{" + key + "}}", output[key]);
+    }
+    return param;
 }
 
-async function parseReactionParams(reaction, output) {
-    return null;
+async function parseReactionParams(reactionConfig, reaction, output) {
+    let params = schemaGetter.getModelSchemaParams(reactionConfig.model);
+    let parsedParams = _.cloneDeep(reaction.params);
+    console.log(parsedParams);
+    for (let i = 0; i < params.length; i++) {
+        let param = params[i];
+        if (typeof parsedParams[param] === 'string' || parsedParams[param] instanceof String)
+            parsedParams[param] = parseReactionParam(parsedParams[param], output);
+    }
+    return parsedParams;
 }
 
 async function triggerFunction(areaId) {

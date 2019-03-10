@@ -6,10 +6,7 @@ const widgetGlobalParams = {
     user: {
         id: String,
     },
-    account: {
-        type: String,
-        id: String,
-    },
+    account: String,
     params: {
     },
     data: String
