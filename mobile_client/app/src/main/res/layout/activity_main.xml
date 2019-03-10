@@ -151,6 +151,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/user_input"
+            android:inputType="text"
             android:theme="@style/TextAppearence.App.TextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
