@@ -50,6 +50,13 @@ exports.addAction = async function (req, area) {
     if (params === false)
         return {id: false, success: false};
     let newAction = new model();
+    let account = req.body.account;
+    if (account === undefined || account === null)
+        newAction.account = null;
+    else {
+        newAction.account.id = account.id;
+        newAction.account.type = account.type;
+    }
     newAction.params = params;
     newAction.user.id = req.user.id;
     newAction = await save(newAction);
@@ -73,6 +80,13 @@ exports.addReaction = async function (req, area) {
         return {id: false, success: false};
     let newReaction = new model();
     newReaction.params = params;
+    let account = req.body.account;
+    if (account === undefined || account === null)
+        newReaction.account = null;
+    else {
+        newReaction.account.id = account.id;
+        newReaction.account.type = account.type;
+    }
     newReaction.user.id = req.user.id;
     newReaction = await save(newReaction);
     await areaSetter.addReaction(area, newReaction.id, req.body.serviceName, req.body.name);
@@ -94,6 +108,13 @@ exports.updateAction = async function (req, area, actionObject) {
     let params = exports.setWidgetParams(req, model, actionObject.params, false);
     if (params === false)
         return {id: false, success: false};
+    let account = req.body.account;
+    if (account === undefined || account === null)
+        actionObject.account = null;
+    else {
+        actionObject.account.id = account.id;
+        actionObject.account.type = account.type;
+    }
     actionObject.params = params;
     await save(actionObject);
     return {id: actionObject.id, success: true};
@@ -110,6 +131,13 @@ exports.updateReaction = async function (req, area, reactionObject) {
     let params = exports.setWidgetParams(req, model, reactionObject.params, false);
     if (params === false)
         return {id: false, success: false};
+    let account = req.body.account;
+    if (account === undefined || account === null)
+        reactionObject.account = null;
+    else {
+        reactionObject.account.id = account.id;
+        reactionObject.account.type = account.type;
+    }
     reactionObject.params = params;
     await save(reactionObject);
     return {id: reactionObject.id, success: true};
