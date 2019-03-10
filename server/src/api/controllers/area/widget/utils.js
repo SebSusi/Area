@@ -17,3 +17,9 @@ exports.saveActionData = async function (action, data) {
 exports.getActionData = async function (action) {
     return JSON.parse(action.data);
 };
+
+exports.compareActionData = async function (action, newData) {
+    const lastData = await exports.getActionData(action);
+    await exports.saveActionData(action, newData);
+    return (lastData !== newData);
+};
