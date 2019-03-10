@@ -76,4 +76,8 @@ class InfoService {
     fun getReactionFields(service: ServiceObject, reactionName: String): Array<FieldObject> {
         return getReAction(service.reactions as Array<AReActionObject>, reactionName).fields.clone()
     }
+
+    fun getActionOutputs(serviceName: String, actionName: String): Array<OutputObject> {
+        return (getReAction(getService(serviceName).actions as Array<AReActionObject>, actionName) as ActionObject).output.clone()
+    }
 }
