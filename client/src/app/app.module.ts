@@ -56,6 +56,11 @@ import {
 import { SidebarComponent } from './components/actions-managers/sidebar/sidebar.component';
 import { ActionStepComponent } from './components/actions-managers/sidebar/action-step/action-step.component';
 import { DynamicActionDirective } from './components/actions-managers/dynamic-action.directive';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {environment} from '../environments/environment';
+import { AccountsComponent } from './components/accounts/accounts.component';
 
 const appRoutes: Routes = [
     {
@@ -126,6 +131,7 @@ const appRoutes: Routes = [
         SidebarComponent,
         ActionStepComponent,
         DynamicActionDirective,
+        AccountsComponent,
     ],
     entryComponents: [
         InputComponent,
@@ -177,6 +183,10 @@ const appRoutes: Routes = [
         NgbModule,
         ReactiveFormsModule,
         SocialLoginModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireModule,
+        AngularFirestoreModule,
+        AngularFireAuthModule
     ],
     providers: [{
         provide: AuthServiceConfig,

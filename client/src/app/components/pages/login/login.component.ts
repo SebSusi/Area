@@ -4,6 +4,10 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login';
 import {ConnectionService} from '../../../services/connection.service';
+import * as firebase from 'firebase';
+import {AngularFireAuth} from '@angular/fire/auth';
+
+
 
 @Component({
     selector: 'app-login-page',
@@ -20,7 +24,8 @@ export class LoginComponent implements OnInit {
     constructor(private http: HttpClient, private router: Router,
                 private socialAuthService: AuthService,
                 private formBuilder: FormBuilder,
-                private connectionService: ConnectionService) {
+                private connectionService: ConnectionService,
+                public afAuth: AngularFireAuth) {
         this.signingUp = false;
         this.userError = '';
         this.loginForm = this.formBuilder.group({
@@ -57,11 +62,10 @@ export class LoginComponent implements OnInit {
     loginSocial(platform) {
         this.userError = '';
         let socialPlatformProvider;
-        if (platform === 'google') {
+        if (platform === 'google')
             socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-        } else if (platform === 'facebook') {
+        else if (platform === 'facebook')
             socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-        }
         this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
                 userData['access_token'] = userData.authToken;
                 this.connectionService.loginSocial(socialPlatformProvider, userData).subscribe(_ => {
@@ -88,6 +92,20 @@ export class LoginComponent implements OnInit {
         if (c.get('password').value !== c.get('passwordConfirm').value) {
             return {invalid: true};
         }
+    }
+
+    doTwitterLogin() {
+        return new Promise<any>((resolve, reject) => {
+            const provider = new firebase.auth.TwitterAuthProvider();
+            this.afAuth.auth
+                .signInWithPopup(provider)
+                .then(res => {
+                    resolve(res);
+                }, err => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
     }
 
 }
