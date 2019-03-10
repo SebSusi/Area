@@ -37,27 +37,52 @@ export class AreaService {
         if (id === undefined || id.length === 0) {
             return this.api.apiPost('/area/', {name: name, timer: 5, activated: true}).pipe(
                 map(data => AreaAdapter.adaptFromNew(data['id'], name)),
-                tap(data => this.updateArea(data)),
+                tap(data => this.updateAreaInList(data)),
                 tap(data => this.id = data['id'])
             );
         }
         return this.api.apiGet('/area/'.concat(id)).pipe(
             map(data => AreaAdapter.adapt(data)),
             tap(data => this.id = data['id']),
-            tap(data => this.updateArea(data))
+            tap(data => this.updateAreaInList(data))
         );
     }
 
-    private updateArea(data: Area) {
-        const id = this._areas.findIndex(item => item.id === data.id);
-        if (id === -1) {
+    private updateAreaInList(data: Area) {
+        const idx = this.getAreaIdx(data.id);
+        if (idx === -1)
             this._areas.push(data);
-        } else {
-            this._areas[id] = data;
-        }
+        else
+            this._areas[idx] = data;
     }
 
     public getPath() {
         return  '/area/' + this.id;
+    }
+
+    deleteArea(id: string) {
+        this.api.apiDelete('/area/'.concat(id)).subscribe(
+            data => {
+                this.removeArea(id);
+            }
+        );
+    }
+
+    getAreaIdx(id): number {
+        return this._areas.findIndex(item => item.id === id);
+    }
+
+    getAreaById(id): Area {
+        return this._areas[this.getAreaIdx(id)];
+    }
+
+    private removeArea(id: string) {
+        const idx = this.getAreaIdx(id);
+        this._areas.splice(idx, 1);
+        return idx;
+    }
+
+    putArea(id: string) {
+        this.api.apiPut('/area/'.concat(id), JSON.stringify(this.getAreaById(id))).subscribe();
     }
 }

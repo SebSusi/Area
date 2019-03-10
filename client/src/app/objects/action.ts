@@ -32,8 +32,10 @@ export class Action {
 
 export class ActionAdapter {
     static adaptArea(item: any): Action[] {
+        console.log(item);
         const i = item['reactions'].map(data => ActionAdapter.adapt(data, ActionType.REACTION));
-        i.unshift(ActionAdapter.adapt(item['action'], ActionType.TRIGGER));
+        if (item['action'] && item['action'].id)
+            i.unshift(ActionAdapter.adapt(item['action'], ActionType.TRIGGER));
         return i;
     }
 

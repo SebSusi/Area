@@ -1,15 +1,33 @@
 <div *ngIf="area" class="sidebar" [class.mat-elevation-12]="true">
-    <mat-form-field class="sidebar-form">
-        <input matInput placeholder="Area Name" value="{{area.name}}">
-    </mat-form-field>
+    <form class="sidebar-form" *ngIf="area">
+        <mat-form-field>
+            <input matInput placeholder="Area Name" type="text" name="areaName" [(ngModel)]="area.name">
+        </mat-form-field>
+        <mat-form-field id="timer-field">
+            <input matInput placeholder="Timer" type="number" name="areaTimer" [(ngModel)]="area.timer">
+        </mat-form-field>
+        <button mat-icon-button (click)="saveArea()">
+            <mat-icon>save</mat-icon>
+        </button>
+    </form>
     <mat-card *ngFor="let act of actionService.actions">
         <mat-card-header class="card-header" (click)="changeActiveAction(act.id)">
             <div mat-card-avatar class="{{act.serviceName}}-icon {{act.type}}-image mat-card-avatar"></div>
             <mat-card-title>{{act.name?.uncamelize()}}</mat-card-title>
             <mat-card-subtitle>{{act.type?.uncamelize()}}</mat-card-subtitle>
-            <button class="action-icon" mat-icon-button (click)="deleteAction(act.id)">
-                <mat-icon >delete</mat-icon>
+            <button class="action-icon" mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
             </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="deleteAction(act.id)">
+                    <mat-icon>delete</mat-icon>
+                    <span>Delete Action</span>
+                </button>
+                <button mat-menu-item (click)="saveAction(act.id)">
+                    <mat-icon>save</mat-icon>
+                    <span>Save Action</span>
+                </button>
+            </mat-menu>
         </mat-card-header>
         <mat-card-content [ngClass]="{'mh-0': act.id !== action.id}">
             <mat-action-list>
@@ -45,6 +63,6 @@
         </mat-card-content>
     </mat-card>
     <div class="add-step-container">
-        <button mat-raised-button color="accent" (click)="addAction()"> Add a step </button>
+        <button mat-raised-button color="accent" (click)="addAction()"> Add a step</button>
     </div>
 </div>

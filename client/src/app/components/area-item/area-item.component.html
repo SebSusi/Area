@@ -8,6 +8,6 @@
         <p >{{area.name}}</p>
     </div>
     <div class="area-options align-middle">
-        <mat-slide-toggle></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="area.activated" (change)="updateArea($event)"></mat-slide-toggle>
     </div>
 </mat-card>

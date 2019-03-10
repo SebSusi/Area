@@ -10,6 +10,16 @@ async function save(widget) {
 }
 
 exports.saveActionData = async function (action, data) {
-    action.data = data;
+    action.data = JSON.stringify(data);
     return await save(action);
+};
+
+exports.getActionData = async function (action) {
+    return JSON.parse(action.data);
+};
+
+exports.compareActionData = async function (action, newData) {
+    const lastData = await exports.getActionData(action);
+    await exports.saveActionData(action, newData);
+    return (lastData !== newData);
 };

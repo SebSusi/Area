@@ -4,11 +4,12 @@ import {Area} from '../../../objects/area';
 import {FormBuilder} from '@angular/forms';
 import {Steps, StepsService} from '../../../services/steps.service';
 import {Action} from '../../../objects/action';
+import {AreaService} from '../../../services/area.service';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+    selector: 'app-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
     @Input()
@@ -16,7 +17,7 @@ export class SidebarComponent implements OnInit {
     public action: Action;
     Steps = Steps;
 
-    constructor(public actionService: ActionService, formB: FormBuilder, public stepperService: StepsService) {
+    constructor(public actionService: ActionService, formB: FormBuilder, public stepperService: StepsService, private areaService: AreaService) {
         this.actionService.actionsObservable.subscribe(reset => {
             this.action = this.actionService.getActiveAction();
         });
@@ -25,11 +26,13 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
     }
 
-    public save() {}
+    public save() {
+    }
 
     changeActiveAction(id: any) {
-        const isFirst = (this.action === undefined);
-        const lastId = isFirst ? id : this.action.id ;
+        const isFirst = (!this.action);
+        console.log(isFirst);
+        const lastId = isFirst ? id : this.action.id;
         this.action = this.actionService.getAction(id);
         if (lastId !== this.action.id || isFirst)
             this.stepperService.changeStep(0);
@@ -45,4 +48,13 @@ export class SidebarComponent implements OnInit {
         this.actionService.deleteAction(id).subscribe();
     }
 
+    saveAction() {
+        console.log('Save');
+        this.action.fields = this.stepperService.getFormGroup(Steps.OPTIONS).getRawValue();
+        this.actionService.updateAction(this.action.id);
+    }
+
+    saveArea() {
+        this.areaService.putArea(this.area.id);
+    }
 }
