@@ -30,7 +30,7 @@ async function getAccountByWidget(widget) {
     if (widget.account === undefined || widget.account === null)
         return null;
     let account = await accountGetter.getAccountByIdWithoutUser(widget.account.id);
-    if (account === undefined || account === null)
+    if (account === undefined || account === null || String(account) === "{}" || account.data === undefined)
         return null;
     return JSON.parse(account.data);
 }
