@@ -1,3 +1,8 @@
+'use strict';
+
+const _ = require('lodash');
+const Weather = require('weather-js');
+
 exports.getOutput = async function (action, actionInfos, account) {
     const params = action.params;
     return new Promise(function (resolve, reject) {

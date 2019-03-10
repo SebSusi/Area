@@ -14,10 +14,7 @@ exports.checkData = async function (action, actionInfos, account) {
             if (err)
                 reject(false);
             try {
-                const degree = await utils.getActionData(action) + "1";
-                const newDegree = response[0].current.temperature;
-                utils.saveActionData(action, newDegree);
-                resolve(degree != response[0].current.temperature);
+                resolve(await utils.compareActionData(action, response[0].current.temperature));
             }
             catch (e) {
                 resolve(false);
