@@ -29,6 +29,7 @@ exports.getFormattedAccountsByType = async function (user, accountType) {
         formattedAccounts.push({
             id: accounts[i].id,
             type: accounts[i].type,
+            name: accounts[i].name,
         })
     }
     return formattedAccounts
@@ -49,6 +50,7 @@ exports.getFormattedAccounts = async function (user) {
         formattedAccounts.push({
             id: accounts[i].id,
             type: accounts[i].type,
+            name: accounts[i].name,
         })
     }
     return formattedAccounts

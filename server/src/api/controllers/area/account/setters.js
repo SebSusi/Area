@@ -13,11 +13,12 @@ async function save(account) {
 }
 
 exports.addAccount = async function (req) {
-    if (req.body.data === undefined && req.body.type === undefined)
+    if (req.body.data === undefined || req.body.type === undefined || req.body.name === undefined)
         return {success: false};
     let newAccount = new accountModel();
     newAccount.ownerId = req.user.id;
     newAccount.type = req.body.type;
+    newAccount.name = req.body.name;
     newAccount.data = JSON.stringify(req.body.data);
     let account = await save(newAccount);
     if (account === false)
