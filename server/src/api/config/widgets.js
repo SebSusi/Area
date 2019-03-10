@@ -30,7 +30,7 @@ let widgets = function () {
                 {
                     name: "timer",
                     description: "It's a timer, what do you expected ?",
-                    controller: require('../controllers/services/weather/actions/temperatureChange'),
+                    controller: require('../controllers/services/calendar/actions/timer'),
                     modelName: "calendarTimer",
                     params: {
                         duration: {type: String, default: '00:00:05'},
@@ -58,7 +58,7 @@ let widgets = function () {
                 {
                     name: "eachMonth",
                     description: "Triggered every month at specified day and time.",
-                    controller: require('../controllers/services/weather/actions/temperatureChange'),
+                    controller: require('../controllers/services/calendar/actions/eachMonth'),
                     modelName: "calendarEachMonth",
                     params: {
                         time: {type: String, default: '00:00:00'},
@@ -100,7 +100,7 @@ let widgets = function () {
                 {
                     name: "eachDay",
                     description: "Triggered every day at specified time.",
-                    controller: require('../controllers/services/weather/actions/temperatureChange'),
+                    controller: require('../controllers/services/calendar/actions/eachDay'),
                     modelName: "calendarEachDay",
                     params: {
                         time: {type: String, default: '00:00:00'},
@@ -159,7 +159,7 @@ let widgets = function () {
                     name: 'videoInfos',
                     description: 'Trigger every time X (dislikes/likes/comments) has been reached.',
                     accountType: 'google',
-                    controller: require('../controllers/services/weather/actions/temperatureChange'),
+                    controller: require('../controllers/services/youtube/actions/videoInfos'),
                     modelName: 'youtubeVideoInfos',
                     params: {
                         type: {type: Number, default: ''},
@@ -237,7 +237,7 @@ let widgets = function () {
                     name: 'channelInfos',
                     description: 'Trigger every time X (views/videos/subscibers) has been reached.',
                     accountType: 'google',
-                    controller: require('../controllers/services/weather/actions/temperatureChange'),
+                    controller: require('../controllers/services/youtube/actions/channelInfos'),
                     modelName: 'youtubeChannelInfos',
                     params: {
                         type: {type: Number, default: ''},
@@ -313,7 +313,7 @@ let widgets = function () {
                     name: 'postComment',
                     description: 'Post a comment under a specified video',
                     accountType: 'google',
-                    controller: require('../controllers/services/weather/actions/temperatureChange'),
+                    controller: require('../controllers/services/youtube/reactions/postComment'),
                     modelName: 'youtubePostComment',
                     params: {
                         message: {type: String, default: 'First!'},
@@ -354,7 +354,7 @@ let widgets = function () {
                     name: 'likeOrDislikeVideo',
                     description: 'Like or Dislike a specified video',
                     accountType: 'google',
-                    controller: require('../controllers/services/weather/actions/temperatureChange'),
+                    controller: require('../controllers/services/youtube/reactions/likeOrDislikeVideo'),
                     modelName: 'youtubeLikeOrDislikeVideo',
                     params: {
                         type: {type: String, default: 'Like'},
@@ -573,6 +573,24 @@ let widgets = function () {
                             label: 'Body',
                             placeholder: 'Enter your Messenger'
                         },
+                    ],
+                    output: [
+                        {
+                            name: "recipient",
+                            description: "Email recipient"
+                        },
+                        {
+                            name: "object",
+                            description: "Email Object"
+                        },
+                        {
+                            name: "body",
+                            description: "Email message in body"
+                        },
+                        {
+                            name: "date",
+                            description: "Date of creation of the email"
+                        }
                     ]
                 },
                 {
@@ -581,8 +599,60 @@ let widgets = function () {
                     controller: require('../controllers/services/gmail/reactions/sendMail'),
                     description: 'Send a mail to specified user.',
                     modelName: 'gmailSendMail',
-                    params: {},
-                    fields: []
+                    params: {
+                        recipient: { type: String },
+                        object: { type: String, default: 'Created by Area' },
+                        body: { type: String }
+                    },
+                    fields: [
+                        {
+                            type: "text",
+                            name: 'recipient',
+                            label: 'Recipient',
+                            placeholder: 'email@hotmail.fr',
+                            validations: [
+                                {
+                                    type: 'required',
+                                    message: 'Mail Required'
+                                },
+                                {
+                                    type: 'pattern',
+                                    pattern: '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$',
+                                    message: 'Accept only mail format'
+                                },
+                            ]
+                        },
+                        {
+                            type: "text",
+                            name: 'object',
+                            label: 'Object',
+                            placeholder: 'Created by Area'
+                        },
+                        {
+                            type: "text",
+                            name: 'body',
+                            label: 'Body',
+                            placeholder: 'Enter your Messenger'
+                        },
+                    ],
+                    output: [
+                        {
+                            name: "recipient",
+                            description: "Email recipient"
+                        },
+                        {
+                            name: "object",
+                            description: "Email Object"
+                        },
+                        {
+                            name: "body",
+                            description: "Email message in body"
+                        },
+                        {
+                            name: "date",
+                            description: "Date of creation of the email"
+                        }
+                    ]
                 }
             ]
         },
@@ -604,8 +674,28 @@ let widgets = function () {
                     controller: require('../controllers/services/facebook/actions/likePage'),
                     description: 'Trigger every time X users have liked a specified page',
                     modelName: 'facebookLikePage',
-                    params: {},
-                    fields: []
+                    params: {
+                        pageurl: {type:String, default:'https://www.facebook.com/TrollsdeGeek/'}
+                    },
+                    fields: [
+                        {
+                            type: "text",
+                            name: 'pageUrl',
+                            label: 'Url of page',
+                            placeholder: 'https://www.facebook.com/...',
+                            validations: [
+                                {
+                                    type: 'required',
+                                    message: 'Page Url Required'
+                                },
+                                {
+                                    type: 'pattern',
+                                    pattern: '^https://www.facebook.com/*$',
+                                    message: 'Invalid page Url'
+                                },
+                            ]
+                        }
+                    ]
                 }
             ],
             reactions: [
@@ -615,8 +705,17 @@ let widgets = function () {
                     controller: require('../controllers/services/facebook/reactions/postMessage'),
                     description: 'Post a Message',
                     modelName: 'facebookPostMessage',
-                    params: {},
-                    fields: []
+                    params: {
+                        message:{type:String, default:'Automatic message by Area'}
+                    },
+                    fields: [
+                        {
+                            type: "text",
+                            name: 'message',
+                            label: 'Message',
+                            placeholder: 'Enter your message',
+                        }
+                    ]
                 }
             ]
         },
@@ -629,7 +728,6 @@ let widgets = function () {
                 [
                     {
                         name: 'temperatureChange',
-                        accountType: 'weather',
                         description: 'Triggered when the temperature has changed',
                         controller: require('../controllers/services/weather/actions/temperatureChange'),
                         modelName: 'weatherTemperatureChange',
