@@ -13,6 +13,15 @@
   & .sidebar-form {
     width: 100%;
     margin: 10px 0 0;
+    display: flex;
+    ::ng-deep #timer-field .mat-form-field-infix {
+        width: 100px !important;
+    }
+    & > * {
+      margin: auto;
+      margin-top: 0;
+      display: block;
+    }
   }
 
   & > * {

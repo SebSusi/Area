@@ -4,6 +4,7 @@ import {Area} from '../../../objects/area';
 import {FormBuilder} from '@angular/forms';
 import {Steps, StepsService} from '../../../services/steps.service';
 import {Action} from '../../../objects/action';
+import {AreaService} from '../../../services/area.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -16,7 +17,7 @@ export class SidebarComponent implements OnInit {
     public action: Action;
     Steps = Steps;
 
-    constructor(public actionService: ActionService, formB: FormBuilder, public stepperService: StepsService) {
+    constructor(public actionService: ActionService, formB: FormBuilder, public stepperService: StepsService, private areaService: AreaService) {
         this.actionService.actionsObservable.subscribe(reset => {
             this.action = this.actionService.getActiveAction();
         });
@@ -53,4 +54,7 @@ export class SidebarComponent implements OnInit {
         this.actionService.updateAction(this.action.id);
     }
 
+    saveArea() {
+        this.areaService.putArea(this.area.id);
+    }
 }

@@ -1,23 +1,24 @@
 import {AreaTemplate} from './area-template';
 import {ValidatorFn, Validators} from '@angular/forms';
 import {ValidatorsFactory} from './validators-factory';
-
-enum OptionTypes {
-    LIST = 'list',
-    TEXT = 'text',
-    BOOLEAN = 'boolean'
-}
+import {InputComponent} from '../components/actions-managers/options-manager/form-components/input/input.component';
+import {TextareaComponent} from '../components/actions-managers/options-manager/form-components/textarea/textarea.component';
+import {ButtonComponent} from '../components/actions-managers/options-manager/form-components/button/button.component';
+import {SelectComponent} from '../components/actions-managers/options-manager/form-components/select/select.component';
+import {DateComponent} from '../components/actions-managers/options-manager/form-components/date/date.component';
+import {RadiobuttonComponent} from '../components/actions-managers/options-manager/form-components/radiobutton/radiobutton.component';
+import {CheckboxComponent} from '../components/actions-managers/options-manager/form-components/checkbox/checkbox.component';
 
 export class Option {
     private _name: string;
-    private _type: OptionTypes;
+    private _type: string;
     private _options: any;
     private _label: string;
     private _placeHolder: string;
     private _validators: ValidatorFn;
     private _value: string;
 
-    constructor(name: string, type: OptionTypes, validators: any, options: any, label: string, placeHolder: string) {
+    constructor(name: string, type: string, validators: any, options: any, label: string, placeHolder: string) {
         this._name = name;
         this._type = type;
         this._validators = ValidatorsFactory.parseValidators(validators);
@@ -43,11 +44,11 @@ export class Option {
         this._name = value;
     }
 
-    get type(): OptionTypes {
+    get type(): string {
         return this._type;
     }
 
-    set type(value: OptionTypes) {
+    set type(value: string) {
         this._type = value;
     }
 
@@ -86,16 +87,8 @@ export class Option {
 
 export class OptionAdapter {
 
-    private static parseType(type: string): OptionTypes {
-        if (Object.values(OptionTypes).includes(type)) {
-                // @ts-ignore
-                return type;
-            }
-        return OptionTypes.TEXT;
-    }
-
     static adapt(option: any): Option {
-        return new Option(option.name, OptionAdapter.parseType(option.type), option.validations,
+        return new Option(option.name, option.type, option.validations,
             option.options, option.label, option.placeHolder);
     }
 }
