@@ -12,8 +12,7 @@ const widgetGlobalParams = {
     },
     params: {
     },
-    data: {
-    }
+    data: String
 };
 
 exports.setModelSchema = function (params) {
