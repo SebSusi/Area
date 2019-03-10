@@ -4,4 +4,5 @@ import java.io.Serializable
 
 class SocialToken (
         var provider: String = "",
-        var token: String = "") : Serializable
+        var token: String = "",
+        var name: String = "") : Serializable
