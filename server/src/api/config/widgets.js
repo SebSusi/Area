@@ -257,7 +257,7 @@ let widgets = function () {
                                 },
                                 {
                                     type: 'pattern',
-                                    pattern: '^https://www.youtube.com/(user/channel)/*$',
+                                    pattern: '(?:https|http)\:\/\/(?:[\w]+\.)?youtube\.com\/(?:c\/|channel\/|user\/)?([a-zA-Z0-9\-]{1,})',
                                     message: 'Invalid youtube Url'
                                 },
                             ]
@@ -404,11 +404,32 @@ let widgets = function () {
                 },
                 {
                     name: 'subscribe',
+                    accountType:'google',
                     controller: require('../controllers/services/youtube/reactions/subscribe'),
                     description: 'Subscribe or Unsubcribe to a specified channel',
                     modelName: 'youtubeSubscribe',
-                    params: {},
-                    fields: []
+                    params: {
+                        channelUrl: {type: String, default: 'https://www.youtube.com/watch?v=6Dh-RL__uN4'}
+                    },
+                    fields: [
+                        {
+                            type: "text",
+                            name: 'channelUrl',
+                            label: 'Url of the channel',
+                            placeholder: 'https://www.youtube.com/...',
+                            validations: [
+                                {
+                                    type: 'required',
+                                    message: 'Channel Required'
+                                },
+                                {
+                                    type: 'pattern',
+                                    pattern: '(?:https|http)\:\/\/(?:[\w]+\.)?youtube\.com\/(?:c\/|channel\/|user\/)?([a-zA-Z0-9\-]{1,})',
+                                    message: 'Invalid youtube Url'
+                                },
+                            ]
+                        },
+                    ]
                 }
             ]
         },
@@ -550,10 +571,6 @@ let widgets = function () {
                             label: 'Recipient',
                             placeholder: 'email@hotmail.fr',
                             validations: [
-                                {
-                                    type: 'required',
-                                    message: 'Mail Required'
-                                },
                                 {
                                     type: 'pattern',
                                     pattern: '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$',
