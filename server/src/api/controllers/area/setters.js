@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const Area = require('../../models/area/Area');
+const trigger = require('./triggers');
 
 async function save(area) {
     let save = await area.save(function (err, object) {
@@ -53,6 +54,7 @@ exports.updateArea = async function (req, area) {
     if (req.user !== undefined)
         area.ownerId = req.user.id;
     else return {success: false};
+    await trigger.stopAreaTimer(area.id);
     if (req.body.name !== undefined)
         area.name = req.body.name;
     if (req.body.activated !== undefined)
@@ -60,6 +62,8 @@ exports.updateArea = async function (req, area) {
     if (req.body.timer !== undefined)
         area.timer = req.body.timer;
     await save(area);
+    if (area.activated === true)
+        await trigger.startAreaTimer(area);
     return {id: area.id, success: true};
 };
 
@@ -80,5 +84,7 @@ exports.createArea = async function (req) {
     newArea = await save(newArea);
     if (newArea === false)
         return {success: false};
+    if (newArea.activated === true)
+        await trigger.startAreaTimer(newArea);
     return {id: newArea.id, success: true};
 };
