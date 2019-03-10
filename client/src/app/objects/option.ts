@@ -1,5 +1,5 @@
 import {AreaTemplate} from './area-template';
-import {Validators} from '@angular/forms';
+import {ValidatorFn, Validators} from '@angular/forms';
 import {ValidatorsFactory} from './validators-factory';
 
 enum OptionTypes {
@@ -14,7 +14,7 @@ export class Option {
     private _options: any;
     private _label: string;
     private _placeHolder: string;
-    private _validators: Validators[];
+    private _validators: ValidatorFn;
     private _value: string;
 
     constructor(name: string, type: OptionTypes, validators: any, options: any, label: string, placeHolder: string) {
@@ -59,11 +59,11 @@ export class Option {
         this._options = value;
     }
 
-    get validators(): Validators[] {
+    get validators(): ValidatorFn {
         return this._validators;
     }
 
-    set validators(value: Validators[]) {
+    set validators(value: ValidatorFn) {
         this._validators = value;
     }
 

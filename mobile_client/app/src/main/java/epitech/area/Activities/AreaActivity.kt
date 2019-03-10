@@ -39,17 +39,29 @@ class AreaActivity : FragmentActivity() {
             view.areaTimer.setText(area.timer.toString())
             view.areaActivated.isChecked = area.activated
             val alert = AlertDialog.Builder(this, R.style.CustomDialogTheme).setTitle("Area Settings").setView(view)
-            alert.setPositiveButton(android.R.string.ok) { _, _ ->
+                    .setPositiveButton(android.R.string.ok, null)
+                    .setNeutralButton(android.R.string.cancel) { dialog, _ -> dialog.cancel() }
+                    .show()
+            alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                 if (checkAreaInfos(view.areaEditName.text.toString(), view.areaTimer.text.toString())) {
                     area.name = view.areaEditName.text.toString()
                     area.timer = view.areaTimer.text.toString().toInt()
                     area.activated = view.areaActivated.isChecked
                     AreaService.instance.changeAreaInfos(area)
                     updateDisplay(true)
+                    alert.dismiss()
                 }
             }
-            alert.setNeutralButton(android.R.string.cancel) { dialog, _ ->
-                dialog.cancel()
+        }
+        actionInfoButton.setOnClickListener {
+            val alert = AlertDialog.Builder(this, R.style.CustomDialogTheme).setTitle("Action Outputs")
+            area.action.output = InfoService.instance.getActionOutputs(area.action.serviceName, area.action.name)
+            if (area.action.id.isNotBlank())
+                alert.setMessage(area.name + "'s action has " + area.action.getOutputsDescription())
+            else
+                alert.setMessage(area.name + " has no action.")
+            alert.setPositiveButton(android.R.string.ok) { dialog, _ ->
+                dialog.dismiss()
             }
             alert.show()
         }

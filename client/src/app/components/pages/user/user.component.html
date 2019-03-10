@@ -12,13 +12,6 @@
     </form>
 
     <div *ngIf="profiles['blindtest']" class="social-buttons">
-        <button mat-raised-button type="button" (click)="showBlindtest = !showBlindtest"
-                class="btn-social col-md-12">
-            <svg-icon src="assets/blindtest-icon.svg"></svg-icon>
-            BlindTest account
-            <span *ngIf="!showBlindtest" class="end-icon fa fa-chevron-right"></span>
-            <span *ngIf="showBlindtest" class="end-icon fa fa-chevron-down"></span>
-        </button>
         <div *ngIf="showBlindtest" class="background-card">
             <form class="area-form" [formGroup]="emailForm"
                   (submit)="changeEmail(this.emailForm.get('email').value)">

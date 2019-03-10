@@ -18,8 +18,7 @@ export class StructureService {
     }
 
     initStructure() {
-        const url = 'https://next.json-generator.com/api/json/get/VyOVzLxHL';
-        this._http.get(url).pipe(map(data => this.adapater.adapt(data)),
+        this.api.apiGet('/area_info').pipe(map(data => this.adapater.adapt(data)),
             tap(data => {this._template = data})).subscribe();
     }
 
@@ -36,13 +35,13 @@ export class StructureService {
     getOptions(action: Action) {
         if (this.template === undefined)
             return undefined;
-        return this.template.getOptions(action.service, action.type, action.name);
+        return this.template.getOptions(action.serviceName, action.type, action.name);
     }
 
     getActionsTypes(action: Action) {
         if (this.template === undefined)
             return undefined;
-        return this.template.getActionsTypes(action.service, action.type);
+        return this.template.getActionsTypes(action.serviceName, action.type);
     }
 
 }

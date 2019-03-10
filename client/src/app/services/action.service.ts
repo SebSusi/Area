@@ -1,23 +1,23 @@
 import {Injectable} from '@angular/core';
-import {Area} from '../objects/area';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {ApiService} from './api.service';
-import {map, tap} from 'rxjs/operators';
 import {Action, ActionAdapter} from '../objects/action';
 import {ActionType} from '../objects/actions-template';
 import {Subject} from 'rxjs';
+import {AreaService} from './area.service';
+import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActionService {
     private _actions: Action[] = [];
-    private _selected: number;
+    private _selected = 0;
 
     public actionsObservable = new Subject();
 
-    constructor(private _http: HttpClient, private _router: Router, private api: ApiService) {
+    constructor(private _http: HttpClient, private _router: Router, private api: ApiService, private areaService: AreaService) {
     }
 
     emitActions(reset: boolean = false) {
@@ -25,38 +25,56 @@ export class ActionService {
     }
 
     get actions(): Action[] {
-        return this._actions;
+        if (!this.areaService.getCurrentArea())
+            return [];
+        return this.areaService.getCurrentArea().actions;
+    }
+
+    getActiveAction() {
+        return this.actions[this._selected];
     }
 
     getAction(id: string): Action {
         if (id === undefined)
-            return this._actions[this._selected];
+            return this.actions[this._selected];
+        console.log(id);
+        console.log(this.actions);
         this.setActiveActionById(id);
         if (this._selected <= -1)
             throw new Error('Can\'t find this action');
-        return this._actions[this._selected];
+        return this.actions[this._selected];
     }
 
-    getActions(area: Area, type: ActionType = ActionType.TRIGGER) {
-        const url = 'https://next.json-generator.com/api/json/get/4JboGC5VU';
-        return this._http.get(url).pipe(
-            map(data => ActionAdapter.adaptArea(data)),
-            tap(data => this._actions = data)
-        );
+    postAction(action: Action) {
+        console.log('Post : ', JSON.stringify(action));
+        this.api.apiPost(this.areaService.getPath() + '/' + (action.type === ActionType.TRIGGER ? 'action' : 'reaction'),
+            JSON.stringify(action)).pipe(tap(data => action.id = data['id']), tap(data => console.log(action))).subscribe();
+    }
+
+    putAction(action) {
+        console.log('Put : ', JSON.stringify(action));
+        this.api.apiPut(this.areaService.getPath() + '/' + (action.type === ActionType.TRIGGER ? 'action/' : 'reaction/') + action.id,
+            JSON.stringify(action)).pipe(tap(data => action.id = data['id'])).subscribe();
     }
 
     updateAction(actionId: string) {
-        const url = 'blablabla.fr';
-        return this._http.put(url, this._actions[actionId]);
+        const index = this.getActionIndex(actionId);
+        console.log(actionId);
+        if (index < 0 || !actionId)
+            return;
+        console.log('Save');
+        if (actionId.startsWith('local'))
+            return this.postAction(this.actions[index]);
+        return this.putAction(this.actions[index]);
     }
 
     setAction(action: Action) {
         this.getAction(action.id);
-        this._actions[this._selected] = action;
+        this.actions[this._selected] = action;
     }
 
     getActionIndex(id: string) {
-        return this._actions.findIndex(item => item.id === id);
+        return this.actions.findIndex(item => item.id === id);
     }
 
     setActiveActionById(id: string) {
@@ -72,12 +90,10 @@ export class ActionService {
     }
 
     getNewAction() {
-        const url = 'https://next.json-generator.com/api/json/get/VkTIxMH8L';
-        return this._http.get(url).pipe(
-            map(data => ActionAdapter.adapt(data, ActionType.REACTION)),
-            tap(data => data.id = Math.random().toString(36).substring(7)),
-            tap(data => this._actions.push(data))
-        );
+        const id = 'local' + Math.random().toString(36).substring(7);
+        const data = ActionAdapter.adapt({id: id}, this.actions.length ? ActionType.REACTION : ActionType.TRIGGER);
+        this.actions.push(data);
+        return id;
     }
 
 

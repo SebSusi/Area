@@ -69,3 +69,10 @@
     margin: auto -4px auto auto;
   }
 }
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none !important;
+}

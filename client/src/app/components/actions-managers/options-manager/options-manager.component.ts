@@ -13,6 +13,7 @@ import {FormGroup, Validators} from '@angular/forms';
 export class OptionsManagerComponent extends AbstractManager implements OnInit {
 
     public options: any;
+    public test: string;
 
     submit(value: any) {}
 
@@ -49,23 +50,14 @@ export class OptionsManagerComponent extends AbstractManager implements OnInit {
         const group: any = {};
         if (this.options)
             this.options.forEach(field => {
+                if (!this.action.fields[field.name])
+                    this.action.fields[field.name] = '';
                 group[field.name] = [
-                    this.action.options.get(field.name),
-                    this.bindValidations(field.validations || [])
+                    this.action.fields[field.name],
+                    field.validators,
                 ];
             });
         return group;
-    }
-
-    bindValidations(validations: any) {
-        if (validations.length > 0) {
-            const validList = [];
-            validations.forEach(valid => {
-                validList.push(valid.validator);
-            });
-            return Validators.compose(validList);
-        }
-        return null;
     }
 
     validateAllFormFields(formGroup: FormGroup) {

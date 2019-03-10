@@ -1,16 +1,17 @@
-import {Validators} from '@angular/forms';
+import {ValidatorFn, Validators} from '@angular/forms';
 
 export class ValidatorsFactory {
 
-    static parseValidators(validations: any) {
+    static parseValidators(validations: any): ValidatorFn {
+        const valid: ValidatorFn[] = [];
         for (const val in validations) {
             validations[val]['name'] = validations[val]['type'];
-            validations[val]['validator'] = this.parseValidator(validations[val]);
+            valid.push(this.parseValidator(validations[val]));
         }
-        return validations;
+        return Validators.compose(valid);
     }
 
-    static parseValidator(validator: any) {
+    static parseValidator(validator: any): ValidatorFn | null {
         switch (validator.type) {
             case 'required':    return Validators.required;
             case 'max':         return Validators.max(validator.value);

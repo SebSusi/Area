@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActionService} from '../../../services/action.service';
-import {FormGroup} from '@angular/forms';
 import {Action} from '../../../objects/action';
 import {Steps, StepsService} from '../../../services/steps.service';
 import {MatStepper} from '@angular/material';
@@ -17,17 +16,15 @@ export class ActionComponent implements OnInit {
     }
 
     public action: Action = undefined;
-    private lastActionId = '';
 
     constructor(private actionService: ActionService, public stepsService: StepsService) {
         this.actionService.actionsObservable.subscribe(reset => {
-            this.action = this.actionService.getAction(undefined);
-            this.lastActionId = this.action.id;
+            this.action = this.actionService.getActiveAction();
         });
-        stepsService.addStep(Steps.SERVICE, 'Select Service');
-        stepsService.addStep(Steps.TYPE, 'Choose Action or Reaction');
-        stepsService.addStep(Steps.ACCOUNT, 'Connect Account');
-        stepsService.addStep(Steps.OPTIONS, 'Set Up Template');
+        stepsService.addStep(Steps.SERVICE, 'Select Service', 0);
+        stepsService.addStep(Steps.TYPE, 'Choose Action or Reaction', 1);
+        stepsService.addStep(Steps.ACCOUNT, 'Connect Account', 2);
+        stepsService.addStep(Steps.OPTIONS, 'Set Up Template', 3);
     }
 
     indexOrderAsc = (akv: KeyValue<string, any>, bkv: KeyValue<string, any>): number => {
@@ -39,5 +36,13 @@ export class ActionComponent implements OnInit {
 
     ngOnInit() {
         this.stepsService.stepper = this.stepper;
+    }
+
+    saveAction() {
+        console.log(this.stepsService.getFormGroup(Steps.OPTIONS));
+        if (this.stepsService.getFormGroup(Steps.OPTIONS).valid) {
+            this.action.fields = this.stepsService.getFormGroup(Steps.OPTIONS).getRawValue();
+            this.actionService.updateAction(this.action.id);
+        }
     }
 }

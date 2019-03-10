@@ -1,6 +1,15 @@
 <ul class="area-list">
+    <li>
+        <mat-checkbox
+                class="example-margin"
+                [(ngModel)]="checked"
+                [indeterminate]="areSomeChecked()"
+                (change)="selectAll()">
+        </mat-checkbox>
+        <button mat-button [disabled]="!areSomeChecked()" (click)="deleteAreas()">Trash</button>
+    </li>
     <li *ngFor="let item of areas" class="d-flex align-items-center">
-        <mat-checkbox color="primary"></mat-checkbox>
+        <mat-checkbox color="primary" [(ngModel)]="item.checked"></mat-checkbox>
         <app-area-item [area]="item" class="flex-fill">
         </app-area-item>
     </li>

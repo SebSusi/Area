@@ -26,7 +26,7 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
     }
 
     receiveActionUpdate() {
-        this.connectionService.getAccounts(this.action.service).subscribe(
+        this.connectionService.getAccounts(this.action.serviceName).subscribe(
             data => {
                 this.accounts = data;
             }

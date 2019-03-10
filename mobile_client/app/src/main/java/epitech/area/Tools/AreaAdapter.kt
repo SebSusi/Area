@@ -88,10 +88,11 @@ class AreaAdapter(private val context: Context, private var areas : ArrayList<Ar
             holder.reactionImage.setImageDrawable(null)
             holder.arrowImage.visibility = View.INVISIBLE
         }
-        holder.areaSwitch.setOnClickListener(null)
         holder.areaSwitch.isChecked = areas[position].activated
         holder.areaSwitch.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener {
             override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+                if (position >= areas.size)
+                    return
                 areas[position].activated = isChecked
                 AreaService.instance.changeAreaInfos(areas[position])
             }
