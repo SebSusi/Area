@@ -533,6 +533,7 @@ let widgets = function () {
                 [
                     {
                         name: 'temperatureChange',
+                        accountType: 'weather',
                         description: 'Triggered when the temperature has changed',
                         controller: require('../controllers/services/weather/actions/temperatureChange'),
                         modelName: 'weatherTemperatureChange',
