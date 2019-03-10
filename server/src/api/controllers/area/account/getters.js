@@ -44,6 +44,8 @@ exports.getFormattedAccountsByType = async function (user, accountType) {
 
 exports.getFormattedAccountById = async function (user, accountId) {
     let account = await exports.getAccountById(user, accountId);
+    if (account === false)
+        return {success: false};
     return ({
         id: account.id,
         type: account.type,

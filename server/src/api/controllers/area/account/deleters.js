@@ -1,5 +1,6 @@
 const widgetsConfig = require('../../../config/widgets');
 const accountGetter = require('./getters');
+const _ = require('lodash');
 
 async function save(widget) {
     let save = await widget.save(function (err, object) {
@@ -44,7 +45,7 @@ async function deleteAccountFromWidgetsWithAccountType(accountType, accountId) {
 }
 
 exports.deleteAccount = async function (user, accountType, accountId) {
-    let account = accountGetter.getAccountById(user, accountId);
+    let account = await accountGetter.getAccountById(user, accountId);
     if (account === false)
         return {success: false};
     await deleteAccountFromWidgetsWithAccountType(accountType, accountId);
