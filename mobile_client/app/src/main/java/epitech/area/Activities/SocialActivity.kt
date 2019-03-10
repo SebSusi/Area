@@ -24,7 +24,6 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 
-
 class SocialActivity : FragmentActivity() {
     private val RC_GOOGLE_SIGN_IN: Int = 1
     private val RC_OAUTH_SIGN_IN: Int = 2
@@ -46,7 +45,9 @@ class SocialActivity : FragmentActivity() {
         buttonFacebook.registerCallback(mCallbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
                 socialToken.provider = "facebook"
+                socialToken.name = "Open Graph Test User"//loginResult.accessToken.userId
                 socialToken.token = loginResult.accessToken.token
+                finish()
             }
 
             override fun onCancel() {
@@ -59,17 +60,19 @@ class SocialActivity : FragmentActivity() {
             }
         })
 
-/*        buttonTwitter.callback = object : com.twitter.sdk.android.core.Callback<TwitterSession>() {
+        buttonTwitter.callback = object : com.twitter.sdk.android.core.Callback<TwitterSession>() {
             override fun success(result: Result<TwitterSession>) {
                 socialToken.provider = "twitter"
+                socialToken.name = result.data.userName
                 socialToken.token = result.data.authToken.token
+                finish()
             }
 
             override fun failure(exception: TwitterException) {
-                Log.d("Facebook Login Error", exception.message)
+                Log.d("Twitter Login Error", exception.message)
                 applicationContext.longToast("Cannot connect to Twitter server")
             }
-        }*/
+        }
         /*buttonImgur.setOnClickListener {
             val imageIntent = Intent(this, OAuthActivity::class.java)
             imageIntent.putExtra("OAuthInfo", OAuthInfo("imgur",
@@ -94,7 +97,7 @@ class SocialActivity : FragmentActivity() {
                 .build()
     }
 
-    private fun getGoogleAccessToken(code: String) {
+    private fun getGoogleAccessToken(code: String, name: String) {
         val client = OkHttpClient()
         val requestBody = FormBody.Builder()
                 .add("grant_type", "authorization_code")
@@ -116,6 +119,7 @@ class SocialActivity : FragmentActivity() {
                 try {
                     val jsonObject = JSONObject(response.body()?.string())
                     socialToken.provider = "google"
+                    socialToken.name = name
                     socialToken.token = jsonObject.getString("access_token")
                     finish()
                 } catch (e: JSONException) {
@@ -129,13 +133,13 @@ class SocialActivity : FragmentActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         mCallbackManager.onActivityResult(requestCode, resultCode, data)
-//        buttonTwitter.onActivityResult(requestCode, resultCode, data)
+        buttonTwitter!!.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == RC_GOOGLE_SIGN_IN) {
                 val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
                 if (result.isSuccess) {
-                    val account = result.signInAccount
-                    getGoogleAccessToken(account?.serverAuthCode!!)
+                    val account = result.signInAccount!!
+                    getGoogleAccessToken(account.serverAuthCode!!, account.displayName!!)
                 }
             }
             else if (requestCode == RC_OAUTH_SIGN_IN) {

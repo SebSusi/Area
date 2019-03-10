@@ -28,6 +28,11 @@ import org.jetbrains.anko.longToast
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
+import com.twitter.sdk.android.core.Twitter
+import com.twitter.sdk.android.core.TwitterAuthConfig
+import com.twitter.sdk.android.core.DefaultLogger
+import com.twitter.sdk.android.core.TwitterConfig
+
 
 class MainActivity : FragmentActivity() {
     private val RC_GOOGLE_SIGN_IN: Int = 1
@@ -42,6 +47,7 @@ class MainActivity : FragmentActivity() {
         AreaService.instance.changeFuelHeaders(applicationContext)
         InfoService.instance.checkAreaInfos()
         initGoogleLogin()
+        initTwitter()
         mCallbackManager = CallbackManager.Factory.create()
         setContentView(R.layout.activity_main)
         signUpChangeButton.setOnClickListener {
@@ -104,6 +110,15 @@ class MainActivity : FragmentActivity() {
                 .enableAutoManage(this, null)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, mGoogleSignInOptions)
                 .build()
+    }
+
+    private fun initTwitter() {
+        val config = TwitterConfig.Builder(this)
+                .logger(DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(TwitterAuthConfig(getString(R.string.twitter_client_id), getString(R.string.twitter_client_secret)))
+                .debug(true)
+                .build()
+        Twitter.initialize(config)
     }
 
     override fun onResume() {
