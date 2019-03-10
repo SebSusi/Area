@@ -482,8 +482,53 @@ let widgets = function () {
                     controller: require('../controllers/services/gmail/actions/newEmail'),
                     description: 'Triggers when a new e-mail appears in the specified mailbox.',
                     modelName: 'gmailNewEmail',
-                    params: {},
-                    fields: []
+                    params: {
+                        recipient:{type:String},
+                        object:{type:String, default:'Created by Area'},
+                    },
+                    fields: [
+                        {
+                            type: "text",
+                            name: 'recipient',
+                            label: 'Recipient',
+                            placeholder: 'email@hotmail.fr',
+                            validations: [
+                                {
+                                    type: 'required',
+                                    message: 'Mail Required'
+                                },
+                                {
+                                    type: 'pattern',
+                                    pattern: '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$',
+                                    message: 'Accept only mail format'
+                                },
+                            ]
+                        },
+                        {
+                            type: "text",
+                            name: 'object',
+                            label: 'Object',
+                            placeholder: 'Created by Area'
+                        },
+                    ],
+                    output: [
+                        {
+                            name: "recipient",
+                            description: "Email recipient"
+                        },
+                        {
+                            name: "object",
+                            description: "Email Object"
+                        },
+                        {
+                            name: "body",
+                            description: "Email message in body"
+                        },
+                        {
+                            name: "date",
+                            description: "Date of reception of the email"
+                        }
+                    ]
                 }
             ],
             reactions: [
@@ -493,8 +538,42 @@ let widgets = function () {
                     controller: require('../controllers/services/gmail/reactions/createDraft'),
                     description: 'Create a draft.',
                     modelName: 'gmailCreateDraft',
-                    params: {},
-                    fields: []
+                    params: {
+                        recipient: { type: String },
+                        object: { type: String, default: 'Created by Area' },
+                        body: { type: String }
+                    },
+                    fields: [
+                        {
+                            type: "text",
+                            name: 'recipient',
+                            label: 'Recipient',
+                            placeholder: 'email@hotmail.fr',
+                            validations: [
+                                {
+                                    type: 'required',
+                                    message: 'Mail Required'
+                                },
+                                {
+                                    type: 'pattern',
+                                    pattern: '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$',
+                                    message: 'Accept only mail format'
+                                },
+                            ]
+                        },
+                        {
+                            type: "text",
+                            name: 'object',
+                            label: 'Object',
+                            placeholder: 'Created by Area'
+                        },
+                        {
+                            type: "text",
+                            name: 'body',
+                            label: 'Body',
+                            placeholder: 'Enter your Messenger'
+                        },
+                    ]
                 },
                 {
                     name: 'sendMail',
