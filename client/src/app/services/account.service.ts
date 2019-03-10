@@ -12,9 +12,13 @@ export class AccountService {
   constructor(private _http: HttpClient, private _router: Router, private api: ApiService, public afAuth: AngularFireAuth) {
   }
 
+  public _accounts: any[];
+
   public putAccount(name, type, data) {
       console.log(name, type, data);
-      this.api.apiPost('/account', {name: name, type: type, data: data}).subscribe();
+      this.api.apiPost('/account', {name: name, type: type, data: data}).subscribe(
+          data => {console.log(data); this._accounts.push({name: name, type: type, id: data['id']}); }
+      );
   }
 
   public putTwitter() {
@@ -46,7 +50,21 @@ export class AccountService {
             });
     }
 
+    get accounts(): any[] {
+      return this._accounts;
+    }
+
     public getAccounts() {
-      return this.api.apiGet('/account');
+      this.api.apiGet('/account').subscribe(data => {this._accounts = data});
+    }
+
+    public deleteAccount(type, id) {
+      this.api.apiDelete('/account/' + type + '/' + id).subscribe(
+          data => {
+              console.log('COco');
+              const idx = this._accounts.findIndex(item => item['id'] === id);
+              this.accounts.splice(idx, 1);
+          }
+      );
     }
 }
