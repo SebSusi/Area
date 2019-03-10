@@ -9,15 +9,18 @@ import {AccountService} from '../../services/account.service';
     styleUrls: ['./accounts.component.scss']
 })
 export class AccountsComponent implements OnInit {
-    public accounts: any;
 
     constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public accountService: AccountService) {
-        const icons = ['facebook', 'twitter', 'gmail'];
+        const icons = ['facebook', 'twitter', 'google'];
         for (const type of icons)
             iconRegistry.addSvgIcon(
                 type,
                 sanitizer.bypassSecurityTrustResourceUrl('assets/types/' + type + '.svg'));
-        this.accountService.getAccounts().subscribe(data => {this.accounts = data, console.log(data)} );
+        this.accountService.getAccounts();
+    }
+
+    get accounts(): any[] {
+        return this.accountService.accounts;
     }
 
     ngOnInit() {
