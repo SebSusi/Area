@@ -48,7 +48,7 @@ let widgets = function () {
                                     },
                                     {
                                         type: 'pattern',
-                                        pattern: '\'^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$\'',
+                                        pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$',
                                         message: 'Please put a duration of format : hh:mm:ss'
                                     },
                                 ]
@@ -73,7 +73,7 @@ let widgets = function () {
                                 validations: [
                                     {
                                         type: 'pattern',
-                                        pattern: '\'^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$\'',
+                                        pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$',
                                         message: 'Please put a duration of format : hh:mm:ss'
                                     },
                                 ]
@@ -114,7 +114,7 @@ let widgets = function () {
                                 validations: [
                                     {
                                         type: 'pattern',
-                                        pattern: '\'^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$\'',
+                                        pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$',
                                         message: 'Please put a duration of format : hh:mm:ss'
                                     },
                                 ]
@@ -147,7 +147,7 @@ let widgets = function () {
                                     },
                                     {
                                         type: 'pattern',
-                                        pattern: '\'^https://www.youtube.com/(user/channel)/*$\'',
+                                        pattern: '^https://www.youtube.com/(user/channel)/*$',
                                         message: 'Invalid youtube Url'
                                     },
                                 ]
@@ -177,7 +177,7 @@ let widgets = function () {
                                     },
                                     {
                                         type: 'pattern',
-                                        pattern: '\'^https://www.youtube.com/watch\?v=*$\'',
+                                        pattern: '^https://www.youtube.com/watch\?v=*$',
                                         message: 'Invalid youtube Url'
                                     },
                                 ]
@@ -254,7 +254,7 @@ let widgets = function () {
                                     },
                                     {
                                         type: 'pattern',
-                                        pattern: '\'^https://www.youtube.com/(user/channel)/*$\'',
+                                        pattern: '^https://www.youtube.com/(user/channel)/*$',
                                         message: 'Invalid youtube Url'
                                     },
                                 ]
@@ -339,7 +339,7 @@ let widgets = function () {
                                     },
                                     {
                                         type: 'pattern',
-                                        pattern: '\'^https://www.youtube.com/watch\?v=*$\'',
+                                        pattern: '^https://www.youtube.com/watch*$',
                                         message: 'Invalid youtube Url'
                                     },
                                 ]
@@ -390,7 +390,7 @@ let widgets = function () {
                                     },
                                     {
                                         type: 'pattern',
-                                        pattern: '\'^https://www.youtube.com/watch\?v=*$\'',
+                                        pattern: '^https://www.youtube.com/watch\?v=*$',
                                         message: 'Invalid youtube Url'
                                     },
                                 ]

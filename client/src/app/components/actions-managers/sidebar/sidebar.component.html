@@ -7,9 +7,19 @@
             <div mat-card-avatar class="{{act.serviceName}}-icon {{act.type}}-image mat-card-avatar"></div>
             <mat-card-title>{{act.name?.uncamelize()}}</mat-card-title>
             <mat-card-subtitle>{{act.type?.uncamelize()}}</mat-card-subtitle>
-            <button class="action-icon" mat-icon-button (click)="deleteAction(act.id)">
-                <mat-icon >delete</mat-icon>
+            <button class="action-icon" mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
             </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="deleteAction(act.id)">
+                    <mat-icon>delete</mat-icon>
+                    <span>Delete Action</span>
+                </button>
+                <button mat-menu-item (click)="saveAction(act.id)">
+                    <mat-icon>save</mat-icon>
+                    <span>Save Action</span>
+                </button>
+            </mat-menu>
         </mat-card-header>
         <mat-card-content [ngClass]="{'mh-0': act.id !== action.id}">
             <mat-action-list>

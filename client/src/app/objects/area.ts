@@ -6,6 +6,7 @@ export class Area {
     public on = false;
     public id: string;
     public timer: number;
+    public checked: boolean;
 
 
     constructor(id: string, name: string = 'Basic Area', on: boolean = false, timer = 5, actions: Action[] = []) {
@@ -19,6 +20,7 @@ export class Area {
 
 export class AreaAdapter {
     static adapt(item: any): Area {
+        console.log(item);
         return new Area(item.uniqueId, item.name, item.activated, item.timer, ActionAdapter.adaptArea(item));
     }
 

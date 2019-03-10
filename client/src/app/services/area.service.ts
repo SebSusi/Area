@@ -49,15 +49,29 @@ export class AreaService {
     }
 
     private updateArea(data: Area) {
-        const id = this._areas.findIndex(item => item.id === data.id);
-        if (id === -1) {
+        const idx = this._areas.findIndex(item => item.id === data.id);
+        if (idx === -1) {
             this._areas.push(data);
         } else {
-            this._areas[id] = data;
+            this._areas[idx] = data;
         }
     }
 
     public getPath() {
         return  '/area/' + this.id;
+    }
+
+    deleteArea(id: string) {
+        this.api.apiDelete('/area/'.concat(id)).subscribe(
+            data => {
+                this.removeArea(id);
+            }
+        );
+    }
+
+    private removeArea(id: string) {
+        const idx = this._areas.findIndex(item => item.id === id);
+        this._areas.splice(idx, 1);
+        return idx;
     }
 }

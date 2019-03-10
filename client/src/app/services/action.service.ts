@@ -37,6 +37,8 @@ export class ActionService {
     getAction(id: string): Action {
         if (id === undefined)
             return this.actions[this._selected];
+        console.log(id);
+        console.log(this.actions);
         this.setActiveActionById(id);
         if (this._selected <= -1)
             throw new Error('Can\'t find this action');
@@ -44,19 +46,23 @@ export class ActionService {
     }
 
     postAction(action: Action) {
+        console.log('Post : ', JSON.stringify(action));
         this.api.apiPost(this.areaService.getPath() + '/' + (action.type === ActionType.TRIGGER ? 'action' : 'reaction'),
-            JSON.stringify(action)).pipe(tap(data => action.id = data['id'])).subscribe();
+            JSON.stringify(action)).pipe(tap(data => action.id = data['id']), tap(data => console.log(action))).subscribe();
     }
 
     putAction(action) {
+        console.log('Put : ', JSON.stringify(action));
         this.api.apiPut(this.areaService.getPath() + '/' + (action.type === ActionType.TRIGGER ? 'action/' : 'reaction/') + action.id,
             JSON.stringify(action)).pipe(tap(data => action.id = data['id'])).subscribe();
     }
 
     updateAction(actionId: string) {
         const index = this.getActionIndex(actionId);
+        console.log(actionId);
         if (index < 0 || !actionId)
             return;
+        console.log('Save');
         if (actionId.startsWith('local'))
             return this.postAction(this.actions[index]);
         return this.putAction(this.actions[index]);
@@ -83,9 +89,9 @@ export class ActionService {
         this._selected = index;
     }
 
-    getNewAction(type = ActionType.TRIGGER) {
+    getNewAction() {
         const id = 'local' + Math.random().toString(36).substring(7);
-        const data = ActionAdapter.adapt({id: id}, type);
+        const data = ActionAdapter.adapt({id: id}, this.actions.length ? ActionType.REACTION : ActionType.TRIGGER);
         this.actions.push(data);
         return id;
     }
