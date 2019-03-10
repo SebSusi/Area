@@ -1,4 +1,4 @@
-const widgetsConfig = require('../../api/config/widgets');
+const widgetsConfig = require('../../../config/widgets');
 const accountGetter = require('./getters');
 
 async function save(widget) {
