@@ -4,7 +4,7 @@ const areaGetter = require('../area/getters');
 const widgetGetter = require('../area/widget/getters');
 
 async function parseReactionParam(reaction, output) {
-
+    
 }
 
 async function parseReactionParams(reaction, output) {
@@ -59,13 +59,14 @@ exports.stopAreaTimer = async function (areaId) {
     });
     if (_.isEmpty(evens))
         return false;
+    console.log("Stop timer of area " + areaId);
     clearInterval(evens[0].timer);
     return true;
 };
 
 exports.startAreaTimer = async function (area) {
     if (area.activated === true) {
-        console.log("Create timer for " + area.id);
+        console.log("Create timer for area " + area.id);
         let timer = setInterval(triggerFunction, area.timer * 1000, area.id);
         global.areaTimers.push({
             id: area.id,

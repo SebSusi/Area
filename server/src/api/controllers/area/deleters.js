@@ -1,9 +1,11 @@
 const widgetDeleters = require('../../controllers/area/widget/deleters');
 const widgetGetters = require('../../controllers/area/widget/getters');
+const trigger = require('./triggers');
 
 exports.deleteArea = async function (req, area) {
     if (area === false)
         return {success: false};
+    await trigger.stopAreaTimer(area.id);
     if (area.action !== null && area.action !== undefined && String(area.action) !== "{}")
         await widgetDeleters.deleteActionWithoutSaveArea(await widgetGetters.getActionWidgetByAreaAction(area.action));
     if (area.reactions !== null && area.reactions !== undefined && String(area.reactions) !== "{}")
