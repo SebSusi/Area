@@ -1,0 +1,16 @@
+<mat-list>
+    <mat-list-item>
+        <span>Add An Account :</span>
+        <button mat-icon-button (click)="accountService.putTwitter()">
+            <mat-icon svgIcon="twitter"></mat-icon>
+        </button>
+        <button mat-icon-button (click)="accountService.putFacebook()">
+            <mat-icon svgIcon="facebook"></mat-icon>
+        </button>
+        <button mat-icon-button (click)="accountService.putGoogle()">
+            <mat-icon svgIcon="gmail"></mat-icon>
+        </button>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Manage Your Accounts</mat-list-item>
+</mat-list>

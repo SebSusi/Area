@@ -129,6 +129,7 @@ let widgets = function () {
                 {
                     name: 'newVideo',
                     description: 'Trigger every time a video is posted by a specified user',
+                    accountType: 'google',
                     controller: require('../controllers/services/youtube/actions/newVideo'),
                     modelName: 'youtubeNewVideo',
                     params: {
@@ -157,6 +158,7 @@ let widgets = function () {
                 {
                     name: 'videoInfos',
                     description: 'Trigger every time X (dislikes/likes/comments) has been reached.',
+                    accountType: 'google',
                     controller: require('../controllers/services/weather/actions/temperatureChange'),
                     modelName: 'youtubeVideoInfos',
                     params: {
@@ -234,6 +236,7 @@ let widgets = function () {
                 {
                     name: 'channelInfos',
                     description: 'Trigger every time X (views/videos/subscibers) has been reached.',
+                    accountType: 'google',
                     controller: require('../controllers/services/weather/actions/temperatureChange'),
                     modelName: 'youtubeChannelInfos',
                     params: {
@@ -309,6 +312,7 @@ let widgets = function () {
                 {
                     name: 'postComment',
                     description: 'Post a comment under a specified video',
+                    accountType: 'google',
                     controller: require('../controllers/services/weather/actions/temperatureChange'),
                     modelName: 'youtubePostComment',
                     params: {
@@ -349,6 +353,7 @@ let widgets = function () {
                 {
                     name: 'likeOrDislikeVideo',
                     description: 'Like or Dislike a specified video',
+                    accountType: 'google',
                     controller: require('../controllers/services/weather/actions/temperatureChange'),
                     modelName: 'youtubeLikeOrDislikeVideo',
                     params: {
@@ -412,6 +417,7 @@ let widgets = function () {
             actions: [
                 {
                     name: 'newTweet',
+                    accountType: 'twitter',
                     controller: require('../controllers/services/twitter/actions/newTweet'),
                     description: 'Trigger when specified user tweet something.',
                     modelName: 'twitterNewTweet',
@@ -420,6 +426,7 @@ let widgets = function () {
                 },
                 {
                     name: 'searchMention',
+                    accountType: 'twitter',
                     controller: require('../controllers/services/twitter/actions/searchMention'),
                     description: 'Triggers When Any User Creates A New Tweet That Contains A Specific Search Term (Like A Word, Phrase, Username Or Hashtag).',
                     modelName: 'twitterSearchMention',
@@ -428,6 +435,7 @@ let widgets = function () {
                 },
                 {
                     name: 'newFollower',
+                    accountType: 'twitter',
                     controller: require('../controllers/services/twitter/actions/newFollower'),
                     description: 'Triggers when a user of your choosing gets a new follower.',
                     modelName: 'twitterNewFollower',
@@ -436,6 +444,7 @@ let widgets = function () {
                 },
                 {
                     name: 'likeTweet',
+                    accountType: 'twitter',
                     controller: require('../controllers/services/twitter/actions/likeTweet'),
                     description: 'Triggers when a specific user likes a tweet.',
                     modelName: 'twitterLikeTweet',
@@ -446,6 +455,7 @@ let widgets = function () {
             reactions: [
                 {
                     name: 'createTweet',
+                    accountType: 'twitter',
                     controller: require('../controllers/services/twitter/reactions/createTweet'),
                     description: 'Creates a tweet.',
                     modelName: 'twitterCreateTweet',
@@ -454,6 +464,7 @@ let widgets = function () {
                 },
                 {
                     name: 'followUser',
+                    accountType: 'twitter',
                     controller: require('../controllers/services/twitter/reactions/followUser'),
                     description: 'Follow a specified user.',
                     modelName: 'twitterFollowUser',
@@ -467,7 +478,7 @@ let widgets = function () {
             actions: [
                 {
                     name: 'newEmail',
-                    accountType:'google',
+                    accountType: 'google',
                     controller: require('../controllers/services/gmail/actions/newEmail'),
                     description: 'Triggers when a new e-mail appears in the specified mailbox.',
                     modelName: 'gmailNewEmail',
@@ -523,6 +534,7 @@ let widgets = function () {
             reactions: [
                 {
                     name: 'createDraft',
+                    accountType: 'google',
                     controller: require('../controllers/services/gmail/reactions/createDraft'),
                     description: 'Create a draft.',
                     modelName: 'gmailCreateDraft',
@@ -565,6 +577,7 @@ let widgets = function () {
                 },
                 {
                     name: 'sendMail',
+                    accountType: 'google',
                     controller: require('../controllers/services/gmail/reactions/sendMail'),
                     description: 'Send a mail to specified user.',
                     modelName: 'gmailSendMail',
@@ -578,6 +591,7 @@ let widgets = function () {
             actions: [
                 {
                     name: 'newPostToYourTimeline',
+                    accountType: 'facebook',
                     controller: require('../controllers/services/facebook/actions/newPostToYourTimeline'),
                     description: 'Triggers when anyone (including you) posts to your Page\'s Timeline.',
                     modelName: 'facebookNewPostToYourTimeline',
@@ -586,6 +600,7 @@ let widgets = function () {
                 },
                 {
                     name: 'likePage',
+                    accountType: 'facebook',
                     controller: require('../controllers/services/facebook/actions/likePage'),
                     description: 'Trigger every time X users have liked a specified page',
                     modelName: 'facebookLikePage',
@@ -596,6 +611,7 @@ let widgets = function () {
             reactions: [
                 {
                     name: 'postMessage',
+                    accountType: 'facebook',
                     controller: require('../controllers/services/facebook/reactions/postMessage'),
                     description: 'Post a Message',
                     modelName: 'facebookPostMessage',
@@ -613,6 +629,7 @@ let widgets = function () {
                 [
                     {
                         name: 'temperatureChange',
+                        accountType: 'weather',
                         description: 'Triggered when the temperature has changed',
                         controller: require('../controllers/services/weather/actions/temperatureChange'),
                         modelName: 'weatherTemperatureChange',

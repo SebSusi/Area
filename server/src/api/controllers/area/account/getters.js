@@ -9,14 +9,14 @@ exports.getAccountsByType = async function (user, accountType) {
 };
 
 exports.getAccountByIdWithoutUser = async function (accountId) {
-    let account = await accountModel.find({'_id': accountId});
+    let account = await accountModel.findOne({'_id': accountId});
     if (account === false || account === null)
         return false;
     return account;
 };
 
 exports.getAccountById = async function (user, accountId) {
-    let account = await accountModel.find({'_id': accountId, 'ownerId': user.id});
+    let account = await accountModel.findOne({'_id': accountId, 'ownerId': user.id});
     if (account === false || account === null)
         return false;
     return account;
@@ -44,6 +44,8 @@ exports.getFormattedAccountsByType = async function (user, accountType) {
 
 exports.getFormattedAccountById = async function (user, accountId) {
     let account = await exports.getAccountById(user, accountId);
+    if (account === false)
+        return {success: false};
     return ({
         id: account.id,
         type: account.type,

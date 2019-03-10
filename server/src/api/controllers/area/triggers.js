@@ -48,7 +48,7 @@ async function triggerFunction(areaId) {
     let actionConfig = widgetGetter.getActionByServiceNameAndActionName(area.action.serviceName, area.action.name);
     if (actionConfig.controller.checkData === undefined || actionConfig.controller.getOutput === undefined)
         return;
-    if (actionConfig.accountType !== undefined || actionConfig.accountType !== null) {
+    if (actionConfig.accountType !== undefined && actionConfig.accountType !== null) {
         actionAccount = await getAccountByWidget(action);
         if (actionAccount === null)
             return;
@@ -64,7 +64,7 @@ async function triggerFunction(areaId) {
         let reaction = widgetGetter.getReactionWidgetByAreaReaction(areaReaction);
         if (reaction !== false) {
             let reactionAccount = null;
-            if (reactionConfig.accountType !== undefined || reactionConfig.accountType !== null) {
+            if (reactionConfig.accountType !== undefined && reactionConfig.accountType !== null) {
                 reactionAccount = await getAccountByWidget(reaction);
                 if (reactionConfig.controller.doReaction !== undefined && reactionAccount !== null)
                     await reactionConfig.controller.doReaction(reaction, reactionConfig,
