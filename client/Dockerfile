@@ -7,7 +7,7 @@ RUN npm install -g @angular/cli@1.7.1
 RUN npm install -qy
 COPY . .
 
-EXPOSE 4242 49153
+EXPOSE 8081 49153
 
 CMD ["npm", "start"]
 
