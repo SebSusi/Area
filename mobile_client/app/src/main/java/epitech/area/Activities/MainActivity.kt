@@ -237,6 +237,7 @@ class MainActivity : FragmentActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        mCallbackManager.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == RC_GOOGLE_SIGN_IN) {
                 val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
