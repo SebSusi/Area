@@ -25,7 +25,7 @@ export class AccountService {
       this.afAuth.auth
           .signInWithPopup(provider)
           .then(res => {
-              this.putAccount(res['additionalUserInfo']['profile']['name'], 'twitter', res);
+              this.putAccount(res['additionalUserInfo']['profile']['name'], 'twitter',  res['credential']);
           });
   }
 
@@ -34,7 +34,7 @@ export class AccountService {
         this.afAuth.auth
             .signInWithPopup(provider)
             .then(res => {
-                this.putAccount(res['additionalUserInfo']['profile']['name'], 'google', res);
+                this.putAccount(res['additionalUserInfo']['profile']['name'], 'google', res['credential']);
             });
     }
 
@@ -43,7 +43,7 @@ export class AccountService {
         this.afAuth.auth
             .signInWithPopup(provider)
             .then(res => {
-                this.putAccount(res['additionalUserInfo']['profile']['name'], 'facebook', res);
+                this.putAccount(res['additionalUserInfo']['profile']['name'], 'facebook', res['credential']);
             });
     }
 
