@@ -42,7 +42,7 @@ class AccountActivity : FragmentActivity() {
 
     private fun socialAuth(socialToken: SocialToken) {
         try {
-            ("auth/" + socialToken.provider).httpPost()
+            ("area_account/").httpPost()
                     .body("{\"access_token\": \"" + socialToken.token + "\"}")
                     .responseObject(TokenResponse.Deserializer()) { _, _, result ->
                         val(res, err) = result
@@ -79,7 +79,8 @@ class AccountActivity : FragmentActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == RC_SOCIAL_O_AUTH) {
-                socialAuth(data?.getSerializableExtra("SocialToken") as SocialToken)
+                AreaService.instance.createAccount(data?.getSerializableExtra("SocialToken") as SocialToken)
+                AreaService.instance.getAccounts(accountList.adapter as AccountAdapter)
             }
         }
     }

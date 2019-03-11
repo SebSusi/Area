@@ -6,8 +6,9 @@ import com.google.gson.Gson
 data class ActionObject (
         override var name: String = "",
         override var serviceName: String = "",
+        override var accountType: String = "",
         override var id: String = "",
-        override var accountId: String = "",
+        override var account: AccountObject = AccountObject(),
         override var fields: Array<FieldObject> = arrayOf(),
         var output: Array<OutputObject> = arrayOf(),
         override var type: String = "ACTION",
