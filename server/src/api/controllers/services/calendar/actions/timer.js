@@ -20,5 +20,6 @@ exports.checkData = async function(action, actionInfo, account) {
 };
 
 exports.getOutput = async function(action, actionInfo, account) {
+    console.log('Oui !');
     return {date: new Date().toString()};
 };
