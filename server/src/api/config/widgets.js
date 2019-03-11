@@ -54,6 +54,12 @@ let widgets = function () {
                             ]
                         },
                     ],
+                    output: [
+                        {
+                            name: 'date',
+                            description: 'Date of triggered timer'
+                        }
+                    ]
                 },
                 {
                     name: "eachMonth",

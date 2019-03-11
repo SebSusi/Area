@@ -20,5 +20,5 @@ exports.checkData = async function(action, actionInfo, account) {
 };
 
 exports.getOutput = async function(action, actionInfo, account) {
-    return null;
+    return {date: new Date().toString()};
 };
