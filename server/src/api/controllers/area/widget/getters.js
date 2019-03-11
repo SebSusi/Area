@@ -60,7 +60,6 @@ async function getFormattedAreaActionReaction(type, object) {
     if (object === null || object === undefined || String(object) === "{}")
         return {};
     let databaseObject = await exports.getWidgetByObjectAndType(object, type);
-    console.log(databaseObject);
     if (databaseObject === false || databaseObject === null)
         return false;
     let account = databaseObject.account;
