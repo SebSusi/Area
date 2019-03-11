@@ -64,6 +64,7 @@ class SocialActivity : FragmentActivity() {
             override fun success(result: Result<TwitterSession>) {
                 socialToken.provider = "twitter"
                 socialToken.name = result.data.userName
+                socialToken.secret = result.data.authToken.secret
                 socialToken.token = result.data.authToken.token
                 finish()
             }
