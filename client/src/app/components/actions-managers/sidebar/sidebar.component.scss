@@ -1,9 +1,13 @@
 @import "sidebar-theme";
 
+::ng-deep app-sidebar {
+  width: 400px;
+}
+
 .sidebar {
-  //  position: fixed;
+  position: fixed;
   padding: 15px 20px 0;
-  top: 0;
+  top: 50px;
   left: 0;
   bottom: 0;
   width: 400px;

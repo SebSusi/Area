@@ -1024,8 +1024,18 @@ let widgets = function () {
                     controller: require('../controllers/services/terminal/reactions/print'),
                     description: 'Print to terminal.',
                     modelName: 'terminalPrint',
-                    params: {},
-                    fields: []
+                    params: {
+                        message: {type: String, default: 'message'}
+                    },
+                    fields: [
+                        {
+                            type: 'text',
+                            name: 'message',
+                            label: 'Message',
+                            placeholder: 'Message',
+                            validations: []
+                        }
+                    ]
                 }
             ]
         },
