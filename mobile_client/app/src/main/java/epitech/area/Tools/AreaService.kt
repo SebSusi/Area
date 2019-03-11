@@ -1,5 +1,6 @@
 package epitech.area.Tools
 
+import android.accounts.Account
 import android.content.Context
 import android.util.Log
 import android.widget.TextView
@@ -16,8 +17,11 @@ import epitech.area.Storages.*
 class AreaService {
 
     val gson = GsonBuilder().create()
-    val reActionGson = GsonBuilder().registerTypeAdapter(Array<FieldObject>::class.java, FieldsAdapter()).create()
-
+    val customGson = GsonBuilder()
+            .registerTypeAdapter(Array<FieldObject>::class.java, FieldsAdapter())
+            .registerTypeAdapter(SocialToken::class.java, SocialTokenAdapter())
+            .registerTypeAdapter(AccountObject::class.java, AccountObjectAdapter())
+            .create()
 
     private object Holder { val INSTANCE = AreaService() }
 
@@ -51,7 +55,6 @@ class AreaService {
         } catch (e: Exception) {
             Log.d("Get Area Exception", e.toString())
         }
-        FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
     }
 
     fun getArea(reActionAdapter: ReActionAdapter, textView: TextView,  area: AreaObject) {
@@ -64,6 +67,9 @@ class AreaService {
                             area.name = res.name
                             area.timer = res.timer
                             area.activated = res.activated
+                            area.action.id = res.action.id
+                            area.action.serviceName = res.action.serviceName
+                            area.action.name = res.action.name
                             reActionAdapter.setReActions(res)
                         }
                     }
@@ -123,7 +129,7 @@ class AreaService {
         try {
             if (reAction.id.isNotBlank())
                 ("area/" + reAction.areaId  + "/" + reAction.type.toLowerCase() + "/" + reAction.id).httpPut()
-                        .body(reActionGson.toJson(reAction))
+                        .body(customGson.toJson(reAction))
                         .response { _, _, result ->
                             val (res, err) = result
                             if (err != null) {
@@ -133,7 +139,7 @@ class AreaService {
                         }
             else
                 ("area/" + reAction.areaId  + "/" + reAction.type.toLowerCase() + "/").httpPost()
-                        .body(reActionGson.toJson(reAction))
+                        .body(customGson.toJson(reAction))
                         .response { _, _, result ->
                             val (res, err) = result
                             if (err != null) {
@@ -162,10 +168,8 @@ class AreaService {
     }
 
     fun getAccounts(accountAdapter: AccountAdapter) {
-        FuelManager.instance.basePath = "" //remove this when using real server
-        FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
         try {
-            "https://next.json-generator.com/api/json/get/Vk_WtKgrU".httpGet()
+            "area_account/".httpGet()
                     .responseObject(AccountObject.ArrayDeserializer()) { _, _, result ->
                         val (res, err) = result
                         if (err == null) {
@@ -175,29 +179,46 @@ class AreaService {
         } catch (e: Exception) {
             Log.d("getAreas Exception", e.toString())
         }
-        FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
     }
 
     fun getServiceAccounts(serviceName: String, reActionActivity: ReActionActivity) {
-        FuelManager.instance.basePath = "" //remove this when using real server
-        FuelManager.instance.baseHeaders = mapOf() //remove this when using real server
         try {
-            "https://next.json-generator.com/api/json/get/Vk_WtKgrU".httpGet()
-                    .responseObject(AccountObject.ArrayDeserializer()) { _, _, result ->
-                        val (res, err) = result
-                        if (err == null) {
-                            reActionActivity.setAccounts(res!!)
-                            reActionActivity.updateAccountStep()
+            if (serviceName == "") {
+                reActionActivity.setAccounts(arrayOf(AccountObject("", "None")))
+                reActionActivity.updateAccountStep()
+            } else {
+                ("area_account/" + serviceName + "/").httpGet()
+                        .responseObject(AccountObject.ArrayDeserializer()) { _, _, result ->
+                            val (res, err) = result
+                            if (err == null) {
+                                reActionActivity.setAccounts(res!!)
+                                reActionActivity.updateAccountStep()
+                            }
                         }
-                    }
+            }
         } catch (e: Exception) {
             Log.d("getAreas Exception", e.toString())
         }
-        FuelManager.instance.basePath = "http://10.0.2.2:8080/" //remove this when using real server
     }
 
-    fun deleteAccount(acountId: String) {
-        "".httpDelete()
+    fun createAccount(socialToken: SocialToken) {
+        try {
+            "area_account/".httpPost()
+                    .body(customGson.toJson(socialToken))
+                    .response { _, _, result ->
+                        val (res, err) = result
+                        if (err != null) {
+                            Log.d("Create Account Err", err.toString())
+                            Log.d("Create Account Res", res.toString())
+                        }
+                    }
+        } catch (e: Exception) {
+            Log.d("Change Area Infos", e.toString())
+        }
+    }
+
+    fun deleteAccount(account: AccountObject) {
+        ("area_account/" + account.type + "/" + account.id).httpDelete()
                 .response { _, _, result ->
                     val (res, err) = result
                     if (err != null) {

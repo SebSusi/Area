@@ -55,7 +55,7 @@ class AccountAdapter(private val context: Context, private var accounts : ArrayL
                     .setTitle("Delete " + accounts[position].getServiceName() + " account")
                     .setMessage("Do you really want to delete the " + accounts[position].getServiceName() + " account '" + accounts[position].name + "' ?")
             alert.setPositiveButton(android.R.string.ok) { _, _ ->
-                AreaService.instance.deleteAccount(accounts[position].id)
+                AreaService.instance.deleteAccount(accounts[position])
                 removeAccountAt(position)
             }
             alert.setNegativeButton(android.R.string.cancel) { dialog, _ ->
