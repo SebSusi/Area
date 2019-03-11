@@ -3,9 +3,10 @@ services:
   client_mobile:
     build:
       context: ./mobile_client/
-    command: ./gradlew build
+    command: bash -c "./gradlew build && cp ./app/build/outputs/apk/debug/app-debug.apk /usr/apkBuild/client.apk"
     volumes:
       - ./mobile_client/:/usr/app
+      - apk-volume:/usr/apkBuild
   client_web:
     build:
       context: ./client/
@@ -13,6 +14,7 @@ services:
     volumes:
       - ./client/:/usr/app
       - /usr/app/node_modules
+      - apk-volume:/usr/apkBuild
     ports:
       - "8081:8081" 
   server:
@@ -40,6 +42,9 @@ services:
       - nodeapp-network
     volumes:
       - ./server/db:/data/db
+
+volumes:
+  apk-volume:
 
 networks:
   nodeapp-network:
