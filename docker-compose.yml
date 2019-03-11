@@ -1,5 +1,11 @@
 version: '3.3'
 services:
+  client_mobile:
+    build:
+      context: ./mobile_client/
+    command: ./gradlew build
+    volumes:
+      - ./mobile_client/:/usr/app
   client_web:
     build:
       context: ./client/
