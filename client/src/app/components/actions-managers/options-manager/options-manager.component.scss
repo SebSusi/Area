@@ -1,0 +1,7 @@
+.output-list {
+  position: relative;
+  margin-bottom: 20px;
+  ::ng-deep .output-title {
+    text-transform: capitalize;
+  }
+}
