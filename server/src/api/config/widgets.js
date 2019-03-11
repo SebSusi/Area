@@ -29,7 +29,7 @@ let widgets = function () {
             actions: [
                 {
                     name: "timer",
-                    description: "It's a timer, what do you expected ?",
+                    description: "It's a timer, what do you expect ?",
                     controller: require('../controllers/services/calendar/actions/timer'),
                     modelName: "calendarTimer",
                     params: {
@@ -56,8 +56,32 @@ let widgets = function () {
                     ],
                     output: [
                         {
-                            name: 'date',
-                            description: 'Date of triggered timer'
+                            name: 'dayName',
+                            description: 'Name of the day'
+                        },
+                        {
+                            name: 'monthName',
+                            description: 'Name of the month'
+                        },
+                        {
+                            name: 'year',
+                            description: 'year of the triggered timer'
+                        },
+                        {
+                            name: 'month',
+                            description: 'month of the triggered timer'
+                        },
+                        {
+                            name: 'hours',
+                            description: 'hours of the triggered timer'
+                        },
+                        {
+                            name: 'minutes',
+                            description: 'minutes of the triggered timer'
+                        },
+                        {
+                            name: 'seconds',
+                            description: 'seconds of the triggered timer'
                         }
                     ]
                 },

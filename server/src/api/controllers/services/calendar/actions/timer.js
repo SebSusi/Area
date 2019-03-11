@@ -20,5 +20,14 @@ exports.checkData = async function(action, actionInfo, account) {
 };
 
 exports.getOutput = async function(action, actionInfo, account) {
-    return {date: new Date().toString()};
+    date = new Date();
+    return {
+        dayName: date.toLocaleString('en-us', {  weekday: 'long' }),
+        monthName: date.toLocaleString('en-us', { month: 'long' }),
+        year: date.getFullYear(),
+        month : date.getMonth(),
+        hours: date.getHours(),
+        minutes: date.getMinutes(),
+        seconds: date.getSeconds()
+    };
 };
