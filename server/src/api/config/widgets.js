@@ -23,12 +23,12 @@ function generateWidgetsModel(widgetsConfig) {
 
 let widgets = function () {
     let widgetsConfig = {
-        timer: {
+        calendar: {
             name: "calendar",
             reactions: [],
             actions: [
                 {
-                    name: "calendar",
+                    name: "timer",
                     description: "It's a timer, what do you expected ?",
                     controller: require('../controllers/services/calendar/actions/timer'),
                     modelName: "calendarTimer",
@@ -54,6 +54,12 @@ let widgets = function () {
                             ]
                         },
                     ],
+                    output: [
+                        {
+                            name: 'date',
+                            description: 'Date of triggered timer'
+                        }
+                    ]
                 },
                 {
                     name: "eachMonth",
@@ -502,8 +508,27 @@ let widgets = function () {
                     controller: require('../controllers/services/twitter/reactions/createTweet'),
                     description: 'Creates a tweet.',
                     modelName: 'twitterCreateTweet',
-                    params: {},
-                    fields: []
+                    params: {
+                        message: {type: String, default: 'Hello world!'}
+                    },
+                    fields: [
+                        {
+                            type: "text",
+                            name: 'message',
+                            label: 'Tweet content',
+                            placeholder: 'Insert here your tweet',
+                            validations: [
+                                {
+                                    type: 'required',
+                                    message: 'A message for the tweet is required'
+                                },
+                                {
+                                    type: 'maxLength',
+                                    value: 280
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     name: 'followUser',
@@ -695,7 +720,7 @@ let widgets = function () {
                 }
             ]
         },
-        Facebook: {
+        facebook: {
             name: "facebook",
             actions: [
                 {
@@ -758,7 +783,7 @@ let widgets = function () {
                 }
             ]
         },
-        'Google+': {
+        'google+': {
             name: "google+",
         },
         weather: {
@@ -787,7 +812,7 @@ let widgets = function () {
                                     },
                                     {
                                         type: 'pattern',
-                                        pattern: '^[a-zA-Z]+$',
+                                        pattern: '^[a-zA-Z -]+$',
                                         message: 'Accept only text'
                                     },
                                 ]
@@ -804,7 +829,7 @@ let widgets = function () {
                                     },
                                     {
                                         type: 'pattern',
-                                        pattern: '^[a-zA-Z]+$',
+                                        pattern: '^[a-zA-Z -]+$',
                                         message: 'Accept only text'
                                     },
                                 ]
@@ -875,7 +900,7 @@ let widgets = function () {
                                     },
                                     {
                                         type: 'pattern',
-                                        pattern: '^[a-zA-Z]+$',
+                                        pattern: '^[a-zA-Z -]+$',
                                         message: 'Accept only text'
                                     },
                                 ]
@@ -892,7 +917,7 @@ let widgets = function () {
                                     },
                                     {
                                         type: 'pattern',
-                                        pattern: '^[a-zA-Z]+$',
+                                        pattern: '^[a-zA-Z \-]+$',
                                         message: 'Accept only text'
                                     },
                                 ]
@@ -943,12 +968,27 @@ let widgets = function () {
                     },
                 ],
             reactions: [],
-        }
-        ,
+        },
+        terminal: {
+            name: "terminal",
+            action: {},
+            reactions: [
+                {
+                    name: 'print',
+                    controller: require('../controllers/services/terminal/reactions/print'),
+                    description: 'Print to terminal.',
+                    modelName: 'terminalPrint',
+                    params: {},
+                    fields: []
+                }
+            ]
+        },
     };
     generateWidgetsModel(widgetsConfig);
     return widgetsConfig;
 };
 
+
+//src/api/controllers/services/terminal/reactions/print.js
 
 module.exports = widgets();

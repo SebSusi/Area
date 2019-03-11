@@ -6,8 +6,9 @@ import com.google.gson.Gson
 data class ReactionObject (
         override var name: String = "",
         override var serviceName: String = "",
+        override var accountType: String = "",
         override var id: String = "",
-        override var accountId: String = "",
+        override var account: AccountObject = AccountObject(),
         override var fields: Array<FieldObject> = arrayOf(),
         override var type: String = "REACTION",
         override var areaId: String = "") : AReActionObject() {

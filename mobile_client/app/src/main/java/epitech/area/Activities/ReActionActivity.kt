@@ -153,7 +153,7 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
             radioButton.buttonTintList = colorStateList
             radioButton.text = accountObject.name
             accountView.addView(radioButton)
-            if (accountObject.id == reAction.accountId)
+            if (accountObject.id == reAction.account.id)
                 radioButton.isChecked = true
         }
     }
@@ -163,22 +163,21 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
             0 -> checkService(reAction.serviceName)
             1 -> checkReAction(reAction.getReActionName())
             2 -> checkField()
-            3 -> checkAccount(getAccountById(reAction.accountId))
+            3 -> checkAccount(getAccountById(reAction.account.id))
         }
     }
 
     fun checkService(serviceName: String) {
         reAction.serviceName = serviceName
         if (reAction.serviceName.isNotBlank()) {
-            reActionStepper.setStepTitle(0, "Service : " + reAction.getService())
-            reActionStepper.setStepAsCompleted(0)
             if (reAction.type.capitalize() == "ACTION") {
                 reActionList = InfoService.instance.getActions(serviceName) as Array<AReActionObject>
             } else {
                 reActionList = InfoService.instance.getReactions(serviceName) as Array<AReActionObject>
             }
-            AreaService.instance.getServiceAccounts(reAction.serviceName, this)
             updateReActionStep()
+            reActionStepper.setStepTitle(0, "Service : " + reAction.getService())
+            reActionStepper.setStepAsCompleted(0)
         } else {
             reActionStepper.setStepTitle(0, "Service")
             reActionStepper.setStepAsUncompleted(0, "You must select a service to continue.")
@@ -193,10 +192,11 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
         }
         if (index >= 0) {
             reAction.name = reActionList[index].name
-            reActionStepper.setStepTitle(1, reAction.type.toLowerCase().capitalize() + " : " + reAction.getReActionName())
-            reActionStepper.setStepAsCompleted(1)
+            AreaService.instance.getServiceAccounts(InfoService.instance.getReActionAccountType(reAction), this)
             reAction.changeFields(InfoService.instance.getReActionFields(reAction))
             (fieldView.adapter as FieldAdapter).setFields(reAction.fields)
+            reActionStepper.setStepTitle(1, reAction.type.toLowerCase().capitalize() + " : " + reAction.getReActionName())
+            reActionStepper.setStepAsCompleted(1)
         } else {
             reAction.name = ""
             reActionStepper.setStepTitle(1, reAction.type.toLowerCase().capitalize())
@@ -218,8 +218,8 @@ class ReActionActivity : FragmentActivity(), VerticalStepperForm {
     }
 
     fun checkAccount(account: AccountObject) {
-        if (account.id.isNotBlank()) {
-            reAction.accountId = account.id
+        if (account.id.isNotBlank() || InfoService.instance.getReActionAccountType(reAction).isBlank()) {
+            reAction.account = account
             reActionStepper.setStepAsCompleted(3)
         } else {
             reActionStepper.setStepAsUncompleted(3, "You must select an account to continue.")

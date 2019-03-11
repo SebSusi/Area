@@ -17,7 +17,8 @@ function parseReactionParam(param, output) {
 async function parseReactionParams(reactionConfig, reaction, output) {
     let params = schemaGetter.getModelSchemaParams(reactionConfig.model);
     let parsedParams = _.cloneDeep(reaction.params);
-    console.log(parsedParams);
+    if (parsedParams === undefined)
+        return null;
     for (let i = 0; i < params.length; i++) {
         let param = params[i];
         if (typeof parsedParams[param] === 'string' || parsedParams[param] instanceof String)
@@ -61,17 +62,17 @@ async function triggerFunction(areaId) {
         let areaReaction = area.reactions[i];
         let reactionConfig = widgetGetter.getReactionByServiceNameAndReactionName(areaReaction.serviceName,
             areaReaction.name);
-        let reaction = widgetGetter.getReactionWidgetByAreaReaction(areaReaction);
+        let reaction = await widgetGetter.getReactionWidgetByAreaReaction(areaReaction);
         if (reaction !== false) {
             let reactionAccount = null;
             if (reactionConfig.accountType !== undefined && reactionConfig.accountType !== null) {
                 reactionAccount = await getAccountByWidget(reaction);
                 if (reactionConfig.controller.doReaction !== undefined && reactionAccount !== null)
                     await reactionConfig.controller.doReaction(reaction, reactionConfig,
-                        await parseReactionParams(reaction, output), reactionAccount)
+                        await parseReactionParams(reactionConfig, reaction, output), reactionAccount)
             } else if (reactionConfig.controller.doReaction !== undefined)
                 await reactionConfig.controller.doReaction(reaction, reactionConfig,
-                    await parseReactionParams(reaction, output), null)
+                    await parseReactionParams(reactionConfig, reaction, output), null)
         }
     }
 }

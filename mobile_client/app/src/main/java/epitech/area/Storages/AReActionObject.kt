@@ -5,8 +5,9 @@ import java.io.Serializable
 abstract class AReActionObject : Serializable {
     abstract var name: String
     abstract var serviceName: String
+    abstract var accountType: String
     abstract var id: String
-    abstract var accountId: String
+    abstract var account: AccountObject
     abstract var fields: Array<FieldObject>
     abstract var type: String
     abstract var areaId: String

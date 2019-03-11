@@ -111,7 +111,9 @@ class AreaActivity : FragmentActivity() {
             reActionNew.reActionImage.setImageResource(R.drawable.ic_reaction)
             reActionNew.reActionClicker.setOnClickListener {
                 val intent = Intent(this, ReActionActivity::class.java)
-                intent.putExtra("ReActionObject", ReactionObject())
+                val reaction = ReactionObject()
+                reaction.areaId = area.uniqueId
+                intent.putExtra("ReActionObject", reaction)
                 startActivity(intent)
             }
         } else {
@@ -119,7 +121,9 @@ class AreaActivity : FragmentActivity() {
             reActionNew.reActionImage.setImageResource(R.drawable.ic_action)
             reActionNew.reActionClicker.setOnClickListener {
                 val intent = Intent(this, ReActionActivity::class.java)
-                intent.putExtra("ReActionObject", ActionObject())
+                val action = ActionObject()
+                action.areaId = area.uniqueId
+                intent.putExtra("ReActionObject", action)
                 startActivity(intent)
             }
         }

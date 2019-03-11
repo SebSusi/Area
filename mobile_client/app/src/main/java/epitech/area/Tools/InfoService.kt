@@ -80,4 +80,24 @@ class InfoService {
     fun getActionOutputs(serviceName: String, actionName: String): Array<OutputObject> {
         return (getReAction(getService(serviceName).actions as Array<AReActionObject>, actionName) as ActionObject).output.clone()
     }
+
+    fun getReActionAccountType(reAction: AReActionObject): String {
+        if (reAction.type.toUpperCase() == "ACTION")
+            return getActionAccountType(getService(reAction.serviceName), reAction.name)
+        return getReactionAccountType(getService(reAction.serviceName), reAction.name)
+    }
+
+    fun getReactionAccountType(service: ServiceObject, reactionName: String): String {
+        val accountType = getReAction(service.reactions as Array<AReActionObject>, reactionName).accountType
+        if (accountType == null)
+            return ""
+        return accountType
+    }
+
+    fun getActionAccountType(service: ServiceObject, actionName: String): String {
+        val accountType = getReAction(service.actions as Array<AReActionObject>, actionName).accountType
+        if (accountType == null)
+            return ""
+        return accountType
+    }
 }

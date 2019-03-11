@@ -1,9 +1,10 @@
 import {AbstractManager} from '../abstract-manager';
 import {ActionService} from '../../../services/action.service';
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {StructureService} from '../../../services/structure.service';
 import {StepsService} from '../../../services/steps.service';
-import {FormGroup, Validators} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
+import {ActionType} from '../../../objects/actions-template';
 
 @Component({
     selector: 'app-options-manager',
@@ -25,6 +26,15 @@ export class OptionsManagerComponent extends AbstractManager implements OnInit {
         this.options = this.structureS.getOptions(this.action);
         this.initManager();
         this.receiveActionUpdate();
+    }
+
+    get firstAction() {
+        return this.actionService.actions[0];
+    }
+
+    get output() {
+        const t = this.structureS.getActionTemplate(this.firstAction);
+        return t && this.action.type !== ActionType.TRIGGER ? t.output : null;
     }
 
     receiveActionUpdate() {
