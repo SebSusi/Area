@@ -4,6 +4,7 @@ const router = require('express').Router({mergeParams: true});
 const jwt = require('../controllers/auth/jwtAuth');
 const auth = require('./auth/auth');
 const account = require('./account/account');
+const areaAccount = require('./account/areaAccount');
 const area = require('./area/area');
 const areaInfo = require('../controllers/area/about');
 
@@ -32,6 +33,7 @@ router
 
 router.use('/auth', auth);
 router.use('/account', account);
+router.use('/area_account', areaAccount);
 router.use('/area', area);
 //const test = require('../controllers/area/widget/getters');
 //console.log(test.getActionByServiceNameAndActionName("weather", "current"));

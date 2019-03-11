@@ -28,7 +28,7 @@ let widgets = function () {
             reactions: [],
             actions: [
                 {
-                    name: "timer",
+                    name: "calendar",
                     description: "It's a timer, what do you expected ?",
                     controller: require('../controllers/services/calendar/actions/timer'),
                     modelName: "calendarTimer",
@@ -343,7 +343,7 @@ let widgets = function () {
                                 },
                                 {
                                     type: 'pattern',
-                                    pattern: '^https://www.youtube.com/watch*$',
+                                    pattern: '^(http(s)??\\:\\/\\/)?(www\\.)?((youtube\\.com\\/watch\\?v=)|(youtu.be\\/))([a-zA-Z0-9\\-_])+$',
                                     message: 'Invalid youtube Url'
                                 },
                             ]
@@ -395,7 +395,7 @@ let widgets = function () {
                                 },
                                 {
                                     type: 'pattern',
-                                    pattern: '^https://www.youtube.com/watch\?v=*$',
+                                    pattern: '^(http(s)??\\:\\/\\/)?(www\\.)?((youtube\\.com\\/watch\\?v=)|(youtu.be\\/))([a-zA-Z0-9\\-_])+$',
                                     message: 'Invalid youtube Url'
                                 },
                             ]
@@ -409,7 +409,7 @@ let widgets = function () {
                     description: 'Subscribe or Unsubcribe to a specified channel',
                     modelName: 'youtubeSubscribe',
                     params: {
-                        channelUrl: {type: String, default: 'https://www.youtube.com/watch?v=6Dh-RL__uN4'}
+                        channelUrl: {type: String, default: 'https://www.youtube.com/channel/PewDiePie'}
                     },
                     fields: [
                         {
