@@ -8,7 +8,7 @@ export enum ActionType {
 
 export class ActionsTemplate {
     type: ActionType;
-    actions: Map<string, {description: string, options: Option[]}>;
+    actions: Map<string, {description: string, options: Option[], output: any, accountType: string}>;
 
     constructor(type: ActionType, actions: any) {
         this.type = type;
@@ -25,11 +25,21 @@ export class ActionsTemplate {
         for (const field of optionsJson.fields) {
             options.push(OptionAdapter.adapt(field));
         }
-        this.actions.set(optionsJson.name, {description: optionsJson.description, options: options});
+        this.actions.set(optionsJson.name,
+            {
+                description: optionsJson.description,
+                options: options,
+                output: optionsJson.output,
+                accountType: optionsJson.accountType
+            });
     }
 
     getActionsTypes() {
         return this.actions;
+    }
+
+    getActionTemplate(name) {
+        return this.actions.get(name);
     }
 
     getOptions(trigger: string): Option[] {

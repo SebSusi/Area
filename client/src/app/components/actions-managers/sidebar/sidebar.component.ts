@@ -31,7 +31,6 @@ export class SidebarComponent implements OnInit {
 
     changeActiveAction(id: any) {
         const isFirst = (!this.action);
-        console.log(isFirst);
         const lastId = isFirst ? id : this.action.id;
         this.action = this.actionService.getAction(id);
         if (lastId !== this.action.id || isFirst)
@@ -49,7 +48,6 @@ export class SidebarComponent implements OnInit {
     }
 
     saveAction() {
-        console.log('Save');
         this.action.fields = this.stepperService.getFormGroup(Steps.OPTIONS).getRawValue();
         this.actionService.updateAction(this.action.id);
     }

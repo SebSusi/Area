@@ -15,7 +15,6 @@ export class AccountService {
   public _accounts: any[];
 
   public putAccount(name, type, data) {
-      console.log(name, type, data);
       this.api.apiPost('/account', {name: name, type: type, data: data}).subscribe(
           data => {console.log(data); this._accounts.push({name: name, type: type, id: data['id']}); }
       );
@@ -35,7 +34,6 @@ export class AccountService {
         this.afAuth.auth
             .signInWithPopup(provider)
             .then(res => {
-                console.log(res);
                 this.putAccount(res['additionalUserInfo']['profile']['name'], 'google', res);
             });
     }
@@ -45,7 +43,6 @@ export class AccountService {
         this.afAuth.auth
             .signInWithPopup(provider)
             .then(res => {
-                console.log(res);
                 this.putAccount(res['additionalUserInfo']['profile']['name'], 'facebook', res);
             });
     }
@@ -54,14 +51,13 @@ export class AccountService {
       return this._accounts;
     }
 
-    public getAccounts() {
-      this.api.apiGet('/account').subscribe(data => {this._accounts = (data as any[]); });
+    public getAccounts(type: string = null) {
+      this.api.apiGet('/account/' + (type ? type : '')).subscribe(data => {this._accounts = (data as any[]); });
     }
 
     public deleteAccount(type, id) {
       this.api.apiDelete('/account/' + type + '/' + id).subscribe(
           data => {
-              console.log('COco');
               const idx = this._accounts.findIndex(item => item['id'] === id);
               this.accounts.splice(idx, 1);
           }

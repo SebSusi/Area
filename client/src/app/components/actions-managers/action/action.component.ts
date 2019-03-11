@@ -39,7 +39,6 @@ export class ActionComponent implements OnInit {
     }
 
     saveAction() {
-        console.log(this.stepsService.getFormGroup(Steps.OPTIONS));
         if (this.stepsService.getFormGroup(Steps.OPTIONS).valid) {
             this.action.fields = this.stepsService.getFormGroup(Steps.OPTIONS).getRawValue();
             this.actionService.updateAction(this.action.id);
