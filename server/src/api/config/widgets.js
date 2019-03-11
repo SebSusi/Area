@@ -509,11 +509,15 @@ let widgets = function () {
                     description: 'Creates a tweet.',
                     modelName: 'twitterCreateTweet',
                     params: {
-                        message: {type: String, default: 'Hello world!'}
+                        message: {type: String, default: 'Hello world!'},
+                        media1: {type: String, default: ''},
+                        media2: {type: String, default: ''},
+                        media3: {type: String, default: ''},
+                        media4: {type: String, default: ''}
                     },
                     fields: [
                         {
-                            type: "text",
+                            type: "textarea",
                             name: 'message',
                             label: 'Tweet content',
                             placeholder: 'Insert here your tweet',
@@ -527,6 +531,30 @@ let widgets = function () {
                                     value: 280
                                 }
                             ]
+                        },
+                        {
+                            type: "text",
+                            name: 'media1',
+                            label: '1st media Url',
+                            validations: []
+                        },
+                        {
+                            type: "text",
+                            name: 'media2',
+                            label: '2nd media Url',
+                            validations: []
+                        },
+                        {
+                            type: "text",
+                            name: 'media3',
+                            label: '3rd media Url',
+                            validations: []
+                        },
+                        {
+                            type: "text",
+                            name: 'media4',
+                            label: '4th media Url',
+                            validations: []
                         }
                     ]
                 },
