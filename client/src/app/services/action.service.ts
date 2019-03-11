@@ -48,8 +48,12 @@ export class ActionService {
             JSON.stringify(action)).pipe(tap(data => action.id = data['id']), tap(data => console.log(action))).subscribe();
     }
 
+    actionPath(id, type) {
+        return this.areaService.getPath() + '/' + (type === ActionType.TRIGGER ? 'action/' : 'reaction/') + id;
+    }
+
     putAction(action) {
-        this.api.apiPut(this.areaService.getPath() + '/' + (action.type === ActionType.TRIGGER ? 'action/' : 'reaction/') + action.id,
+        this.api.apiPut(this.actionPath(action.id, action.type),
             JSON.stringify(action)).pipe(tap(data => action.id = data['id'])).subscribe();
     }
 
@@ -95,11 +99,10 @@ export class ActionService {
         const idx = this.getActionIndex(id);
         if (idx === -1)
             throw new Error('Can\'t find this action');
+        const type = this.actions[idx].account.type;
         this.actions.splice(idx, 1);
         if (this._selected >= idx)
             this.setActiveAction(0);
-        // Todo
-        const url = 'https://next.json-generator.com/api/json/get/VkTIxMH8L';
-        return this._http.get(url).pipe();
+        return this.api.apiDelete(this.actionPath(id, type)).subscribe();
     }
 }
