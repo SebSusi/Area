@@ -10,7 +10,7 @@ const weatherTools = require('../global');
 exports.checkData = async function (action, actionInfos, account) {
     const params = action.params;
     return new Promise(function (resolve, reject) {
-        Weather.find({search: params.city + "," + params.country, degreeType: 'C'}, async function (err, response) {
+        Weather.find({search: params.city + ", " + params.country, degreeType: 'C'}, async function (err, response) {
             if (err)
                 reject(false);
             try {

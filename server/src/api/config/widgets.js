@@ -65,23 +65,23 @@ let widgets = function () {
                         },
                         {
                             name: 'year',
-                            description: 'year of the triggered timer'
+                            description: 'Year of the triggered timer'
                         },
                         {
                             name: 'month',
-                            description: 'month of the triggered timer'
+                            description: 'Month of the triggered timer'
                         },
                         {
                             name: 'hours',
-                            description: 'hours of the triggered timer'
+                            description: 'Hours of the triggered timer'
                         },
                         {
                             name: 'minutes',
-                            description: 'minutes of the triggered timer'
+                            description: 'Minutes of the triggered timer'
                         },
                         {
                             name: 'seconds',
-                            description: 'seconds of the triggered timer'
+                            description: 'Seconds of the triggered timer'
                         }
                     ]
                 },
@@ -137,23 +137,23 @@ let widgets = function () {
                         },
                         {
                             name: 'year',
-                            description: 'year of the triggered timer'
+                            description: 'Year of the triggered timer'
                         },
                         {
                             name: 'month',
-                            description: 'month of the triggered timer'
+                            description: 'Month of the triggered timer'
                         },
                         {
                             name: 'hours',
-                            description: 'hours of the triggered timer'
+                            description: 'Hours of the triggered timer'
                         },
                         {
                             name: 'minutes',
-                            description: 'minutes of the triggered timer'
+                            description: 'Minutes of the triggered timer'
                         },
                         {
                             name: 'seconds',
-                            description: 'seconds of the triggered timer'
+                            description: 'Seconds of the triggered timer'
                         }
                     ]
                 },
@@ -191,23 +191,23 @@ let widgets = function () {
                         },
                         {
                             name: 'year',
-                            description: 'year of the triggered timer'
+                            description: 'Year of the triggered timer'
                         },
                         {
                             name: 'month',
-                            description: 'month of the triggered timer'
+                            description: 'Month of the triggered timer'
                         },
                         {
                             name: 'hours',
-                            description: 'hours of the triggered timer'
+                            description: 'Hours of the triggered timer'
                         },
                         {
                             name: 'minutes',
-                            description: 'minutes of the triggered timer'
+                            description: 'Minutes of the triggered timer'
                         },
                         {
                             name: 'seconds',
-                            description: 'seconds of the triggered timer'
+                            description: 'Seconds of the triggered timer'
                         }
                     ]
                 },
@@ -247,27 +247,27 @@ let widgets = function () {
                     output: [
                         {
                             name: "title",
-                            description: "title of new video"
+                            description: "Title of new video"
                         },
                         {
                             name: "channel",
-                            description: "channel of new video"
+                            description: "Channel of new video"
                         },
                         {
                             name: "description",
-                            description: "description of new video"
+                            description: "Description of new video"
                         },
                         {
                             name: "date",
-                            description: "publish date of new video"
+                            description: "Publish date of new video"
                         },
                         {
                             name: "picture",
-                            description: "picture of new video"
+                            description: "Picture of new video"
                         },
                         {
                             name: "url",
-                            description: "url of new video"
+                            description: "Url of new video"
                         }
                     ]
                 },
@@ -278,8 +278,8 @@ let widgets = function () {
                     controller: require('../controllers/services/youtube/actions/videoInfos'),
                     modelName: 'youtubeVideoInfos',
                     params: {
-                        type: {type: Number, default: ''},
-                        interval: {type: Number, default: ''},
+                        type: {type: Number, default: 3},
+                        interval: {type: Number, default: 1000000},
                         videoUrl: {type: String, default: 'https://www.youtube.com/watch?v=6Dh-RL__uN4'}
                     },
                     fields: [
@@ -313,15 +313,15 @@ let widgets = function () {
                             ],
                             options: [
                                 {
-                                    name: 'Like',
+                                    name: 'Likes',
                                     value: 0
                                 },
                                 {
-                                    name: 'Dislike',
+                                    name: 'Dislikes',
                                     value: 1
                                 },
                                 {
-                                    name: 'Comment',
+                                    name: 'Comments',
                                     value: 2
                                 },
                                 {
@@ -351,43 +351,43 @@ let widgets = function () {
                     output: [
                         {
                             name: "title",
-                            description: "title of video"
+                            description: "Title of the video"
                         },
                         {
                             name: "channel",
-                            description: "channel of video"
+                            description: "Channel of the video"
                         },
                         {
                             name: "description",
-                            description: "description of video"
+                            description: "Description of the video"
                         },
                         {
                             name: "date",
-                            description: "publish date of video"
+                            description: "Publish date of the video"
                         },
                         {
                             name: "picture",
-                            description: "picture of video"
+                            description: "Picture of the video"
                         },
                         {
                             name: "url",
-                            description: "url of video"
+                            description: "Url of the video"
                         },
                         {
                             name: "like",
-                            description: "like vount of video"
+                            description: "Like count of the video"
                         },
                         {
                             name: "dislike",
-                            description: "dislike count of video"
+                            description: "Dislike count of the video"
                         },
                         {
                             name: "comment",
-                            description: "comment count of video"
+                            description: "Comment count of the video"
                         },
                         {
                             name: "view",
-                            description: "view count of video"
+                            description: "View count of the video"
                         }
                     ]
                 },
@@ -398,9 +398,9 @@ let widgets = function () {
                     controller: require('../controllers/services/youtube/actions/channelInfos'),
                     modelName: 'youtubeChannelInfos',
                     params: {
-                        type: {type: Number, default: ''},
-                        interval: {type: Number, default: ''},
-                        channelUrl: {type: String, default: 'https://www.youtube.com/watch?v=6Dh-RL__uN4'}
+                        type: {type: Number, default: 1},
+                        interval: {type: Number, default: 1000000},
+                        channelUrl: {type: String, default: 'https://www.youtube.com/user/PewDiePie'}
                     },
                     fields: [
                         {
@@ -437,7 +437,7 @@ let widgets = function () {
                                     value: 1
                                 },
                                 {
-                                    name: 'Comment',
+                                    name: 'Comments',
                                     value: 2
                                 },
                                 {
@@ -479,7 +479,7 @@ let widgets = function () {
                     },
                     fields: [
                         {
-                            type: 'text',
+                            type: 'textarea',
                             name: 'message',
                             label: 'Your message',
                             validations: [
@@ -515,7 +515,7 @@ let widgets = function () {
                     controller: require('../controllers/services/youtube/reactions/likeOrDislikeVideo'),
                     modelName: 'youtubeLikeOrDislikeVideo',
                     params: {
-                        type: {type: String, default: 'Like'},
+                        type: {type: Number, default: 1},
                         videoUrl: {type: String, default: 'https://www.youtube.com/watch?v=6Dh-RL__uN4'}
                     },
                     fields: [
@@ -643,10 +643,10 @@ let widgets = function () {
                     },
                     fields: [
                         {
-                            type: "text",
+                            type: "textarea",
                             name: 'message',
                             label: 'Tweet content',
-                            placeholder: 'Insert here your tweet',
+                            placeholder: 'Insert your tweet here',
                             validations: [
                                 {
                                     type: 'required',
@@ -681,7 +681,7 @@ let widgets = function () {
                     description: 'Triggers when a new e-mail appears in the specified mailbox.',
                     modelName: 'gmailNewEmail',
                     params: {
-                        recipient:{type:String},
+                        recipient:{type:String, default:'email@gmail.com'},
                         object:{type:String, default:'Created by Area'},
                     },
                     fields: [
@@ -691,10 +691,6 @@ let widgets = function () {
                             label: 'Recipient',
                             placeholder: 'email@hotmail.fr',
                             validations: [
-                                {
-                                    type: 'required',
-                                    message: 'Mail Required'
-                                },
                                 {
                                     type: 'pattern',
                                     pattern: '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$',
@@ -737,9 +733,9 @@ let widgets = function () {
                     description: 'Create a draft.',
                     modelName: 'gmailCreateDraft',
                     params: {
-                        recipient: { type: String },
+                        recipient: { type: String, default:'email@gmail.com'},
                         object: { type: String, default: 'Created by Area' },
-                        body: { type: String }
+                        body: { type: String, default:'Hello world!' }
                     },
                     fields: [
                         {
@@ -762,10 +758,10 @@ let widgets = function () {
                             placeholder: 'Created by Area'
                         },
                         {
-                            type: "text",
+                            type: "textarea",
                             name: 'body',
                             label: 'Body',
-                            placeholder: 'Enter your Messenger'
+                            placeholder: 'Enter your message'
                         },
                     ],
                     output: [
@@ -794,9 +790,9 @@ let widgets = function () {
                     description: 'Send a mail to specified user.',
                     modelName: 'gmailSendMail',
                     params: {
-                        recipient: { type: String },
+                        recipient: { type: String, default:'email@gmail.com' },
                         object: { type: String, default: 'Created by Area' },
-                        body: { type: String }
+                        body: { type: String, default:'Hello world!' }
                     },
                     fields: [
                         {
@@ -823,10 +819,10 @@ let widgets = function () {
                             placeholder: 'Created by Area'
                         },
                         {
-                            type: "text",
+                            type: "textarea",
                             name: 'body',
                             label: 'Body',
-                            placeholder: 'Enter your Messenger'
+                            placeholder: 'Enter your message'
                         },
                     ],
                     output: [
@@ -904,7 +900,7 @@ let widgets = function () {
                     },
                     fields: [
                         {
-                            type: "text",
+                            type: "textarea",
                             name: 'message',
                             label: 'Message',
                             placeholder: 'Enter your message',
