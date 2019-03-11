@@ -62,6 +62,7 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {environment} from '../environments/environment';
 import { AccountsComponent } from './components/accounts/accounts.component';
 import {TextareaComponent} from './components/actions-managers/options-manager/form-components/textarea/textarea.component';
+import { ApkComponent } from './components/pages/apk/apk.component';
 
 const appRoutes: Routes = [
     {
@@ -96,13 +97,17 @@ const appRoutes: Routes = [
         component: LoginComponent
     },
     {
+        path: 'client.apk',
+        component: ApkComponent
+    },
+    {
         path: '404',
         component: Error404Component
-    }/*,
+    },
     {
         path: '**',
         redirectTo: '/404'
-    }*/
+    }
 ];
 
 @NgModule({
@@ -134,6 +139,7 @@ const appRoutes: Routes = [
         ActionStepComponent,
         DynamicActionDirective,
         AccountsComponent,
+        ApkComponent,
     ],
     entryComponents: [
         InputComponent,
