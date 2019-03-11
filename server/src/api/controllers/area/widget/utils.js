@@ -15,6 +15,8 @@ exports.saveActionData = async function (action, data) {
 };
 
 exports.getActionData = async function (action) {
+    if (action.data === undefined || action.data === null)
+        return null;
     return JSON.parse(action.data);
 };
 
