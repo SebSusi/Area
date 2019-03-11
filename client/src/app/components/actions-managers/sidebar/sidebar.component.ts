@@ -44,7 +44,7 @@ export class SidebarComponent implements OnInit {
     }
 
     deleteAction(id: string) {
-        this.actionService.deleteAction(id).subscribe();
+        this.actionService.deleteAction(id);
     }
 
     saveAction() {

@@ -486,8 +486,27 @@ let widgets = function () {
                     controller: require('../controllers/services/twitter/reactions/createTweet'),
                     description: 'Creates a tweet.',
                     modelName: 'twitterCreateTweet',
-                    params: {},
-                    fields: []
+                    params: {
+                        message: {type: String, default: 'Hello world!'}
+                    },
+                    fields: [
+                        {
+                            type: "text",
+                            name: 'message',
+                            label: 'Tweet content',
+                            placeholder: 'Insert here your tweet',
+                            validations: [
+                                {
+                                    type: 'required',
+                                    message: 'A message for the tweet is required'
+                                },
+                                {
+                                    type: 'maxLength',
+                                    value: 280
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     name: 'followUser',
@@ -927,12 +946,27 @@ let widgets = function () {
                     },
                 ],
             reactions: [],
-        }
-        ,
+        },
+        terminal: {
+            name: "terminal",
+            action: {},
+            reactions: [
+                {
+                    name: 'print',
+                    controller: require('../controllers/services/terminal/reactions/print'),
+                    description: 'Print to terminal.',
+                    modelName: 'terminalPrint',
+                    params: {},
+                    fields: []
+                }
+            ]
+        },
     };
     generateWidgetsModel(widgetsConfig);
     return widgetsConfig;
 };
 
+
+//src/api/controllers/services/terminal/reactions/print.js
 
 module.exports = widgets();
