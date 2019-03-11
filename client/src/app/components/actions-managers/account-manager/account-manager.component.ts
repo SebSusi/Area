@@ -18,7 +18,7 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
     public test: '';
     private templateAccount: { description: string; options: Option[]; output: any; accountType: string };
 
-    constructor(as: ActionService, ss: StepsService, public accountService: AccountService, private structureService: StructureService) {
+    constructor(as: ActionService, ss: StepsService, public accountService: AccountService, public structureService: StructureService) {
         super(as, ss);
     }
 
@@ -29,6 +29,10 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
     }
 
     receiveActionUpdate() {
+        this.updateTemplate();
+    }
+
+    updateTemplate() {
         const newTemplate = this.structureService.getActionTemplate(this.action);
         if (this.templateAccount !== newTemplate)
             this.accountService.getAccounts(this.templateAccount ? this.templateAccount.accountType : null);
@@ -36,7 +40,10 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
     }
 
     get accounts() {
-        if (this.structureService.getActionTemplate(this.action).accountType)
+        this.updateTemplate();
+        if (this.templateAccount)
+            console.log(this.templateAccount.accountType);
+        if (this.templateAccount && this.templateAccount.accountType)
             return this.accountService.accounts;
         return [];
     }

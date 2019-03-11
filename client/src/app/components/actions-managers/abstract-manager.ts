@@ -3,6 +3,7 @@ import {Action} from '../../objects/action';
 import {ActionService} from '../../services/action.service';
 import {FormControl, Validators} from '@angular/forms';
 import {Steps, StepsService} from '../../services/steps.service';
+import {StructureService} from '../../services/structure.service';
 
 @Injectable()
 export abstract class AbstractManager {

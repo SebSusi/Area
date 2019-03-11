@@ -4,6 +4,7 @@ import {Action} from '../../../objects/action';
 import {Steps, StepsService} from '../../../services/steps.service';
 import {MatStepper} from '@angular/material';
 import {KeyValue} from '@angular/common';
+import {StructureService} from '../../../services/structure.service';
 
 @Component({
     selector: 'app-action',
@@ -17,7 +18,7 @@ export class ActionComponent implements OnInit {
 
     public action: Action = undefined;
 
-    constructor(private actionService: ActionService, public stepsService: StepsService) {
+    constructor(private actionService: ActionService, public stepsService: StepsService, public structureService: StructureService) {
         this.actionService.actionsObservable.subscribe(reset => {
             this.action = this.actionService.getActiveAction();
         });

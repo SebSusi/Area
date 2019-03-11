@@ -1,6 +1,7 @@
 <ng-template [ngIf]="action">
     <mat-horizontal-stepper linear #stepper>
-        <mat-step *ngFor="let step of stepsService.steps | keyvalue:indexOrderAsc" [stepControl]="step.value.group" [label]="step.value.description">
+        <ng-container *ngFor="let step of stepsService.steps | keyvalue:indexOrderAsc">
+        <mat-step [stepControl]="step.value.group" [label]="step.value.description">
             <form [formGroup]="step.value.group">
                 <ng-template appDynamicAction [type]="step.key"> </ng-template>
             </form>
@@ -10,6 +11,7 @@
                 <button *ngIf="step.key === stepsService.lastStep" mat-raised-button color="primary" (click)="saveAction()">Save</button>
             </div>
         </mat-step>
+        </ng-container>
     </mat-horizontal-stepper>
 </ng-template>
 <ng-template [ngIf]="!action">
