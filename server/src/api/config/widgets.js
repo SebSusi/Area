@@ -679,7 +679,7 @@ let widgets = function () {
                 }
             ]
         },
-        Facebook: {
+        facebook: {
             name: "facebook",
             actions: [
                 {
@@ -742,7 +742,7 @@ let widgets = function () {
                 }
             ]
         },
-        'Google+': {
+        'google+': {
             name: "google+",
         },
         weather: {

@@ -26,12 +26,14 @@ class IconService {
     private fun getIcon(serviceName: String, default: String = "BASIC") : Int {
         when (serviceName.toUpperCase()) {
             "MULTIPLE" -> return R.drawable.ic_more_horiz
+            "CALENDAR" -> return R.drawable.ic_calendar
             "FACEBOOK" -> return R.drawable.ic_facebook
             "GOOGLE" -> return R.drawable.ic_google
             "GOOGLE+" -> return R.drawable.ic_google_plus
             "GMAIL" -> return R.drawable.ic_gmail
             "OUTLOOK" -> return R.drawable.ic_outlook
             "TWITTER" -> return R.drawable.ic_twitter
+            "WEATHER" -> return R.drawable.ic_weather
             "YOUTUBE" -> return R.drawable.ic_youtube
         }
         when (default.toUpperCase()) {
