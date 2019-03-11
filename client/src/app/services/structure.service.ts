@@ -44,4 +44,9 @@ export class StructureService {
         return this.template.getActionsTypes(action.serviceName, action.type);
     }
 
+    getActionTemplate(action: Action) {
+        if (this.template === undefined)
+            return undefined;
+        return this.template.getAction(action.serviceName, action.type, action.name);
+    }
 }

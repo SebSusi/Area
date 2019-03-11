@@ -20,7 +20,6 @@ export class Area {
 
 export class AreaAdapter {
     static adapt(item: any): Area {
-        console.log(item);
         return new Area(item.uniqueId, item.name, item.activated, item.timer, ActionAdapter.adaptArea(item));
     }
 

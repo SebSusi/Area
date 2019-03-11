@@ -26,7 +26,13 @@ export class AreaTemplate {
         return this._services.get(service);
     }
 
-    getAction(service: string, action: ActionType) {
+    getAction(service: string, action: ActionType, name: string) {
+        if (!name)
+            return undefined;
+        return this.getActions(service, action).actions.get(name);
+    }
+
+    getActions(service: string, action: ActionType) {
         if (service === undefined || this.getService(service) === undefined)
             return undefined;
         return this.getService(service).find(item => item.type === action);
@@ -39,14 +45,14 @@ export class AreaTemplate {
     getActionsTypes(service: string, actionType: ActionType = ActionType.TRIGGER) {
         if (service === undefined)
             return [];
-        const action = this.getAction(service, actionType);
+        const action = this.getActions(service, actionType);
         return action === undefined ? undefined : action.getActionsTypes();
     }
 
     getOptions(service: string, actionType: ActionType = ActionType.TRIGGER, trigger: string) {
         if (service === undefined || trigger === undefined)
             return [];
-        const action = this.getAction(service, actionType);
+        const action = this.getActions(service, actionType);
         return action === undefined ? undefined : action.getOptions(trigger);
     }
 }
