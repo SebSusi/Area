@@ -979,7 +979,7 @@ let widgets = function () {
                     description: 'Print to terminal.',
                     modelName: 'terminalPrint',
                     params: {
-                        content: {type: String, default: 'message'}
+                        message: {type: String, default: 'message'}
                     },
                     fields: [
                         {
