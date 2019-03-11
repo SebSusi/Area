@@ -350,15 +350,15 @@ let widgets = function () {
                             options: [
                                 {
                                     name: 'Subscribers',
-                                    value: 1
+                                    value: 0
                                 },
                                 {
                                     name: 'Comment',
-                                    value: 2
+                                    value: 1
                                 },
                                 {
                                     name: 'Views',
-                                    value: 3
+                                    value: 2
                                 }
                             ]
                         },
@@ -380,6 +380,40 @@ let widgets = function () {
                             ],
                         },
                     ],
+                    output: [
+                        {
+                            name: "title",
+                            description: "title of channel"
+                        },
+                        {
+                            name: "description",
+                            description: "description of channel"
+                        },
+                        {
+                            name: "date",
+                            description: "creation date of channel"
+                        },
+                        {
+                            name: "picture",
+                            description: "picture of channel"
+                        },
+                        {
+                            name: "url",
+                            description: "url of channel"
+                        },
+                        {
+                            name: "subscriber",
+                            description: "subscriber count of channel"
+                        },
+                        {
+                            name: "comment",
+                            description: "comment count of channel"
+                        },
+                        {
+                            name: "video",
+                            description: "views count of channel"
+                        }
+                    ]
                 }
             ],
             reactions: [

@@ -27,17 +27,16 @@ async function getYoutubeChannelId(action) {
                     case 3:
                         youtubedata = video.data.statistics.viewCount;
                         break;
-
                 }
             })
             .catch(function (err) {
                 youtubedata = false
             });
     }
-    return new Promise(function (resolve, reject) {
+    return new Promise(async function (resolve, reject) {
         if (!youtubedata)
             reject(false);
-        resolve(utils.compareActionData(action, youtubedata));
+        resolve(await utils.compareActionDatawithInterval(action, youtubedata, params.interval));
     });
 }
 exports.checkData = async function(action, actionInfo, account) {
@@ -65,7 +64,7 @@ exports.getOutput = async function (action, actionInfo, account) {
             channel: youtubedata.channel,
             description: youtubedata.description,
             date: youtubedata.publishedAt,
-            picture: youtubedata.thumbnails.default.url,
+            picture: youtubedata.thumbnails.medium.url,
             url: params.videoUrl,
             like: stat.likeCount,
             dislike: stat.dislikeCount,
