@@ -39,8 +39,9 @@ exports.canAuth = function (req, res, next) {
                 User.findOne({token: token}, function (err, user) {
                     if (!err && user) {
                         req.user = user;
-                        return next();
                     }
+                    req.user = null;
+                    return next();
                 });
         }
     })(req, res, next);
@@ -69,6 +70,12 @@ exports.requireAuth = function (req, res, next) {
                     if (!err && user) {
                         req.user = user;
                         return next();
+                    } else {
+                        res.json({
+                            success: false,
+                            field: 'Authorization',
+                            message: 'user not exists'
+                        });
                     }
                 });
         }
