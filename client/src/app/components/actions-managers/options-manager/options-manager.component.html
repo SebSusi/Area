@@ -1,4 +1,4 @@
-<mat-expansion-panel class="output-list">
+<mat-expansion-panel class="output-list" *ngIf="action.type === 'reaction'">
     <mat-expansion-panel-header>
         <mat-panel-title class="output-title">
             {{firstAction.name}} output's
