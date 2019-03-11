@@ -9,20 +9,23 @@ function parseReactionParam(param, output) {
     let keys = Object.keys(output);
     for (let i = 0; i < keys.length; i++) {
         let key = keys[i];
-        param.replace("{{" + key + "}}", output[key]);
+        param = param.replace("{{" + key + "}}", output[key]);
     }
     return param;
 }
 
 async function parseReactionParams(reactionConfig, reaction, output) {
     let params = schemaGetter.getModelSchemaParams(reactionConfig.model);
-    let parsedParams = _.cloneDeep(reaction.params);
+    if (String(params) === "{}" || params === null || params === undefined)
+        return null;
+    let parsedParams = JSON.parse(JSON.stringify(reaction.params));
     if (parsedParams === undefined)
         return null;
     for (let i = 0; i < params.length; i++) {
         let param = params[i];
-        if (typeof parsedParams[param] === 'string' || parsedParams[param] instanceof String)
+        if (typeof parsedParams[param] === 'string' || parsedParams[param] instanceof String) {
             parsedParams[param] = parseReactionParam(parsedParams[param], output);
+        }
     }
     return parsedParams;
 }
