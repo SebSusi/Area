@@ -14,7 +14,7 @@ services:
     volumes:
       - ./client/:/usr/app
       - /usr/app/node_modules
-      - apk-volume:/usr/apkBuild
+      - apk-volume:/usr/app/src/assets/apkBuild
     ports:
       - "8081:8081"
   server:

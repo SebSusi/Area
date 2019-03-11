@@ -16,9 +16,7 @@ export class ApkComponent implements OnInit {
     downloadApk() {
         const link = document.createElement('a');
         link.download = 'client.apk';
-        link.href = '/usr/apkBuild/client.apk';
-//        link.href = 'assets/client.apk';
-        link.href = 'usr/';
+        link.href = 'assets/apkBuild/client.apk';
         link.click();
     }
 
