@@ -125,6 +125,36 @@ let widgets = function () {
                                 },
                             ]
                         }
+                    ],
+                    output: [
+                        {
+                            name: 'dayName',
+                            description: 'Name of the day'
+                        },
+                        {
+                            name: 'monthName',
+                            description: 'Name of the month'
+                        },
+                        {
+                            name: 'year',
+                            description: 'year of the triggered timer'
+                        },
+                        {
+                            name: 'month',
+                            description: 'month of the triggered timer'
+                        },
+                        {
+                            name: 'hours',
+                            description: 'hours of the triggered timer'
+                        },
+                        {
+                            name: 'minutes',
+                            description: 'minutes of the triggered timer'
+                        },
+                        {
+                            name: 'seconds',
+                            description: 'seconds of the triggered timer'
+                        }
                     ]
                 },
                 {
@@ -148,6 +178,36 @@ let widgets = function () {
                                     message: 'Please put a duration of format : hh:mm:ss'
                                 },
                             ]
+                        }
+                    ],
+                    output: [
+                        {
+                            name: 'dayName',
+                            description: 'Name of the day'
+                        },
+                        {
+                            name: 'monthName',
+                            description: 'Name of the month'
+                        },
+                        {
+                            name: 'year',
+                            description: 'year of the triggered timer'
+                        },
+                        {
+                            name: 'month',
+                            description: 'month of the triggered timer'
+                        },
+                        {
+                            name: 'hours',
+                            description: 'hours of the triggered timer'
+                        },
+                        {
+                            name: 'minutes',
+                            description: 'minutes of the triggered timer'
+                        },
+                        {
+                            name: 'seconds',
+                            description: 'seconds of the triggered timer'
                         }
                     ]
                 },
