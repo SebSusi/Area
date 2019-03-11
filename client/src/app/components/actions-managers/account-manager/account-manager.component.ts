@@ -36,7 +36,9 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
     }
 
     get accounts() {
-        return this.accountService.accounts;
+        if (this.structureService.getActionTemplate(this.action).accountType)
+            return this.accountService.accounts;
+        return [];
     }
 
     getFormGroup() {

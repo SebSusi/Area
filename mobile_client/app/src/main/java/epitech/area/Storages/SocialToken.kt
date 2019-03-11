@@ -8,6 +8,7 @@ import java.io.Serializable
 class SocialToken (
         var provider: String = "",
         var token: String = "",
+        var secret: String = "",
         var name: String = "") : Serializable
 
 class SocialTokenAdapter : TypeAdapter<SocialToken>() {
@@ -16,7 +17,10 @@ class SocialTokenAdapter : TypeAdapter<SocialToken>() {
         writer?.beginObject()
         writer?.name("name")?.value(socialToken?.name)
         writer?.name("type")?.value(socialToken?.provider)
-        writer?.name("data")?.beginObject()?.name("access_token")?.value(socialToken?.token)?.endObject()
+        writer?.name("data")?.beginObject()
+        writer?.name("accessToken")?.value(socialToken?.token)
+        writer?.name("secret")?.value(socialToken?.secret)
+        writer?.endObject()
         writer?.endObject()
     }
 

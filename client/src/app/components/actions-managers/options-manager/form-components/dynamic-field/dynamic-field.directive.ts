@@ -39,6 +39,7 @@ export class DynamicFieldDirective implements OnInit, OnChanges {
     }
 
     ngOnInit() {
+        console.log(this.field.type);
         if (!componentMapper[this.field.type])
             this.field.type = 'text';
         const factory = this.resolver.resolveComponentFactory(

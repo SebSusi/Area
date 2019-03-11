@@ -61,6 +61,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {environment} from '../environments/environment';
 import { AccountsComponent } from './components/accounts/accounts.component';
+import {TextareaComponent} from './components/actions-managers/options-manager/form-components/textarea/textarea.component';
 
 const appRoutes: Routes = [
     {
@@ -120,6 +121,7 @@ const appRoutes: Routes = [
         HomeComponent,
         InputComponent,
         LoginComponent,
+        TextareaComponent,
         NavbarComponent,
         OptionsManagerComponent,
         RadiobuttonComponent,
@@ -139,6 +141,7 @@ const appRoutes: Routes = [
         SelectComponent,
         DateComponent,
         RadiobuttonComponent,
+        TextareaComponent,
         CheckboxComponent,
         ServiceManagerComponent,
         TriggerManagerComponent,

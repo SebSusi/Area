@@ -8,6 +8,9 @@ services:
       - ./mobile_client/:/usr/app
       - apk-volume:/usr/apkBuild
   client_web:
+    depends_on:
+      - server
+      - client_mobile
     build:
       context: ./client/
     command: npm start
