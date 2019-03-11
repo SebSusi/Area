@@ -43,7 +43,7 @@ exports.setWidgetParams = function (req, model, params, update) {
 
 exports.addAction = async function (req, area) {
     let action = widgetGetter.getActionByServiceNameAndActionName(req.body.serviceName, req.body.name);
-    if (action === false)
+    if (action === false || action === undefined)
         return {success: false};
     let model = action.model;
     let params = exports.setWidgetParams(req, model, undefined, false);
