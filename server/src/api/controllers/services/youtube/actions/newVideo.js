@@ -58,6 +58,7 @@ exports.getOutput = async function (action, actionInfo, account) {
     if (data != null) {
         await youtubeApi.getVideoByUrl('https://www.youtube.com/watch?v=' + data)
             .then(function (video) {
+                console.log(video.data);
                 youtubedata = video.data.snippet;
             })
             .catch(function (err) {
@@ -72,7 +73,8 @@ exports.getOutput = async function (action, actionInfo, account) {
             channel: youtubedata.channel,
             description: youtubedata.description,
             date: youtubedata.publishedAt,
-            picture:youtubedata.thumbnails.default.url
+            picture:youtubedata.thumbnails.default.url,
+            url:'https://www.youtube.com/watch?v=' + data
             });
     });
 };
