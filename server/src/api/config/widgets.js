@@ -148,12 +148,34 @@ let widgets = function () {
                                 },
                                 {
                                     type: 'pattern',
-                                    pattern: '^https://www.youtube.com/(user/channel)/*$',
-                                    message: 'Invalid youtube Url'
+                                    pattern: '(?:https|http)\:\/\/(?:[\w]+\.)?youtube\.com\/(?:c\/|channel\/|user\/)?([a-zA-Z0-9\-]{1,})',
+                                    message: 'Invalid channel Url'
                                 },
                             ]
                         },
                     ],
+                    output: [
+                        {
+                            name: "title",
+                            description: "title of new video"
+                        },
+                        {
+                            name: "channel",
+                            description: "channel of new video"
+                        },
+                        {
+                            name: "description",
+                            description: "description of new video"
+                        },
+                        {
+                            name: "date",
+                            description: "publish date of new video"
+                        },
+                        {
+                            name: "picture",
+                            description: "picture of new video"
+                        }
+                    ]
                 },
                 {
                     name: 'videoInfos',
