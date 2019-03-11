@@ -13,10 +13,5 @@ export class SelectComponent implements OnInit {
 
   constructor() {}
   ngOnInit() {
-    console.log(this.field);
   }
-
-  print() {
-      console.log(this.field);
-  };
 }
