@@ -180,6 +180,10 @@ let widgets = function () {
                         {
                             name: "picture",
                             description: "picture of new video"
+                        },
+                        {
+                            name: "url",
+                            description: "url of new video"
                         }
                     ]
                 },
@@ -207,7 +211,7 @@ let widgets = function () {
                                 },
                                 {
                                     type: 'pattern',
-                                    pattern: '^https://www.youtube.com/watch\?v=*$',
+                                    pattern: '^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$',
                                     message: 'Invalid youtube Url'
                                 },
                             ]
@@ -260,6 +264,48 @@ let widgets = function () {
                             ],
                         },
                     ],
+                    output: [
+                        {
+                            name: "title",
+                            description: "title of video"
+                        },
+                        {
+                            name: "channel",
+                            description: "channel of video"
+                        },
+                        {
+                            name: "description",
+                            description: "description of video"
+                        },
+                        {
+                            name: "date",
+                            description: "publish date of video"
+                        },
+                        {
+                            name: "picture",
+                            description: "picture of video"
+                        },
+                        {
+                            name: "url",
+                            description: "url of video"
+                        },
+                        {
+                            name: "like",
+                            description: "like vount of video"
+                        },
+                        {
+                            name: "dislike",
+                            description: "dislike count of video"
+                        },
+                        {
+                            name: "comment",
+                            description: "comment count of video"
+                        },
+                        {
+                            name: "view",
+                            description: "view count of video"
+                        }
+                    ]
                 },
                 {
                     name: 'channelInfos',
@@ -371,7 +417,7 @@ let widgets = function () {
                                 },
                                 {
                                     type: 'pattern',
-                                    pattern: '^(http(s)??\\:\\/\\/)?(www\\.)?((youtube\\.com\\/watch\\?v=)|(youtu.be\\/))([a-zA-Z0-9\\-_])+$',
+                                    pattern: '^(http(s)??\:\/\/)?(www\.)?((youtube\.com\/watch\?v=)|(youtu.be\/))([a-zA-Z0-9\-_])+',
                                     message: 'Invalid youtube Url'
                                 },
                             ]
