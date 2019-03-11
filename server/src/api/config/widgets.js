@@ -23,12 +23,12 @@ function generateWidgetsModel(widgetsConfig) {
 
 let widgets = function () {
     let widgetsConfig = {
-        timer: {
+        calendar: {
             name: "calendar",
             reactions: [],
             actions: [
                 {
-                    name: "calendar",
+                    name: "timer",
                     description: "It's a timer, what do you expected ?",
                     controller: require('../controllers/services/calendar/actions/timer'),
                     modelName: "calendarTimer",
