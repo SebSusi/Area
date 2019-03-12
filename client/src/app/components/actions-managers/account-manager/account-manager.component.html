@@ -1,9 +1,11 @@
-<mat-radio-group *ngIf="action.account"
+<mat-radio-group *ngIf="action.account.type"
                  class="accounts-group"
-                 [(ngModel)]="action.account"
+                 [(ngModel)]="action.account.id"
                  [formControl]="stepsService.getController(type, 'accountControl')"
                  (change)="actionService.emitActions()">
-    <mat-radio-button class="account" *ngFor="let item of accounts" [value]="{id: item.id, type: templateAccount?.accountType}">
+    <mat-radio-button class="account" *ngFor="let item of accounts" [value]="item.id">
         <p class="mat-subheading-1 title">{{item.name}}</p>
+        <p class="mat-subheading-1 description">#{{item.id}}</p>
     </mat-radio-button>
 </mat-radio-group>
+<h3 *ngIf="!action.account.type">This (re)action doesn't require an account connection</h3>

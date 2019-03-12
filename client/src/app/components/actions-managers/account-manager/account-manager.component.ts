@@ -15,7 +15,6 @@ import {Option} from '../../../objects/option';
     styleUrls: ['./account-manager.component.scss']
 })
 export class AccountManagerComponent extends AbstractManager implements OnInit {
-    public test: '';
     private templateAccount: { description: string; options: Option[]; output: any; accountType: string };
 
     constructor(as: ActionService, ss: StepsService, public accountService: AccountService, public structureService: StructureService) {
@@ -25,7 +24,6 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
     ngOnInit() {
         this.receiveActionUpdate();
         this.initManager();
-//        this.accountService.getAccounts(this.structureService.getActionsTypes(this.action)['actionType']);
     }
 
     receiveActionUpdate() {
@@ -34,25 +32,30 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
 
     updateTemplate() {
         const newTemplate = this.structureService.getActionTemplate(this.action);
-        if (this.templateAccount !== newTemplate)
-            this.accountService.getAccounts(this.templateAccount ? this.templateAccount.accountType : null);
+        if (!newTemplate || newTemplate.accountType === '') {
+            this.action.account.type = '';
+            this.accountService.accounts = [];
+        } else if (newTemplate && (!this.templateAccount || this.templateAccount.accountType !== newTemplate.accountType)) {
+            this.action.account.type = newTemplate.accountType;
+            this.accountService.getAccounts(newTemplate.accountType);
+        }
         this.templateAccount = newTemplate;
     }
 
     get accounts() {
         this.updateTemplate();
-        if (this.templateAccount)
-            console.log(this.templateAccount.accountType);
-        if (this.templateAccount && this.templateAccount.accountType)
+        if (this.templateAccount && this.templateAccount.accountType) {
             return this.accountService.accounts;
+        }
         return [];
     }
 
     getFormGroup() {
-        if (!this.action.account)
-            this.action.account = {id: '', type: ''};
+        if (!this.action.account) {
+            this.action.account = {id: '', type: this.templateAccount ? this.templateAccount.accountType : ''};
+        }
         return {
-            accountControl: [this.action.account, Validators.required]
+            accountControl: [this.action.account.id, Validators.required]
         };
     }
 

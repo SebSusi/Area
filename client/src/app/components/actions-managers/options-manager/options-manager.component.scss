@@ -4,4 +4,11 @@
   ::ng-deep .output-title {
     text-transform: capitalize;
   }
+
+  .output-line {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    text-wrap: normal;
+  }
 }

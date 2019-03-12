@@ -47,6 +47,10 @@ export class AccountService {
             });
     }
 
+    set accounts(v: any[]) {
+      this._accounts = v;
+    }
+
     get accounts(): any[] {
       return this._accounts;
     }
