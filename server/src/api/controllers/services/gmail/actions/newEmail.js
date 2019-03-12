@@ -9,13 +9,13 @@ exports.checkData = async function(action, actionInfo, account) {
     var message =gmail.messages('label:inbox', {max: 1});
     const params = action.params;
 
-    return new Promise(function (resolve, reject) {
-        message.on('data', function (data) {
-            console.log(d.id)
-            if (d)
+    return new Promise(async function (resolve, reject) {
+        message.on('data', async function (data) {
+            console.log(data.id)
+            if (data)
                 reject(false);
             try {
-                //resolve(await utils.compareActionData(action, d));
+                resolve(await utils.compareActionData(action, data.id));
             }
             catch (e) {
                 resolve(false);
@@ -25,5 +25,5 @@ exports.checkData = async function(action, actionInfo, account) {
 };
 
 exports.getOutput = async function(action, actionInfo, account) {
-    return null;
+    return action.data;
 };
