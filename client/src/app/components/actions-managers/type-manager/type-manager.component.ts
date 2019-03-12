@@ -8,11 +8,11 @@ import {StepsService} from '../../../services/steps.service';
 
 @Component({
     selector: 'app-service-manager',
-    templateUrl: './service-manager.component.html',
-    styleUrls: ['./service-manager.component.scss']
+    templateUrl: './type-manager.component.html',
+    styleUrls: ['./type-manager.component.scss']
 })
 
-export class ServiceManagerComponent extends AbstractManager implements OnInit{
+export class TypeManagerComponent extends AbstractManager implements OnInit{
 
     constructor(as: ActionService, ss: StepsService, private areaService: AreaService,
                 private structureService: StructureService) {

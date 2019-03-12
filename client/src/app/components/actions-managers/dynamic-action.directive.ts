@@ -1,6 +1,6 @@
 import {ComponentFactoryResolver, Directive, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {ServiceManagerComponent} from './service-manager/service-manager.component';
-import {TriggerManagerComponent} from './trigger-manager/trigger-manager.component';
+import {TypeManagerComponent} from './type-manager/type-manager.component';
+import {SubtypeManagerComponent} from './subtype-manager/subtype-manager.component';
 import {AccountManagerComponent} from './account-manager/account-manager.component';
 import {OptionsManagerComponent} from './options-manager/options-manager.component';
 import {FormGroup} from '@angular/forms';
@@ -8,8 +8,8 @@ import {Steps} from '../../services/steps.service';
 
 
 const componentMapper: Map<Steps, any> = new Map<Steps, any>([
-    [Steps.SERVICE, ServiceManagerComponent],
-    [Steps.TYPE, TriggerManagerComponent],
+    [Steps.SERVICE, TypeManagerComponent],
+    [Steps.TYPE, SubtypeManagerComponent],
     [Steps.ACCOUNT, AccountManagerComponent],
     [Steps.OPTIONS, OptionsManagerComponent]
 ]);

@@ -7,10 +7,10 @@ import {StepsService} from '../../../services/steps.service';
 
 @Component({
     selector: 'app-trigger-manager',
-    templateUrl: './trigger-manager.component.html',
-    styleUrls: ['./trigger-manager.component.scss']
+    templateUrl: './subtype-manager.component.html',
+    styleUrls: ['./subtype-manager.component.scss']
 })
-export class TriggerManagerComponent extends AbstractManager implements OnInit {
+export class SubtypeManagerComponent extends AbstractManager implements OnInit {
 
     public triggers;
 

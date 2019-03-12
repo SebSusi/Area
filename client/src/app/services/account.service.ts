@@ -16,7 +16,7 @@ export class AccountService {
 
   public putAccount(name, type, data) {
       this.api.apiPost('/area_account', {name: name, type: type, data: data}).subscribe(
-          data => {console.log(data); this._accounts.push({name: name, type: type, id: data['id']}); }
+          resp => {this._accounts.push({name: name, type: type, id: resp['id']}); }
       );
   }
 

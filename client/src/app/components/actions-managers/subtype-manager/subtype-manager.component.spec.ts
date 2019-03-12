@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TriggerManagerComponent } from './trigger-manager.component';
+import { SubtypeManagerComponent } from './subtype-manager.component';
 
-describe('TriggerManagerComponent', () => {
-  let component: TriggerManagerComponent;
-  let fixture: ComponentFixture<TriggerManagerComponent>;
+describe('SubtypeManagerComponent', () => {
+  let component: SubtypeManagerComponent;
+  let fixture: ComponentFixture<SubtypeManagerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TriggerManagerComponent ]
+      declarations: [ SubtypeManagerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TriggerManagerComponent);
+    fixture = TestBed.createComponent(SubtypeManagerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
