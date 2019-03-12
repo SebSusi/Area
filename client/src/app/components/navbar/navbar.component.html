@@ -5,6 +5,9 @@
                 <svg-icon src="assets/area.svg"></svg-icon>
             </a>
             <div class="area-tools">
+                <button mat-raised-button color="primary" routerLink="/client.apk">
+                    Download Android APK!
+                </button>
                 <button mat-raised-button color="primary" routerLink="/app/editor">
                     Make an Area!
                 </button>
@@ -13,6 +16,9 @@
                 </button>
                 <button mat-icon-button (click)="switchTheme()">
                         <mat-icon>brightness_medium</mat-icon>
+                </button>
+                <button mat-icon-button routerLink="/login">
+                    <mat-icon>exit_to_app</mat-icon>
                 </button>
             </div>
         </div>

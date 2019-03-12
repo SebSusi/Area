@@ -76,7 +76,7 @@ export class UserComponent implements OnInit {
         this.changeInfo('');
         this.cnxService.linkAccount(jsonLoginForm).subscribe(
             _ => {
-                this.changeInfo('BlindTest account created.');
+                this.changeInfo('Area account created.');
                 this.updateLocalInfo();
             }, res => {
                 this.changeError(res);

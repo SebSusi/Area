@@ -25,3 +25,11 @@ exports.compareActionData = async function (action, newData) {
     await exports.saveActionData(action, newData);
     return (lastData !== newData);
 };
+
+exports.compareActionDatawithInterval = async function (action, newData, interval) {
+    const lastData = await exports.getActionData(action);
+    let totaux = lastData != null ? parseInt(lastData)+parseInt(interval) : 0;
+    if (totaux <= newData)
+        await exports.saveActionData(action, newData);
+    return (totaux <= newData);
+};

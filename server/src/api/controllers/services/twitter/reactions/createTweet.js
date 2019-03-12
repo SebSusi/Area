@@ -1,4 +1,3 @@
-var base64Img = require('base64-img');
 const Twitter = require('twitter');
 const http = require('http');
 

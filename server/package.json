@@ -33,7 +33,9 @@
     "passport-spotify": "^1.0.1",
     "request": "^2.88.0",
     "twitter": "^1.7.1",
-    "weather-js": "^2.0.0"
+    "weather-js": "^2.0.0",
+    "fb": "^2.0.0",
+    "fbgraph": "^1.4.4"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
