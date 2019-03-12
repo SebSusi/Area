@@ -46,6 +46,7 @@ async function uploadFile(mediaUrls, client, nextImg, sender) {
 }
 
 async function customAlert(msg, client, ids, callback) {
+    console.log();
     getImage(msg, function (err, data) {
         data = {media_id: 1105153134995955700};
         ids += data.media_id + ',';
@@ -68,15 +69,19 @@ exports.doReaction = async function (reaction, reactionInfo, parsedParams, accou
         access_token_key: account.accessToken,
         access_token_secret: account.secret
     });
-/*    let ids='';
+    /*let ids='';
     const medias = [parsedParams.media1, parsedParams.media2, parsedParams.media3, parsedParams.media4];
     var x = 0;
     var loopThrewMedia = function () {
+        console.log(x);
         customAlert(medias[x], client, ids, function () {
             x++;
-            if (x < medias.length)
+            console.log(medias.length);
+            if (x < medias.length) {
                 loopThrewMedia();
-            console.log(ids);
+                console.log(x);
+            }
+            console.log(x);
         });
     };
 
