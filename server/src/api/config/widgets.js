@@ -716,7 +716,7 @@ let widgets = function () {
                     name: 'newFollower',
                     accountType: 'twitter',
                     controller: require('../controllers/services/twitter/actions/newFollower'),
-                    description: 'Triggers when a user of your choosing gets a new follower.',
+                    description: 'Triggers when a user of your choice gets a new follower.',
                     modelName: 'twitterNewFollower',
                     params: {
                         username: {type: String}
@@ -725,8 +725,8 @@ let widgets = function () {
                         {
                             type: 'text',
                             name: 'username',
-                            label: 'username @',
-                            placeholder:'@Frederic_molas',
+                            label: 'username',
+                            placeholder:'Frederic_molas',
                             validations: [
                                 {
                                     type: 'required',
@@ -737,21 +737,37 @@ let widgets = function () {
                     ],
                     output: [
                         {
-                            name: "followers",
-                            description: "number followers of user"
+                            name: "name",
+                            description: "Name of the follower"
                         },
                         {
-                            name: "username",
-                            description: "name of user"
+                            name: "screenName",
+                            description: "screenName of the follower"
                         },
                         {
-                            name: "date",
-                            description: "creation date of account user"
+                            name: "id",
+                            description: "Id of the follower"
                         },
                         {
-                            name: "picture",
-                            description: "picture of user"
+                            name: "location",
+                            description: "Location of the follower"
                         },
+                        {
+                            name: "lang",
+                            description: "Speaking langage of the follower"
+                        },
+                        {
+                            name: "friendCount",
+                            description: "Number of friends"
+                        },
+                        {
+                            name: "followersCount",
+                            description: "Number of followers"
+                        },
+                        {
+                            name: "description",
+                            description: "Description (bio) of the follower"
+                        }
                     ]
                 },
                 {
@@ -827,8 +843,23 @@ let widgets = function () {
                     controller: require('../controllers/services/twitter/reactions/followUser'),
                     description: 'Follow a specified user.',
                     modelName: 'twitterFollowUser',
-                    params: {},
-                    fields: []
+                    params: {
+                        username: {type: String}
+                    },
+                    fields: [
+                        {
+                            type: 'text',
+                            name: 'username',
+                            label: 'username @',
+                            placeholder:'@Frederic_molas',
+                            validations: [
+                                {
+                                    type: 'required',
+                                    message: 'username Required'
+                                },
+                            ]
+                        },
+                    ],
                 }
             ]
         },

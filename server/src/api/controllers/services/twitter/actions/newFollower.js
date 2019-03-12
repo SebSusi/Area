@@ -11,36 +11,46 @@ exports.checkData = async function(action, actionInfo, account) {
     });
     var tparams = { screen_name: params.username };
     return new Promise(async function (resolve, reject) {
-
-        client.get('statuses/user_timeline', tparams, async function (error, tweets, response) {
-            if (error)
+        client.get('followers/list', tparams, async function (error, resp, response) {
+            if (error) {
+                console.log(error);
                 reject(false);
-            resolve(await utils.compareActionData(action, tweets[0].user.followers_count));
+            }
+            if (resp.users.length)
+                resolve(await utils.compareActionData(action, resp.users[0].name));
+            else
+                resolve(false);
         });
     });
 };
 
 exports.getOutput = async function (action, actionInfo, account) {
-    const params = action.params;
     const client = new Twitter({
         consumer_key: 'aniiz8uwHB44Dg0eR30WSglYv',
         consumer_secret: 'YhhlA7u2iRZy2Rn7r4Q3Q54kR1r8iPgYRjoPQ8GRL8nxFe0q0Z',
         access_token_key: account.accessToken,
         access_token_secret: account.secret
     });
-    var tparams = { screen_name:  params.username};
+    var tparams = { screen_name: action.params.username };
     return new Promise(async function (resolve, reject) {
-
-        client.get('statuses/user_timeline', tparams, async function (error, tweets, response) {
-            if (error)
-                reject(false);
-            let data = tweets[0];
-            resolve({
-                followers:data.user.followers_count,
-                username:data.user.name,
-                date:data.user.created_at,
-                picture_user:data.user.profile_image_url
-            });
+        client.get('followers/list', tparams, async function (error, resp, response) {
+            if (error) {
+                reject(null);
+            }
+            if (resp.users && resp.users.length) {
+                const follower = resp.users[0];
+                resolve({
+                    name: follower.name,
+                    screenName: follower.screen_name,
+                    id: follower.id_str,
+                    location: follower.location,
+                    lang: follower.lang,
+                    friendCount: follower.friends_count,
+                    followersCount: follower.followers_count,
+                    description: follower.description
+                });
+            } else
+                resolve(null);
         });
     });
 };

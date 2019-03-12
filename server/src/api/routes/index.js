@@ -38,7 +38,5 @@ router.use('/area', area);
 //const test = require('../controllers/area/widget/getters');
 //console.log(test.getActionByServiceNameAndActionName("weather", "current"));
 
-const temp = require('../controllers/services/weather/actions/temperatureChange.js');
-
 module.exports = router;
 

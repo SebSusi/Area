@@ -55,7 +55,7 @@ export class AccountManagerComponent extends AbstractManager implements OnInit {
             this.action.account = {id: '', type: this.templateAccount ? this.templateAccount.accountType : ''};
         }
         return {
-            accountControl: [this.action.account.id, Validators.required]
+            accountControl: [this.action.account.id, this.action.account.type ? Validators.required : null]
         };
     }
 

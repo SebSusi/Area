@@ -13,8 +13,8 @@
     <mat-card *ngFor="let act of actionService.actions">
         <mat-card-header class="card-header" (click)="changeActiveAction(act.id)">
             <div mat-card-avatar class="{{act.serviceName}}-icon {{act.type}}-image mat-card-avatar"></div>
-            <mat-card-title>{{act.name?.uncamelize()}}</mat-card-title>
-            <mat-card-subtitle>{{act.type?.uncamelize()}}</mat-card-subtitle>
+            <mat-card-title>{{act.name ? act.name?.uncamelize() : 'Undefined'}}</mat-card-title>
+            <mat-card-subtitle>{{act.type?.uncamelize()}} <span *ngIf="act.id.toString().startsWith('local')"> (local)</span></mat-card-subtitle>
             <button class="action-icon" mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
