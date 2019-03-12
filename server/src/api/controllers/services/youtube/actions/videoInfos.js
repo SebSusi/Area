@@ -61,7 +61,7 @@ exports.getOutput = async function (action, actionInfo, account) {
             reject(false);
         resolve({
             title: youtubedata.title,
-            channel: youtubedata.channel,
+            channel: youtubedata.channelTitle,
             description: youtubedata.description,
             date: youtubedata.publishedAt,
             picture: youtubedata.thumbnails.medium.url,
