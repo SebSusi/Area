@@ -634,8 +634,41 @@ let widgets = function () {
                     controller: require('../controllers/services/twitter/actions/newTweet'),
                     description: 'Trigger when specified user tweet something.',
                     modelName: 'twitterNewTweet',
-                    params: {},
-                    fields: []
+                    params: {
+                        username: {type: String}
+                    },
+                    fields: [
+                        {
+                            type: 'text',
+                            name: 'username',
+                            label: 'username @',
+                            placeholder:'@Frederic_molas',
+                            validations: [
+                                {
+                                    type: 'required',
+                                    message: 'username Required'
+                                },
+                            ]
+                        },
+                    ],
+                    output: [
+                        {
+                            name: "text",
+                            description: "body of tweets"
+                        },
+                        {
+                            name: "username",
+                            description: "user creator"
+                        },
+                        {
+                            name: "date",
+                            description: "creation date of tweets"
+                        },
+                        {
+                            name: "picture",
+                            description: "picture of user creator"
+                        },
+                    ]
                 },
                 {
                     name: 'searchMention',
@@ -643,8 +676,41 @@ let widgets = function () {
                     controller: require('../controllers/services/twitter/actions/searchMention'),
                     description: 'Triggers When Any User Creates A New Tweet That Contains A Specific Search Term (Like A Word, Phrase, Username Or Hashtag).',
                     modelName: 'twitterSearchMention',
-                    params: {},
-                    fields: []
+                    params: {
+                        search: {type: String}
+                    },
+                    fields: [
+                        {
+                            type: 'text',
+                            name: 'search',
+                            label: 'search ',
+                            placeholder:'Grade A',
+                            validations: [
+                                {
+                                    type: 'required',
+                                    message: 'username Required'
+                                },
+                            ]
+                        },
+                    ],
+                    output: [
+                        {
+                            name: "text",
+                            description: "body of tweets"
+                        },
+                        {
+                            name: "username",
+                            description: "user creator"
+                        },
+                        {
+                            name: "date",
+                            description: "creation date of tweets"
+                        },
+                        {
+                            name: "picture",
+                            description: "picture of user creator"
+                        },
+                    ]
                 },
                 {
                     name: 'newFollower',
@@ -652,8 +718,41 @@ let widgets = function () {
                     controller: require('../controllers/services/twitter/actions/newFollower'),
                     description: 'Triggers when a user of your choosing gets a new follower.',
                     modelName: 'twitterNewFollower',
-                    params: {},
-                    fields: []
+                    params: {
+                        username: {type: String}
+                    },
+                    fields: [
+                        {
+                            type: 'text',
+                            name: 'username',
+                            label: 'username @',
+                            placeholder:'@Frederic_molas',
+                            validations: [
+                                {
+                                    type: 'required',
+                                    message: 'username Required'
+                                },
+                            ]
+                        },
+                    ],
+                    output: [
+                        {
+                            name: "followers",
+                            description: "number followers of user"
+                        },
+                        {
+                            name: "username",
+                            description: "name of user"
+                        },
+                        {
+                            name: "date",
+                            description: "creation date of account user"
+                        },
+                        {
+                            name: "picture",
+                            description: "picture of user"
+                        },
+                    ]
                 },
                 {
                     name: 'likeTweet',
