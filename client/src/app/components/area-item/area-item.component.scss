@@ -14,7 +14,7 @@ mat-card.mat-card {
         margin-right: 25px;
       }
       li {
-        &:not(:last-child) svg-icon::after {
+        &:not(:last-child) div::after {
           content: '';
           width: 0;
           height: 0;
@@ -22,14 +22,13 @@ mat-card.mat-card {
           top: calc(50% - 5px);
           border-left-color: grey !important;
           border: 5px solid transparent;
-          margin-left: 10px;
+          margin-left: 40px;
         }
 
-        ::ng-deep svg-icon {
-          svg {
-            height: 30px !important;
-            width: 30px !important;
-          }
+        ::ng-deep div {
+          height: 30px !important;
+          width: 30px !important;
+          display: block;
         }
       }
     }
@@ -47,6 +46,18 @@ mat-card.mat-card {
   &:hover {
     @include mat-elevation(12);
   }
+}
+
+.action-image {
+  background-image: url("/assets/action.svg");
+  background-size: contain;
+  border-radius: 10%;
+}
+
+.reaction-image {
+  background-image: url("/assets/reaction.svg");
+  background-size: contain;
+  border-radius: 10%;
 }
 
 $break-phone: 778px;
