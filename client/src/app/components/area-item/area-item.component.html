@@ -1,8 +1,19 @@
 <mat-card class="d-flex align-content-center flex-wraps">
     <div routerLink="/app/editor/{{area.id}}" class="area-infos d-flex flex-fill align-content-center flex">
-        <ol class="d-flex align-content-center">
+        <ol *ngIf="area.actions.length <= 3" class="d-flex align-content-center">
             <li *ngFor="let item of area.actions" class="action-type-icon">
                 <div class="{{item.type}}-image {{item.serviceName}}-icon"></div>
+            </li>
+        </ol>
+        <ol *ngIf="area.actions.length > 3" class="d-flex align-content-center">
+            <li class="action-type-icon">
+                <div class="action-image {{area.actions[0].serviceName}}-icon"></div>
+            </li>
+            <li class="action-type-icon">
+                <div class="reaction-image"></div>
+            </li>
+            <li class="action-type-icon">
+                <div class="reaction-image {{area.actions[area.actions.length - 1].serviceName}}-icon"></div>
             </li>
         </ol>
         <p >{{area.name}}</p>
